@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScipt," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="作者：FY引用请标明出处  Part 2 · 前端工程化实践模块一：开发脚手架及封装自动化构建工作流任务一：工程化概述1.工程化的定义和主要解决的问题 主要解决的问题 传统语言或语法的弊端 无法使用模块化&#x2F;组件化 重复的机械式工作 代码风格统一、质量保证 依赖后端服务接口支持 整体依赖后端项目    2.一个项目过程中工程化的体现 一切以提高效率、降低成本、质量保证为目的的手段都属于工程化 一切">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习笔记 ----- 【前端工程化实践】开发脚手架及封装自动化构建工作流">
+<meta property="og:url" content="http://yoursite.com/2020/11/22/28/index.html">
+<meta property="og:site_name" content="旋の飞羽">
+<meta property="og:description" content="作者：FY引用请标明出处  Part 2 · 前端工程化实践模块一：开发脚手架及封装自动化构建工作流任务一：工程化概述1.工程化的定义和主要解决的问题 主要解决的问题 传统语言或语法的弊端 无法使用模块化&#x2F;组件化 重复的机械式工作 代码风格统一、质量保证 依赖后端服务接口支持 整体依赖后端项目    2.一个项目过程中工程化的体现 一切以提高效率、降低成本、质量保证为目的的手段都属于工程化 一切">
+<meta property="article:published_time" content="2020-11-21T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-11-22T10:44:30.819Z">
+<meta property="article:author" content="FY">
+<meta property="article:tag" content="JavaScipt">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/11/22/28/"/>
+
+
+
+
+
+  <title>学习笔记 ----- 【前端工程化实践】开发脚手架及封装自动化构建工作流 | 旋の飞羽</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">旋の飞羽</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">人间值得，未来可期。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/22/28/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FY">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="旋の飞羽">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">学习笔记 ----- 【前端工程化实践】开发脚手架及封装自动化构建工作流</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-22T00:00:00+08:00">
+                2020-11-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>作者：FY<br>引用请标明出处</p>
+</blockquote>
+<h1 id="Part-2-·-前端工程化实践"><a href="#Part-2-·-前端工程化实践" class="headerlink" title="Part 2 · 前端工程化实践"></a>Part 2 · 前端工程化实践</h1><h2 id="模块一：开发脚手架及封装自动化构建工作流"><a href="#模块一：开发脚手架及封装自动化构建工作流" class="headerlink" title="模块一：开发脚手架及封装自动化构建工作流"></a>模块一：开发脚手架及封装自动化构建工作流</h2><h2 id="任务一：工程化概述"><a href="#任务一：工程化概述" class="headerlink" title="任务一：工程化概述"></a>任务一：工程化概述</h2><h3 id="1-工程化的定义和主要解决的问题"><a href="#1-工程化的定义和主要解决的问题" class="headerlink" title="1.工程化的定义和主要解决的问题"></a>1.工程化的定义和主要解决的问题</h3><ul>
+<li>主要解决的问题<ul>
+<li>传统语言或语法的弊端</li>
+<li>无法使用模块化/组件化</li>
+<li>重复的机械式工作</li>
+<li>代码风格统一、质量保证</li>
+<li>依赖后端服务接口支持</li>
+<li>整体依赖后端项目</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-一个项目过程中工程化的体现"><a href="#2-一个项目过程中工程化的体现" class="headerlink" title="2.一个项目过程中工程化的体现"></a>2.一个项目过程中工程化的体现</h3><ul>
+<li>一切以提高效率、降低成本、质量保证为目的的手段都属于<strong>工程化</strong></li>
+<li>一切重复的工作都应该被自动化<ul>
+<li>创建项目<ul>
+<li>创建项目结构</li>
+<li>创建特定类型文件</li>
+</ul>
+</li>
+<li>编码<ul>
+<li>格式化代码</li>
+<li>校验代码风格</li>
+<li>编译/构建/打包</li>
+</ul>
+</li>
+<li>预览/测试<ul>
+<li>Web Server / Mock</li>
+<li>Live Reloading / HMR</li>
+<li>Source Map</li>
+</ul>
+</li>
+<li>提交<ul>
+<li>Git Hooks</li>
+<li>Lint-staged</li>
+<li>持续集成</li>
+</ul>
+</li>
+<li>部署<ul>
+<li>CI / CD</li>
+<li>自动发布</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-工程化不等于工具"><a href="#3-工程化不等于工具" class="headerlink" title="3.工程化不等于工具"></a>3.工程化不等于工具</h3><ul>
+<li>一些成熟的工程化集成<ul>
+<li>create-react-app</li>
+<li>vue-cli</li>
+<li>angular-cli</li>
+<li>gatsby-cli</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-工程化与Node-js"><a href="#4-工程化与Node-js" class="headerlink" title="4.工程化与Node.js"></a>4.工程化与Node.js</h3><ul>
+<li>内容概要<ul>
+<li>脚手架工具开发</li>
+<li>自动化构建系统</li>
+<li>模块化打包</li>
+<li>项目代码规范化</li>
+<li>自动化部署</li>
+</ul>
+</li>
+</ul>
+<h2 id="任务二：脚手架工具"><a href="#任务二：脚手架工具" class="headerlink" title="任务二：脚手架工具"></a>任务二：脚手架工具</h2><h3 id="1-脚手架工具概要"><a href="#1-脚手架工具概要" class="headerlink" title="1.脚手架工具概要"></a>1.脚手架工具概要</h3><ul>
+<li><p>脚手架的本质作用</p>
+<ul>
+<li>创建项目基础结构、提供项目规范和约定<ul>
+<li>相同的组织结构</li>
+<li>相同的开发范式</li>
+<li>相同的模块依赖</li>
+<li>相同的工具配置</li>
+<li>相同的基础代码</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>内容概要</p>
+<ul>
+<li>脚手架的作用</li>
+<li>常用的脚手架工具</li>
+<li>通用脚手架工具剖析</li>
+<li>开发一款脚手架</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-常用的脚手架工具"><a href="#2-常用的脚手架工具" class="headerlink" title="2.常用的脚手架工具"></a>2.常用的脚手架工具</h3><ul>
+<li>React 项目 -&gt; create-react-app</li>
+<li>Vue.js 项目 -&gt; vue-cli</li>
+<li>Angular 项目 -&gt; angular-cli</li>
+<li>Yeoman</li>
+<li>Plop</li>
+</ul>
+<h3 id="3-Yeoman-简介"><a href="#3-Yeoman-简介" class="headerlink" title="3.Yeoman 简介"></a>3.Yeoman 简介</h3><ul>
+<li>用于创造现代化Web应用的脚手架工具</li>
+</ul>
+<h3 id="4-Yeoman-基础使用"><a href="#4-Yeoman-基础使用" class="headerlink" title="4.Yeoman 基础使用"></a>4.Yeoman 基础使用</h3><ul>
+<li>在全局范围安装 yo<ul>
+<li>$ npm install yo –global # or yarn global add yo</li>
+</ul>
+</li>
+<li>安装对应的 generator<ul>
+<li>$ npm install generator-node –global # or yarn global add generator-node</li>
+</ul>
+</li>
+<li>通过 yo 运行 generator<ul>
+<li>$ cd path/to/project-dir</li>
+<li>$ mkdir my-module</li>
+<li>$ yo node</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-Sub-Generator"><a href="#5-Sub-Generator" class="headerlink" title="5.Sub Generator"></a>5.Sub Generator</h3><ul>
+<li>略</li>
+</ul>
+<h3 id="6-Yeoman-使用步骤总结"><a href="#6-Yeoman-使用步骤总结" class="headerlink" title="6.Yeoman 使用步骤总结"></a>6.Yeoman 使用步骤总结</h3><ul>
+<li>明确你的需求</li>
+<li>找到合适的 Generator</li>
+<li>全局范围安装找到的 Generator</li>
+<li>通过 Yo 运行对应的 Generator</li>
+<li>通过命令行交互填写选项</li>
+<li>生成你所需要的项目结构</li>
+</ul>
+<h3 id="7-自定义-Generator"><a href="#7-自定义-Generator" class="headerlink" title="7.自定义 Generator"></a>7.自定义 Generator</h3><ul>
+<li>略</li>
+</ul>
+<h3 id="8-创建-Generator-模块"><a href="#8-创建-Generator-模块" class="headerlink" title="8.创建 Generator 模块"></a>8.创建 Generator 模块</h3><ul>
+<li>Generator 本质上就是一个 NPM 模块</li>
+<li>略</li>
+</ul>
+<h3 id="9-根据模板创建文件"><a href="#9-根据模板创建文件" class="headerlink" title="9.根据模板创建文件"></a>9.根据模板创建文件</h3><ul>
+<li>相对于手动创建每一个文件，模板的方式大大提高了效率</li>
+</ul>
+<h3 id="10-接收用户输入"><a href="#10-接收用户输入" class="headerlink" title="10.接收用户输入"></a>10.接收用户输入</h3><ul>
+<li>略</li>
+</ul>
+<h3 id="11-Vue-Generator-案例"><a href="#11-Vue-Generator-案例" class="headerlink" title="11.Vue Generator 案例"></a>11.Vue Generator 案例</h3><ul>
+<li>略</li>
+</ul>
+<h3 id="12-发布-Generator"><a href="#12-发布-Generator" class="headerlink" title="12.发布 Generator"></a>12.发布 Generator</h3><ul>
+<li>略</li>
+</ul>
+<h3 id="13-Plop-简介"><a href="#13-Plop-简介" class="headerlink" title="13.Plop 简介"></a>13.Plop 简介</h3><ul>
+<li>一个小而美的脚手架工具</li>
+</ul>
+<h3 id="14-Plop-的基本使用"><a href="#14-Plop-的基本使用" class="headerlink" title="14.Plop 的基本使用"></a>14.Plop 的基本使用</h3><ul>
+<li>将plop模块作为项目开发依赖安装</li>
+<li>在项目根目录下创建一个plopfile.js文件</li>
+<li>在plopfile.js文件中定义脚手架任务</li>
+<li>编写用于生成特定类型文件的模板</li>
+<li>通过Plop提供的CLI运行脚手架任务</li>
+</ul>
+<h3 id="15-脚手架的工作原理"><a href="#15-脚手架的工作原理" class="headerlink" title="15.脚手架的工作原理"></a>15.脚手架的工作原理</h3><ul>
+<li>略</li>
+</ul>
+<h2 id="任务三：自动化构建"><a href="#任务三：自动化构建" class="headerlink" title="任务三：自动化构建"></a>任务三：自动化构建</h2><h3 id="1-自动化构建简介"><a href="#1-自动化构建简介" class="headerlink" title="1.自动化构建简介"></a>1.自动化构建简介</h3><ul>
+<li>自动化构建工作流<ul>
+<li>源代码 =&gt; 自动化构建 =&gt; 生产代码</li>
+<li>脱离运行环境兼容带来的问题</li>
+<li>使用提高效率的语法、规范和标准<ul>
+<li>ECMAScript Next</li>
+<li>Sass</li>
+<li>模板引擎</li>
+<li>这些用法大都不被浏览器直接支持</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>构建转换那些不被支持的<strong>特性</strong></li>
+</ul>
+<h3 id="2-自动化构建初体验"><a href="#2-自动化构建初体验" class="headerlink" title="2.自动化构建初体验"></a>2.自动化构建初体验</h3><ul>
+<li>NPM Scripts 实现自动化构建工作流的最简方式</li>
+</ul>
+<h3 id="3-常用的自动化构建工具"><a href="#3-常用的自动化构建工具" class="headerlink" title="3.常用的自动化构建工具"></a>3.常用的自动化构建工具</h3><ul>
+<li>Grunt 工作过程基于临时文件去实现，构建速度相对较慢</li>
+<li>Gulp 基于内存去实现，默认支持同时执行多个任务</li>
+<li>FIS 资源加载、模块化开发、代码部署、性能优化</li>
+</ul>
+<h3 id="4-Grunt-的基本使用"><a href="#4-Grunt-的基本使用" class="headerlink" title="4.Grunt 的基本使用"></a>4.Grunt 的基本使用</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="params">grunt</span> =&gt;</span> &#123;</span><br><span class="line">    grunt.registerTask(<span class="string">'foo'</span>, () =&gt; &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'hello grunt~'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">    grunt.registerTask(<span class="string">'bar'</span>, <span class="string">'任务描述'</span>, () =&gt; &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'other task~'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">// grunt.registerTask('default', () =&gt; &#123;</span></span><br><span class="line">    <span class="comment">//     console.log('default task~')</span></span><br><span class="line">    <span class="comment">// &#125;)</span></span><br><span class="line">    grunt.registerTask(<span class="string">'default'</span>, [<span class="string">'foo'</span>, <span class="string">'bar'</span>])</span><br><span class="line"></span><br><span class="line">    <span class="comment">// grunt.registerTask('async-task', () =&gt; &#123;</span></span><br><span class="line">    <span class="comment">//       setTimeout(() =&gt; &#123;</span></span><br><span class="line">    <span class="comment">//           console.log('async task working~')</span></span><br><span class="line">    <span class="comment">//       &#125;, 1000);</span></span><br><span class="line">    <span class="comment">// &#125;)</span></span><br><span class="line"></span><br><span class="line">    grunt.registerTask(<span class="string">'async-task'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">const</span> done = <span class="keyword">this</span>.async()</span><br><span class="line">        setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'async task working~'</span>)</span><br><span class="line">            done()</span><br><span class="line">        &#125;, <span class="number">1000</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-Grunt-标记任务失败"><a href="#5-Grunt-标记任务失败" class="headerlink" title="5.Grunt 标记任务失败"></a>5.Grunt 标记任务失败</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="params">grunt</span> =&gt;</span> &#123;</span><br><span class="line">    grunt.registerTask(<span class="string">'bad'</span>, () =&gt; &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'bad working~'</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;)</span><br><span class="line">    grunt.registerTask(<span class="string">'bad-async'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">const</span> done = <span class="keyword">this</span>.async()</span><br><span class="line">        setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'bad async'</span>)</span><br><span class="line">            done(<span class="literal">false</span>)</span><br><span class="line">        &#125;, <span class="number">1000</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-Grunt-的配置方法"><a href="#6-Grunt-的配置方法" class="headerlink" title="6.Grunt 的配置方法"></a>6.Grunt 的配置方法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="params">grunt</span> =&gt;</span> &#123;</span><br><span class="line">    grunt.initConfig(&#123;</span><br><span class="line">      <span class="comment">// foo: 'bar'</span></span><br><span class="line">      foo: &#123;</span><br><span class="line">        bar: <span class="number">123</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    grunt.registerTask(<span class="string">'foo'</span>, () =&gt; &#123;</span><br><span class="line">      <span class="comment">// console,log(grunt.config('foo'))</span></span><br><span class="line">      <span class="built_in">console</span>,log(grunt.config(<span class="string">'foo.bar'</span>))</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-Grunt-多目标任务"><a href="#7-Grunt-多目标任务" class="headerlink" title="7.Grunt 多目标任务"></a>7.Grunt 多目标任务</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="params">grunt</span> =&gt;</span> &#123;</span><br><span class="line">    grunt.initConfig(&#123;</span><br><span class="line">      <span class="string">'build'</span>: &#123;</span><br><span class="line">        options:&#123;</span><br><span class="line">           foo: <span class="string">'bar'</span></span><br><span class="line">        &#125;,</span><br><span class="line">        css: &#123;</span><br><span class="line">          options: &#123;</span><br><span class="line">            foo: <span class="string">'baz'</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        js: <span class="string">'2'</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    grunt.registerMultiTask(<span class="string">'build'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.options())</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">`target: <span class="subst">$&#123;<span class="keyword">this</span>.target&#125;</span>, data: <span class="subst">$&#123;<span class="keyword">this</span>.data&#125;</span>`</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="8-Grunt-插件的使用"><a href="#8-Grunt-插件的使用" class="headerlink" title="8.Grunt 插件的使用"></a>8.Grunt 插件的使用</h3><ul>
+<li>yarn add grunt-contrib-clean 用来自动清除项目开发过程中产生的一些临时文件</li>
+<li>yarn grunt clean</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="params">grunt</span> =&gt;</span> &#123;</span><br><span class="line">  grunt.initConfig(&#123;</span><br><span class="line">    clean: &#123;</span><br><span class="line">      temp: <span class="string">'temp/**'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">  grunt.loadNpmTasks(<span class="string">'grunt-contrib-clean'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="9-Grunt-常用插件及总结"><a href="#9-Grunt-常用插件及总结" class="headerlink" title="9.Grunt 常用插件及总结"></a>9.Grunt 常用插件及总结</h3><ul>
+<li>yarn add grunt-sass sass –dev</li>
+<li>yarn add grunt-babel @babel/core @babel/preset-env –dev</li>
+<li>yarn add load-grunt-tasks –dev</li>
+<li>yarn add grunt-contrib-watch –dev</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> sass = <span class="built_in">require</span>(<span class="string">'sass'</span>)</span><br><span class="line"><span class="keyword">const</span> loadGruntTasks = <span class="built_in">require</span>(<span class="string">'load-grunt-tasks'</span>)</span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="params">grunt</span> =&gt;</span> &#123;</span><br><span class="line">  grunt.initConfig(&#123;</span><br><span class="line">    sass: &#123;</span><br><span class="line">      options: &#123;</span><br><span class="line">        sourceMap: <span class="literal">true</span>,</span><br><span class="line">        implementation: sass</span><br><span class="line">      &#125;,</span><br><span class="line">      main: &#123;</span><br><span class="line">        files: &#123;</span><br><span class="line">          <span class="string">'dist/css/main.css'</span>: <span class="string">'src/scss/main.scss'</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    babel: &#123;</span><br><span class="line">      options: &#123;</span><br><span class="line">        sourceMap: <span class="literal">true</span>,</span><br><span class="line">        presets: [<span class="string">'@babel/preset-env'</span>]</span><br><span class="line">      &#125;</span><br><span class="line">      main: &#123;</span><br><span class="line">        files: &#123;</span><br><span class="line">          <span class="string">'dist/js/app.js'</span>: <span class="string">'src/js/app.js'</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    watch: &#123;</span><br><span class="line">      js: &#123;</span><br><span class="line">        files: [<span class="string">'src/js/*.js'</span>],</span><br><span class="line">        tasks: [<span class="string">'babel'</span>]</span><br><span class="line">      &#125;,</span><br><span class="line">      css: &#123;</span><br><span class="line">        files: [<span class="string">'src/scss/*.scss'</span>],</span><br><span class="line">        tasks: [<span class="string">'sass'</span>]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// grunt.loadNpmTasks('grunt-sass')</span></span><br><span class="line">  loadGruntTasks(grunt) <span class="comment">// 自动加载所有的 grunt 插件中的任务</span></span><br><span class="line">  grunt.registerTask(<span class="string">'default'</span>,[<span class="string">'sass'</span>,<span class="string">'babel'</span>,<span class="string">'watch'</span>])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="10-Gulp-的基本使用"><a href="#10-Gulp-的基本使用" class="headerlink" title="10.Gulp 的基本使用"></a>10.Gulp 的基本使用</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// gulp 入口文件 gulpfile.js</span></span><br><span class="line">exports.foo = <span class="function"><span class="params">done</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'foo task working~'</span>)</span><br><span class="line">    done() <span class="comment">// 标识任务完成</span></span><br><span class="line">&#125;</span><br><span class="line">exports.default = <span class="function"><span class="params">done</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'default task working~'</span>)</span><br><span class="line">    done() </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="11-Gulp-的组合任务"><a href="#11-Gulp-的组合任务" class="headerlink" title="11.Gulp 的组合任务"></a>11.Gulp 的组合任务</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; series,, parallel &#125; = <span class="built_in">require</span>(<span class="string">'gulp'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> task1 = <span class="function"><span class="params">done</span> =&gt;</span> &#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'task1 working~'</span>)</span><br><span class="line">    done()</span><br><span class="line">  &#125;,<span class="number">1000</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> task2 = <span class="function"><span class="params">done</span> =&gt;</span> &#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'task2 working~'</span>)</span><br><span class="line">    done()</span><br><span class="line">  &#125;,<span class="number">1000</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> task3 = <span class="function"><span class="params">done</span> =&gt;</span> &#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'task3 working~'</span>)</span><br><span class="line">    done()</span><br><span class="line">  &#125;,<span class="number">1000</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">exports.foo = series(task1, task2, task3) <span class="comment">// 串行</span></span><br><span class="line">exports.bar = parallel(task1, task2, task3) <span class="comment">// 并行</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="12-Gulp-的异步任务"><a href="#12-Gulp-的异步任务" class="headerlink" title="12.Gulp 的异步任务"></a>12.Gulp 的异步任务</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>)</span><br><span class="line">exports.callback = <span class="function"><span class="params">done</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'callback task~'</span>)</span><br><span class="line">  done()</span><br><span class="line">&#125;</span><br><span class="line">exports.callback_error = <span class="function"><span class="params">done</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'callback task~'</span>)</span><br><span class="line">  done(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'task failed!'</span>))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">exports.promise = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'promise task~'</span>)</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve()</span><br><span class="line">&#125;</span><br><span class="line">exports.promise_error = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'promise task~'</span>)</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'task failed!'</span>))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> timeout = <span class="function"><span class="params">time</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">    setTimeout(resolve, time)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line">exports.async = <span class="keyword">async</span>() =&gt; &#123;</span><br><span class="line">  <span class="keyword">await</span> timeout(<span class="number">1000</span>)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'async task~'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">exports.stream = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> readStream = fs.createReadStream(<span class="string">'package,json'</span>)</span><br><span class="line">  <span class="keyword">const</span> writeStream = fs.createWriteStream(<span class="string">'temp.txt'</span>)</span><br><span class="line">  readSream.pipe(writeStream)</span><br><span class="line">  <span class="keyword">return</span> readStream</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">exports.stream = <span class="function"><span class="params">done</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> readStream = fs.createReadStream(<span class="string">'package,json'</span>)</span><br><span class="line">  <span class="keyword">const</span> writeStream = fs.createWriteStream(<span class="string">'temp.txt'</span>)</span><br><span class="line">  readSream.pipe(writeStream)</span><br><span class="line">  readStream.on(<span class="string">'end'</span>, () =&gt; &#123;</span><br><span class="line">    done()</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="13-Gulp-构建过程核心工作原理"><a href="#13-Gulp-构建过程核心工作原理" class="headerlink" title="13.Gulp 构建过程核心工作原理"></a>13.Gulp 构建过程核心工作原理</h3><ul>
+<li>读取流 =&gt; 转换流 =&gt; 写入流</li>
+<li>The streaming build system</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>)</span><br><span class="line"><span class="keyword">const</span> &#123; Transform &#125; = <span class="built_in">require</span>(<span class="string">'stream'</span>)</span><br><span class="line">exports.default = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 文件读取流</span></span><br><span class="line">  <span class="keyword">const</span> read = fs.createReadStream(<span class="string">'normalize.css'</span>)</span><br><span class="line">  <span class="comment">// 文件转换流</span></span><br><span class="line">  <span class="keyword">const</span> transform = <span class="keyword">new</span> Transform(&#123;</span><br><span class="line">    transform: <span class="function">(<span class="params">chunk, encoding, callback</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> input = chunk.toString()</span><br><span class="line">      <span class="keyword">const</span> output = input.replace(<span class="regexp">/\s+/g</span>, <span class="string">''</span>).repalce(<span class="regexp">/\/\*.+?\*\//g</span>,<span class="string">''</span>)</span><br><span class="line">      callback(<span class="literal">null</span>, output)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// 文件写入流</span></span><br><span class="line">  <span class="keyword">const</span> write = fs.createWriteStream(<span class="string">'normalize.min.css'</span>)</span><br><span class="line">  <span class="comment">// 把读取出来的文件流导入写入文件流</span></span><br><span class="line">  read</span><br><span class="line">  .pipe(transform)</span><br><span class="line">  .pipe(write)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> read</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="14-Gulp-文件操作-API"><a href="#14-Gulp-文件操作-API" class="headerlink" title="14.Gulp 文件操作 API"></a>14.Gulp 文件操作 API</h3><ul>
+<li>yarn add gulp-clean-css –dev</li>
+<li>yarn add gulp-rename –dev</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; src, dest &#125; = <span class="built_in">require</span>(<span class="string">'gulp'</span>)</span><br><span class="line"><span class="keyword">const</span> cleanCss = <span class="built_in">require</span>(<span class="string">'gulp-clean-css'</span>)</span><br><span class="line"><span class="keyword">const</span> rename = <span class="built_in">require</span>(<span class="string">'gulp-rename'</span>)</span><br><span class="line">exports.default = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> src(<span class="string">'src/*.css'</span>)</span><br><span class="line">  .pipe(cleanCss())</span><br><span class="line">  .pipe(rename(&#123;<span class="attr">extname</span>: <span class="string">'.min.css'</span>&#125;))</span><br><span class="line">  .pipe(dest(<span class="string">'dist'</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="15-Gulp-案例-样式编译"><a href="#15-Gulp-案例-样式编译" class="headerlink" title="15.Gulp 案例-样式编译"></a>15.Gulp 案例-样式编译</h3><ul>
+<li>略</li>
+</ul>
+<h3 id="16-Gulp-案例-脚本编译"><a href="#16-Gulp-案例-脚本编译" class="headerlink" title="16.Gulp 案例-脚本编译"></a>16.Gulp 案例-脚本编译</h3><ul>
+<li>略</li>
+</ul>
+<h3 id="17-Gulp-案例-页面模板编译"><a href="#17-Gulp-案例-页面模板编译" class="headerlink" title="17.Gulp 案例-页面模板编译"></a>17.Gulp 案例-页面模板编译</h3><ul>
+<li>略</li>
+</ul>
+<h3 id="18-Gulp-案例-图片和字体文件转换"><a href="#18-Gulp-案例-图片和字体文件转换" class="headerlink" title="18.Gulp 案例-图片和字体文件转换"></a>18.Gulp 案例-图片和字体文件转换</h3><ul>
+<li>略</li>
+</ul>
+<h3 id="19-Gulp-案例-其它文件及文件清除"><a href="#19-Gulp-案例-其它文件及文件清除" class="headerlink" title="19.Gulp 案例-其它文件及文件清除"></a>19.Gulp 案例-其它文件及文件清除</h3><ul>
+<li>略</li>
+</ul>
+<h3 id="20-Gulp-案例-自动加载插件"><a href="#20-Gulp-案例-自动加载插件" class="headerlink" title="20.Gulp 案例-自动加载插件"></a>20.Gulp 案例-自动加载插件</h3><ul>
+<li>略</li>
+</ul>
+<h3 id="21-Gulp-案例-开发服务器"><a href="#21-Gulp-案例-开发服务器" class="headerlink" title="21.Gulp 案例-开发服务器"></a>21.Gulp 案例-开发服务器</h3><ul>
+<li>略</li>
+</ul>
+<h3 id="22-Gulp-案例-监听变化以及构建优化"><a href="#22-Gulp-案例-监听变化以及构建优化" class="headerlink" title="22.Gulp 案例-监听变化以及构建优化"></a>22.Gulp 案例-监听变化以及构建优化</h3><ul>
+<li>略</li>
+</ul>
+<h3 id="23-Gulp-案例-useref文件引用处理"><a href="#23-Gulp-案例-useref文件引用处理" class="headerlink" title="23.Gulp 案例-useref文件引用处理"></a>23.Gulp 案例-useref文件引用处理</h3><ul>
+<li>略</li>
+</ul>
+<h3 id="24-Gulp-案例-文件压缩"><a href="#24-Gulp-案例-文件压缩" class="headerlink" title="24.Gulp 案例-文件压缩"></a>24.Gulp 案例-文件压缩</h3><ul>
+<li>略</li>
+</ul>
+<h3 id="25-Gulp-案例-重新规划构建过程"><a href="#25-Gulp-案例-重新规划构建过程" class="headerlink" title="25.Gulp 案例-重新规划构建过程"></a>25.Gulp 案例-重新规划构建过程</h3><ul>
+<li>略</li>
+</ul>
+<h3 id="26-Gulp-案例-补充"><a href="#26-Gulp-案例-补充" class="headerlink" title="26.Gulp 案例-补充"></a>26.Gulp 案例-补充</h3><ul>
+<li>略</li>
+</ul>
+<h3 id="27-封装工作流-准备"><a href="#27-封装工作流-准备" class="headerlink" title="27.封装工作流-准备"></a>27.封装工作流-准备</h3><ul>
+<li>略</li>
+</ul>
+<h3 id="28-封装工作流-提取-gulpfile"><a href="#28-封装工作流-提取-gulpfile" class="headerlink" title="28.封装工作流-提取 gulpfile"></a>28.封装工作流-提取 gulpfile</h3><ul>
+<li>略</li>
+</ul>
+<h3 id="29-封装工作流-解决模块中的问题"><a href="#29-封装工作流-解决模块中的问题" class="headerlink" title="29.封装工作流-解决模块中的问题"></a>29.封装工作流-解决模块中的问题</h3><ul>
+<li>略</li>
+</ul>
+<h3 id="30-封装工作流-抽象路径配置"><a href="#30-封装工作流-抽象路径配置" class="headerlink" title="30.封装工作流-抽象路径配置"></a>30.封装工作流-抽象路径配置</h3><ul>
+<li>略</li>
+</ul>
+<h3 id="31-封装工作流-包装-Gulp-Cli"><a href="#31-封装工作流-包装-Gulp-Cli" class="headerlink" title="31.封装工作流-包装 Gulp Cli"></a>31.封装工作流-包装 Gulp Cli</h3><ul>
+<li>略</li>
+</ul>
+<h3 id="32-封装工作流-发布并使用模块"><a href="#32-封装工作流-发布并使用模块" class="headerlink" title="32.封装工作流-发布并使用模块"></a>32.封装工作流-发布并使用模块</h3><ul>
+<li>略</li>
+</ul>
+<h3 id="33-封装工作流-总结"><a href="#33-封装工作流-总结" class="headerlink" title="33.封装工作流-总结"></a>33.封装工作流-总结</h3><ul>
+<li>略</li>
+</ul>
+<h3 id="34-FIS-的基本使用"><a href="#34-FIS-的基本使用" class="headerlink" title="34.FIS 的基本使用"></a>34.FIS 的基本使用</h3><ul>
+<li>略</li>
+</ul>
+<h3 id="35-FIS-编译与压缩"><a href="#35-FIS-编译与压缩" class="headerlink" title="35.FIS 编译与压缩"></a>35.FIS 编译与压缩</h3><ul>
+<li>略</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScipt/" rel="tag"># JavaScipt</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/11/04/27/" rel="next" title="学习笔记 ----- 【JavaScript 深度剖析】ES 新特性与 TypeScript、JS 性能优化">
+                <i class="fa fa-chevron-left"></i> 学习笔记 ----- 【JavaScript 深度剖析】ES 新特性与 TypeScript、JS 性能优化
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/12/04/29/" rel="prev" title="学习笔记 ----- 【前端工程化实践】模块化开发与规范化标准">
+                学习笔记 ----- 【前端工程化实践】模块化开发与规范化标准 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="FY" />
+            
+              <p class="site-author-name" itemprop="name">FY</p>
+              <p class="site-description motion-element" itemprop="description">Just Be Yourself</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/xuanfeiyu" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Part-2-·-前端工程化实践"><span class="nav-number">1.</span> <span class="nav-text">Part 2 · 前端工程化实践</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模块一：开发脚手架及封装自动化构建工作流"><span class="nav-number">1.1.</span> <span class="nav-text">模块一：开发脚手架及封装自动化构建工作流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#任务一：工程化概述"><span class="nav-number">1.2.</span> <span class="nav-text">任务一：工程化概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-工程化的定义和主要解决的问题"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.工程化的定义和主要解决的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-一个项目过程中工程化的体现"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.一个项目过程中工程化的体现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-工程化不等于工具"><span class="nav-number">1.2.3.</span> <span class="nav-text">3.工程化不等于工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-工程化与Node-js"><span class="nav-number">1.2.4.</span> <span class="nav-text">4.工程化与Node.js</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#任务二：脚手架工具"><span class="nav-number">1.3.</span> <span class="nav-text">任务二：脚手架工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-脚手架工具概要"><span class="nav-number">1.3.1.</span> <span class="nav-text">1.脚手架工具概要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-常用的脚手架工具"><span class="nav-number">1.3.2.</span> <span class="nav-text">2.常用的脚手架工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Yeoman-简介"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.Yeoman 简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Yeoman-基础使用"><span class="nav-number">1.3.4.</span> <span class="nav-text">4.Yeoman 基础使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Sub-Generator"><span class="nav-number">1.3.5.</span> <span class="nav-text">5.Sub Generator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-Yeoman-使用步骤总结"><span class="nav-number">1.3.6.</span> <span class="nav-text">6.Yeoman 使用步骤总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-自定义-Generator"><span class="nav-number">1.3.7.</span> <span class="nav-text">7.自定义 Generator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-创建-Generator-模块"><span class="nav-number">1.3.8.</span> <span class="nav-text">8.创建 Generator 模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-根据模板创建文件"><span class="nav-number">1.3.9.</span> <span class="nav-text">9.根据模板创建文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-接收用户输入"><span class="nav-number">1.3.10.</span> <span class="nav-text">10.接收用户输入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-Vue-Generator-案例"><span class="nav-number">1.3.11.</span> <span class="nav-text">11.Vue Generator 案例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-发布-Generator"><span class="nav-number">1.3.12.</span> <span class="nav-text">12.发布 Generator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-Plop-简介"><span class="nav-number">1.3.13.</span> <span class="nav-text">13.Plop 简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-Plop-的基本使用"><span class="nav-number">1.3.14.</span> <span class="nav-text">14.Plop 的基本使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-脚手架的工作原理"><span class="nav-number">1.3.15.</span> <span class="nav-text">15.脚手架的工作原理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#任务三：自动化构建"><span class="nav-number">1.4.</span> <span class="nav-text">任务三：自动化构建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-自动化构建简介"><span class="nav-number">1.4.1.</span> <span class="nav-text">1.自动化构建简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-自动化构建初体验"><span class="nav-number">1.4.2.</span> <span class="nav-text">2.自动化构建初体验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-常用的自动化构建工具"><span class="nav-number">1.4.3.</span> <span class="nav-text">3.常用的自动化构建工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Grunt-的基本使用"><span class="nav-number">1.4.4.</span> <span class="nav-text">4.Grunt 的基本使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Grunt-标记任务失败"><span class="nav-number">1.4.5.</span> <span class="nav-text">5.Grunt 标记任务失败</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-Grunt-的配置方法"><span class="nav-number">1.4.6.</span> <span class="nav-text">6.Grunt 的配置方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-Grunt-多目标任务"><span class="nav-number">1.4.7.</span> <span class="nav-text">7.Grunt 多目标任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-Grunt-插件的使用"><span class="nav-number">1.4.8.</span> <span class="nav-text">8.Grunt 插件的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-Grunt-常用插件及总结"><span class="nav-number">1.4.9.</span> <span class="nav-text">9.Grunt 常用插件及总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-Gulp-的基本使用"><span class="nav-number">1.4.10.</span> <span class="nav-text">10.Gulp 的基本使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-Gulp-的组合任务"><span class="nav-number">1.4.11.</span> <span class="nav-text">11.Gulp 的组合任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-Gulp-的异步任务"><span class="nav-number">1.4.12.</span> <span class="nav-text">12.Gulp 的异步任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-Gulp-构建过程核心工作原理"><span class="nav-number">1.4.13.</span> <span class="nav-text">13.Gulp 构建过程核心工作原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-Gulp-文件操作-API"><span class="nav-number">1.4.14.</span> <span class="nav-text">14.Gulp 文件操作 API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-Gulp-案例-样式编译"><span class="nav-number">1.4.15.</span> <span class="nav-text">15.Gulp 案例-样式编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16-Gulp-案例-脚本编译"><span class="nav-number">1.4.16.</span> <span class="nav-text">16.Gulp 案例-脚本编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17-Gulp-案例-页面模板编译"><span class="nav-number">1.4.17.</span> <span class="nav-text">17.Gulp 案例-页面模板编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18-Gulp-案例-图片和字体文件转换"><span class="nav-number">1.4.18.</span> <span class="nav-text">18.Gulp 案例-图片和字体文件转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19-Gulp-案例-其它文件及文件清除"><span class="nav-number">1.4.19.</span> <span class="nav-text">19.Gulp 案例-其它文件及文件清除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#20-Gulp-案例-自动加载插件"><span class="nav-number">1.4.20.</span> <span class="nav-text">20.Gulp 案例-自动加载插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#21-Gulp-案例-开发服务器"><span class="nav-number">1.4.21.</span> <span class="nav-text">21.Gulp 案例-开发服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#22-Gulp-案例-监听变化以及构建优化"><span class="nav-number">1.4.22.</span> <span class="nav-text">22.Gulp 案例-监听变化以及构建优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#23-Gulp-案例-useref文件引用处理"><span class="nav-number">1.4.23.</span> <span class="nav-text">23.Gulp 案例-useref文件引用处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#24-Gulp-案例-文件压缩"><span class="nav-number">1.4.24.</span> <span class="nav-text">24.Gulp 案例-文件压缩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#25-Gulp-案例-重新规划构建过程"><span class="nav-number">1.4.25.</span> <span class="nav-text">25.Gulp 案例-重新规划构建过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#26-Gulp-案例-补充"><span class="nav-number">1.4.26.</span> <span class="nav-text">26.Gulp 案例-补充</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#27-封装工作流-准备"><span class="nav-number">1.4.27.</span> <span class="nav-text">27.封装工作流-准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#28-封装工作流-提取-gulpfile"><span class="nav-number">1.4.28.</span> <span class="nav-text">28.封装工作流-提取 gulpfile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#29-封装工作流-解决模块中的问题"><span class="nav-number">1.4.29.</span> <span class="nav-text">29.封装工作流-解决模块中的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#30-封装工作流-抽象路径配置"><span class="nav-number">1.4.30.</span> <span class="nav-text">30.封装工作流-抽象路径配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#31-封装工作流-包装-Gulp-Cli"><span class="nav-number">1.4.31.</span> <span class="nav-text">31.封装工作流-包装 Gulp Cli</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#32-封装工作流-发布并使用模块"><span class="nav-number">1.4.32.</span> <span class="nav-text">32.封装工作流-发布并使用模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#33-封装工作流-总结"><span class="nav-number">1.4.33.</span> <span class="nav-text">33.封装工作流-总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#34-FIS-的基本使用"><span class="nav-number">1.4.34.</span> <span class="nav-text">34.FIS 的基本使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#35-FIS-编译与压缩"><span class="nav-number">1.4.35.</span> <span class="nav-text">35.FIS 编译与压缩</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">FY</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

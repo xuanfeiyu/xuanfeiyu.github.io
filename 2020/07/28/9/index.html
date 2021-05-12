@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScipt," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="作者：FY引用请标明出处  1.工厂模式12345678910111213function createPerson(name,age,job)&amp;#123;    var o &#x3D; new Object();    o.name &#x3D; name;    o.age &#x3D; age;    o.job &#x3D; job;    o.sayName &#x3D; funct">
+<meta property="og:type" content="article">
+<meta property="og:title" content="创建对象">
+<meta property="og:url" content="http://yoursite.com/2020/07/28/9/index.html">
+<meta property="og:site_name" content="旋の飞羽">
+<meta property="og:description" content="作者：FY引用请标明出处  1.工厂模式12345678910111213function createPerson(name,age,job)&amp;#123;    var o &#x3D; new Object();    o.name &#x3D; name;    o.age &#x3D; age;    o.job &#x3D; job;    o.sayName &#x3D; funct">
+<meta property="article:published_time" content="2020-07-27T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-10-31T11:59:02.186Z">
+<meta property="article:author" content="FY">
+<meta property="article:tag" content="JavaScipt">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/07/28/9/"/>
+
+
+
+
+
+  <title>创建对象 | 旋の飞羽</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">旋の飞羽</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">人间值得，未来可期。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/28/9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FY">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="旋の飞羽">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">创建对象</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-28T00:00:00+08:00">
+                2020-07-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>作者：FY<br>引用请标明出处</p>
+</blockquote>
+<h1 id="1-工厂模式"><a href="#1-工厂模式" class="headerlink" title="1.工厂模式"></a>1.工厂模式</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function createPerson(name,age,job)&#123;</span><br><span class="line">    var o &#x3D; new Object();</span><br><span class="line">    o.name &#x3D; name;</span><br><span class="line">    o.age &#x3D; age;</span><br><span class="line">    o.job &#x3D; job;</span><br><span class="line">    o.sayName &#x3D; function()&#123;</span><br><span class="line">        alert(this.name);</span><br><span class="line">    &#125;;</span><br><span class="line">    return o;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var person1 &#x3D; createPerson(&#39;Nichols&#39;,29,&#39;Software Engineer&#39;);</span><br><span class="line">var person2 &#x3D; createPerson(&#39;Greg&#39;,27,&#39;Doctor&#39;);</span><br></pre></td></tr></table></figure>
+
+<p>工厂模式虽然解决了创建多个对象相似的问题，但却没有解决对象识别的问题（即怎样知道一个对象的类型）。</p>
+<a id="more"></a>
+<h1 id="2-构造函数模式"><a href="#2-构造函数模式" class="headerlink" title="2.构造函数模式"></a>2.构造函数模式</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function Person(name,age,job)&#123;</span><br><span class="line">    this.name &#x3D; name;</span><br><span class="line">    this.age &#x3D; age;</span><br><span class="line">    this.job &#x3D; job;</span><br><span class="line">    this.sayName &#x3D; function()&#123;</span><br><span class="line">        alert(this.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var person1 &#x3D; new Person(&#39;Nichols&#39;,29,&#39;Software Engineer&#39;);</span><br><span class="line">var person2 &#x3D; new Person(&#39;Greg&#39;,27,&#39;Doctor&#39;);</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，Person()函数取代了 createPerson()函数。我们注意到，Person()函数中的代码除了与createPerson()中相同的部分外，还存在以下不同之处：</p>
+<p>没有显示的创建对象；<br>直接将属性和方法赋给了this对象；<br>没有return语句。</p>
+<p>要创建Person的新实例，必须使用new操作符。以这种方式调用构造函数实际上会经历以下四个步骤：</p>
+<p>1.创建一个新对象；<br>2.将构造函数的作用域赋给新对象（因此this就指向了这个新对象）；<br>3.执行构造函数中的代码（为这个新对象添加属性）；<br>4.返回新对象。</p>
+<p>创建自定义的构造函数意味着将来可以将它的实例标识为一种特定的类型；而这正是构造函数模式胜过工厂模式的地方。</p>
+<h1 id="3-原型模式"><a href="#3-原型模式" class="headerlink" title="3.原型模式"></a>3.原型模式</h1><p>我们创建的每个函数都有一个prototype（原型）属性，这个属性是一个指针，指向一个对象。<br>而这个对象的用途是包含可以由特定类型的所有实例共享的属性和方法。<br>如果按照字面意思来理解，那么prototype就是通过调用构造函数而创建的那个对象实例的原型对象。<br>使用原型对象的好处是可以让所有对象实例共享它所包含的属性和方法。换句话说，不必在构造函数中定义对象实例的信息，而是可以将这些信息直接添加到原型对象中，如下面的例子所示。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">function Person()&#123;&#125;</span><br><span class="line"></span><br><span class="line">Person.prototype.name &#x3D; &#39;Nicholas&#39;;</span><br><span class="line">Person.prototype.age &#x3D; 29;</span><br><span class="line">Person.prototype.job &#x3D; &#39;Software Engineer&#39;;</span><br><span class="line">Person.prototype.sayName &#x3D; function()&#123;</span><br><span class="line">    alert(this.name);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var person1 &#x3D; new Person();</span><br><span class="line">person1.sayName(); &#x2F;&#x2F; &#39;Nicholas&#39;</span><br><span class="line"></span><br><span class="line">var person2 &#x3D; new Person();</span><br><span class="line">person2.sayName(); &#x2F;&#x2F; &#39;Nicholas&#39;</span><br><span class="line"></span><br><span class="line">alert(person1.sayName &#x3D;&#x3D; person2.sayName); &#x2F;&#x2F; true</span><br></pre></td></tr></table></figure>
+
+<h1 id="4-组合使用构造函数模式和原型模式"><a href="#4-组合使用构造函数模式和原型模式" class="headerlink" title="4.组合使用构造函数模式和原型模式"></a>4.组合使用构造函数模式和原型模式</h1><p>创建自定义类型的最常见方式，就是组合使用构造函数模式与原型模式。构造函数模式用于定义实例属性，而原型模式用于定义方法和共享的属性。<br>结果，每个实例都会有自己的一份实例属性的副本，但同时又共享着对方法的引用，最大限度地节省了内存。<br>另外，这种混成模式还支持向构造函数传递参数；可谓是集两种模式之长。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">function Person(name,age,job)&#123;</span><br><span class="line">  this.name &#x3D; name;</span><br><span class="line">  this.age &#x3D; age;</span><br><span class="line">  this.job &#x3D; job;</span><br><span class="line">  this.friends &#x3D; [&quot;shelby&quot;,&quot;Count&quot;];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person.prototype &#x3D; &#123;</span><br><span class="line">    constructor: Person,</span><br><span class="line">    sayName: function()&#123;</span><br><span class="line">        alert(this.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var person1 &#x3D; new Person(&quot;Nicholas&quot;,29,&quot;Software Engineer&quot;);</span><br><span class="line">var person2 &#x3D; new Person(&quot;Greg&quot;,27,&quot;Doctor&quot;);</span><br><span class="line"></span><br><span class="line">person1.friends.push(&quot;Van&quot;);</span><br><span class="line">alert(person1.friends); &#x2F;&#x2F; &quot;Shelby,Count,Van&quot;</span><br><span class="line">alert(person2.friends); &#x2F;&#x2F; &quot;Shelby,Count&quot;</span><br><span class="line">alert(person1.friends &#x3D;&#x3D;&#x3D; person2.friends); &#x2F;&#x2F; false</span><br><span class="line">alert(person1.sayName &#x3D;&#x3D;&#x3D; person2.sayName); &#x2F;&#x2F; true</span><br></pre></td></tr></table></figure>
+
+<h1 id="5-动态原型模式"><a href="#5-动态原型模式" class="headerlink" title="5.动态原型模式"></a>5.动态原型模式</h1><p>通过检查某个应该存在的方法是否有效，来决定是否初始化原型。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function Person(name,age,job)&#123;</span><br><span class="line">  this.name &#x3D; name;</span><br><span class="line">  this.age &#x3D; age;</span><br><span class="line">  this.job &#x3D; job;</span><br><span class="line">  if(typeof this.sayName !&#x3D; &quot;function&quot;)&#123;</span><br><span class="line">      Person.prototype.sayName &#x3D; function()&#123;</span><br><span class="line">          alert(this.name);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var friend &#x3D; new Person(&quot;Nicholas&quot;,29,&quot;Software Engineer&quot;);</span><br><span class="line">friend.sayName();</span><br></pre></td></tr></table></figure>
+
+<h1 id="6-寄生构造函数模式"><a href="#6-寄生构造函数模式" class="headerlink" title="6.寄生构造函数模式"></a>6.寄生构造函数模式</h1><p>通常，在前述的几种模式都不适用的情况下，可以使用寄生构造函数模式。这种模式的基本思想是创建一个函数，该函数的作用仅仅是封装创建对象的代码，然后再返回新创建的对象；但从表面上看，这个函数又很像是典型的构造函数。下面是一个例子。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function Person(name,age,job)&#123;</span><br><span class="line">  var o &#x3D; new Object();</span><br><span class="line">  o.name &#x3D; name;</span><br><span class="line">  o.age &#x3D; age;</span><br><span class="line">  o.job &#x3D; job;</span><br><span class="line">  o.sayName &#x3D; function()&#123;</span><br><span class="line">      alert(this.name);</span><br><span class="line">  &#125;;</span><br><span class="line">  return o;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var friend &#x3D; new Person(&#39;Nicholas&#39;,29,&#39;Software Engineer&#39;);</span><br><span class="line">friend.sayName();</span><br></pre></td></tr></table></figure>
+<p>这个模式可以在特殊的情况下用来为对象创建构造函数。假设我们想创建一个具有额外方法的特殊数组。由于不能直接修改Array构造函数，因此可以使用这个模式。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function SpecialArray()&#123;</span><br><span class="line">  &#x2F;&#x2F; 创建数组</span><br><span class="line">  var values &#x3D; new Array();</span><br><span class="line">  &#x2F;&#x2F; 添加值</span><br><span class="line">  values.push.apply(values,arguments);</span><br><span class="line">  &#x2F;&#x2F; 添加方法</span><br><span class="line">  values.toPipedString &#x3D; function()&#123;</span><br><span class="line">      return this.join(&#39;|&#39;);</span><br><span class="line">  &#125;;</span><br><span class="line">  return values;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var colors &#x3D; new SpecialArray(&#39;red&#39;,&#39;blue&#39;,&#39;green&#39;);</span><br><span class="line">alert(colors.toPipedString())</span><br></pre></td></tr></table></figure>
+<p>关于寄生函数模式，有一点需要说明：首先，返回的对象与构造函数或者构造函数的原型属性之间没有关系；也就是说，构造函数返回的对象与在构造函数外部创建的对象没有什么不同。为此，不能依赖instanceof操作符来确定对象类型。由于存在上述问题，我们建议在可以使用其他模式的情况下，不要使用这种模式。</p>
+<h1 id="7-稳妥构造函数模式"><a href="#7-稳妥构造函数模式" class="headerlink" title="7.稳妥构造函数模式"></a>7.稳妥构造函数模式</h1><p>所谓稳妥对象，指的是没有公共属性，而且其方法也不引用this的对象。稳妥对象最适合在一些安全的环境中（这些环境中会禁止使用this和new），或者在防止数据被其他应用程序改动时使用。稳妥构造函数遵循与寄生构造函数类似的模式，但有两点不同：一是新创建对象的实例方法不引用this；二是不使用new操作符调用构造函数。按照稳妥构造函数的要求，可以将前面的Person构造函数重写如下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function Person(name,age,job)&#123;</span><br><span class="line">    &#x2F;&#x2F; 创建要返回的对象</span><br><span class="line">    var o &#x3D; new Object();</span><br><span class="line">    &#x2F;&#x2F; 可以在这里定义私有变量和函数</span><br><span class="line">    &#x2F;&#x2F; 添加方法</span><br><span class="line">    o.sayName &#x3D; function()&#123;</span><br><span class="line">        alert(name);</span><br><span class="line">    &#125;</span><br><span class="line">    return o;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意，在以这种模式创建的对象中，除了使用sayName()方法之外，没有其他办法可以访问name的值。可以像下面使用稳妥的Person构造函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var friend &#x3D; Person(&#39;Nicholas&#39;,29,&#39;Software Engineer&#39;);</span><br><span class="line">friend.sayName();</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScipt/" rel="tag"># JavaScipt</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/07/22/7/" rel="next" title="了解BOM">
+                <i class="fa fa-chevron-left"></i> 了解BOM
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/07/28/8/" rel="prev" title="高频前端面试题">
+                高频前端面试题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="FY" />
+            
+              <p class="site-author-name" itemprop="name">FY</p>
+              <p class="site-description motion-element" itemprop="description">Just Be Yourself</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/xuanfeiyu" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-工厂模式"><span class="nav-number">1.</span> <span class="nav-text">1.工厂模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-构造函数模式"><span class="nav-number">2.</span> <span class="nav-text">2.构造函数模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-原型模式"><span class="nav-number">3.</span> <span class="nav-text">3.原型模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-组合使用构造函数模式和原型模式"><span class="nav-number">4.</span> <span class="nav-text">4.组合使用构造函数模式和原型模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-动态原型模式"><span class="nav-number">5.</span> <span class="nav-text">5.动态原型模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-寄生构造函数模式"><span class="nav-number">6.</span> <span class="nav-text">6.寄生构造函数模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-稳妥构造函数模式"><span class="nav-number">7.</span> <span class="nav-text">7.稳妥构造函数模式</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">FY</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

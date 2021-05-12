@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScipt," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="作者：FY引用请标明出处  Part 3 · Vue.js 框架源码与进阶模块二 · Vue.js 源码分析（响应式、虚拟 DOM、模板编译与组件化）任务一：Vue.js 源码剖析-响应式原理1.课程目标 Vue.js 的静态成员和实例成员初始化过程 首次渲染的过程 数据响应式原理  2.准备工作-目录结构 Vue 源码的获取   项目地址：https:&#x2F;&#x2F;github.com&#x2F;vuejs&#x2F;vu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习笔记 ----- 【Vue.js 框架源码与进阶】Vue.js 源码分析（响应式、虚拟 DOM、模板编译与组件化）">
+<meta property="og:url" content="http://yoursite.com/2020/12/20/31/index.html">
+<meta property="og:site_name" content="旋の飞羽">
+<meta property="og:description" content="作者：FY引用请标明出处  Part 3 · Vue.js 框架源码与进阶模块二 · Vue.js 源码分析（响应式、虚拟 DOM、模板编译与组件化）任务一：Vue.js 源码剖析-响应式原理1.课程目标 Vue.js 的静态成员和实例成员初始化过程 首次渲染的过程 数据响应式原理  2.准备工作-目录结构 Vue 源码的获取   项目地址：https:&#x2F;&#x2F;github.com&#x2F;vuejs&#x2F;vu">
+<meta property="article:published_time" content="2020-12-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-12-20T13:16:28.845Z">
+<meta property="article:author" content="FY">
+<meta property="article:tag" content="JavaScipt">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/12/20/31/"/>
+
+
+
+
+
+  <title>学习笔记 ----- 【Vue.js 框架源码与进阶】Vue.js 源码分析（响应式、虚拟 DOM、模板编译与组件化） | 旋の飞羽</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">旋の飞羽</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">人间值得，未来可期。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/20/31/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FY">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="旋の飞羽">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">学习笔记 ----- 【Vue.js 框架源码与进阶】Vue.js 源码分析（响应式、虚拟 DOM、模板编译与组件化）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-20T00:00:00+08:00">
+                2020-12-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>作者：FY<br>引用请标明出处</p>
+</blockquote>
+<h1 id="Part-3-·-Vue-js-框架源码与进阶"><a href="#Part-3-·-Vue-js-框架源码与进阶" class="headerlink" title="Part 3 · Vue.js 框架源码与进阶"></a>Part 3 · Vue.js 框架源码与进阶</h1><h2 id="模块二-·-Vue-js-源码分析（响应式、虚拟-DOM、模板编译与组件化）"><a href="#模块二-·-Vue-js-源码分析（响应式、虚拟-DOM、模板编译与组件化）" class="headerlink" title="模块二 · Vue.js 源码分析（响应式、虚拟 DOM、模板编译与组件化）"></a>模块二 · Vue.js 源码分析（响应式、虚拟 DOM、模板编译与组件化）</h2><h2 id="任务一：Vue-js-源码剖析-响应式原理"><a href="#任务一：Vue-js-源码剖析-响应式原理" class="headerlink" title="任务一：Vue.js 源码剖析-响应式原理"></a>任务一：Vue.js 源码剖析-响应式原理</h2><h3 id="1-课程目标"><a href="#1-课程目标" class="headerlink" title="1.课程目标"></a>1.课程目标</h3><ul>
+<li>Vue.js 的静态成员和实例成员初始化过程</li>
+<li>首次渲染的过程</li>
+<li>数据响应式原理</li>
+</ul>
+<h3 id="2-准备工作-目录结构"><a href="#2-准备工作-目录结构" class="headerlink" title="2.准备工作-目录结构"></a>2.准备工作-目录结构</h3><blockquote>
+<p>Vue 源码的获取</p>
+</blockquote>
+<ul>
+<li>项目地址：<a href="https://github.com/vuejs/vue" target="_blank" rel="noopener">https://github.com/vuejs/vue</a></li>
+<li>Fork 一份到自己仓库，克隆到本地，可以自己写注释提交到 github</li>
+<li>为什么分析 Vue 2.6<ul>
+<li>到目前为止 Vue3.0的正式版还没有发布</li>
+<li>新版本发布后，现有项目不会升级到3.0,2.x还有很长一段过渡期</li>
+<li>3.0 项目地址：<a href="https://github.com/vuejs/vue-next" target="_blank" rel="noopener">https://github.com/vuejs/vue-next</a></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>源码目录结构</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">src</span><br><span class="line">   |-compiler           编译相关</span><br><span class="line">   |-core               Vue 核心库</span><br><span class="line">   |-platforms          平台相关代码</span><br><span class="line">   |-server             SSR 服务端渲染</span><br><span class="line">   |-sfc                .vue 文件编译为 js 对象</span><br><span class="line">   |-shared             公共的代码</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>了解 Flow</p>
+</blockquote>
+<ul>
+<li>官网：<a href="https://flow.org/" target="_blank" rel="noopener">https://flow.org/</a></li>
+<li>javaScript 的静态类型检查器</li>
+<li>Flow 的静态类型检查错误是通过静态类型推断实现的<ul>
+<li>文件开头通过 // @flow 或者 /* @flow */ 声明</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-准备工作-调试"><a href="#3-准备工作-调试" class="headerlink" title="3.准备工作-调试"></a>3.准备工作-调试</h3><blockquote>
+<p>打包</p>
+</blockquote>
+<ul>
+<li><p>打包工具 Rollup</p>
+<ul>
+<li>Vue.js 源码的打包工具使用的是 Rollup，比 Webpack 轻量</li>
+<li>Webpack 把所有文件当做模块，Rollup 只处理 js 文件，更适合在 Vue.js 这样的库中使用</li>
+<li>Rollup 打包不会生成冗余的代码</li>
+</ul>
+</li>
+<li><p>安装依赖</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i</span><br></pre></td></tr></table></figure></li>
+<li><p>设置 sourcemap</p>
+<ul>
+<li>package.json 文件中的 dev 脚本中添加参数 –sourcemap<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;dev&quot;:&quot;rollup -w -c scripts&#x2F;config.js --sourcemap --environment TARGET:web-full-dev&quot;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>执行 dev</p>
+<ul>
+<li>npm run dev 执行打包，用的 rollup，-w 参数是监听文件的变化，文件变化自动重新打包</li>
+<li>结果</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-准备工作-Vue-的不同构建版本"><a href="#4-准备工作-Vue-的不同构建版本" class="headerlink" title="4.准备工作-Vue 的不同构建版本"></a>4.准备工作-Vue 的不同构建版本</h3><blockquote>
+<p>Vue 的不同构建版本</p>
+</blockquote>
+<ul>
+<li>npm run build 重新打包所有文件</li>
+<li>官方文档-对不同构建版本的解释</li>
+<li>dist/README.md</li>
+</ul>
+<blockquote>
+<p>术语</p>
+</blockquote>
+<ul>
+<li><p>完整版：同时包含<strong>编译器</strong>和<strong>运行时</strong>的版本</p>
+</li>
+<li><p>编译器：用来将模板字符串编译成为 JavaScript 渲染函数的代码，体积大，效率低</p>
+</li>
+<li><p>运行时：用来创建 Vue 实例、渲染并处理虚拟 DOM 等的代码，体积小、效率高。基本上就是除去编译器的代码</p>
+</li>
+<li><p>UMD：UMD 版本**通用的模块版本，支持多种模块方式。vue.js 默认文件就是运行时 + 编译器的 UMD 版本</p>
+</li>
+<li><p>CommonJS(cjs)：CommonJs 版本用来配合老的打包工具比如 Browserify 或 webpack 1</p>
+</li>
+<li><p>ES Module：从 2.6 开始 Vue 会提供两个 ES Module(ESM) 构造文件，为现代打包工具提供的版本</p>
+<ul>
+<li>ESM 格式被设计为可以被静态分析，所以打包工具可以利用这一点来进行 tree-shaking 并将用不到的代码排除出最终的包。</li>
+<li>ESM 模块 与 CommonJS 模块的差异</li>
+</ul>
+</li>
+<li><p>vue inspect &gt; output.js 查看 Webpack 配置文件</p>
+</li>
+</ul>
+<h3 id="5-寻找入口文件"><a href="#5-寻找入口文件" class="headerlink" title="5.寻找入口文件"></a>5.寻找入口文件</h3><blockquote>
+<p>寻找入口文件</p>
+</blockquote>
+<ul>
+<li>查看 dist/vue.js 的构建过程</li>
+</ul>
+<blockquote>
+<p>执行构建</p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm run dev</span><br><span class="line"># "dev": "rollup -w -c script/config.js --sourcemap --environment TARGET:web-full-dev"</span><br><span class="line"># --environment TARGET:web-full-dev 设置环境变量 TARGET</span><br></pre></td></tr></table></figure>
+<ul>
+<li>script/config.js 的执行过程<ul>
+<li>作用：生成 rollup 构建的配置文件</li>
+<li>使用环境变量 TARGET = web-full-dev</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 判断环境变量是否有 TARGET</span></span><br><span class="line"><span class="comment">// 如果有的话 使用 genConfig() 生成 rollup 配置文件</span></span><br><span class="line"><span class="keyword">if</span>(process.env.TARGET) &#123;</span><br><span class="line">    <span class="built_in">module</span>.exports = genConfig(process.env.TARGET)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 否则获取全部配置</span></span><br><span class="line">    exports.getBuild = genConfig</span><br><span class="line">    exports.getAllBuilds = <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">Object</span>.keys(builds).map(getConfig)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-从入口开始"><a href="#6-从入口开始" class="headerlink" title="6.从入口开始"></a>6.从入口开始</h3><ul>
+<li>src/platform/web/entry-runtime-with-compiler.js</li>
+</ul>
+<blockquote>
+<p>通过查看源码解决下面问题</p>
+</blockquote>
+<ul>
+<li>观察以下代码，通过阅读源码，回答在页面上输出的结果</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">"app"</span>,</span><br><span class="line">    template: <span class="string">'&lt;h3&gt;Hello template&lt;/h3&gt;'</span>,</span><br><span class="line">    render (h) &#123;</span><br><span class="line">        <span class="keyword">return</span> h(<span class="string">'h4'</span>, <span class="string">'Hello render'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>阅读源码记录<ul>
+<li>el 不能是 body 或者 html 标签</li>
+<li>如果没有 render，把 template 转换成 render 函数</li>
+<li>如有有 render 方法，直接调用 mount 挂载 DOM</li>
+</ul>
+</li>
+</ul>
+<h3 id="7-Vue-初始化的过程"><a href="#7-Vue-初始化的过程" class="headerlink" title="7.Vue 初始化的过程"></a>7.Vue 初始化的过程</h3><blockquote>
+<p>四个导出 Vue 的模块</p>
+</blockquote>
+<ul>
+<li><p>src/platform/web/entry-runtime-with-compiler.js</p>
+<ul>
+<li>web 平台相关的入口</li>
+<li>重写了平台相关的 $mount() 方法</li>
+<li>注册了 Vue.compile() 方法，传递一个 HTML 字符串返回 render 函数</li>
+</ul>
+</li>
+<li><p>src/platform/web/runtime/index.js</p>
+<ul>
+<li>web 平台相关</li>
+<li>注册和平台相关的全局指令：v-model、v-show</li>
+<li>注册和平台相关的全局组件：v-transition、v-transition-group</li>
+<li>全局方法<ul>
+<li>_<em>patch_</em>:把虚拟 DOM 转换成真实 DOM</li>
+<li>$mount: 挂载方法</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>src/core/index.js</p>
+<ul>
+<li>与平台无关</li>
+<li>设置了 Vue 的静态方法，initGlobalAPI(Vue)</li>
+</ul>
+</li>
+<li><p>src/core/instance/index.js</p>
+<ul>
+<li>与平台无关</li>
+<li>定义了构造函数，调用了 this._init(options)方法</li>
+<li>给 Vue 中混入了常用的实例成员</li>
+</ul>
+</li>
+</ul>
+<h3 id="8-Vue-初始化-两个问题"><a href="#8-Vue-初始化-两个问题" class="headerlink" title="8.Vue 初始化-两个问题"></a>8.Vue 初始化-两个问题</h3><ul>
+<li>vscode 不识别 flow<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// setting.json</span></span><br><span class="line"><span class="string">"javascript.validate.enable"</span>: <span class="literal">false</span></span><br></pre></td></tr></table></figure></li>
+<li>Babel Javascript 插件 解决 flow 泛型不高亮显示问题 不能解决 ctrl + 鼠标左键 跳转问题</li>
+</ul>
+<h3 id="9-Vue-初始化-静态成员"><a href="#9-Vue-初始化-静态成员" class="headerlink" title="9.Vue 初始化-静态成员"></a>9.Vue 初始化-静态成员</h3><p>略</p>
+<h3 id="10-Vue-初始化-实例成员"><a href="#10-Vue-初始化-实例成员" class="headerlink" title="10.Vue 初始化-实例成员"></a>10.Vue 初始化-实例成员</h3><p>略</p>
+<h3 id="11-Vue-初始化-实例成员-init"><a href="#11-Vue-初始化-实例成员-init" class="headerlink" title="11.Vue 初始化-实例成员-init"></a>11.Vue 初始化-实例成员-init</h3><p>略</p>
+<h3 id="12-Vue-初始化-实例成员-initState"><a href="#12-Vue-初始化-实例成员-initState" class="headerlink" title="12.Vue 初始化-实例成员-initState"></a>12.Vue 初始化-实例成员-initState</h3><p>略</p>
+<h3 id="13-调试-Vue-初始化过程"><a href="#13-调试-Vue-初始化过程" class="headerlink" title="13.调试 Vue 初始化过程"></a>13.调试 Vue 初始化过程</h3><p>略</p>
+<h3 id="14-首次渲染过程"><a href="#14-首次渲染过程" class="headerlink" title="14.首次渲染过程"></a>14.首次渲染过程</h3><ul>
+<li>首先进入第一个文件 src/core/instance/index.js<ul>
+<li>调用 Vue 构造函数 _init() 方法</li>
+</ul>
+</li>
+<li>进入第二个文件 src/core/index.js<ul>
+<li>调用 initGlobalApi()，初始化 Vue 中静态成员</li>
+</ul>
+</li>
+<li>进入第三个文件 src/platforms/web/runtime/index.js<ul>
+<li>初始化和平台相关的内容，比如指令和组件。挂载了<strong>patch</strong>和$mount</li>
+</ul>
+</li>
+<li>进入第四个文件 src/platforms/web/entry-runtime-with-compiler.js<ul>
+<li>重写了 $mount 方法 增加了编译的功能</li>
+</ul>
+</li>
+</ul>
+<h3 id="15-首次渲染过程-总结"><a href="#15-首次渲染过程-总结" class="headerlink" title="15.首次渲染过程-总结"></a>15.首次渲染过程-总结</h3><ul>
+<li><p>首先进行 Vue 的初始化，初始化 Vue 的实例成员以及静态成员。</p>
+</li>
+<li><p>初始化结束后，调用 Vue 的构造函数，在 Vue 的构造函数中调用了 this._init(),在这个方法中又调用了vm.$mount()</p>
+<ul>
+<li>第一个 $mount 是 src/platform/web/entry-runtime-with-compiler.js 中的<ul>
+<li>核心作用是把模板编译成 render() 函数。首先会判断是否传入了 render 选项，如果没传入会获取 template 选项，如果没有 template，会把 el 作为模板，然后把模板编译成 render() 函数。通过 compileToFunctions() 生成 renser() 渲染函数。最后将这个render() 存在 options.render 中。</li>
+</ul>
+</li>
+<li>第二个 $mount 是 src/platform/web/runtime/index.js 中的<ul>
+<li>重新获取 el</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>调用 src/core/instance/lifecycle.js 的 mountComponent(this.el) </p>
+<ul>
+<li>首先判断是否有 render 选项，如果没有但是传入了模板，并且是开发环境的话会发送警告。运行时版本不支持编译器。</li>
+</ul>
+</li>
+<li><p>触发 beforeMount</p>
+</li>
+<li><p>定义 updateComponent</p>
+<ul>
+<li>在这个方法中，定义了 _render 和 _update<ul>
+<li>_render 的作用是生成虚拟 DOM</li>
+<li>_update 的作用是将虚拟 DOM 转换成真实 DOM，并且挂载到页面上</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>创建 Watcher 实例</p>
+<ul>
+<li>在创建 Watcher 时，传递了 updateComponent 这个函数，这个函数最终实在Watcher内部调用的</li>
+<li>调用 get() 方法，在 get() 方法中会调用 updateComponent()</li>
+</ul>
+</li>
+<li><p>最后触发了生命周期的钩子函数 mounted，挂载结束，return vm</p>
+</li>
+</ul>
+<h3 id="16-数据响应式原理-响应式处理入口"><a href="#16-数据响应式原理-响应式处理入口" class="headerlink" title="16.数据响应式原理-响应式处理入口"></a>16.数据响应式原理-响应式处理入口</h3><blockquote>
+<p>通过查看源码解决下面问题</p>
+</blockquote>
+<ul>
+<li>vm.msg = { count: 0 },重新给属性赋值，是否是响应式的</li>
+<li>vm.arr[0] = 4,给数组元素赋值，视图是否会更新</li>
+<li>vm.arrlength = 0,修改数组的 length，视图是否会更新</li>
+<li>vm.arr.push(4),视图是否会更新</li>
+</ul>
+<blockquote>
+<p>响应式处理的入口</p>
+</blockquote>
+<p>整个响应式的入口是比较复杂的，下面我们先从</p>
+<ul>
+<li><p>src/core/instance/init.js</p>
+<ul>
+<li>initState(vm) vm 状态的初始化</li>
+<li>初始化了 _data、_props、modules 等</li>
+</ul>
+</li>
+<li><p>src/core/instance/state.js</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数据的初始化</span></span><br><span class="line"><span class="keyword">if</span> (opts.data) &#123;</span><br><span class="line">  initData(vm)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  observe(vm._data = &#123;&#125;, <span class="literal">true</span> <span class="comment">/* asRootData */</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="17-数据响应式原理-Observer"><a href="#17-数据响应式原理-Observer" class="headerlink" title="17.数据响应式原理-Observer"></a>17.数据响应式原理-Observer</h3><ul>
+<li>首先判断传进来的第一个参数 value 是否是对象，如果不是直接返回</li>
+<li>获取 value 中的<strong>ob</strong>（observer对象）属性，如果有取出来直接返回</li>
+<li>判断 value 对象是否可以进行响应式处理，如果可以创建一个 Observer 对象</li>
+</ul>
+<h3 id="18-数据响应式原理-defineReactive"><a href="#18-数据响应式原理-defineReactive" class="headerlink" title="18.数据响应式原理-defineReactive"></a>18.数据响应式原理-defineReactive</h3><ul>
+<li>为一个对象定义一个响应式的属性</li>
+</ul>
+<h3 id="19-数据响应式原理-依赖收集"><a href="#19-数据响应式原理-依赖收集" class="headerlink" title="19.数据响应式原理-依赖收集"></a>19.数据响应式原理-依赖收集</h3><p>略</p>
+<h3 id="20-数据响应式原理-依赖收集-调试"><a href="#20-数据响应式原理-依赖收集-调试" class="headerlink" title="20.数据响应式原理-依赖收集-调试"></a>20.数据响应式原理-依赖收集-调试</h3><p>略</p>
+<h3 id="21-数据响应式原理-数组"><a href="#21-数据响应式原理-数组" class="headerlink" title="21.数据响应式原理-数组"></a>21.数据响应式原理-数组</h3><p>略</p>
+<h3 id="22-数据响应式原理-数组练习"><a href="#22-数据响应式原理-数组练习" class="headerlink" title="22.数据响应式原理-数组练习"></a>22.数据响应式原理-数组练习</h3><p>略</p>
+<h3 id="23-数据响应式原理-Watcher上"><a href="#23-数据响应式原理-Watcher上" class="headerlink" title="23.数据响应式原理-Watcher上"></a>23.数据响应式原理-Watcher上</h3><blockquote>
+<p>Watcher类</p>
+</blockquote>
+<ul>
+<li>Watcher 分为三种，Computed Wather、用户 Watcher（侦听器）、渲染 Watcher</li>
+<li>渲染 Wathcer 的创建时机<ul>
+<li>/src/core/instance/lifecycle.js</li>
+</ul>
+</li>
+</ul>
+<h3 id="24-数据响应式原理-Watcher下"><a href="#24-数据响应式原理-Watcher下" class="headerlink" title="24.数据响应式原理-Watcher下"></a>24.数据响应式原理-Watcher下</h3><p>略</p>
+<h3 id="25-数据响应式原理-调试上"><a href="#25-数据响应式原理-调试上" class="headerlink" title="25.数据响应式原理-调试上"></a>25.数据响应式原理-调试上</h3><blockquote>
+<p>调试响应式数据执行过程</p>
+</blockquote>
+<ul>
+<li>数组响应式处理的核心过程和数组收集依赖的过程</li>
+<li>当数组的数据改变的时候 watcher 的执行过程</li>
+</ul>
+<h3 id="26-数据响应式原理-调试下"><a href="#26-数据响应式原理-调试下" class="headerlink" title="26.数据响应式原理-调试下"></a>26.数据响应式原理-调试下</h3><p>略</p>
+<h3 id="27-数据响应式原理-总结"><a href="#27-数据响应式原理-总结" class="headerlink" title="27.数据响应式原理-总结"></a>27.数据响应式原理-总结</h3><blockquote>
+<p>响应式的处理过程</p>
+</blockquote>
+<ul>
+<li>整个响应式是从 vue 实例的 init 方法开始的</li>
+<li>在 init 方法中先调用 initState() 初始化 vue 实例的状态，在 initState() 方法中调用了 initData() 把 data 属性注入到实例上，并且调用 observe() 把 data 对象转换为响应式对象</li>
+<li>observe(value) 位置 src/core/observer/index.js  <ul>
+<li>首先判断 value 是否是对象，如果不是对象直接返回</li>
+<li>判断 value 对象有没有 __ob__，如果有直接返回，如果没有，创建 observer 对象</li>
+<li>返回 observer 对象</li>
+</ul>
+</li>
+<li>Observer 位置 src/core/observer/index.js<ul>
+<li>给 value 对象定义不可枚举的 __ob__属性，记录当前的 observer 对象</li>
+<li>数组的响应式处理</li>
+<li>对象的响应式处理，调用 walk 方法</li>
+</ul>
+</li>
+<li>defineReactive 位置 src/core/observer/index.js<ul>
+<li>为每一个属性创建 dep 对象</li>
+<li>如果当前属性的值是对象，调用 observe</li>
+<li>定义 getter 收集依赖 返回属性的值</li>
+<li>定义 setter 保存新值 如果新值是对象，调用 observe</li>
+<li>派发更新(发送通知)，调用 dep.notify()</li>
+</ul>
+</li>
+<li>依赖收集<ul>
+<li>在 watcher 对象的 get 方法中调用 pushTarget 记录 Dep.target 属性</li>
+<li>访问 data 中的成员的时候收集依赖，defineReactive 的 getter 中收集依赖</li>
+<li>把属性对象的 watcher 对象添加到 dep 的 subs 数组中</li>
+<li>给 childOb 收集依赖，目的是子对象添加和删除成员时发送通知</li>
+</ul>
+</li>
+<li>Watcher<ul>
+<li>dep.notify() 在调用 watcher 对象的 update() 方法</li>
+<li>queueWatcher() 判断 watcher 是否被处理，如果没有的话添加到 queue 队列中，并调用 flushScheduleQueue()</li>
+<li>flushScheduleQueue()<ul>
+<li>触发 beforeUpdate 钩子函数</li>
+<li>调用 wathcer.run() run() –&gt; get() –&gt; getter –&gt; updateComponent</li>
+<li>清空上一次的依赖</li>
+<li>触发 actived 钩子函数</li>
+<li>触发 updated 钩子函数</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="28-动态添加一个响应式属性"><a href="#28-动态添加一个响应式属性" class="headerlink" title="28.动态添加一个响应式属性"></a>28.动态添加一个响应式属性</h3><p>略</p>
+<h3 id="29-set-源码"><a href="#29-set-源码" class="headerlink" title="29.set-源码"></a>29.set-源码</h3><blockquote>
+<p>定义位置</p>
+</blockquote>
+<ul>
+<li>Vue.set()<ul>
+<li>global-api/index.js</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 静态方法 set/delete/nextTick</span></span><br><span class="line">Vue.set = <span class="keyword">set</span></span><br><span class="line">Vue.delete = del</span><br><span class="line">Vue.nextTick = nextTick</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Vue.$set()<ul>
+<li>instance/index.js</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 注册 vm 的 $data/$props/$set/$delete/$watch</span></span><br><span class="line"><span class="comment">// instance/state.js</span></span><br><span class="line">stateMixin(Vue)</span><br><span class="line"><span class="comment">// instance/state.js</span></span><br><span class="line">Vue.prototype.$<span class="keyword">set</span> = <span class="keyword">set</span></span><br><span class="line">Vue.prototype.$delete = del</span><br></pre></td></tr></table></figure>
+<h3 id="30-set-调试"><a href="#30-set-调试" class="headerlink" title="30.set-调试"></a>30.set-调试</h3><p>略</p>
+<h3 id="31-delete"><a href="#31-delete" class="headerlink" title="31.delete"></a>31.delete</h3><blockquote>
+<p>vm.$delete</p>
+</blockquote>
+<ul>
+<li>功能<ul>
+<li>删除对象的属性。如果对象是响应式的，确保删除能触发更新视图。这个方法主要用于避开 Vue 不能检测到属性被删除的限制，但是你应该很少会使用它。</li>
+<li>注意：目标对象不能是一个 Vue 实例或 Vue 实例的根数据对象。</li>
+</ul>
+</li>
+<li>示例</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vm.$<span class="keyword">delete</span>(vm.obj,<span class="string">'msg'</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="32-delete-源码"><a href="#32-delete-源码" class="headerlink" title="32.delete-源码"></a>32.delete-源码</h3><p>略</p>
+<h3 id="33-watch-回顾"><a href="#33-watch-回顾" class="headerlink" title="33.watch-回顾"></a>33.watch-回顾</h3><blockquote>
+<p>vm.$watch</p>
+</blockquote>
+<ul>
+<li>vm.$watch(expOrFn,callback,[options])<ul>
+<li>功能<br>-观察 Vue 实例变化的一个表达式或计算属性函数。回调函数得到的参数为新值和旧值。表达式只接受监督的键路径。对于更复杂的表达式，用一个函数取代。</li>
+<li>参数<ul>
+<li>expOrFn：要监视的 $data 中的属性，可以是表达式或函数</li>
+<li>callback：数据变化后执行的函数<ul>
+<li>函数：回调函数</li>
+<li>对象：具有 handler 属性（字符串或者函数），如果该属性为字符串则 methods 中相应的定义</li>
+</ul>
+</li>
+<li>options：可选的选项<ul>
+<li>deep：布尔类型，深度监听</li>
+<li>immediate：布尔类型，是否立即执行一次回调函数</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="34-三种类型的-Watcher"><a href="#34-三种类型的-Watcher" class="headerlink" title="34.三种类型的 Watcher"></a>34.三种类型的 Watcher</h3><ul>
+<li>没有静态方法，因为 $watch 方法中要使用 Vue 的实例</li>
+<li>Watchr 分三种：计算属性 Watcher、用户 Watcher（侦听器）、渲染 Watcher<ul>
+<li>创建顺序：计算属性 Watcher、用户 Watcher（侦听器）、渲染 Watcher</li>
+</ul>
+</li>
+<li>vm.$watcher<ul>
+<li>src/core/instance/state.js</li>
+</ul>
+</li>
+</ul>
+<h3 id="35-watch-源码"><a href="#35-watch-源码" class="headerlink" title="35.watch-源码"></a>35.watch-源码</h3><p>略</p>
+<h3 id="36-nextTick-回顾"><a href="#36-nextTick-回顾" class="headerlink" title="36.nextTick-回顾"></a>36.nextTick-回顾</h3><blockquote>
+<p>异步更新队列-nextTick()</p>
+</blockquote>
+<ul>
+<li>Vue 更新 DOM 是异步执行的，批量的<ul>
+<li>在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。</li>
+<li>vm.$nextTcik(function(){/<em>操作 DOM</em>/}) / Vue.nextTick(function(){})</li>
+</ul>
+</li>
+</ul>
+<h3 id="36-nextTick-源码"><a href="#36-nextTick-源码" class="headerlink" title="36.nextTick-源码"></a>36.nextTick-源码</h3><blockquote>
+<p>定义位置</p>
+</blockquote>
+<ul>
+<li>src\core\instance\render.js</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Vue.prototype.$nextTick = <span class="function"><span class="keyword">function</span>(<span class="params">fn:Function</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> nextTick(fn,<span class="keyword">this</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>源码</p>
+</blockquote>
+<ul>
+<li>手动调用 vm.$nextTick()</li>
+<li>在 Watcher 的 queueWatcher 中执行 nextTick()</li>
+<li>src\core\util\next-tick.js</li>
+</ul>
+<h2 id="任务二：Vue-js-源码剖析-虚拟DOM"><a href="#任务二：Vue-js-源码剖析-虚拟DOM" class="headerlink" title="任务二：Vue.js 源码剖析-虚拟DOM"></a>任务二：Vue.js 源码剖析-虚拟DOM</h2><h3 id="1-课程回顾"><a href="#1-课程回顾" class="headerlink" title="1.课程回顾"></a>1.课程回顾</h3><ul>
+<li>虚拟 DOM 库 - Snabbdom</li>
+<li>Vue.js 响应式原理模拟实现</li>
+<li>Vue.js 源码剖析 - 响应式原理</li>
+</ul>
+<h3 id="2-虚拟-DOM-概念回顾"><a href="#2-虚拟-DOM-概念回顾" class="headerlink" title="2.虚拟 DOM 概念回顾"></a>2.虚拟 DOM 概念回顾</h3><blockquote>
+<p>什么是虚拟 DOM</p>
+</blockquote>
+<ul>
+<li>虚拟 DOM 是使用 JacaScript 对象描述真实 DOM</li>
+<li>Vue.js 中的虚拟 DOM 借鉴 Snabbdom，并添加了 Vue.js 的特性<ul>
+<li>例如：指令和组件机制</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>为什么要使用虚拟 DOM</p>
+</blockquote>
+<ul>
+<li>避免直接操作 DOM，提高开发效率</li>
+<li>作为一个中间层可以跨平台</li>
+<li>虚拟 DOM 不一定可以提高性能<ul>
+<li>首次渲染的时候会增加开销</li>
+<li>复杂视图情况下提高渲染性能</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-代码演示"><a href="#3-代码演示" class="headerlink" title="3.代码演示"></a>3.代码演示</h3><blockquote>
+<p>h 函数</p>
+</blockquote>
+<ul>
+<li><p>vm.$createElement(tag, data, children, normalizeChildren)</p>
+<ul>
+<li>tag<ul>
+<li>标签名称或者组件对象</li>
+</ul>
+</li>
+<li>data<ul>
+<li>描述 tag，可以设置 DOM 的属性或者标签的属性</li>
+</ul>
+</li>
+<li>children<ul>
+<li>tag 中的文本内容或者子节点<blockquote>
+<p>VNode</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>VNode 的核心属性</p>
+<ul>
+<li>tag</li>
+<li>data</li>
+<li>children</li>
+<li>text</li>
+<li>elm</li>
+<li>key</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-整体过程分析"><a href="#4-整体过程分析" class="headerlink" title="4.整体过程分析"></a>4.整体过程分析</h3><p>略</p>
+<h3 id="5-createElement-上"><a href="#5-createElement-上" class="headerlink" title="5.createElement-上"></a>5.createElement-上</h3><p>略</p>
+<h3 id="6-createElement-下"><a href="#6-createElement-下" class="headerlink" title="6.createElement-下"></a>6.createElement-下</h3><p>略</p>
+<h3 id="7-update"><a href="#7-update" class="headerlink" title="7.update"></a>7.update</h3><p>略</p>
+<h3 id="8-patch-函数的初始化"><a href="#8-patch-函数的初始化" class="headerlink" title="8.patch 函数的初始化"></a>8.patch 函数的初始化</h3><ul>
+<li>src/platforms/web/runtime/index.js</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; patch &#125; <span class="keyword">from</span> <span class="string">'./patch'</span></span><br><span class="line">Vue.prototype.__patch__ = inBrowser ? patch : noop</span><br></pre></td></tr></table></figure>
+
+<h3 id="9-patch"><a href="#9-patch" class="headerlink" title="9.patch"></a>9.patch</h3><p>略</p>
+<h3 id="10-createElm"><a href="#10-createElm" class="headerlink" title="10.createElm"></a>10.createElm</h3><p>略</p>
+<h3 id="11-patchVnode"><a href="#11-patchVnode" class="headerlink" title="11.patchVnode"></a>11.patchVnode</h3><p>略</p>
+<h3 id="12-updateChildren"><a href="#12-updateChildren" class="headerlink" title="12.updateChildren"></a>12.updateChildren</h3><p>略</p>
+<h3 id="13-没有设置-key-的情况"><a href="#13-没有设置-key-的情况" class="headerlink" title="13.没有设置 key 的情况"></a>13.没有设置 key 的情况</h3><p>略</p>
+<h3 id="14-设置-key-的情况"><a href="#14-设置-key-的情况" class="headerlink" title="14.设置 key 的情况"></a>14.设置 key 的情况</h3><p>略</p>
+<h3 id="15-总结"><a href="#15-总结" class="headerlink" title="15.总结"></a>15.总结</h3><p>略</p>
+<h2 id="任务三：Vue-js-源码剖析-模板编译和组件化"><a href="#任务三：Vue-js-源码剖析-模板编译和组件化" class="headerlink" title="任务三：Vue.js 源码剖析-模板编译和组件化"></a>任务三：Vue.js 源码剖析-模板编译和组件化</h2><h3 id="1-模板编译介绍"><a href="#1-模板编译介绍" class="headerlink" title="1.模板编译介绍"></a>1.模板编译介绍</h3><ul>
+<li>模板编译的主要目的是将模板(tempalte)转换为渲染函数(render)<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span> @<span class="attr">click</span>=<span class="string">"handler"</span>&gt;</span>title<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>some content<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>渲染函数<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">render(h) &#123;</span><br><span class="line">  <span class="keyword">return</span> h(<span class="string">'div'</span>, [</span><br><span class="line">    h(<span class="string">'h1'</span>, &#123; <span class="attr">on</span>: &#123; <span class="attr">click</span>: <span class="keyword">this</span>.handler &#125; &#125;, <span class="string">'title'</span>)</span><br><span class="line">    h(<span class="string">'p'</span>, <span class="string">'some content'</span>)</span><br><span class="line">  ])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<blockquote>
+<p>模板编译的作用</p>
+</blockquote>
+<ul>
+<li>Vue 2.x 使用 VNode 描述视图以及各种交互，用户自己编写 VNode 比较复杂</li>
+<li>用户只需要编写类似 HTML 的代码 - Vue.js 模板，通过编译器将模板转换为返回 VNode 的 render 函数</li>
+<li>.vue 文件会被 webpack 在构建的过程中转换成 render 函数</li>
+</ul>
+<h3 id="2-体验模板编译的结果-上"><a href="#2-体验模板编译的结果-上" class="headerlink" title="2.体验模板编译的结果-上"></a>2.体验模板编译的结果-上</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">anonymous</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">with</span> (<span class="keyword">this</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> _c(</span><br><span class="line">      <span class="string">"div"</span>,</span><br><span class="line">      &#123; <span class="attr">attrs</span>: &#123; <span class="attr">id</span>: <span class="string">"app"</span> &#125; &#125;,</span><br><span class="line">      [</span><br><span class="line">        _m(<span class="number">0</span>),</span><br><span class="line">        _v(<span class="string">" "</span>),</span><br><span class="line">        _c(<span class="string">"p"</span>, [_v[_s(msg)]]),</span><br><span class="line">        _v(<span class="string">" "</span>),</span><br><span class="line">        _c(<span class="string">"comp"</span>, &#123; <span class="attr">on</span>: &#123; <span class="attr">myclick</span>: handler &#125;&#125;),</span><br><span class="line">      ],</span><br><span class="line">      <span class="number">1</span></span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>编译生成的函数的位置</p>
+</blockquote>
+<ul>
+<li><p>_c()</p>
+<ul>
+<li>src/core/instance/render.js</li>
+</ul>
+</li>
+<li><p>_m()/_v()/_s()</p>
+<ul>
+<li>src/core/instance/render-helpers/index.js</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-体验模板编译的结果-下"><a href="#3-体验模板编译的结果-下" class="headerlink" title="3.体验模板编译的结果-下"></a>3.体验模板编译的结果-下</h3><p>略</p>
+<h3 id="4-Vue-Template-Explorer"><a href="#4-Vue-Template-Explorer" class="headerlink" title="4.Vue Template Explorer"></a>4.Vue Template Explorer</h3><ul>
+<li><a href="https://template-explorer.vuejs.org" target="_blank" rel="noopener">https://template-explorer.vuejs.org</a></li>
+<li><a href="https://vue-next-template-explorer.netlify.app" target="_blank" rel="noopener">https://vue-next-template-explorer.netlify.app</a></li>
+</ul>
+<h3 id="5-模板编译的入口"><a href="#5-模板编译的入口" class="headerlink" title="5.模板编译的入口"></a>5.模板编译的入口</h3><ul>
+<li>compileToFunction(template,{},this) 返回 {render,staticRenderFns}</li>
+<li>createCompiler(baseOptions)<ul>
+<li>定义 compile(template,options) 函数</li>
+<li>生成 compileToFunctions  createCompileToFunction(compile)</li>
+<li>返回 {compile,compileToFunctions}</li>
+<li>compileToFunctions 函数是模板编译的入口</li>
+</ul>
+</li>
+<li>createCompileCreator(function baseCompile(){})<ul>
+<li>传入了 baseCompile(template,finalOptions) 函数</li>
+<li>baseCompile<ul>
+<li>解析 parse</li>
+<li>优化 optimize</li>
+<li>生成 generate</li>
+</ul>
+</li>
+<li>返回 createCompiler 函数</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-模板编译过程-compileToFunction"><a href="#6-模板编译过程-compileToFunction" class="headerlink" title="6.模板编译过程-compileToFunction"></a>6.模板编译过程-compileToFunction</h3><p>略</p>
+<h3 id="7-模板编译过程-compile"><a href="#7-模板编译过程-compile" class="headerlink" title="7.模板编译过程-compile"></a>7.模板编译过程-compile</h3><p>略</p>
+<h3 id="8-模板编译过程-baseCompile-AST"><a href="#8-模板编译过程-baseCompile-AST" class="headerlink" title="8.模板编译过程-baseCompile-AST"></a>8.模板编译过程-baseCompile-AST</h3><ul>
+<li>首先调用 parse 函数把模板转换成 ast 抽象语法树</li>
+<li>然后调用 optimize 优化抽象语法树</li>
+<li>最后调用 genertate 把抽象语法树生成字符串形式的 js 代码</li>
+<li>最终返回对象 { ast, render: code.render, staticRenderFns: code.staticRenderFns }</li>
+</ul>
+<blockquote>
+<p>什么是抽象语法树</p>
+</blockquote>
+<ul>
+<li>抽象语法树简称 AST(Abstract Syntax Tree)</li>
+<li>使用对象的形式描述树形的代码结构</li>
+<li>此处的抽象语法树是用来描述树形结构的 HTML 字符串</li>
+</ul>
+<blockquote>
+<p>为什么要使用抽象语法树</p>
+</blockquote>
+<ul>
+<li>模板字符串转换成 AST 后，可以通过 AST 对模板做优化处理</li>
+<li>标记模板中的静态内容，在 patch 的时候直接跳过静态内容</li>
+<li>在 patch 的过程中静态内容不需要对比和重新渲染</li>
+</ul>
+<h3 id="9-模板编译过程-baseCompile-parse"><a href="#9-模板编译过程-baseCompile-parse" class="headerlink" title="9.模板编译过程-baseCompile-parse"></a>9.模板编译过程-baseCompile-parse</h3><p>略</p>
+<h3 id="10-模板编译过程-baseCompile-optimize"><a href="#10-模板编译过程-baseCompile-optimize" class="headerlink" title="10.模板编译过程-baseCompile-optimize"></a>10.模板编译过程-baseCompile-optimize</h3><p>略</p>
+<h3 id="11-模板编译过程-generate-上"><a href="#11-模板编译过程-generate-上" class="headerlink" title="11.模板编译过程-generate-上"></a>11.模板编译过程-generate-上</h3><p>略</p>
+<h3 id="12-模板编译过程-generate-下"><a href="#12-模板编译过程-generate-下" class="headerlink" title="12.模板编译过程-generate-下"></a>12.模板编译过程-generate-下</h3><p>略</p>
+<h3 id="13-模板编译过程-调试"><a href="#13-模板编译过程-调试" class="headerlink" title="13.模板编译过程-调试"></a>13.模板编译过程-调试</h3><p>略</p>
+<h3 id="14-模板编译过程-总结"><a href="#14-模板编译过程-总结" class="headerlink" title="14.模板编译过程-总结"></a>14.模板编译过程-总结</h3><ul>
+<li>compileToFunctions(template,…)<ul>
+<li>先从缓存中加载编译好的 render 函数</li>
+<li>缓存中没有调用 compile(template,options)</li>
+</ul>
+</li>
+<li>compile(template,options)<ul>
+<li>合并 options</li>
+<li>baseCompile(template.trim(),finalOptions)  </li>
+</ul>
+</li>
+<li>baseCompile(template.trim(),finalOptions)<ul>
+<li>parse() 把 tempalte 转换成 AST tree</li>
+<li>optimize()<ul>
+<li>标记 AST tree 中的静态 sub trees</li>
+<li>检测到静态子树，设置为静态，不需要在每次重新渲染的时候重新生成节点</li>
+<li>patch 阶段跳过静态子树</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>generate()<ul>
+<li>AST tree 生成 js 的创建代码</li>
+</ul>
+</li>
+<li>compileToFunctions(template,…)<ul>
+<li>继续把上一步中生成的字符串形式 js 代码转换为函数</li>
+<li>createFunction()</li>
+<li>render 和 staticRenderFns 初始化完毕，挂载到 Vue 实例的 options 对应的属性中</li>
+</ul>
+</li>
+</ul>
+<h3 id="15-组件化回顾"><a href="#15-组件化回顾" class="headerlink" title="15.组件化回顾"></a>15.组件化回顾</h3><ul>
+<li>一个 Vue 组件就是一个拥有预定义选项的一个 Vue 实例</li>
+<li>一个组件可以组成页面上一个功能完备的区域，组件可以包含脚本、样式、模板</li>
+</ul>
+<h3 id="16-组件注册"><a href="#16-组件注册" class="headerlink" title="16.组件注册"></a>16.组件注册</h3><blockquote>
+<p>组件注册方式</p>
+</blockquote>
+<ul>
+<li>全局组件</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"app"</span>&gt;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;script&gt;</span></span><br><span class="line"><span class="regexp">cosnt Comp = Vue.component('comp',&#123;</span></span><br><span class="line"><span class="regexp">  template: '&lt;div&gt;Hello Component&lt;/</span>div&gt;<span class="string">'</span></span><br><span class="line"><span class="string">&#125;)</span></span><br><span class="line"><span class="string">const vm = new Vue(&#123;</span></span><br><span class="line">  el: '#app',</span><br><span class="line">  render(h) &#123;</span><br><span class="line">    <span class="keyword">return</span> h(Comp)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>局部组件<h3 id="17-Vue-extend"><a href="#17-Vue-extend" class="headerlink" title="17.Vue.extend"></a>17.Vue.extend</h3></li>
+</ul>
+<p>略</p>
+<h3 id="18-调试组件注册过程"><a href="#18-调试组件注册过程" class="headerlink" title="18.调试组件注册过程"></a>18.调试组件注册过程</h3><p>略</p>
+<h3 id="19-组件的创建过程"><a href="#19-组件的创建过程" class="headerlink" title="19.组件的创建过程"></a>19.组件的创建过程</h3><blockquote>
+<p>回顾首次渲染过程</p>
+</blockquote>
+<ul>
+<li>Vue 构造函数</li>
+<li>this._init()</li>
+<li>this.$mount()</li>
+<li>mountComponent()</li>
+<li>new Watcher() 渲染 Watcher</li>
+<li>updateComponent()</li>
+<li>vm._render() -&gt; createElement()</li>
+<li>vm._update()</li>
+</ul>
+<h3 id="20-组件的-patch-过程"><a href="#20-组件的-patch-过程" class="headerlink" title="20.组件的 patch 过程"></a>20.组件的 patch 过程</h3><p>略</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScipt/" rel="tag"># JavaScipt</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/12/04/29/" rel="next" title="学习笔记 ----- 【前端工程化实践】模块化开发与规范化标准">
+                <i class="fa fa-chevron-left"></i> 学习笔记 ----- 【前端工程化实践】模块化开发与规范化标准
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/12/20/30/" rel="prev" title="学习笔记 ----- 【Vue.js 框架源码与进阶】手写 Vue Router、手写响应式实现、虚拟 DOM 和 Diff 算法">
+                学习笔记 ----- 【Vue.js 框架源码与进阶】手写 Vue Router、手写响应式实现、虚拟 DOM 和 Diff 算法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="FY" />
+            
+              <p class="site-author-name" itemprop="name">FY</p>
+              <p class="site-description motion-element" itemprop="description">Just Be Yourself</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/xuanfeiyu" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Part-3-·-Vue-js-框架源码与进阶"><span class="nav-number">1.</span> <span class="nav-text">Part 3 · Vue.js 框架源码与进阶</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模块二-·-Vue-js-源码分析（响应式、虚拟-DOM、模板编译与组件化）"><span class="nav-number">1.1.</span> <span class="nav-text">模块二 · Vue.js 源码分析（响应式、虚拟 DOM、模板编译与组件化）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#任务一：Vue-js-源码剖析-响应式原理"><span class="nav-number">1.2.</span> <span class="nav-text">任务一：Vue.js 源码剖析-响应式原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-课程目标"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.课程目标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-准备工作-目录结构"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.准备工作-目录结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-准备工作-调试"><span class="nav-number">1.2.3.</span> <span class="nav-text">3.准备工作-调试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-准备工作-Vue-的不同构建版本"><span class="nav-number">1.2.4.</span> <span class="nav-text">4.准备工作-Vue 的不同构建版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-寻找入口文件"><span class="nav-number">1.2.5.</span> <span class="nav-text">5.寻找入口文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-从入口开始"><span class="nav-number">1.2.6.</span> <span class="nav-text">6.从入口开始</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-Vue-初始化的过程"><span class="nav-number">1.2.7.</span> <span class="nav-text">7.Vue 初始化的过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-Vue-初始化-两个问题"><span class="nav-number">1.2.8.</span> <span class="nav-text">8.Vue 初始化-两个问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-Vue-初始化-静态成员"><span class="nav-number">1.2.9.</span> <span class="nav-text">9.Vue 初始化-静态成员</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-Vue-初始化-实例成员"><span class="nav-number">1.2.10.</span> <span class="nav-text">10.Vue 初始化-实例成员</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-Vue-初始化-实例成员-init"><span class="nav-number">1.2.11.</span> <span class="nav-text">11.Vue 初始化-实例成员-init</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-Vue-初始化-实例成员-initState"><span class="nav-number">1.2.12.</span> <span class="nav-text">12.Vue 初始化-实例成员-initState</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-调试-Vue-初始化过程"><span class="nav-number">1.2.13.</span> <span class="nav-text">13.调试 Vue 初始化过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-首次渲染过程"><span class="nav-number">1.2.14.</span> <span class="nav-text">14.首次渲染过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-首次渲染过程-总结"><span class="nav-number">1.2.15.</span> <span class="nav-text">15.首次渲染过程-总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16-数据响应式原理-响应式处理入口"><span class="nav-number">1.2.16.</span> <span class="nav-text">16.数据响应式原理-响应式处理入口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17-数据响应式原理-Observer"><span class="nav-number">1.2.17.</span> <span class="nav-text">17.数据响应式原理-Observer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18-数据响应式原理-defineReactive"><span class="nav-number">1.2.18.</span> <span class="nav-text">18.数据响应式原理-defineReactive</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19-数据响应式原理-依赖收集"><span class="nav-number">1.2.19.</span> <span class="nav-text">19.数据响应式原理-依赖收集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#20-数据响应式原理-依赖收集-调试"><span class="nav-number">1.2.20.</span> <span class="nav-text">20.数据响应式原理-依赖收集-调试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#21-数据响应式原理-数组"><span class="nav-number">1.2.21.</span> <span class="nav-text">21.数据响应式原理-数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#22-数据响应式原理-数组练习"><span class="nav-number">1.2.22.</span> <span class="nav-text">22.数据响应式原理-数组练习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#23-数据响应式原理-Watcher上"><span class="nav-number">1.2.23.</span> <span class="nav-text">23.数据响应式原理-Watcher上</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#24-数据响应式原理-Watcher下"><span class="nav-number">1.2.24.</span> <span class="nav-text">24.数据响应式原理-Watcher下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#25-数据响应式原理-调试上"><span class="nav-number">1.2.25.</span> <span class="nav-text">25.数据响应式原理-调试上</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#26-数据响应式原理-调试下"><span class="nav-number">1.2.26.</span> <span class="nav-text">26.数据响应式原理-调试下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#27-数据响应式原理-总结"><span class="nav-number">1.2.27.</span> <span class="nav-text">27.数据响应式原理-总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#28-动态添加一个响应式属性"><span class="nav-number">1.2.28.</span> <span class="nav-text">28.动态添加一个响应式属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#29-set-源码"><span class="nav-number">1.2.29.</span> <span class="nav-text">29.set-源码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#30-set-调试"><span class="nav-number">1.2.30.</span> <span class="nav-text">30.set-调试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#31-delete"><span class="nav-number">1.2.31.</span> <span class="nav-text">31.delete</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#32-delete-源码"><span class="nav-number">1.2.32.</span> <span class="nav-text">32.delete-源码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#33-watch-回顾"><span class="nav-number">1.2.33.</span> <span class="nav-text">33.watch-回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#34-三种类型的-Watcher"><span class="nav-number">1.2.34.</span> <span class="nav-text">34.三种类型的 Watcher</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#35-watch-源码"><span class="nav-number">1.2.35.</span> <span class="nav-text">35.watch-源码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#36-nextTick-回顾"><span class="nav-number">1.2.36.</span> <span class="nav-text">36.nextTick-回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#36-nextTick-源码"><span class="nav-number">1.2.37.</span> <span class="nav-text">36.nextTick-源码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#任务二：Vue-js-源码剖析-虚拟DOM"><span class="nav-number">1.3.</span> <span class="nav-text">任务二：Vue.js 源码剖析-虚拟DOM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-课程回顾"><span class="nav-number">1.3.1.</span> <span class="nav-text">1.课程回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-虚拟-DOM-概念回顾"><span class="nav-number">1.3.2.</span> <span class="nav-text">2.虚拟 DOM 概念回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-代码演示"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.代码演示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-整体过程分析"><span class="nav-number">1.3.4.</span> <span class="nav-text">4.整体过程分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-createElement-上"><span class="nav-number">1.3.5.</span> <span class="nav-text">5.createElement-上</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-createElement-下"><span class="nav-number">1.3.6.</span> <span class="nav-text">6.createElement-下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-update"><span class="nav-number">1.3.7.</span> <span class="nav-text">7.update</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-patch-函数的初始化"><span class="nav-number">1.3.8.</span> <span class="nav-text">8.patch 函数的初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-patch"><span class="nav-number">1.3.9.</span> <span class="nav-text">9.patch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-createElm"><span class="nav-number">1.3.10.</span> <span class="nav-text">10.createElm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-patchVnode"><span class="nav-number">1.3.11.</span> <span class="nav-text">11.patchVnode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-updateChildren"><span class="nav-number">1.3.12.</span> <span class="nav-text">12.updateChildren</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-没有设置-key-的情况"><span class="nav-number">1.3.13.</span> <span class="nav-text">13.没有设置 key 的情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-设置-key-的情况"><span class="nav-number">1.3.14.</span> <span class="nav-text">14.设置 key 的情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-总结"><span class="nav-number">1.3.15.</span> <span class="nav-text">15.总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#任务三：Vue-js-源码剖析-模板编译和组件化"><span class="nav-number">1.4.</span> <span class="nav-text">任务三：Vue.js 源码剖析-模板编译和组件化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-模板编译介绍"><span class="nav-number">1.4.1.</span> <span class="nav-text">1.模板编译介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-体验模板编译的结果-上"><span class="nav-number">1.4.2.</span> <span class="nav-text">2.体验模板编译的结果-上</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-体验模板编译的结果-下"><span class="nav-number">1.4.3.</span> <span class="nav-text">3.体验模板编译的结果-下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Vue-Template-Explorer"><span class="nav-number">1.4.4.</span> <span class="nav-text">4.Vue Template Explorer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-模板编译的入口"><span class="nav-number">1.4.5.</span> <span class="nav-text">5.模板编译的入口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-模板编译过程-compileToFunction"><span class="nav-number">1.4.6.</span> <span class="nav-text">6.模板编译过程-compileToFunction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-模板编译过程-compile"><span class="nav-number">1.4.7.</span> <span class="nav-text">7.模板编译过程-compile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-模板编译过程-baseCompile-AST"><span class="nav-number">1.4.8.</span> <span class="nav-text">8.模板编译过程-baseCompile-AST</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-模板编译过程-baseCompile-parse"><span class="nav-number">1.4.9.</span> <span class="nav-text">9.模板编译过程-baseCompile-parse</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-模板编译过程-baseCompile-optimize"><span class="nav-number">1.4.10.</span> <span class="nav-text">10.模板编译过程-baseCompile-optimize</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-模板编译过程-generate-上"><span class="nav-number">1.4.11.</span> <span class="nav-text">11.模板编译过程-generate-上</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-模板编译过程-generate-下"><span class="nav-number">1.4.12.</span> <span class="nav-text">12.模板编译过程-generate-下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-模板编译过程-调试"><span class="nav-number">1.4.13.</span> <span class="nav-text">13.模板编译过程-调试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-模板编译过程-总结"><span class="nav-number">1.4.14.</span> <span class="nav-text">14.模板编译过程-总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-组件化回顾"><span class="nav-number">1.4.15.</span> <span class="nav-text">15.组件化回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16-组件注册"><span class="nav-number">1.4.16.</span> <span class="nav-text">16.组件注册</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17-Vue-extend"><span class="nav-number">1.4.17.</span> <span class="nav-text">17.Vue.extend</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18-调试组件注册过程"><span class="nav-number">1.4.18.</span> <span class="nav-text">18.调试组件注册过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19-组件的创建过程"><span class="nav-number">1.4.19.</span> <span class="nav-text">19.组件的创建过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#20-组件的-patch-过程"><span class="nav-number">1.4.20.</span> <span class="nav-text">20.组件的 patch 过程</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">FY</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

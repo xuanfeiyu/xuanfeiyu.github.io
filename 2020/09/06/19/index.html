@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScipt," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="作者：FY引用请标明出处  1.邮箱123export const isEmail &#x3D; (s) &#x3D;&gt; &amp;#123;    return &#x2F;^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((.[a-zA-Z0-9_-]&amp;#123;2,3&amp;#125;)&amp;#123;1,2&amp;#125;)$&#x2F;.test(s)&amp;#125;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端常用 60 余种工具方法">
+<meta property="og:url" content="http://yoursite.com/2020/09/06/19/index.html">
+<meta property="og:site_name" content="旋の飞羽">
+<meta property="og:description" content="作者：FY引用请标明出处  1.邮箱123export const isEmail &#x3D; (s) &#x3D;&gt; &amp;#123;    return &#x2F;^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((.[a-zA-Z0-9_-]&amp;#123;2,3&amp;#125;)&amp;#123;1,2&amp;#125;)$&#x2F;.test(s)&amp;#125;">
+<meta property="article:published_time" content="2020-09-05T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-10-31T11:52:49.982Z">
+<meta property="article:author" content="FY">
+<meta property="article:tag" content="JavaScipt">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/09/06/19/"/>
+
+
+
+
+
+  <title>前端常用 60 余种工具方法 | 旋の飞羽</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">旋の飞羽</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">人间值得，未来可期。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/06/19/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FY">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="旋の飞羽">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">前端常用 60 余种工具方法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-06T00:00:00+08:00">
+                2020-09-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>作者：FY<br>引用请标明出处</p>
+</blockquote>
+<h1 id="1-邮箱"><a href="#1-邮箱" class="headerlink" title="1.邮箱"></a>1.邮箱</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export const isEmail &#x3D; (s) &#x3D;&gt; &#123;</span><br><span class="line">    return &#x2F;^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((.[a-zA-Z0-9_-]&#123;2,3&#125;)&#123;1,2&#125;)$&#x2F;.test(s)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h1 id="2-手机号码"><a href="#2-手机号码" class="headerlink" title="2.手机号码"></a>2.手机号码</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export const isMobile &#x3D; (s) &#x3D;&gt; &#123;</span><br><span class="line">    return &#x2F;^1[0-9]&#123;10&#125;$&#x2F;.test(s)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="3-电话号码"><a href="#3-电话号码" class="headerlink" title="3.电话号码"></a>3.电话号码</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export const isPhone &#x3D; (s) &#x3D;&gt; &#123;</span><br><span class="line">    return &#x2F;^([0-9]&#123;3,4&#125;-)?[0-9]&#123;7,8&#125;$&#x2F;.test(s)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="4-是否url地址"><a href="#4-是否url地址" class="headerlink" title="4.是否url地址"></a>4.是否url地址</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export const isURL &#x3D; (s) &#x3D;&gt; &#123;</span><br><span class="line">    return &#x2F;^http[s]?:\&#x2F;\&#x2F;.*&#x2F;.test(s)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="5-是否字符串"><a href="#5-是否字符串" class="headerlink" title="5.是否字符串"></a>5.是否字符串</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export const isString &#x3D; (o) &#x3D;&gt; &#123;</span><br><span class="line">    return Object.prototype.toString.call(o).slice(8, -1) &#x3D;&#x3D;&#x3D; &#39;String&#39;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="6-是否数字"><a href="#6-是否数字" class="headerlink" title="6.是否数字"></a>6.是否数字</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export const isNumber &#x3D; (o) &#x3D;&gt; &#123;</span><br><span class="line">    return Object.prototype.toString.call(o).slice(8, -1) &#x3D;&#x3D;&#x3D; &#39;Number&#39;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="7-是否boolean"><a href="#7-是否boolean" class="headerlink" title="7.是否boolean"></a>7.是否boolean</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export const isBoolean &#x3D; (o) &#x3D;&gt; &#123;</span><br><span class="line">    return Object.prototype.toString.call(o).slice(8, -1) &#x3D;&#x3D;&#x3D; &#39;Boolean&#39;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="8-是否函数"><a href="#8-是否函数" class="headerlink" title="8.是否函数"></a>8.是否函数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export const isFunction &#x3D; (o) &#x3D;&gt; &#123;</span><br><span class="line">    return Object.prototype.toString.call(o).slice(8, -1) &#x3D;&#x3D;&#x3D; &#39;Function&#39;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="9-是否为null"><a href="#9-是否为null" class="headerlink" title="9.是否为null"></a>9.是否为null</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export const isNull &#x3D; (o) &#x3D;&gt; &#123;</span><br><span class="line">    return Object.prototype.toString.call(o).slice(8, -1) &#x3D;&#x3D;&#x3D; &#39;Null&#39;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="10-是否undefined"><a href="#10-是否undefined" class="headerlink" title="10.是否undefined"></a>10.是否undefined</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export const isUndefined &#x3D; (o) &#x3D;&gt; &#123;</span><br><span class="line">    return Object.prototype.toString.call(o).slice(8, -1) &#x3D;&#x3D;&#x3D; &#39;Undefined&#39;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="11-是否对象"><a href="#11-是否对象" class="headerlink" title="11.是否对象"></a>11.是否对象</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export const isObj &#x3D; (o) &#x3D;&gt; &#123;</span><br><span class="line">    return Object.prototype.toString.call(o).slice(8, -1) &#x3D;&#x3D;&#x3D; &#39;Object&#39;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="12-是否数组"><a href="#12-是否数组" class="headerlink" title="12.是否数组"></a>12.是否数组</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export const isArray &#x3D; (o) &#x3D;&gt; &#123;</span><br><span class="line">    return Object.prototype.toString.call(o).slice(8, -1) &#x3D;&#x3D;&#x3D; &#39;Array&#39;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="13-是否时间"><a href="#13-是否时间" class="headerlink" title="13.是否时间"></a>13.是否时间</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export const isDate &#x3D; (o) &#x3D;&gt; &#123;</span><br><span class="line">    return Object.prototype.toString.call(o).slice(8, -1) &#x3D;&#x3D;&#x3D; &#39;Date&#39;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="14-是否正则"><a href="#14-是否正则" class="headerlink" title="14.是否正则"></a>14.是否正则</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export const isRegExp &#x3D; (o) &#x3D;&gt; &#123;</span><br><span class="line">    return Object.prototype.toString.call(o).slice(8, -1) &#x3D;&#x3D;&#x3D; &#39;RegExp&#39;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="15-是否错误对象"><a href="#15-是否错误对象" class="headerlink" title="15.是否错误对象"></a>15.是否错误对象</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export const isError &#x3D; (o) &#x3D;&gt; &#123;</span><br><span class="line">    return Object.prototype.toString.call(o).slice(8, -1) &#x3D;&#x3D;&#x3D; &#39;Error&#39;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="16-是否Symbol函数"><a href="#16-是否Symbol函数" class="headerlink" title="16.是否Symbol函数"></a>16.是否Symbol函数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export const isSymbol &#x3D; (o) &#x3D;&gt; &#123;</span><br><span class="line">    return Object.prototype.toString.call(o).slice(8, -1) &#x3D;&#x3D;&#x3D; &#39;Symbol&#39;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="17-是否Promise对象"><a href="#17-是否Promise对象" class="headerlink" title="17.是否Promise对象"></a>17.是否Promise对象</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export const isPromise &#x3D; (o) &#x3D;&gt; &#123;</span><br><span class="line">    return Object.prototype.toString.call(o).slice(8, -1) &#x3D;&#x3D;&#x3D; &#39;Promise&#39;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="18-是否Set对象"><a href="#18-是否Set对象" class="headerlink" title="18.是否Set对象"></a>18.是否Set对象</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export const isSet &#x3D; (o) &#x3D;&gt; &#123;</span><br><span class="line">    return Object.prototype.toString.call(o).slice(8, -1) &#x3D;&#x3D;&#x3D; &#39;Set&#39;</span><br><span class="line">&#125;</span><br><span class="line">export const ua &#x3D; navigator.userAgent.toLowerCase();</span><br></pre></td></tr></table></figure>
+<h1 id="19-是否是微信浏览器"><a href="#19-是否是微信浏览器" class="headerlink" title="19.是否是微信浏览器"></a>19.是否是微信浏览器</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export const isWeiXin &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">    return ua.match(&#x2F;microMessenger&#x2F;i) &#x3D;&#x3D; &#39;micromessenger&#39;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="20-是否是移动端"><a href="#20-是否是移动端" class="headerlink" title="20.是否是移动端"></a>20.是否是移动端</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export const isDeviceMobile &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">    return &#x2F;android|webos|iphone|ipod|balckberry&#x2F;i.test(ua)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="21-是否是QQ浏览器"><a href="#21-是否是QQ浏览器" class="headerlink" title="21.是否是QQ浏览器"></a>21.是否是QQ浏览器</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export const isQQBrowser &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">    return !!ua.match(&#x2F;mqqbrowser|qzone|qqbrowser|qbwebviewtype&#x2F;i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="22-是否是爬虫"><a href="#22-是否是爬虫" class="headerlink" title="22.是否是爬虫"></a>22.是否是爬虫</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export const isSpider &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">    return &#x2F;adsbot|googlebot|bingbot|msnbot|yandexbot|baidubot|robot|careerbot|seznambot|bot|baiduspider|jikespider|symantecspider|scannerlwebcrawler|crawler|360spider|sosospider|sogou web sprider|sogou orion spider&#x2F;.test(ua)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="23-是否ios"><a href="#23-是否ios" class="headerlink" title="23.是否ios"></a>23.是否ios</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">export const isIos &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">    var u &#x3D; navigator.userAgent;</span><br><span class="line">    if (u.indexOf(&#39;Android&#39;) &gt; -1 || u.indexOf(&#39;Linux&#39;) &gt; -1) &#123;  &#x2F;&#x2F;安卓手机</span><br><span class="line">        return false</span><br><span class="line">    &#125; else if (u.indexOf(&#39;iPhone&#39;) &gt; -1) &#123;&#x2F;&#x2F;苹果手机</span><br><span class="line">        return true</span><br><span class="line">    &#125; else if (u.indexOf(&#39;iPad&#39;) &gt; -1) &#123;&#x2F;&#x2F;iPad</span><br><span class="line">        return false</span><br><span class="line">    &#125; else if (u.indexOf(&#39;Windows Phone&#39;) &gt; -1) &#123;&#x2F;&#x2F;winphone手机</span><br><span class="line">        return false</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        return false</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="24-是否为PC端"><a href="#24-是否为PC端" class="headerlink" title="24.是否为PC端"></a>24.是否为PC端</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">export const isPC &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">    var userAgentInfo &#x3D; navigator.userAgent;</span><br><span class="line">    var Agents &#x3D; [&quot;Android&quot;, &quot;iPhone&quot;,</span><br><span class="line">        &quot;SymbianOS&quot;, &quot;Windows Phone&quot;,</span><br><span class="line">        &quot;iPad&quot;, &quot;iPod&quot;];</span><br><span class="line">    var flag &#x3D; true;</span><br><span class="line">    for (var v &#x3D; 0; v &lt; Agents.length; v++) &#123;</span><br><span class="line">        if (userAgentInfo.indexOf(Agents[v]) &gt; 0) &#123;</span><br><span class="line">            flag &#x3D; false;</span><br><span class="line">            break;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return flag;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="25-去除html标签"><a href="#25-去除html标签" class="headerlink" title="25.去除html标签"></a>25.去除html标签</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export const removeHtmltag &#x3D; (str) &#x3D;&gt; &#123;</span><br><span class="line">    return str.replace(&#x2F;&lt;[^&gt;]+&gt;&#x2F;g, &#39;&#39;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="26-获取url参数"><a href="#26-获取url参数" class="headerlink" title="26.获取url参数"></a>26.获取url参数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">export const getQueryString &#x3D; (name) &#x3D;&gt; &#123;</span><br><span class="line">    const reg &#x3D; new RegExp(&#39;(^|&amp;)&#39; + name + &#39;&#x3D;([^&amp;]*)(&amp;|$)&#39;, &#39;i&#39;);</span><br><span class="line">    const search &#x3D; window.location.search.split(&#39;?&#39;)[1] || &#39;&#39;;</span><br><span class="line">    const r &#x3D; search.match(reg) || [];</span><br><span class="line">    return r[2];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="27-动态引入js"><a href="#27-动态引入js" class="headerlink" title="27.动态引入js"></a>27.动态引入js</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">export const injectScript &#x3D; (src) &#x3D;&gt; &#123;</span><br><span class="line">    const s &#x3D; document.createElement(&#39;script&#39;);</span><br><span class="line">    s.type &#x3D; &#39;text&#x2F;javascript&#39;;</span><br><span class="line">    s.async &#x3D; true;</span><br><span class="line">    s.src &#x3D; src;</span><br><span class="line">    const t &#x3D; document.getElementsByTagName(&#39;script&#39;)[0];</span><br><span class="line">    t.parentNode.insertBefore(s, t);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="28-根据url地址下载"><a href="#28-根据url地址下载" class="headerlink" title="28.根据url地址下载"></a>28.根据url地址下载</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">export const download &#x3D; (url) &#x3D;&gt; &#123;</span><br><span class="line">    var isChrome &#x3D; navigator.userAgent.toLowerCase().indexOf(&#39;chrome&#39;) &gt; -1;</span><br><span class="line">    var isSafari &#x3D; navigator.userAgent.toLowerCase().indexOf(&#39;safari&#39;) &gt; -1;</span><br><span class="line">    if (isChrome || isSafari) &#123;</span><br><span class="line">        var link &#x3D; document.createElement(&#39;a&#39;);</span><br><span class="line">        link.href &#x3D; url;</span><br><span class="line">        if (link.download !&#x3D;&#x3D; undefined) &#123;</span><br><span class="line">            var fileName &#x3D; url.substring(url.lastIndexOf(&#39;&#x2F;&#39;) + 1, url.length);</span><br><span class="line">            link.download &#x3D; fileName;</span><br><span class="line">        &#125;</span><br><span class="line">        if (document.createEvent) &#123;</span><br><span class="line">            var e &#x3D; document.createEvent(&#39;MouseEvents&#39;);</span><br><span class="line">            e.initEvent(&#39;click&#39;, true, true);</span><br><span class="line">            link.dispatchEvent(e);</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    if (url.indexOf(&#39;?&#39;) &#x3D;&#x3D;&#x3D; -1) &#123;</span><br><span class="line">        url +&#x3D; &#39;?download&#39;;</span><br><span class="line">    &#125;</span><br><span class="line">    window.open(url, &#39;_self&#39;);</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="29-el是否包含某个class"><a href="#29-el是否包含某个class" class="headerlink" title="29.el是否包含某个class"></a>29.el是否包含某个class</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export const hasClass &#x3D; (el, className) &#x3D;&gt; &#123;</span><br><span class="line">    let reg &#x3D; new RegExp(&#39;(^|\\s)&#39; + className + &#39;(\\s|$)&#39;)</span><br><span class="line">    return reg.test(el.className)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="30-el添加某个class"><a href="#30-el添加某个class" class="headerlink" title="30.el添加某个class"></a>30.el添加某个class</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">export const addClass &#x3D; (el, className) &#x3D;&gt; &#123;</span><br><span class="line">    if (hasClass(el, className)) &#123;</span><br><span class="line">        return</span><br><span class="line">    &#125;</span><br><span class="line">    let newClass &#x3D; el.className.split(&#39; &#39;)</span><br><span class="line">    newClass.push(className)</span><br><span class="line">    el.className &#x3D; newClass.join(&#39; &#39;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="31-el去除某个class"><a href="#31-el去除某个class" class="headerlink" title="31.el去除某个class"></a>31.el去除某个class</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">export const removeClass &#x3D; (el, className) &#x3D;&gt; &#123;</span><br><span class="line">    if (!hasClass(el, className)) &#123;</span><br><span class="line">        return</span><br><span class="line">    &#125;</span><br><span class="line">    let reg &#x3D; new RegExp(&#39;(^|\\s)&#39; + className + &#39;(\\s|$)&#39;, &#39;g&#39;)</span><br><span class="line">    el.className &#x3D; el.className.replace(reg, &#39; &#39;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="32-获取滚动的坐标"><a href="#32-获取滚动的坐标" class="headerlink" title="32.获取滚动的坐标"></a>32.获取滚动的坐标</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export const getScrollPosition &#x3D; (el &#x3D; window) &#x3D;&gt; (&#123;</span><br><span class="line">    x: el.pageXOffset !&#x3D;&#x3D; undefined ? el.pageXOffset : el.scrollLeft,</span><br><span class="line">    y: el.pageYOffset !&#x3D;&#x3D; undefined ? el.pageYOffset : el.scrollTop</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h1 id="33-滚动到顶部"><a href="#33-滚动到顶部" class="headerlink" title="33.滚动到顶部"></a>33.滚动到顶部</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">export const scrollToTop &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">    const c &#x3D; document.documentElement.scrollTop || document.body.scrollTop;</span><br><span class="line">    if (c &gt; 0) &#123;</span><br><span class="line">        window.requestAnimationFrame(scrollToTop);</span><br><span class="line">        window.scrollTo(0, c - c &#x2F; 8);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="34-el是否在视口范围内"><a href="#34-el是否在视口范围内" class="headerlink" title="34.el是否在视口范围内"></a>34.el是否在视口范围内</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">export const elementIsVisibleInViewport &#x3D; (el, partiallyVisible &#x3D; false) &#x3D;&gt; &#123;</span><br><span class="line">    const &#123; top, left, bottom, right &#125; &#x3D; el.getBoundingClientRect();</span><br><span class="line">    const &#123; innerHeight, innerWidth &#125; &#x3D; window;</span><br><span class="line">    return partiallyVisible</span><br><span class="line">        ? ((top &gt; 0 &amp;&amp; top &lt; innerHeight) || (bottom &gt; 0 &amp;&amp; bottom &lt; innerHeight)) &amp;&amp;</span><br><span class="line">        ((left &gt; 0 &amp;&amp; left &lt; innerWidth) || (right &gt; 0 &amp;&amp; right &lt; innerWidth))</span><br><span class="line">        : top &gt;&#x3D; 0 &amp;&amp; left &gt;&#x3D; 0 &amp;&amp; bottom &lt;&#x3D; innerHeight &amp;&amp; right &lt;&#x3D; innerWidth;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="35-洗牌算法随机"><a href="#35-洗牌算法随机" class="headerlink" title="35.洗牌算法随机"></a>35.洗牌算法随机</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">export const shuffle &#x3D; (arr) &#x3D;&gt; &#123;</span><br><span class="line">    var result &#x3D; [],</span><br><span class="line">        random;</span><br><span class="line">    while (arr.length &gt; 0) &#123;</span><br><span class="line">        random &#x3D; Math.floor(Math.random() * arr.length);</span><br><span class="line">        result.push(arr[random])</span><br><span class="line">        arr.splice(random, 1)</span><br><span class="line">    &#125;</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="36-拦截粘贴板"><a href="#36-拦截粘贴板" class="headerlink" title="36.拦截粘贴板"></a>36.拦截粘贴板</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">export const copyTextToClipboard &#x3D; (value) &#x3D;&gt; &#123;</span><br><span class="line">    var textArea &#x3D; document.createElement(&quot;textarea&quot;);</span><br><span class="line">    textArea.style.background &#x3D; &#39;transparent&#39;;</span><br><span class="line">    textArea.value &#x3D; value;</span><br><span class="line">    document.body.appendChild(textArea);</span><br><span class="line">    textArea.select();</span><br><span class="line">    try &#123;</span><br><span class="line">        var successful &#x3D; document.execCommand(&#39;copy&#39;);</span><br><span class="line">    &#125; catch (err) &#123;</span><br><span class="line">        console.log(&#39;Oops, unable to copy&#39;);</span><br><span class="line">    &#125;</span><br><span class="line">    document.body.removeChild(textArea);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="37-判断类型集合"><a href="#37-判断类型集合" class="headerlink" title="37.判断类型集合"></a>37.判断类型集合</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">export const checkStr &#x3D; (str, type) &#x3D;&gt; &#123;</span><br><span class="line">    switch (type) &#123;</span><br><span class="line">        case &#39;phone&#39;:   &#x2F;&#x2F;手机号码</span><br><span class="line">            return &#x2F;^1[3|4|5|6|7|8|9][0-9]&#123;9&#125;$&#x2F;.test(str);</span><br><span class="line">        case &#39;tel&#39;:     &#x2F;&#x2F;座机</span><br><span class="line">            return &#x2F;^(0\d&#123;2,3&#125;-\d&#123;7,8&#125;)(-\d&#123;1,4&#125;)?$&#x2F;.test(str);</span><br><span class="line">        case &#39;card&#39;:    &#x2F;&#x2F;身份证</span><br><span class="line">            return &#x2F;(^\d&#123;15&#125;$)|(^\d&#123;18&#125;$)|(^\d&#123;17&#125;(\d|X|x)$)&#x2F;.test(str);</span><br><span class="line">        case &#39;pwd&#39;:     &#x2F;&#x2F;密码以字母开头，长度在6~18之间，只能包含字母、数字和下划线</span><br><span class="line">            return &#x2F;^[a-zA-Z]\w&#123;5,17&#125;$&#x2F;.test(str)</span><br><span class="line">        case &#39;postal&#39;:  &#x2F;&#x2F;邮政编码</span><br><span class="line">            return &#x2F;[1-9]\d&#123;5&#125;(?!\d)&#x2F;.test(str);</span><br><span class="line">        case &#39;QQ&#39;:      &#x2F;&#x2F;QQ号</span><br><span class="line">            return &#x2F;^[1-9][0-9]&#123;4,9&#125;$&#x2F;.test(str);</span><br><span class="line">        case &#39;email&#39;:   &#x2F;&#x2F;邮箱</span><br><span class="line">            return &#x2F;^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$&#x2F;.test(str);</span><br><span class="line">        case &#39;money&#39;:   &#x2F;&#x2F;金额(小数点2位)</span><br><span class="line">            return &#x2F;^\d*(?:\.\d&#123;0,2&#125;)?$&#x2F;.test(str);</span><br><span class="line">        case &#39;URL&#39;:     &#x2F;&#x2F;网址</span><br><span class="line">            return &#x2F;(http|ftp|https):\&#x2F;\&#x2F;[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^&#x3D;%&amp;:&#x2F;~\+#]*[\w\-\@?^&#x3D;%&amp;&#x2F;~\+#])?&#x2F;.test(str)</span><br><span class="line">        case &#39;IP&#39;:      &#x2F;&#x2F;IP</span><br><span class="line">            return &#x2F;((?:(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d)\\.)&#123;3&#125;(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d))&#x2F;.test(str);</span><br><span class="line">        case &#39;date&#39;:    &#x2F;&#x2F;日期时间</span><br><span class="line">            return &#x2F;^(\d&#123;4&#125;)\-(\d&#123;2&#125;)\-(\d&#123;2&#125;) (\d&#123;2&#125;)(?:\:\d&#123;2&#125;|:(\d&#123;2&#125;):(\d&#123;2&#125;))$&#x2F;.test(str) || &#x2F;^(\d&#123;4&#125;)\-(\d&#123;2&#125;)\-(\d&#123;2&#125;)$&#x2F;.test(str)</span><br><span class="line">        case &#39;number&#39;:  &#x2F;&#x2F;数字</span><br><span class="line">            return &#x2F;^[0-9]$&#x2F;.test(str);</span><br><span class="line">        case &#39;english&#39;: &#x2F;&#x2F;英文</span><br><span class="line">            return &#x2F;^[a-zA-Z]+$&#x2F;.test(str);</span><br><span class="line">        case &#39;chinese&#39;: &#x2F;&#x2F;中文</span><br><span class="line">            return &#x2F;^[\\u4E00-\\u9FA5]+$&#x2F;.test(str);</span><br><span class="line">        case &#39;lower&#39;:   &#x2F;&#x2F;小写</span><br><span class="line">            return &#x2F;^[a-z]+$&#x2F;.test(str);</span><br><span class="line">        case &#39;upper&#39;:   &#x2F;&#x2F;大写</span><br><span class="line">            return &#x2F;^[A-Z]+$&#x2F;.test(str);</span><br><span class="line">        case &#39;HTML&#39;:    &#x2F;&#x2F;HTML标记</span><br><span class="line">            return &#x2F;&lt;(&quot;[^&quot;]*&quot;|&#39;[^&#39;]*&#39;|[^&#39;&quot;&gt;])*&gt;&#x2F;.test(str);</span><br><span class="line">        default:</span><br><span class="line">            return true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="38-严格的身份证校验"><a href="#38-严格的身份证校验" class="headerlink" title="38.严格的身份证校验"></a>38.严格的身份证校验</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">export const isCardID &#x3D; (sId) &#x3D;&gt; &#123;</span><br><span class="line">    if (!&#x2F;(^\d&#123;15&#125;$)|(^\d&#123;17&#125;(\d|X|x)$)&#x2F;.test(sId)) &#123;</span><br><span class="line">        console.log(&#39;你输入的身份证长度或格式错误&#39;)</span><br><span class="line">        return false</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;身份证城市</span><br><span class="line">    var aCity &#x3D; &#123; 11: &quot;北京&quot;, 12: &quot;天津&quot;, 13: &quot;河北&quot;, 14: &quot;山西&quot;, 15: &quot;内蒙古&quot;, 21: &quot;辽宁&quot;, 22: &quot;吉林&quot;, 23: &quot;黑龙江&quot;, 31: &quot;上海&quot;, 32: &quot;江苏&quot;, 33: &quot;浙江&quot;, 34: &quot;安徽&quot;, 35: &quot;福建&quot;, 36: &quot;江西&quot;, 37: &quot;山东&quot;, 41: &quot;河南&quot;, 42: &quot;湖北&quot;, 43: &quot;湖南&quot;, 44: &quot;广东&quot;, 45: &quot;广西&quot;, 46: &quot;海南&quot;, 50: &quot;重庆&quot;, 51: &quot;四川&quot;, 52: &quot;贵州&quot;, 53: &quot;云南&quot;, 54: &quot;西藏&quot;, 61: &quot;陕西&quot;, 62: &quot;甘肃&quot;, 63: &quot;青海&quot;, 64: &quot;宁夏&quot;, 65: &quot;新疆&quot;, 71: &quot;台湾&quot;, 81: &quot;香港&quot;, 82: &quot;澳门&quot;, 91: &quot;国外&quot; &#125;;</span><br><span class="line">    if (!aCity[parseInt(sId.substr(0, 2))]) &#123;</span><br><span class="line">        console.log(&#39;你的身份证地区非法&#39;)</span><br><span class="line">        return false</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 出生日期验证</span><br><span class="line">    var sBirthday &#x3D; (sId.substr(6, 4) + &quot;-&quot; + Number(sId.substr(10, 2)) + &quot;-&quot; + Number(sId.substr(12, 2))).replace(&#x2F;-&#x2F;g, &quot;&#x2F;&quot;),</span><br><span class="line">        d &#x3D; new Date(sBirthday)</span><br><span class="line">    if (sBirthday !&#x3D; (d.getFullYear() + &quot;&#x2F;&quot; + (d.getMonth() + 1) + &quot;&#x2F;&quot; + d.getDate())) &#123;</span><br><span class="line">        console.log(&#39;身份证上的出生日期非法&#39;)</span><br><span class="line">        return false</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 身份证号码校验</span><br><span class="line">    var sum &#x3D; 0,</span><br><span class="line">        weights &#x3D; [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2],</span><br><span class="line">        codes &#x3D; &quot;10X98765432&quot;</span><br><span class="line">    for (var i &#x3D; 0; i &lt; sId.length - 1; i++) &#123;</span><br><span class="line">        sum +&#x3D; sId[i] * weights[i];</span><br><span class="line">    &#125;</span><br><span class="line">    var last &#x3D; codes[sum % 11]; &#x2F;&#x2F;计算出来的最后一位身份证号码</span><br><span class="line">    if (sId[sId.length - 1] !&#x3D; last) &#123;</span><br><span class="line">        console.log(&#39;你输入的身份证号非法&#39;)</span><br><span class="line">        return false</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="39-随机数范围"><a href="#39-随机数范围" class="headerlink" title="39.随机数范围"></a>39.随机数范围</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">export const random &#x3D; (min, max) &#x3D;&gt; &#123;</span><br><span class="line">    if (arguments.length &#x3D;&#x3D;&#x3D; 2) &#123;</span><br><span class="line">        return Math.floor(min + Math.random() * ((max + 1) - min))</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="40-将阿拉伯数字翻译成中文的大写数字"><a href="#40-将阿拉伯数字翻译成中文的大写数字" class="headerlink" title="40.将阿拉伯数字翻译成中文的大写数字"></a>40.将阿拉伯数字翻译成中文的大写数字</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">export const numberToChinese &#x3D; (num) &#x3D;&gt; &#123;</span><br><span class="line">    var AA &#x3D; new Array(&quot;零&quot;, &quot;一&quot;, &quot;二&quot;, &quot;三&quot;, &quot;四&quot;, &quot;五&quot;, &quot;六&quot;, &quot;七&quot;, &quot;八&quot;, &quot;九&quot;, &quot;十&quot;);</span><br><span class="line">    var BB &#x3D; new Array(&quot;&quot;, &quot;十&quot;, &quot;百&quot;, &quot;仟&quot;, &quot;萬&quot;, &quot;億&quot;, &quot;点&quot;, &quot;&quot;);</span><br><span class="line">    var a &#x3D; (&quot;&quot; + num).replace(&#x2F;(^0*)&#x2F;g, &quot;&quot;).split(&quot;.&quot;),</span><br><span class="line">        k &#x3D; 0,</span><br><span class="line">        re &#x3D; &quot;&quot;;</span><br><span class="line">    for (var i &#x3D; a[0].length - 1; i &gt;&#x3D; 0; i--) &#123;</span><br><span class="line">        switch (k) &#123;</span><br><span class="line">            case 0:</span><br><span class="line">                re &#x3D; BB[7] + re;</span><br><span class="line">                break;</span><br><span class="line">            case 4:</span><br><span class="line">                if (!new RegExp(&quot;0&#123;4&#125;&#x2F;&#x2F;d&#123;&quot; + (a[0].length - i - 1) + &quot;&#125;$&quot;)</span><br><span class="line">                    .test(a[0]))</span><br><span class="line">                    re &#x3D; BB[4] + re;</span><br><span class="line">                break;</span><br><span class="line">            case 8:</span><br><span class="line">                re &#x3D; BB[5] + re;</span><br><span class="line">                BB[7] &#x3D; BB[5];</span><br><span class="line">                k &#x3D; 0;</span><br><span class="line">                break;</span><br><span class="line">        &#125;</span><br><span class="line">        if (k % 4 &#x3D;&#x3D; 2 &amp;&amp; a[0].charAt(i + 2) !&#x3D; 0 &amp;&amp; a[0].charAt(i + 1) &#x3D;&#x3D; 0)</span><br><span class="line">            re &#x3D; AA[0] + re;</span><br><span class="line">        if (a[0].charAt(i) !&#x3D; 0)</span><br><span class="line">            re &#x3D; AA[a[0].charAt(i)] + BB[k % 4] + re;</span><br><span class="line">        k++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (a.length &gt; 1) &#x2F;&#x2F; 加上小数部分(如果有小数部分)</span><br><span class="line">    &#123;</span><br><span class="line">        re +&#x3D; BB[6];</span><br><span class="line">        for (var i &#x3D; 0; i &lt; a[1].length; i++)</span><br><span class="line">            re +&#x3D; AA[a[1].charAt(i)];</span><br><span class="line">    &#125;</span><br><span class="line">    if (re &#x3D;&#x3D; &#39;一十&#39;)</span><br><span class="line">        re &#x3D; &quot;十&quot;;</span><br><span class="line">    if (re.match(&#x2F;^一&#x2F;) &amp;&amp; re.length &#x3D;&#x3D; 3)</span><br><span class="line">        re &#x3D; re.replace(&quot;一&quot;, &quot;&quot;);</span><br><span class="line">    return re;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="41-将数字转换为大写金额"><a href="#41-将数字转换为大写金额" class="headerlink" title="41.将数字转换为大写金额"></a>41.将数字转换为大写金额</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br></pre></td><td class="code"><pre><span class="line">export const changeToChinese &#x3D; (Num) &#x3D;&gt; &#123;</span><br><span class="line">    &#x2F;&#x2F;判断如果传递进来的不是字符的话转换为字符</span><br><span class="line">    if (typeof Num &#x3D;&#x3D; &quot;number&quot;) &#123;</span><br><span class="line">        Num &#x3D; new String(Num);</span><br><span class="line">    &#125;;</span><br><span class="line">    Num &#x3D; Num.replace(&#x2F;,&#x2F;g, &quot;&quot;) &#x2F;&#x2F;替换tomoney()中的“,”</span><br><span class="line">    Num &#x3D; Num.replace(&#x2F; &#x2F;g, &quot;&quot;) &#x2F;&#x2F;替换tomoney()中的空格</span><br><span class="line">    Num &#x3D; Num.replace(&#x2F;￥&#x2F;g, &quot;&quot;) &#x2F;&#x2F;替换掉可能出现的￥字符</span><br><span class="line">    if (isNaN(Num)) &#123; &#x2F;&#x2F;验证输入的字符是否为数字</span><br><span class="line">        &#x2F;&#x2F;alert(&quot;请检查小写金额是否正确&quot;);</span><br><span class="line">        return &quot;&quot;;</span><br><span class="line">    &#125;;</span><br><span class="line">    &#x2F;&#x2F;字符处理完毕后开始转换，采用前后两部分分别转换</span><br><span class="line">    var part &#x3D; String(Num).split(&quot;.&quot;);</span><br><span class="line">    var newchar &#x3D; &quot;&quot;;</span><br><span class="line">    &#x2F;&#x2F;小数点前进行转化</span><br><span class="line">    for (var i &#x3D; part[0].length - 1; i &gt;&#x3D; 0; i--) &#123;</span><br><span class="line">        if (part[0].length &gt; 10) &#123;</span><br><span class="line">            return &quot;&quot;;</span><br><span class="line">            &#x2F;&#x2F;若数量超过拾亿单位，提示</span><br><span class="line">        &#125;</span><br><span class="line">        var tmpnewchar &#x3D; &quot;&quot;</span><br><span class="line">        var perchar &#x3D; part[0].charAt(i);</span><br><span class="line">        switch (perchar) &#123;</span><br><span class="line">            case &quot;0&quot;:</span><br><span class="line">                tmpnewchar &#x3D; &quot;零&quot; + tmpnewchar;</span><br><span class="line">                break;</span><br><span class="line">            case &quot;1&quot;:</span><br><span class="line">                tmpnewchar &#x3D; &quot;壹&quot; + tmpnewchar;</span><br><span class="line">                break;</span><br><span class="line">            case &quot;2&quot;:</span><br><span class="line">                tmpnewchar &#x3D; &quot;贰&quot; + tmpnewchar;</span><br><span class="line">                break;</span><br><span class="line">            case &quot;3&quot;:</span><br><span class="line">                tmpnewchar &#x3D; &quot;叁&quot; + tmpnewchar;</span><br><span class="line">                break;</span><br><span class="line">            case &quot;4&quot;:</span><br><span class="line">                tmpnewchar &#x3D; &quot;肆&quot; + tmpnewchar;</span><br><span class="line">                break;</span><br><span class="line">            case &quot;5&quot;:</span><br><span class="line">                tmpnewchar &#x3D; &quot;伍&quot; + tmpnewchar;</span><br><span class="line">                break;</span><br><span class="line">            case &quot;6&quot;:</span><br><span class="line">                tmpnewchar &#x3D; &quot;陆&quot; + tmpnewchar;</span><br><span class="line">                break;</span><br><span class="line">            case &quot;7&quot;:</span><br><span class="line">                tmpnewchar &#x3D; &quot;柒&quot; + tmpnewchar;</span><br><span class="line">                break;</span><br><span class="line">            case &quot;8&quot;:</span><br><span class="line">                tmpnewchar &#x3D; &quot;捌&quot; + tmpnewchar;</span><br><span class="line">                break;</span><br><span class="line">            case &quot;9&quot;:</span><br><span class="line">                tmpnewchar &#x3D; &quot;玖&quot; + tmpnewchar;</span><br><span class="line">                break;</span><br><span class="line">        &#125;</span><br><span class="line">        switch (part[0].length - i - 1) &#123;</span><br><span class="line">            case 0:</span><br><span class="line">                tmpnewchar &#x3D; tmpnewchar + &quot;元&quot;;</span><br><span class="line">                break;</span><br><span class="line">            case 1:</span><br><span class="line">                if (perchar !&#x3D; 0) tmpnewchar &#x3D; tmpnewchar + &quot;拾&quot;;</span><br><span class="line">                break;</span><br><span class="line">            case 2:</span><br><span class="line">                if (perchar !&#x3D; 0) tmpnewchar &#x3D; tmpnewchar + &quot;佰&quot;;</span><br><span class="line">                break;</span><br><span class="line">            case 3:</span><br><span class="line">                if (perchar !&#x3D; 0) tmpnewchar &#x3D; tmpnewchar + &quot;仟&quot;;</span><br><span class="line">                break;</span><br><span class="line">            case 4:</span><br><span class="line">                tmpnewchar &#x3D; tmpnewchar + &quot;万&quot;;</span><br><span class="line">                break;</span><br><span class="line">            case 5:</span><br><span class="line">                if (perchar !&#x3D; 0) tmpnewchar &#x3D; tmpnewchar + &quot;拾&quot;;</span><br><span class="line">                break;</span><br><span class="line">            case 6:</span><br><span class="line">                if (perchar !&#x3D; 0) tmpnewchar &#x3D; tmpnewchar + &quot;佰&quot;;</span><br><span class="line">                break;</span><br><span class="line">            case 7:</span><br><span class="line">                if (perchar !&#x3D; 0) tmpnewchar &#x3D; tmpnewchar + &quot;仟&quot;;</span><br><span class="line">                break;</span><br><span class="line">            case 8:</span><br><span class="line">                tmpnewchar &#x3D; tmpnewchar + &quot;亿&quot;;</span><br><span class="line">                break;</span><br><span class="line">            case 9:</span><br><span class="line">                tmpnewchar &#x3D; tmpnewchar + &quot;拾&quot;;</span><br><span class="line">                break;</span><br><span class="line">        &#125;</span><br><span class="line">        var newchar &#x3D; tmpnewchar + newchar;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;小数点之后进行转化</span><br><span class="line">    if (Num.indexOf(&quot;.&quot;) !&#x3D; -1) &#123;</span><br><span class="line">        if (part[1].length &gt; 2) &#123;</span><br><span class="line">            &#x2F;&#x2F; alert(&quot;小数点之后只能保留两位,系统将自动截断&quot;);</span><br><span class="line">            part[1] &#x3D; part[1].substr(0, 2)</span><br><span class="line">        &#125;</span><br><span class="line">        for (i &#x3D; 0; i &lt; part[1].length; i++) &#123;</span><br><span class="line">            tmpnewchar &#x3D; &quot;&quot;</span><br><span class="line">            perchar &#x3D; part[1].charAt(i)</span><br><span class="line">            switch (perchar) &#123;</span><br><span class="line">                case &quot;0&quot;:</span><br><span class="line">                    tmpnewchar &#x3D; &quot;零&quot; + tmpnewchar;</span><br><span class="line">                    break;</span><br><span class="line">                case &quot;1&quot;:</span><br><span class="line">                    tmpnewchar &#x3D; &quot;壹&quot; + tmpnewchar;</span><br><span class="line">                    break;</span><br><span class="line">                case &quot;2&quot;:</span><br><span class="line">                    tmpnewchar &#x3D; &quot;贰&quot; + tmpnewchar;</span><br><span class="line">                    break;</span><br><span class="line">                case &quot;3&quot;:</span><br><span class="line">                    tmpnewchar &#x3D; &quot;叁&quot; + tmpnewchar;</span><br><span class="line">                    break;</span><br><span class="line">                case &quot;4&quot;:</span><br><span class="line">                    tmpnewchar &#x3D; &quot;肆&quot; + tmpnewchar;</span><br><span class="line">                    break;</span><br><span class="line">                case &quot;5&quot;:</span><br><span class="line">                    tmpnewchar &#x3D; &quot;伍&quot; + tmpnewchar;</span><br><span class="line">                    break;</span><br><span class="line">                case &quot;6&quot;:</span><br><span class="line">                    tmpnewchar &#x3D; &quot;陆&quot; + tmpnewchar;</span><br><span class="line">                    break;</span><br><span class="line">                case &quot;7&quot;:</span><br><span class="line">                    tmpnewchar &#x3D; &quot;柒&quot; + tmpnewchar;</span><br><span class="line">                    break;</span><br><span class="line">                case &quot;8&quot;:</span><br><span class="line">                    tmpnewchar &#x3D; &quot;捌&quot; + tmpnewchar;</span><br><span class="line">                    break;</span><br><span class="line">                case &quot;9&quot;:</span><br><span class="line">                    tmpnewchar &#x3D; &quot;玖&quot; + tmpnewchar;</span><br><span class="line">                    break;</span><br><span class="line">            &#125;</span><br><span class="line">            if (i &#x3D;&#x3D; 0) tmpnewchar &#x3D; tmpnewchar + &quot;角&quot;;</span><br><span class="line">            if (i &#x3D;&#x3D; 1) tmpnewchar &#x3D; tmpnewchar + &quot;分&quot;;</span><br><span class="line">            newchar &#x3D; newchar + tmpnewchar;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;替换所有无用汉字</span><br><span class="line">    while (newchar.search(&quot;零零&quot;) !&#x3D; -1)</span><br><span class="line">        newchar &#x3D; newchar.replace(&quot;零零&quot;, &quot;零&quot;);</span><br><span class="line">    newchar &#x3D; newchar.replace(&quot;零亿&quot;, &quot;亿&quot;);</span><br><span class="line">    newchar &#x3D; newchar.replace(&quot;亿万&quot;, &quot;亿&quot;);</span><br><span class="line">    newchar &#x3D; newchar.replace(&quot;零万&quot;, &quot;万&quot;);</span><br><span class="line">    newchar &#x3D; newchar.replace(&quot;零元&quot;, &quot;元&quot;);</span><br><span class="line">    newchar &#x3D; newchar.replace(&quot;零角&quot;, &quot;&quot;);</span><br><span class="line">    newchar &#x3D; newchar.replace(&quot;零分&quot;, &quot;&quot;);</span><br><span class="line">    if (newchar.charAt(newchar.length - 1) &#x3D;&#x3D; &quot;元&quot;) &#123;</span><br><span class="line">        newchar &#x3D; newchar + &quot;整&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    return newchar;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="42-判断一个元素是否在数组中"><a href="#42-判断一个元素是否在数组中" class="headerlink" title="42.判断一个元素是否在数组中"></a>42.判断一个元素是否在数组中</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export const contains &#x3D; (arr, val) &#x3D;&gt; &#123;</span><br><span class="line">    return arr.indexOf(val) !&#x3D; -1 ? true : false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="43-数组排序，-type-1：从小到大-2：从大到小-3：随机"><a href="#43-数组排序，-type-1：从小到大-2：从大到小-3：随机" class="headerlink" title="43.数组排序，{type} 1：从小到大 2：从大到小 3：随机"></a>43.数组排序，{type} 1：从小到大 2：从大到小 3：随机</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">export const sort &#x3D; (arr, type &#x3D; 1) &#x3D;&gt; &#123;</span><br><span class="line">    return arr.sort((a, b) &#x3D;&gt; &#123;</span><br><span class="line">        switch (type) &#123;</span><br><span class="line">            case 1:</span><br><span class="line">                return a - b;</span><br><span class="line">            case 2:</span><br><span class="line">                return b - a;</span><br><span class="line">            case 3:</span><br><span class="line">                return Math.random() - 0.5;</span><br><span class="line">            default:</span><br><span class="line">                return arr;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="44-去重"><a href="#44-去重" class="headerlink" title="44.去重"></a>44.去重</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">export const unique &#x3D; (arr) &#x3D;&gt; &#123;</span><br><span class="line">    if (Array.hasOwnProperty(&#39;from&#39;)) &#123;</span><br><span class="line">        return Array.from(new Set(arr));</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        var n &#x3D; &#123;&#125;, r &#x3D; [];</span><br><span class="line">        for (var i &#x3D; 0; i &lt; arr.length; i++) &#123;</span><br><span class="line">            if (!n[arr[i]]) &#123;</span><br><span class="line">                n[arr[i]] &#x3D; true;</span><br><span class="line">                r.push(arr[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return r;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="45-求两个集合的并集"><a href="#45-求两个集合的并集" class="headerlink" title="45.求两个集合的并集"></a>45.求两个集合的并集</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export const union &#x3D; (a, b) &#x3D;&gt; &#123;</span><br><span class="line">    var newArr &#x3D; a.concat(b);</span><br><span class="line">    return this.unique(newArr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="46-求两个集合的交集"><a href="#46-求两个集合的交集" class="headerlink" title="46.求两个集合的交集"></a>46.求两个集合的交集</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">export const intersect &#x3D; (a, b) &#x3D;&gt; &#123;</span><br><span class="line">    var _this &#x3D; this;</span><br><span class="line">    a &#x3D; this.unique(a);</span><br><span class="line">    return this.map(a, function (o) &#123;</span><br><span class="line">        return _this.contains(b, o) ? o : null;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="47-删除其中一个元素"><a href="#47-删除其中一个元素" class="headerlink" title="47.删除其中一个元素"></a>47.删除其中一个元素</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">export const remove &#x3D; (arr, ele) &#x3D;&gt; &#123;</span><br><span class="line">    var index &#x3D; arr.indexOf(ele);</span><br><span class="line">    if (index &gt; -1) &#123;</span><br><span class="line">        arr.splice(index, 1);</span><br><span class="line">    &#125;</span><br><span class="line">    return arr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="48-将类数组转换为数组"><a href="#48-将类数组转换为数组" class="headerlink" title="48.将类数组转换为数组"></a>48.将类数组转换为数组</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">export const formArray &#x3D; (ary) &#x3D;&gt; &#123;</span><br><span class="line">    var arr &#x3D; [];</span><br><span class="line">    if (Array.isArray(ary)) &#123;</span><br><span class="line">        arr &#x3D; ary;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        arr &#x3D; Array.prototype.slice.call(ary);</span><br><span class="line">    &#125;;</span><br><span class="line">    return arr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="49-最大值"><a href="#49-最大值" class="headerlink" title="49.最大值"></a>49.最大值</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export const max &#x3D; (arr) &#x3D;&gt; &#123;</span><br><span class="line">    return Math.max.apply(null, arr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="50-最小值"><a href="#50-最小值" class="headerlink" title="50.最小值"></a>50.最小值</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export const min &#x3D; (arr) &#x3D;&gt; &#123;</span><br><span class="line">    return Math.min.apply(null, arr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="51-求和"><a href="#51-求和" class="headerlink" title="51.求和"></a>51.求和</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">export const sum &#x3D; (arr) &#x3D;&gt; &#123;</span><br><span class="line">    return arr.reduce((pre, cur) &#x3D;&gt; &#123;</span><br><span class="line">        return pre + cur</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="52-平均值"><a href="#52-平均值" class="headerlink" title="52.平均值"></a>52.平均值</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export const average &#x3D; (arr) &#x3D;&gt; &#123;</span><br><span class="line">    return this.sum(arr) &#x2F; arr.length</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="53-去除空格-type-1-所有空格-2-前后空格-3-前空格-4-后空格"><a href="#53-去除空格-type-1-所有空格-2-前后空格-3-前空格-4-后空格" class="headerlink" title="53.去除空格,type: 1-所有空格 2-前后空格 3-前空格 4-后空格"></a>53.去除空格,type: 1-所有空格 2-前后空格 3-前空格 4-后空格</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">export const trim &#x3D; (str, type) &#x3D;&gt; &#123;</span><br><span class="line">    type &#x3D; type || 1</span><br><span class="line">    switch (type) &#123;</span><br><span class="line">        case 1:</span><br><span class="line">            return str.replace(&#x2F;\s+&#x2F;g, &quot;&quot;);</span><br><span class="line">        case 2:</span><br><span class="line">            return str.replace(&#x2F;(^\s*)|(\s*$)&#x2F;g, &quot;&quot;);</span><br><span class="line">        case 3:</span><br><span class="line">            return str.replace(&#x2F;(^\s*)&#x2F;g, &quot;&quot;);</span><br><span class="line">        case 4:</span><br><span class="line">            return str.replace(&#x2F;(\s*$)&#x2F;g, &quot;&quot;);</span><br><span class="line">        default:</span><br><span class="line">            return str;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="54-字符转换，type-1-首字母大写-2：首字母小写-3：大小写转换-4：全部大写-5：全部小写"><a href="#54-字符转换，type-1-首字母大写-2：首字母小写-3：大小写转换-4：全部大写-5：全部小写" class="headerlink" title="54.字符转换，type: 1:首字母大写 2：首字母小写 3：大小写转换 4：全部大写 5：全部小写"></a>54.字符转换，type: 1:首字母大写 2：首字母小写 3：大小写转换 4：全部大写 5：全部小写</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">export const changeCase &#x3D; (str, type) &#x3D;&gt; &#123;</span><br><span class="line">    type &#x3D; type || 4</span><br><span class="line">    switch (type) &#123;</span><br><span class="line">        case 1:</span><br><span class="line">            return str.replace(&#x2F;\b\w+\b&#x2F;g, function (word) &#123;</span><br><span class="line">                return word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase();</span><br><span class="line"></span><br><span class="line">            &#125;);</span><br><span class="line">        case 2:</span><br><span class="line">            return str.replace(&#x2F;\b\w+\b&#x2F;g, function (word) &#123;</span><br><span class="line">                return word.substring(0, 1).toLowerCase() + word.substring(1).toUpperCase();</span><br><span class="line">            &#125;);</span><br><span class="line">        case 3:</span><br><span class="line">            return str.split(&#39;&#39;).map(function (word) &#123;</span><br><span class="line">                if (&#x2F;[a-z]&#x2F;.test(word)) &#123;</span><br><span class="line">                    return word.toUpperCase();</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    return word.toLowerCase()</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;).join(&#39;&#39;)</span><br><span class="line">        case 4:</span><br><span class="line">            return str.toUpperCase();</span><br><span class="line">        case 5:</span><br><span class="line">            return str.toLowerCase();</span><br><span class="line">        default:</span><br><span class="line">            return str;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="55-检测密码强度"><a href="#55-检测密码强度" class="headerlink" title="55.检测密码强度"></a>55.检测密码强度</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">export const checkPwd &#x3D; (str) &#x3D;&gt; &#123;</span><br><span class="line">    var Lv &#x3D; 0;</span><br><span class="line">    if (str.length &lt; 6) &#123;</span><br><span class="line">        return Lv</span><br><span class="line">    &#125;</span><br><span class="line">    if (&#x2F;[0-9]&#x2F;.test(str)) &#123;</span><br><span class="line">        Lv++</span><br><span class="line">    &#125;</span><br><span class="line">    if (&#x2F;[a-z]&#x2F;.test(str)) &#123;</span><br><span class="line">        Lv++</span><br><span class="line">    &#125;</span><br><span class="line">    if (&#x2F;[A-Z]&#x2F;.test(str)) &#123;</span><br><span class="line">        Lv++</span><br><span class="line">    &#125;</span><br><span class="line">    if (&#x2F;[\.|-|_]&#x2F;.test(str)) &#123;</span><br><span class="line">        Lv++</span><br><span class="line">    &#125;</span><br><span class="line">    return Lv;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="56-函数节流器"><a href="#56-函数节流器" class="headerlink" title="56.函数节流器"></a>56.函数节流器</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">export const debouncer &#x3D; (fn, time, interval &#x3D; 200) &#x3D;&gt; &#123;</span><br><span class="line">    if (time - (window.debounceTimestamp || 0) &gt; interval) &#123;</span><br><span class="line">        fn &amp;&amp; fn();</span><br><span class="line">        window.debounceTimestamp &#x3D; time;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="57-在字符串中插入新字符串"><a href="#57-在字符串中插入新字符串" class="headerlink" title="57.在字符串中插入新字符串"></a>57.在字符串中插入新字符串</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export const insertStr &#x3D; (soure, index, newStr) &#x3D;&gt; &#123;</span><br><span class="line">    var str &#x3D; soure.slice(0, index) + newStr + soure.slice(index);</span><br><span class="line">    return str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="58-判断两个对象是否键值相同"><a href="#58-判断两个对象是否键值相同" class="headerlink" title="58.判断两个对象是否键值相同"></a>58.判断两个对象是否键值相同</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">export const isObjectEqual &#x3D; (a, b) &#x3D;&gt; &#123;</span><br><span class="line">    var aProps &#x3D; Object.getOwnPropertyNames(a);</span><br><span class="line">    var bProps &#x3D; Object.getOwnPropertyNames(b);</span><br><span class="line"></span><br><span class="line">    if (aProps.length !&#x3D;&#x3D; bProps.length) &#123;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    for (var i &#x3D; 0; i &lt; aProps.length; i++) &#123;</span><br><span class="line">        var propName &#x3D; aProps[i];</span><br><span class="line"></span><br><span class="line">        if (a[propName] !&#x3D;&#x3D; b[propName]) &#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="59-16进制颜色转RGBRGBA字符串"><a href="#59-16进制颜色转RGBRGBA字符串" class="headerlink" title="59.16进制颜色转RGBRGBA字符串"></a>59.16进制颜色转RGBRGBA字符串</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">export const colorToRGB &#x3D; (val, opa) &#x3D;&gt; &#123;</span><br><span class="line"></span><br><span class="line">    var pattern &#x3D; &#x2F;^(#?)[a-fA-F0-9]&#123;6&#125;$&#x2F;; &#x2F;&#x2F;16进制颜色值校验规则</span><br><span class="line">    var isOpa &#x3D; typeof opa &#x3D;&#x3D; &#39;number&#39;; &#x2F;&#x2F;判断是否有设置不透明度</span><br><span class="line"></span><br><span class="line">    if (!pattern.test(val)) &#123; &#x2F;&#x2F;如果值不符合规则返回空字符</span><br><span class="line">        return &#39;&#39;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    var v &#x3D; val.replace(&#x2F;#&#x2F;, &#39;&#39;); &#x2F;&#x2F;如果有#号先去除#号</span><br><span class="line">    var rgbArr &#x3D; [];</span><br><span class="line">    var rgbStr &#x3D; &#39;&#39;;</span><br><span class="line"></span><br><span class="line">    for (var i &#x3D; 0; i &lt; 3; i++) &#123;</span><br><span class="line">        var item &#x3D; v.substring(i * 2, i * 2 + 2);</span><br><span class="line">        var num &#x3D; parseInt(item, 16);</span><br><span class="line">        rgbArr.push(num);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    rgbStr &#x3D; rgbArr.join();</span><br><span class="line">    rgbStr &#x3D; &#39;rgb&#39; + (isOpa ? &#39;a&#39; : &#39;&#39;) + &#39;(&#39; + rgbStr + (isOpa ? &#39;,&#39; + opa : &#39;&#39;) + &#39;)&#39;;</span><br><span class="line">    return rgbStr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="60-追加url参数"><a href="#60-追加url参数" class="headerlink" title="60.追加url参数"></a>60.追加url参数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">export const appendQuery &#x3D; (url, key, value) &#x3D;&gt; &#123;</span><br><span class="line">    var options &#x3D; key;</span><br><span class="line">    if (typeof options &#x3D;&#x3D; &#39;string&#39;) &#123;</span><br><span class="line">        options &#x3D; &#123;&#125;;</span><br><span class="line">        options[key] &#x3D; value;</span><br><span class="line">    &#125;</span><br><span class="line">    options &#x3D; $.param(options);</span><br><span class="line">    if (url.includes(&#39;?&#39;)) &#123;</span><br><span class="line">        url +&#x3D; &#39;&amp;&#39; + options</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        url +&#x3D; &#39;?&#39; + options</span><br><span class="line">    &#125;</span><br><span class="line">    return url;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScipt/" rel="tag"># JavaScipt</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/09/05/18/" rel="next" title="JavaScript规定了几种语言类型">
+                <i class="fa fa-chevron-left"></i> JavaScript规定了几种语言类型
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/09/11/20/" rel="prev" title="遥远的救世主">
+                遥远的救世主 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="FY" />
+            
+              <p class="site-author-name" itemprop="name">FY</p>
+              <p class="site-description motion-element" itemprop="description">Just Be Yourself</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/xuanfeiyu" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-邮箱"><span class="nav-number">1.</span> <span class="nav-text">1.邮箱</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-手机号码"><span class="nav-number">2.</span> <span class="nav-text">2.手机号码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-电话号码"><span class="nav-number">3.</span> <span class="nav-text">3.电话号码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-是否url地址"><span class="nav-number">4.</span> <span class="nav-text">4.是否url地址</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-是否字符串"><span class="nav-number">5.</span> <span class="nav-text">5.是否字符串</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-是否数字"><span class="nav-number">6.</span> <span class="nav-text">6.是否数字</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-是否boolean"><span class="nav-number">7.</span> <span class="nav-text">7.是否boolean</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-是否函数"><span class="nav-number">8.</span> <span class="nav-text">8.是否函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-是否为null"><span class="nav-number">9.</span> <span class="nav-text">9.是否为null</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-是否undefined"><span class="nav-number">10.</span> <span class="nav-text">10.是否undefined</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#11-是否对象"><span class="nav-number">11.</span> <span class="nav-text">11.是否对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#12-是否数组"><span class="nav-number">12.</span> <span class="nav-text">12.是否数组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#13-是否时间"><span class="nav-number">13.</span> <span class="nav-text">13.是否时间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#14-是否正则"><span class="nav-number">14.</span> <span class="nav-text">14.是否正则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#15-是否错误对象"><span class="nav-number">15.</span> <span class="nav-text">15.是否错误对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#16-是否Symbol函数"><span class="nav-number">16.</span> <span class="nav-text">16.是否Symbol函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#17-是否Promise对象"><span class="nav-number">17.</span> <span class="nav-text">17.是否Promise对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#18-是否Set对象"><span class="nav-number">18.</span> <span class="nav-text">18.是否Set对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#19-是否是微信浏览器"><span class="nav-number">19.</span> <span class="nav-text">19.是否是微信浏览器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#20-是否是移动端"><span class="nav-number">20.</span> <span class="nav-text">20.是否是移动端</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#21-是否是QQ浏览器"><span class="nav-number">21.</span> <span class="nav-text">21.是否是QQ浏览器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#22-是否是爬虫"><span class="nav-number">22.</span> <span class="nav-text">22.是否是爬虫</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#23-是否ios"><span class="nav-number">23.</span> <span class="nav-text">23.是否ios</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#24-是否为PC端"><span class="nav-number">24.</span> <span class="nav-text">24.是否为PC端</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#25-去除html标签"><span class="nav-number">25.</span> <span class="nav-text">25.去除html标签</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#26-获取url参数"><span class="nav-number">26.</span> <span class="nav-text">26.获取url参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#27-动态引入js"><span class="nav-number">27.</span> <span class="nav-text">27.动态引入js</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#28-根据url地址下载"><span class="nav-number">28.</span> <span class="nav-text">28.根据url地址下载</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#29-el是否包含某个class"><span class="nav-number">29.</span> <span class="nav-text">29.el是否包含某个class</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#30-el添加某个class"><span class="nav-number">30.</span> <span class="nav-text">30.el添加某个class</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#31-el去除某个class"><span class="nav-number">31.</span> <span class="nav-text">31.el去除某个class</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#32-获取滚动的坐标"><span class="nav-number">32.</span> <span class="nav-text">32.获取滚动的坐标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#33-滚动到顶部"><span class="nav-number">33.</span> <span class="nav-text">33.滚动到顶部</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#34-el是否在视口范围内"><span class="nav-number">34.</span> <span class="nav-text">34.el是否在视口范围内</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#35-洗牌算法随机"><span class="nav-number">35.</span> <span class="nav-text">35.洗牌算法随机</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#36-拦截粘贴板"><span class="nav-number">36.</span> <span class="nav-text">36.拦截粘贴板</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#37-判断类型集合"><span class="nav-number">37.</span> <span class="nav-text">37.判断类型集合</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#38-严格的身份证校验"><span class="nav-number">38.</span> <span class="nav-text">38.严格的身份证校验</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#39-随机数范围"><span class="nav-number">39.</span> <span class="nav-text">39.随机数范围</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#40-将阿拉伯数字翻译成中文的大写数字"><span class="nav-number">40.</span> <span class="nav-text">40.将阿拉伯数字翻译成中文的大写数字</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#41-将数字转换为大写金额"><span class="nav-number">41.</span> <span class="nav-text">41.将数字转换为大写金额</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#42-判断一个元素是否在数组中"><span class="nav-number">42.</span> <span class="nav-text">42.判断一个元素是否在数组中</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#43-数组排序，-type-1：从小到大-2：从大到小-3：随机"><span class="nav-number">43.</span> <span class="nav-text">43.数组排序，{type} 1：从小到大 2：从大到小 3：随机</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#44-去重"><span class="nav-number">44.</span> <span class="nav-text">44.去重</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#45-求两个集合的并集"><span class="nav-number">45.</span> <span class="nav-text">45.求两个集合的并集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#46-求两个集合的交集"><span class="nav-number">46.</span> <span class="nav-text">46.求两个集合的交集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#47-删除其中一个元素"><span class="nav-number">47.</span> <span class="nav-text">47.删除其中一个元素</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#48-将类数组转换为数组"><span class="nav-number">48.</span> <span class="nav-text">48.将类数组转换为数组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#49-最大值"><span class="nav-number">49.</span> <span class="nav-text">49.最大值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#50-最小值"><span class="nav-number">50.</span> <span class="nav-text">50.最小值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#51-求和"><span class="nav-number">51.</span> <span class="nav-text">51.求和</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#52-平均值"><span class="nav-number">52.</span> <span class="nav-text">52.平均值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#53-去除空格-type-1-所有空格-2-前后空格-3-前空格-4-后空格"><span class="nav-number">53.</span> <span class="nav-text">53.去除空格,type: 1-所有空格 2-前后空格 3-前空格 4-后空格</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#54-字符转换，type-1-首字母大写-2：首字母小写-3：大小写转换-4：全部大写-5：全部小写"><span class="nav-number">54.</span> <span class="nav-text">54.字符转换，type: 1:首字母大写 2：首字母小写 3：大小写转换 4：全部大写 5：全部小写</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#55-检测密码强度"><span class="nav-number">55.</span> <span class="nav-text">55.检测密码强度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#56-函数节流器"><span class="nav-number">56.</span> <span class="nav-text">56.函数节流器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#57-在字符串中插入新字符串"><span class="nav-number">57.</span> <span class="nav-text">57.在字符串中插入新字符串</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#58-判断两个对象是否键值相同"><span class="nav-number">58.</span> <span class="nav-text">58.判断两个对象是否键值相同</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#59-16进制颜色转RGBRGBA字符串"><span class="nav-number">59.</span> <span class="nav-text">59.16进制颜色转RGBRGBA字符串</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#60-追加url参数"><span class="nav-number">60.</span> <span class="nav-text">60.追加url参数</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">FY</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

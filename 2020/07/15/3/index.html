@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScipt," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="作者：FY引用请标明出处  操作数组常用方法1、concat()concat() 方法用于连接两个或多个数组。该方法不会改变现有的数组，仅会返回被连接数组的一个副本。 12345var arr1 &#x3D; [1,2,3];var arr2 &#x3D; [4,5];var arr3 &#x3D; arr1.concat(arr2);console.log(arr1); &#x2F;&amp;#x2F">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用数组操作">
+<meta property="og:url" content="http://yoursite.com/2020/07/15/3/index.html">
+<meta property="og:site_name" content="旋の飞羽">
+<meta property="og:description" content="作者：FY引用请标明出处  操作数组常用方法1、concat()concat() 方法用于连接两个或多个数组。该方法不会改变现有的数组，仅会返回被连接数组的一个副本。 12345var arr1 &#x3D; [1,2,3];var arr2 &#x3D; [4,5];var arr3 &#x3D; arr1.concat(arr2);console.log(arr1); &#x2F;&amp;#x2F">
+<meta property="article:published_time" content="2020-07-14T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-10-31T12:00:36.122Z">
+<meta property="article:author" content="FY">
+<meta property="article:tag" content="JavaScipt">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/07/15/3/"/>
+
+
+
+
+
+  <title>常用数组操作 | 旋の飞羽</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">旋の飞羽</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">人间值得，未来可期。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/15/3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FY">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="旋の飞羽">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">常用数组操作</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-15T00:00:00+08:00">
+                2020-07-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>作者：FY<br>引用请标明出处</p>
+</blockquote>
+<h1 id="操作数组常用方法"><a href="#操作数组常用方法" class="headerlink" title="操作数组常用方法"></a>操作数组常用方法</h1><h2 id="1、concat"><a href="#1、concat" class="headerlink" title="1、concat()"></a>1、concat()</h2><p>concat() 方法用于连接两个或多个数组。该方法不会改变现有的数组，仅会返回被连接数组的一个副本。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var arr1 &#x3D; [1,2,3];</span><br><span class="line">var arr2 &#x3D; [4,5];</span><br><span class="line">var arr3 &#x3D; arr1.concat(arr2);</span><br><span class="line">console.log(arr1); &#x2F;&#x2F; [1, 2, 3]</span><br><span class="line">console.log(arr3); &#x2F;&#x2F; [1, 2, 3, 4, 5]</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="2、join"><a href="#2、join" class="headerlink" title="2、join()"></a>2、join()</h2><p>join() 方法用于把数组中的所有元素放入一个字符串。元素是通过指定的分隔符进行分隔的，默认使用’,’号分割，不改变原数组。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var arr &#x3D; [2,3,4];</span><br><span class="line">console.log(arr.join());  &#x2F;&#x2F; 2,3,4</span><br><span class="line">console.log(arr);  &#x2F;&#x2F; [2, 3, 4]</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、push"><a href="#3、push" class="headerlink" title="3、push()"></a>3、push()</h2><p>push() 方法可向数组的末尾添加一个或多个元素，并返回新的长度。末尾添加，返回的是长度，会改变原数组。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var a &#x3D; [2,3,4];</span><br><span class="line">var b &#x3D; a.push(5);</span><br><span class="line">console.log(a);  &#x2F;&#x2F; [2,3,4,5]</span><br><span class="line">console.log(b);  &#x2F;&#x2F; 4</span><br></pre></td></tr></table></figure>
+<p>push方法可以一次添加多个元素push(data1,data2….)</p>
+<h2 id="4、pop"><a href="#4、pop" class="headerlink" title="4、pop()"></a>4、pop()</h2><p>pop() 方法用于删除并返回数组的最后一个元素。返回最后一个元素，会改变原数组。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var arr &#x3D; [2,3,4];</span><br><span class="line">console.log(arr.pop()); &#x2F;&#x2F; 4</span><br><span class="line">console.log(arr);  &#x2F;&#x2F; [2,3]</span><br></pre></td></tr></table></figure>
+
+<h2 id="5、shift"><a href="#5、shift" class="headerlink" title="5、shift()"></a>5、shift()</h2><p>shift() 方法用于把数组的第一个元素从其中删除，并返回第一个元素的值。返回第一个元素，改变原数组。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var arr &#x3D; [2,3,4];</span><br><span class="line">console.log(arr.shift()); &#x2F;&#x2F; 2</span><br><span class="line">console.log(arr);  &#x2F;&#x2F; [3,4]</span><br></pre></td></tr></table></figure>
+
+<h2 id="6、unshift"><a href="#6、unshift" class="headerlink" title="6、unshift()"></a>6、unshift()</h2><p>unshift() 方法可向数组的开头添加一个或更多元素，并返回新的长度。返回新长度，改变原数组。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var arr &#x3D; [2,3,4,5];</span><br><span class="line">console.log(arr.unshift(3,6)); &#x2F;&#x2F; 6</span><br><span class="line">console.log(arr); &#x2F;&#x2F; [3, 6, 2, 3, 4, 5]</span><br></pre></td></tr></table></figure>
+<p>tip:该方法可以不传参数,不传参数就是不增加元素。</p>
+<h2 id="7、slice"><a href="#7、slice" class="headerlink" title="7、slice()"></a>7、slice()</h2><p>返回一个新的数组，包含从 start 到 end （不包括该元素）的 arrayObject 中的元素。返回选定的元素，该方法不会修改原数组。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var arr &#x3D; [2,3,4,5];</span><br><span class="line">console.log(arr.slice(1,3));  &#x2F;&#x2F; [3,4]</span><br><span class="line">console.log(arr);  &#x2F;&#x2F; [2,3,4,5]</span><br></pre></td></tr></table></figure>
+
+<h2 id="8、splice"><a href="#8、splice" class="headerlink" title="8、splice()"></a>8、splice()</h2><p>splice() 方法可删除从 index 处开始的零个或多个元素，并且用参数列表中声明的一个或多个值来替换那些被删除的元素。如果从 arrayObject 中删除了元素，则返回的是含有被删除的元素的数组。splice() 方法会直接对数组进行修改。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var a &#x3D; [5,6,7,8];</span><br><span class="line">console.log(a.splice(1,0,9)); &#x2F;&#x2F; []</span><br><span class="line">console.log(a);  &#x2F;&#x2F; [5, 9, 6, 7, 8]</span><br><span class="line">var b &#x3D; [5,6,7,8];</span><br><span class="line">console.log(b.splice(1,2,3));  &#x2F;&#x2F; [6, 7]</span><br><span class="line">console.log(b); &#x2F;&#x2F; [5, 3, 8]</span><br></pre></td></tr></table></figure>
+
+<h2 id="9、substring-和-substr"><a href="#9、substring-和-substr" class="headerlink" title="9、substring() 和 substr()"></a>9、substring() 和 substr()</h2><p>相同点：如果只是写一个参数，两者的作用都一样：都是是截取字符串从当前下标以后直到字符串最后的字符串片段。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">substr(startIndex);</span><br><span class="line">substring(startIndex);</span><br><span class="line"></span><br><span class="line">var str &#x3D; &#39;123456789&#39;;</span><br><span class="line">console.log(str.substr(2));    &#x2F;&#x2F; &quot;3456789&quot;</span><br><span class="line">console.log(str.substring(2)) ;&#x2F;&#x2F; &quot;3456789&quot;</span><br></pre></td></tr></table></figure>
+
+<p>不同点：第二个参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">substr（startIndex,lenth）： 第二个参数是截取字符串的长度（从起始点截取某个长度的字符串）；</span><br><span class="line">substring（startIndex, endIndex）： 第二个参数是截取字符串最终的下标 （截取2个位置之间的字符串,‘含头不含尾’）。</span><br><span class="line"></span><br><span class="line">console.log(&quot;123456789&quot;.substr(2,5));    &#x2F;&#x2F; &quot;34567&quot;</span><br><span class="line">console.log(&quot;123456789&quot;.substring(2,5)) ;&#x2F;&#x2F; &quot;345&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="10、sort-排序"><a href="#10、sort-排序" class="headerlink" title="10、sort 排序"></a>10、sort 排序</h2><p>按照 Unicode code 位置排序，默认升序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var fruit &#x3D; [&#39;cherries&#39;, &#39;apples&#39;, &#39;bananas&#39;];</span><br><span class="line">fruit.sort(); &#x2F;&#x2F; [&#39;apples&#39;, &#39;bananas&#39;, &#39;cherries&#39;]</span><br><span class="line"></span><br><span class="line">var scores &#x3D; [1, 10, 21, 2];</span><br><span class="line">scores.sort(); &#x2F;&#x2F; [1, 10, 2, 21]</span><br></pre></td></tr></table></figure>
+
+<h2 id="11、reverse"><a href="#11、reverse" class="headerlink" title="11、reverse()"></a>11、reverse()</h2><p>reverse() 方法用于颠倒数组中元素的顺序。返回的是颠倒后的数组，会改变原数组。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var arr &#x3D; [2,3,4];</span><br><span class="line">console.log(arr.reverse()); &#x2F;&#x2F; [4, 3, 2]</span><br><span class="line">console.log(arr);  &#x2F;&#x2F; [4, 3, 2]</span><br></pre></td></tr></table></figure>
+
+<h2 id="12、indexOf-和-lastIndexOf"><a href="#12、indexOf-和-lastIndexOf" class="headerlink" title="12、indexOf 和 lastIndexOf"></a>12、indexOf 和 lastIndexOf</h2><p>都接受两个参数：查找的值、查找起始位置<br>不存在，返回 -1 ；存在，返回位置。indexOf 是从前往后查找， lastIndexOf 是从后往前查找。</p>
+<p>indexOf</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var a &#x3D; [2, 9, 9];</span><br><span class="line">a.indexOf(2); &#x2F;&#x2F; 0</span><br><span class="line">a.indexOf(7); &#x2F;&#x2F; -1</span><br><span class="line"></span><br><span class="line">if (a.indexOf(7) &#x3D;&#x3D;&#x3D; -1) &#123;</span><br><span class="line">  &#x2F;&#x2F; element doesn&#39;t exist in array</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>lastIndexOf</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var numbers &#x3D; [2, 5, 9, 2];</span><br><span class="line">numbers.lastIndexOf(2);     &#x2F;&#x2F; 3</span><br><span class="line">numbers.lastIndexOf(7);     &#x2F;&#x2F; -1</span><br><span class="line">numbers.lastIndexOf(2, 3);  &#x2F;&#x2F; 3</span><br><span class="line">numbers.lastIndexOf(2, 2);  &#x2F;&#x2F; 0</span><br><span class="line">numbers.lastIndexOf(2, -2); &#x2F;&#x2F; 0</span><br><span class="line">numbers.lastIndexOf(2, -1); &#x2F;&#x2F; 3</span><br></pre></td></tr></table></figure>
+
+<h2 id="13、every"><a href="#13、every" class="headerlink" title="13、every"></a>13、every</h2><p>对数组的每一项都运行给定的函数，每一项都返回 ture,则返回 true</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function isBigEnough(element, index, array) &#123;</span><br><span class="line">  return element &lt; 10;</span><br><span class="line">&#125;</span><br><span class="line">[2, 5, 8, 3, 4].every(isBigEnough);   &#x2F;&#x2F; true</span><br></pre></td></tr></table></figure>
+
+<h2 id="14、some"><a href="#14、some" class="headerlink" title="14、some"></a>14、some</h2><p>对数组的每一项都运行给定的函数，任意一项返回 ture,则返回 true</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function compare(element, index, array) &#123;</span><br><span class="line">  return element &gt; 10;</span><br><span class="line">&#125;</span><br><span class="line">[2, 5, 8, 1, 4].some(compare);  &#x2F;&#x2F; false</span><br><span class="line">[12, 5, 8, 1, 4].some(compare); &#x2F;&#x2F; true</span><br></pre></td></tr></table></figure>
+
+<h2 id="15、filter"><a href="#15、filter" class="headerlink" title="15、filter"></a>15、filter</h2><p>对数组的每一项都运行给定的函数，返回结果为 ture 的项组成的数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var words &#x3D; [&quot;spray&quot;, &quot;limit&quot;, &quot;elite&quot;, &quot;exuberant&quot;, &quot;destruction&quot;, &quot;present&quot;, &quot;happy&quot;];</span><br><span class="line">var longWords &#x3D; words.filter(function(word)&#123;</span><br><span class="line">  return word.length &gt; 6;</span><br><span class="line">&#125;);</span><br><span class="line">&#x2F;&#x2F; Filtered array longWords is [&quot;exuberant&quot;, &quot;destruction&quot;, &quot;present&quot;]</span><br></pre></td></tr></table></figure>
+
+<h2 id="16、map"><a href="#16、map" class="headerlink" title="16、map"></a>16、map</h2><p>对数组的每一项都运行给定的函数，返回每次函数调用的结果组成一个新数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var numbers &#x3D; [1, 5, 10, 15];</span><br><span class="line">var doubles &#x3D; numbers.map(function(x) &#123;</span><br><span class="line">   return x * 2;</span><br><span class="line">&#125;);</span><br><span class="line">&#x2F;&#x2F; doubles is now [2, 10, 20, 30]</span><br><span class="line">&#x2F;&#x2F; numbers is still [1, 5, 10, 15]</span><br></pre></td></tr></table></figure>
+
+<h2 id="17、forEach-数组遍历"><a href="#17、forEach-数组遍历" class="headerlink" title="17、forEach 数组遍历"></a>17、forEach 数组遍历</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const items &#x3D; [&#39;item1&#39;, &#39;item2&#39;, &#39;item3&#39;];</span><br><span class="line">const copy &#x3D; [];</span><br><span class="line">items.forEach(function(item)&#123;</span><br><span class="line">  copy.push(item)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h1 id="ES6新增操作数组的方法"><a href="#ES6新增操作数组的方法" class="headerlink" title="ES6新增操作数组的方法"></a>ES6新增操作数组的方法</h1><h2 id="1、find"><a href="#1、find" class="headerlink" title="1、find()"></a>1、find()</h2><p>传入一个回调函数，找到数组中符合当前搜索规则的第一个元素，返回它，并且终止搜索。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const arr &#x3D; [1, &quot;2&quot;, 3, 3, &quot;2&quot;]</span><br><span class="line">console.log(arr.find(n &#x3D;&gt; typeof n &#x3D;&#x3D;&#x3D; &quot;number&quot;)) &#x2F;&#x2F; 1</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、findIndex"><a href="#2、findIndex" class="headerlink" title="2、findIndex()"></a>2、findIndex()</h2><p>传入一个回调函数，找到数组中符合当前搜索规则的第一个元素，返回它的下标，终止搜索。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const arr &#x3D; [1, &quot;2&quot;, 3, 3, &quot;2&quot;]</span><br><span class="line">console.log(arr.findIndex(n &#x3D;&gt; typeof n &#x3D;&#x3D;&#x3D; &quot;number&quot;)) &#x2F;&#x2F; 0</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、fill"><a href="#3、fill" class="headerlink" title="3、fill()"></a>3、fill()</h2><p>用新元素替换掉数组内的元素，可以指定替换下标范围。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr.fill(value, start, end)</span><br></pre></td></tr></table></figure>
+
+<h2 id="4、copyWithin"><a href="#4、copyWithin" class="headerlink" title="4、copyWithin()"></a>4、copyWithin()</h2><p>选择数组的某个下标，从该位置开始复制数组元素，默认从0开始复制。也可以指定要复制的元素范围。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">arr.copyWithin(target, start, end)</span><br><span class="line">const arr &#x3D; [1, 2, 3, 4, 5]</span><br><span class="line">console.log(arr.copyWithin(3))</span><br><span class="line">&#x2F;&#x2F; [1,2,3,1,2] 从下标为3的元素开始，复制数组，所以4, 5被替换成1, 2</span><br><span class="line">const arr1 &#x3D; [1, 2, 3, 4, 5]</span><br><span class="line">console.log(arr1.copyWithin(3, 1))</span><br><span class="line">&#x2F;&#x2F; [1,2,3,2,3] 从下标为3的元素开始，复制数组，指定复制的第一个元素下标为1，所以4, 5被替换成2, 3</span><br><span class="line">const arr2 &#x3D; [1, 2, 3, 4, 5]</span><br><span class="line">console.log(arr2.copyWithin(3, 1, 2))</span><br><span class="line">&#x2F;&#x2F; [1,2,3,2,5] 从下标为3的元素开始，复制数组，指定复制的第一个元素下标为1，结束位置为2，所以4被替换成2</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<h2 id="5、from"><a href="#5、from" class="headerlink" title="5、from"></a>5、from</h2><p>将类似数组的对象（array-like object）和可遍历（iterable）的对象转为真正的数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const bar &#x3D; [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;];</span><br><span class="line">Array.from(bar);</span><br><span class="line">&#x2F;&#x2F; [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]</span><br><span class="line"></span><br><span class="line">Array.from(&#39;foo&#39;);</span><br><span class="line">&#x2F;&#x2F; [&quot;f&quot;, &quot;o&quot;, &quot;o&quot;]</span><br></pre></td></tr></table></figure>
+
+<h2 id="6、of"><a href="#6、of" class="headerlink" title="6、of"></a>6、of</h2><p>用于将一组值，转换为数组。这个方法的主要目的，是弥补数组构造函数 Array() 的不足。因为参数个数的不同，会导致 Array() 的行为有差异。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Array() &#x2F;&#x2F; []</span><br><span class="line">Array(3) &#x2F;&#x2F; [, , ,]</span><br><span class="line">Array(3, 11, 8) &#x2F;&#x2F; [3, 11, 8]</span><br><span class="line">Array.of(7);       &#x2F;&#x2F; [7]</span><br><span class="line">Array.of(1, 2, 3); &#x2F;&#x2F; [1, 2, 3]</span><br><span class="line"></span><br><span class="line">Array(7);          &#x2F;&#x2F; [ , , , , , , ]</span><br><span class="line">Array(1, 2, 3);    &#x2F;&#x2F; [1, 2, 3]</span><br></pre></td></tr></table></figure>
+
+<h2 id="7、entries-返回迭代器：返回键值对"><a href="#7、entries-返回迭代器：返回键值对" class="headerlink" title="7、entries() 返回迭代器：返回键值对"></a>7、entries() 返回迭代器：返回键值对</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;数组</span><br><span class="line">const arr &#x3D; [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;];</span><br><span class="line">for(let v of arr.entries()) &#123;</span><br><span class="line">  console.log(v)</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; [0, &#39;a&#39;] [1, &#39;b&#39;] [2, &#39;c&#39;]</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;Set</span><br><span class="line">const arr &#x3D; new Set([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]);</span><br><span class="line">for(let v of arr.entries()) &#123;</span><br><span class="line">  console.log(v)</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; [&#39;a&#39;, &#39;a&#39;] [&#39;b&#39;, &#39;b&#39;] [&#39;c&#39;, &#39;c&#39;]</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;Map</span><br><span class="line">const arr &#x3D; new Map();</span><br><span class="line">arr.set(&#39;a&#39;, &#39;a&#39;);</span><br><span class="line">arr.set(&#39;b&#39;, &#39;b&#39;);</span><br><span class="line">for(let v of arr.entries()) &#123;</span><br><span class="line">  console.log(v)</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; [&#39;a&#39;, &#39;a&#39;] [&#39;b&#39;, &#39;b&#39;]</span><br></pre></td></tr></table></figure>
+
+<h2 id="8、values-返回迭代器：返回键值对的value"><a href="#8、values-返回迭代器：返回键值对的value" class="headerlink" title="8、values() 返回迭代器：返回键值对的value"></a>8、values() 返回迭代器：返回键值对的value</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;数组</span><br><span class="line">const arr &#x3D; [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;];</span><br><span class="line">for(let v of arr.values()) &#123;</span><br><span class="line">  console.log(v)</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F;&#39;a&#39; &#39;b&#39; &#39;c&#39;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;Set</span><br><span class="line">const arr &#x3D; new Set([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]);</span><br><span class="line">for(let v of arr.values()) &#123;</span><br><span class="line">  console.log(v)</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; &#39;a&#39; &#39;b&#39; &#39;c&#39;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;Map</span><br><span class="line">const arr &#x3D; new Map();</span><br><span class="line">arr.set(&#39;a&#39;, &#39;a&#39;);</span><br><span class="line">arr.set(&#39;b&#39;, &#39;b&#39;);</span><br><span class="line">for(let v of arr.values()) &#123;</span><br><span class="line">  console.log(v)</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; &#39;a&#39; &#39;b&#39;</span><br></pre></td></tr></table></figure>
+
+<h2 id="9、keys-返回迭代器：返回键值对的key"><a href="#9、keys-返回迭代器：返回键值对的key" class="headerlink" title="9、keys() 返回迭代器：返回键值对的key"></a>9、keys() 返回迭代器：返回键值对的key</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;数组</span><br><span class="line">const arr &#x3D; [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;];</span><br><span class="line">for(let v of arr.keys()) &#123;</span><br><span class="line">  console.log(v)</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; 0 1 2</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;Set</span><br><span class="line">const arr &#x3D; new Set([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]);</span><br><span class="line">for(let v of arr.keys()) &#123;</span><br><span class="line">  console.log(v)</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; &#39;a&#39; &#39;b&#39; &#39;c&#39;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;Map</span><br><span class="line">const arr &#x3D; new Map();</span><br><span class="line">arr.set(&#39;a&#39;, &#39;a&#39;);</span><br><span class="line">arr.set(&#39;b&#39;, &#39;b&#39;);</span><br><span class="line">for(let v of arr.keys()) &#123;</span><br><span class="line">  console.log(v)</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; &#39;a&#39; &#39;b&#39;</span><br></pre></td></tr></table></figure>
+<h2 id="10、includes"><a href="#10、includes" class="headerlink" title="10、includes"></a>10、includes</h2><p>判断数组中是否存在该元素，参数：查找的值、起始位置，可以替换 ES5 时代的 indexOf 判断方式。indexOf 判断元素是否为 NaN，会判断错误。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var a &#x3D; [1, 2, 3];</span><br><span class="line">a.includes(2); &#x2F;&#x2F; true</span><br><span class="line">a.includes(4); &#x2F;&#x2F; false</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScipt/" rel="tag"># JavaScipt</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/07/05/2/" rel="next" title="批量添加类名性能优化">
+                <i class="fa fa-chevron-left"></i> 批量添加类名性能优化
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/07/16/4/" rel="prev" title="Vue之slot用法">
+                Vue之slot用法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="FY" />
+            
+              <p class="site-author-name" itemprop="name">FY</p>
+              <p class="site-description motion-element" itemprop="description">Just Be Yourself</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/xuanfeiyu" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#操作数组常用方法"><span class="nav-number">1.</span> <span class="nav-text">操作数组常用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、concat"><span class="nav-number">1.1.</span> <span class="nav-text">1、concat()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、join"><span class="nav-number">1.2.</span> <span class="nav-text">2、join()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、push"><span class="nav-number">1.3.</span> <span class="nav-text">3、push()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、pop"><span class="nav-number">1.4.</span> <span class="nav-text">4、pop()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5、shift"><span class="nav-number">1.5.</span> <span class="nav-text">5、shift()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6、unshift"><span class="nav-number">1.6.</span> <span class="nav-text">6、unshift()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7、slice"><span class="nav-number">1.7.</span> <span class="nav-text">7、slice()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8、splice"><span class="nav-number">1.8.</span> <span class="nav-text">8、splice()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9、substring-和-substr"><span class="nav-number">1.9.</span> <span class="nav-text">9、substring() 和 substr()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10、sort-排序"><span class="nav-number">1.10.</span> <span class="nav-text">10、sort 排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11、reverse"><span class="nav-number">1.11.</span> <span class="nav-text">11、reverse()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12、indexOf-和-lastIndexOf"><span class="nav-number">1.12.</span> <span class="nav-text">12、indexOf 和 lastIndexOf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13、every"><span class="nav-number">1.13.</span> <span class="nav-text">13、every</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14、some"><span class="nav-number">1.14.</span> <span class="nav-text">14、some</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15、filter"><span class="nav-number">1.15.</span> <span class="nav-text">15、filter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16、map"><span class="nav-number">1.16.</span> <span class="nav-text">16、map</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17、forEach-数组遍历"><span class="nav-number">1.17.</span> <span class="nav-text">17、forEach 数组遍历</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ES6新增操作数组的方法"><span class="nav-number">2.</span> <span class="nav-text">ES6新增操作数组的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、find"><span class="nav-number">2.1.</span> <span class="nav-text">1、find()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、findIndex"><span class="nav-number">2.2.</span> <span class="nav-text">2、findIndex()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、fill"><span class="nav-number">2.3.</span> <span class="nav-text">3、fill()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、copyWithin"><span class="nav-number">2.4.</span> <span class="nav-text">4、copyWithin()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5、from"><span class="nav-number">2.5.</span> <span class="nav-text">5、from</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6、of"><span class="nav-number">2.6.</span> <span class="nav-text">6、of</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7、entries-返回迭代器：返回键值对"><span class="nav-number">2.7.</span> <span class="nav-text">7、entries() 返回迭代器：返回键值对</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8、values-返回迭代器：返回键值对的value"><span class="nav-number">2.8.</span> <span class="nav-text">8、values() 返回迭代器：返回键值对的value</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9、keys-返回迭代器：返回键值对的key"><span class="nav-number">2.9.</span> <span class="nav-text">9、keys() 返回迭代器：返回键值对的key</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10、includes"><span class="nav-number">2.10.</span> <span class="nav-text">10、includes</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">FY</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

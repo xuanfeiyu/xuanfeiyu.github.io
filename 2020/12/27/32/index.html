@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScipt," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="作者：FY引用请标明出处  Part 3 · Vue.js 框架源码与进阶模块三 · Vue 数据流管理及 Vue.js 服务端渲染(SSR)任务一：Vuex 状态管理1.课程目标 Vue 组件间通信方式回顾 Vuex 核心概念和基本使用回顾 购物车案例 模拟实现 Vuex  2.组件内状态管理流程 状态管理   state，驱动应用的数据源 view，以声明方式将 state 映射到视图 ac">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习笔记 ----- 【Vue.js 框架源码与进阶】Vue 数据流管理及 Vue.js 服务端渲染(SSR)">
+<meta property="og:url" content="http://yoursite.com/2020/12/27/32/index.html">
+<meta property="og:site_name" content="旋の飞羽">
+<meta property="og:description" content="作者：FY引用请标明出处  Part 3 · Vue.js 框架源码与进阶模块三 · Vue 数据流管理及 Vue.js 服务端渲染(SSR)任务一：Vuex 状态管理1.课程目标 Vue 组件间通信方式回顾 Vuex 核心概念和基本使用回顾 购物车案例 模拟实现 Vuex  2.组件内状态管理流程 状态管理   state，驱动应用的数据源 view，以声明方式将 state 映射到视图 ac">
+<meta property="article:published_time" content="2020-12-26T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-12-27T12:04:40.068Z">
+<meta property="article:author" content="FY">
+<meta property="article:tag" content="JavaScipt">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/12/27/32/"/>
+
+
+
+
+
+  <title>学习笔记 ----- 【Vue.js 框架源码与进阶】Vue 数据流管理及 Vue.js 服务端渲染(SSR) | 旋の飞羽</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">旋の飞羽</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">人间值得，未来可期。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/27/32/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FY">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="旋の飞羽">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">学习笔记 ----- 【Vue.js 框架源码与进阶】Vue 数据流管理及 Vue.js 服务端渲染(SSR)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-27T00:00:00+08:00">
+                2020-12-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>作者：FY<br>引用请标明出处</p>
+</blockquote>
+<h1 id="Part-3-·-Vue-js-框架源码与进阶"><a href="#Part-3-·-Vue-js-框架源码与进阶" class="headerlink" title="Part 3 · Vue.js 框架源码与进阶"></a>Part 3 · Vue.js 框架源码与进阶</h1><h2 id="模块三-·-Vue-数据流管理及-Vue-js-服务端渲染-SSR"><a href="#模块三-·-Vue-数据流管理及-Vue-js-服务端渲染-SSR" class="headerlink" title="模块三 · Vue 数据流管理及 Vue.js 服务端渲染(SSR)"></a>模块三 · Vue 数据流管理及 Vue.js 服务端渲染(SSR)</h2><h2 id="任务一：Vuex-状态管理"><a href="#任务一：Vuex-状态管理" class="headerlink" title="任务一：Vuex 状态管理"></a>任务一：Vuex 状态管理</h2><h3 id="1-课程目标"><a href="#1-课程目标" class="headerlink" title="1.课程目标"></a>1.课程目标</h3><ul>
+<li>Vue 组件间通信方式回顾</li>
+<li>Vuex 核心概念和基本使用回顾</li>
+<li>购物车案例</li>
+<li>模拟实现 Vuex</li>
+</ul>
+<h3 id="2-组件内状态管理流程"><a href="#2-组件内状态管理流程" class="headerlink" title="2.组件内状态管理流程"></a>2.组件内状态管理流程</h3><blockquote>
+<p>状态管理</p>
+</blockquote>
+<ul>
+<li>state，驱动应用的数据源</li>
+<li>view，以声明方式将 state 映射到视图</li>
+<li>actions，响应在 view 上的用户输入导致的状态变化</li>
+</ul>
+<h3 id="3-组件间通信方式回顾-父组件给子组件传值"><a href="#3-组件间通信方式回顾-父组件给子组件传值" class="headerlink" title="3.组件间通信方式回顾-父组件给子组件传值"></a>3.组件间通信方式回顾-父组件给子组件传值</h3><ul>
+<li>子组件中通过 props 接收数据</li>
+<li>父组件中给子组件通过相应属性传值</li>
+</ul>
+<h3 id="4-组件间通信方式回顾-子组件给父组件传值"><a href="#4-组件间通信方式回顾-子组件给父组件传值" class="headerlink" title="4.组件间通信方式回顾-子组件给父组件传值"></a>4.组件间通信方式回顾-子组件给父组件传值</h3><p>略</p>
+<h3 id="5-组件间通信方式回顾-不相关组件传值"><a href="#5-组件间通信方式回顾-不相关组件传值" class="headerlink" title="5.组件间通信方式回顾-不相关组件传值"></a>5.组件间通信方式回顾-不相关组件传值</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// eventbus.js</span></span><br><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Vue()</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-组件间通信方式回顾-通过ref获取子组件"><a href="#6-组件间通信方式回顾-通过ref获取子组件" class="headerlink" title="6.组件间通信方式回顾-通过ref获取子组件"></a>6.组件间通信方式回顾-通过ref获取子组件</h3><ul>
+<li>$root</li>
+<li>$parent</li>
+<li>$children</li>
+<li>$refs</li>
+</ul>
+<blockquote>
+<p>ref 两个作用</p>
+</blockquote>
+<ul>
+<li>在普通的 HTML 标签上使用 ref，获取到的是 DOM</li>
+<li>在组件标签上使用 ref，获取到的是组件实例</li>
+</ul>
+<h3 id="7-简易的状态管理方案"><a href="#7-简易的状态管理方案" class="headerlink" title="7.简易的状态管理方案"></a>7.简易的状态管理方案</h3><blockquote>
+<p>问题</p>
+</blockquote>
+<ul>
+<li>多个视图依赖同一状态</li>
+<li>来自不同视图的行为需要变更同一状态</li>
+</ul>
+<h3 id="8-Vuex-概念回顾"><a href="#8-Vuex-概念回顾" class="headerlink" title="8.Vuex 概念回顾"></a>8.Vuex 概念回顾</h3><blockquote>
+<p>什么是 Vuex</p>
+</blockquote>
+<ul>
+<li>Vuex 是专门为 Vue.js 设计的状态管理库</li>
+<li>Vuex 采用集中式的方式存储需要共享的状态</li>
+<li>Vuex 的作用是进行状态管理，解决复杂组件通信，数据共享</li>
+<li>Vuex 集成了 devtools 中，提供了 time-travel 时光旅行历史回滚功能</li>
+</ul>
+<blockquote>
+<p>什么情况下使用 Vuex</p>
+</blockquote>
+<ul>
+<li>非必要的情况下不要使用 Vuex</li>
+<li>大型的单页应用程序<ul>
+<li>多个视图依赖于同一状态</li>
+<li>来自不同视图的行为需要变更同一状态</li>
+</ul>
+</li>
+</ul>
+<h3 id="9-Vuex-的核心概念"><a href="#9-Vuex-的核心概念" class="headerlink" title="9.Vuex 的核心概念"></a>9.Vuex 的核心概念</h3><ul>
+<li>Store</li>
+<li>State</li>
+<li>Getter</li>
+<li>Mutation</li>
+<li>Action</li>
+<li>Module</li>
+</ul>
+<h3 id="10-基本代码结构"><a href="#10-基本代码结构" class="headerlink" title="10.基本代码结构"></a>10.基本代码结构</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line">Vue.use(Vuex)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">    state: &#123;&#125;,</span><br><span class="line">    mutations: &#123;&#125;,</span><br><span class="line">    actions: &#123;&#125;,</span><br><span class="line">    modules: &#123;&#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="11-State"><a href="#11-State" class="headerlink" title="11.State"></a>11.State</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; mapState &#125; <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    computed: &#123;</span><br><span class="line">        <span class="comment">// ...mapState(['count','msg'])</span></span><br><span class="line">        ...mapState(&#123;<span class="attr">num</span>:<span class="string">'count'</span>,<span class="attr">message</span>:<span class="string">'msg'</span>&#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="12-Getter"><a href="#12-Getter" class="headerlink" title="12.Getter"></a>12.Getter</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line">Vue.use(Vuex)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">    state: &#123;</span><br><span class="line">        count: <span class="number">0</span>,</span><br><span class="line">        msg: <span class="string">'Hello Vuex'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    getters: &#123;</span><br><span class="line">        reverseMsg(state) &#123;</span><br><span class="line">            <span class="keyword">return</span> state.msg.split(<span class="string">''</span>).reverse().join(<span class="string">''</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    mutations: &#123;&#125;,</span><br><span class="line">    actions: &#123;&#125;,</span><br><span class="line">    modules: &#123;&#125;,</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; mapState, mapGetters &#125; <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    computed: &#123;</span><br><span class="line">        <span class="comment">// ...mapState(['count','msg'])</span></span><br><span class="line">        ...mapState(&#123;<span class="attr">num</span>:<span class="string">'count'</span>,<span class="attr">message</span>:<span class="string">'msg'</span>&#125;)</span><br><span class="line">        ...mapGetters([<span class="string">'reverseMsg'</span>])</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="13-Mutation"><a href="#13-Mutation" class="headerlink" title="13.Mutation"></a>13.Mutation</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line">Vue.use(Vuex)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">    state: &#123;</span><br><span class="line">        count: <span class="number">0</span>,</span><br><span class="line">        msg: <span class="string">'Hello Vuex'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    getters: &#123;</span><br><span class="line">        reverseMsg(state) &#123;</span><br><span class="line">            <span class="keyword">return</span> state.msg.split(<span class="string">''</span>).reverse().join(<span class="string">''</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    mutations: &#123;</span><br><span class="line">        increate(state,payload)&#123;</span><br><span class="line">            state.count += payload</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    actions: &#123;&#125;,</span><br><span class="line">    modules: &#123;&#125;,</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; mapState, mapGetters &#125; <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    computed: &#123;</span><br><span class="line">        <span class="comment">// ...mapState(['count','msg'])</span></span><br><span class="line">        ...mapState(&#123;<span class="attr">num</span>:<span class="string">'count'</span>,<span class="attr">message</span>:<span class="string">'msg'</span>&#125;)</span><br><span class="line">        ...mapGetters([<span class="string">'reverseMsg'</span>])</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        ...mapMutations([<span class="string">'increate'</span>])</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="14-Action"><a href="#14-Action" class="headerlink" title="14.Action"></a>14.Action</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line">Vue.use(Vuex)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">    state: &#123;</span><br><span class="line">        count: <span class="number">0</span>,</span><br><span class="line">        msg: <span class="string">'Hello Vuex'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    getters: &#123;</span><br><span class="line">        reverseMsg(state) &#123;</span><br><span class="line">            <span class="keyword">return</span> state.msg.split(<span class="string">''</span>).reverse().join(<span class="string">''</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    mutations: &#123;</span><br><span class="line">        increate(state,payload)&#123;</span><br><span class="line">            state.count += payload</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    actions: &#123;</span><br><span class="line">        increateAsync(context,payload) &#123;</span><br><span class="line">            setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">                context.commit(<span class="string">'increate'</span>,payload)</span><br><span class="line">            &#125;,<span class="number">2000</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    modules: &#123;&#125;,</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; mapState, mapGetters &#125; <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    computed: &#123;</span><br><span class="line">        <span class="comment">// ...mapState(['count','msg'])</span></span><br><span class="line">        ...mapState(&#123;<span class="attr">num</span>:<span class="string">'count'</span>,<span class="attr">message</span>:<span class="string">'msg'</span>&#125;)</span><br><span class="line">        ...mapGetters([<span class="string">'reverseMsg'</span>])</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        ...mapMutations([<span class="string">'increate'</span>])</span><br><span class="line">        ...mapActions([<span class="string">'increateAsync'</span>])</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="15-Module"><a href="#15-Module" class="headerlink" title="15.Module"></a>15.Module</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// products.js</span></span><br><span class="line"><span class="keyword">const</span> state = &#123;</span><br><span class="line">    products: [</span><br><span class="line">        &#123; <span class="attr">id</span>:<span class="number">1</span>, <span class="attr">title</span>:<span class="string">'iPhone 11'</span>, <span class="attr">price</span>:<span class="number">8000</span> &#125;,</span><br><span class="line">        &#123; <span class="attr">id</span>:<span class="number">2</span>, <span class="attr">title</span>:<span class="string">'iPhone 12'</span>, <span class="attr">price</span>:<span class="number">10000</span> &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> getters = &#123;&#125;</span><br><span class="line"><span class="keyword">const</span> mutations = &#123;</span><br><span class="line">    setProducts(state, payload) &#123;</span><br><span class="line">        state.products = payload</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> actions = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">   namespaced: <span class="literal">true</span>,</span><br><span class="line">   state,</span><br><span class="line">   getters,</span><br><span class="line">   mutations,</span><br><span class="line">   actions,</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// cart.js</span></span><br><span class="line"><span class="keyword">const</span> state = &#123;&#125;</span><br><span class="line"><span class="keyword">const</span> getters = &#123;&#125;</span><br><span class="line"><span class="keyword">const</span> mutations = &#123;&#125;</span><br><span class="line"><span class="keyword">const</span> actions = &#123;&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">   namespaced: <span class="literal">true</span>,</span><br><span class="line">   state,</span><br><span class="line">   getters,</span><br><span class="line">   mutations,</span><br><span class="line">   actions,</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// index.js</span></span><br><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line">Vue.use(Vuex)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">    state: &#123;</span><br><span class="line">        count: <span class="number">0</span>,</span><br><span class="line">        msg: <span class="string">'Hello Vuex'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    getters: &#123;</span><br><span class="line">        reverseMsg(state) &#123;</span><br><span class="line">            <span class="keyword">return</span> state.msg.split(<span class="string">''</span>).reverse().join(<span class="string">''</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    mutations: &#123;</span><br><span class="line">        increate(state,payload)&#123;</span><br><span class="line">            state.count += payload</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    actions: &#123;</span><br><span class="line">        increateAsync(context,payload) &#123;</span><br><span class="line">            setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">                context.commit(<span class="string">'increate'</span>,payload)</span><br><span class="line">            &#125;,<span class="number">2000</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    modules: &#123;</span><br><span class="line">        products,</span><br><span class="line">        cart</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; mapState, mapGetters &#125; <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    computed: &#123;</span><br><span class="line">        <span class="comment">// ...mapState(['count','msg'])</span></span><br><span class="line">        ...mapState(&#123;<span class="attr">num</span>:<span class="string">'count'</span>,<span class="attr">message</span>:<span class="string">'msg'</span>&#125;)</span><br><span class="line">        ...mapGetters([<span class="string">'reverseMsg'</span>])</span><br><span class="line">        ...mapState(<span class="string">'products'</span>,[<span class="string">'products'</span>])</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        ...mapMutations([<span class="string">'increate'</span>])</span><br><span class="line">        ...mapActions([<span class="string">'increateAsync'</span>])</span><br><span class="line">        ...mapMutations(<span class="string">'products'</span>,[<span class="string">'setProducts'</span>])</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="16-严格模式"><a href="#16-严格模式" class="headerlink" title="16.严格模式"></a>16.严格模式</h3><ul>
+<li>strict: process.env.NODE_ENV !== ‘production’ 开发环境中开启，生产环境中关闭</li>
+</ul>
+<h3 id="17-购物车案例-演示"><a href="#17-购物车案例-演示" class="headerlink" title="17.购物车案例-演示"></a>17.购物车案例-演示</h3><p>略</p>
+<h3 id="18-购物车案例-模板"><a href="#18-购物车案例-模板" class="headerlink" title="18.购物车案例-模板"></a>18.购物车案例-模板</h3><p>略</p>
+<h3 id="19-购物车案例-商品列表"><a href="#19-购物车案例-商品列表" class="headerlink" title="19.购物车案例-商品列表"></a>19.购物车案例-商品列表</h3><blockquote>
+<p>三个组件</p>
+</blockquote>
+<ul>
+<li>商品列表组件<ul>
+<li>展示商品列表</li>
+<li>添加购物车</li>
+</ul>
+</li>
+<li>购物车列表组件</li>
+<li>我的购物车组件（弹出窗口）</li>
+</ul>
+<h3 id="20-购物车案例-添加购物车"><a href="#20-购物车案例-添加购物车" class="headerlink" title="20.购物车案例-添加购物车"></a>20.购物车案例-添加购物车</h3><p>略</p>
+<h3 id="21-购物车案例-我的购物车-列表"><a href="#21-购物车案例-我的购物车-列表" class="headerlink" title="21.购物车案例-我的购物车-列表"></a>21.购物车案例-我的购物车-列表</h3><p>略</p>
+<h3 id="22-购物车案例-我的购物车-统计"><a href="#22-购物车案例-我的购物车-统计" class="headerlink" title="22.购物车案例-我的购物车-统计"></a>22.购物车案例-我的购物车-统计</h3><p>略</p>
+<h3 id="23-购物车案例-我的购物车-删除"><a href="#23-购物车案例-我的购物车-删除" class="headerlink" title="23.购物车案例-我的购物车-删除"></a>23.购物车案例-我的购物车-删除</h3><p>略</p>
+<h3 id="24-购物车案例-购物车组件-购物车列表"><a href="#24-购物车案例-购物车组件-购物车列表" class="headerlink" title="24.购物车案例-购物车组件-购物车列表"></a>24.购物车案例-购物车组件-购物车列表</h3><p>略</p>
+<h3 id="25-购物车案例-购物车组件-全选"><a href="#25-购物车案例-购物车组件-全选" class="headerlink" title="25.购物车案例-购物车组件-全选"></a>25.购物车案例-购物车组件-全选</h3><p>略</p>
+<h3 id="26-购物车案例-购物车组件-数字文本框"><a href="#26-购物车案例-购物车组件-数字文本框" class="headerlink" title="26.购物车案例-购物车组件-数字文本框"></a>26.购物车案例-购物车组件-数字文本框</h3><p>略</p>
+<h3 id="27-购物车案例-购物车组件-统计"><a href="#27-购物车案例-购物车组件-统计" class="headerlink" title="27.购物车案例-购物车组件-统计"></a>27.购物车案例-购物车组件-统计</h3><p>略</p>
+<h3 id="28-购物车案例-本地存储"><a href="#28-购物车案例-本地存储" class="headerlink" title="28.购物车案例-本地存储"></a>28.购物车案例-本地存储</h3><blockquote>
+<p>Vuex 插件介绍</p>
+</blockquote>
+<ul>
+<li>Vuex 的插件就是一个函数</li>
+<li>这个函数接收一个 store 参数</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myPlugin = <span class="function"><span class="params">store</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 当 store 初始化后调用</span></span><br><span class="line">    store.subscribe(<span class="function">(<span class="params">mutation,state</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="comment">// 每次 mutation 之后调用</span></span><br><span class="line">    <span class="comment">// mutation 的格式为 &#123;type,payload&#125;</span></span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">    plugins: [myPlugin]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="29-模拟Vuex-基本结构"><a href="#29-模拟Vuex-基本结构" class="headerlink" title="29.模拟Vuex-基本结构"></a>29.模拟Vuex-基本结构</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> _Vue = <span class="literal">null</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Store</span> </span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">install</span> (<span class="params">vue</span>) </span>&#123;</span><br><span class="line">    _Vue = vue</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    Store,</span><br><span class="line">    install</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="30-模拟Vuex-install"><a href="#30-模拟Vuex-install" class="headerlink" title="30.模拟Vuex-install"></a>30.模拟Vuex-install</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> _Vue = <span class="literal">null</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Store</span> </span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">install</span> (<span class="params">vue</span>) </span>&#123;</span><br><span class="line">    _Vue = vue</span><br><span class="line">    _Vue.mixin(&#123;</span><br><span class="line">        beforeCreate () &#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="keyword">this</span>.$options.store) &#123;</span><br><span class="line">                _Vue.prototype.$store = <span class="keyword">this</span>.$options.store</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    Store,</span><br><span class="line">    install</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="31-模拟Vuex-Store-类"><a href="#31-模拟Vuex-Store-类" class="headerlink" title="31.模拟Vuex-Store 类"></a>31.模拟Vuex-Store 类</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> _Vue = <span class="literal">null</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Store</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(options)&#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;</span><br><span class="line">            state = &#123;&#125;,</span><br><span class="line">            getters = &#123;&#125;,</span><br><span class="line">            mutations = &#123;&#125;,</span><br><span class="line">            actions = &#123;&#125;,</span><br><span class="line">        &#125; = options</span><br><span class="line">        <span class="keyword">this</span>.state = _Vue.observable(state)</span><br><span class="line">        <span class="keyword">this</span>.getters = <span class="built_in">Object</span>.create(<span class="literal">null</span>)</span><br><span class="line">        <span class="built_in">Object</span>.keys(getters).forEach(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="built_in">Object</span>.defineProperty(<span class="keyword">this</span>.getters, key, &#123;</span><br><span class="line">                <span class="keyword">get</span>: () =&gt; getters[key](state)</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;)</span><br><span class="line">        this._mutations = mutations</span><br><span class="line">        this._actions = actions</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    commit (type, payload) &#123;</span><br><span class="line">        <span class="keyword">this</span>._mutations[type](<span class="keyword">this</span>.state, payload)</span><br><span class="line">    &#125;</span><br><span class="line">    dispatch (type, payload) &#123;</span><br><span class="line">        <span class="keyword">this</span>._actions[type](<span class="keyword">this</span>, payload)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">install</span> (<span class="params">vue</span>) </span>&#123;</span><br><span class="line">    _Vue = vue</span><br><span class="line">    _Vue.mixin(&#123;</span><br><span class="line">        beforeCreate () &#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="keyword">this</span>.$options.store) &#123;</span><br><span class="line">                _Vue.prototype.$store = <span class="keyword">this</span>.$options.store</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    Store,</span><br><span class="line">    install</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="任务二：服务端渲染基础"><a href="#任务二：服务端渲染基础" class="headerlink" title="任务二：服务端渲染基础"></a>任务二：服务端渲染基础</h2><h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h3><blockquote>
+<p>SPA 单页面应用</p>
+</blockquote>
+<ul>
+<li><p>优点</p>
+<ul>
+<li>用户体验好</li>
+<li>开发效率高</li>
+<li>渲染性能好</li>
+<li>可维护性好</li>
+</ul>
+</li>
+<li><p>缺点</p>
+<ul>
+<li>首屏渲染时间长</li>
+<li>不利于 SEO</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>同构应用</p>
+</blockquote>
+<ul>
+<li>通过服务端渲染首屏直出，解决 SPA 应用首屏渲染慢以及不利于 SEO 问题</li>
+<li>通过客户端渲染接管页面内容交互得到更好的用户体验</li>
+</ul>
+<blockquote>
+<p>相关概念</p>
+</blockquote>
+<ul>
+<li>什么是渲染</li>
+<li>传统的服务端渲染</li>
+<li>客户端渲染</li>
+<li>现代化的服务端渲染（同构渲染）</li>
+</ul>
+<h3 id="2-什么是渲染"><a href="#2-什么是渲染" class="headerlink" title="2.什么是渲染"></a>2.什么是渲染</h3><ul>
+<li>渲染：把 数据 + 模板 拼接到一起</li>
+</ul>
+<h3 id="3-传统的服务端渲染"><a href="#3-传统的服务端渲染" class="headerlink" title="3.传统的服务端渲染"></a>3.传统的服务端渲染</h3><ul>
+<li>前后端代码完全耦合在一起，不利于开发和维护</li>
+<li>前端没有足够发挥空间</li>
+<li>服务端压力大</li>
+<li>用户体验一般</li>
+</ul>
+<h3 id="4-客户端渲染"><a href="#4-客户端渲染" class="headerlink" title="4.客户端渲染"></a>4.客户端渲染</h3><ul>
+<li>后端：负责处理数据接口</li>
+<li>前端：负责将接口数据渲染到页面中</li>
+</ul>
+<h3 id="5-为什么客户端渲染首屏渲染慢"><a href="#5-为什么客户端渲染首屏渲染慢" class="headerlink" title="5.为什么客户端渲染首屏渲染慢"></a>5.为什么客户端渲染首屏渲染慢</h3><p>略</p>
+<h3 id="6-为什么客户端渲染不利于-SEO"><a href="#6-为什么客户端渲染不利于-SEO" class="headerlink" title="6.为什么客户端渲染不利于 SEO"></a>6.为什么客户端渲染不利于 SEO</h3><p>略</p>
+<h3 id="7-现代化的服务端渲染"><a href="#7-现代化的服务端渲染" class="headerlink" title="7.现代化的服务端渲染"></a>7.现代化的服务端渲染</h3><ul>
+<li>基于 React、Vue 等框架，客户端渲染和服务器渲染的结合<ul>
+<li>在服务器端执行一次，用于实现服务器端渲染（首屏直出）</li>
+<li>在客户端再执行一次，用于接管页面交互</li>
+</ul>
+</li>
+<li>核心解决 SEO 和首屏渲染慢的问题</li>
+<li>拥有传统服务端渲染的优点，也有客户端渲染的优点</li>
+</ul>
+<blockquote>
+<p>如何实现同构渲染</p>
+</blockquote>
+<ul>
+<li>使用 Vue、React 等框架的官方解决方案<ul>
+<li>优点：有助于理解原理</li>
+<li>缺点：需要搭建环境，比较麻烦</li>
+</ul>
+</li>
+<li>使用第三方解决方案<ul>
+<li>React 生态的 Next.js</li>
+<li>Vue 生态的 Nuxt.js</li>
+</ul>
+</li>
+</ul>
+<h3 id="8-通过-Nuxt-体验同构渲染"><a href="#8-通过-Nuxt-体验同构渲染" class="headerlink" title="8.通过 Nuxt 体验同构渲染"></a>8.通过 Nuxt 体验同构渲染</h3><p>略</p>
+<h3 id="9-同构渲染的-SPA-应用"><a href="#9-同构渲染的-SPA-应用" class="headerlink" title="9.同构渲染的 SPA 应用"></a>9.同构渲染的 SPA 应用</h3><p>略</p>
+<h3 id="10-同构渲染的问题"><a href="#10-同构渲染的问题" class="headerlink" title="10.同构渲染的问题"></a>10.同构渲染的问题</h3><blockquote>
+<p>同构渲染应用的问题</p>
+</blockquote>
+<ul>
+<li>开发条件所限</li>
+<li>设计构建设置和部署的更多要求</li>
+<li>更多的服务器端负载</li>
+</ul>
+<blockquote>
+<p>开发条件有限</p>
+</blockquote>
+<ul>
+<li>浏览器特定的代码只能在某些生命周期钩子函数中使用</li>
+<li>一些外部扩展库可能需要特殊处理才能在服务端渲染应用中运行</li>
+<li>不能在服务端渲染期间操作 DOM</li>
+<li>某些代码操作需要区分运行环境</li>
+</ul>
+<blockquote>
+<p>更多的服务端负载</p>
+</blockquote>
+<ul>
+<li>在 Node 中渲染完整的应用程序，相比仅仅提供静态文件的服务器需要大量占用 CPU 资源</li>
+<li>如果应用在高流量环境下使用，需要准备相应的服务器负载、</li>
+<li>需要更多的服务端渲染优化工作处理</li>
+</ul>
+<blockquote>
+<p>服务端渲染使用建议</p>
+</blockquote>
+<ul>
+<li>首屏渲染速度是否真的重要？</li>
+<li>是否真的需要 SEO？</li>
+</ul>
+<h2 id="任务三：NuxtJS-基础"><a href="#任务三：NuxtJS-基础" class="headerlink" title="任务三：NuxtJS 基础"></a>任务三：NuxtJS 基础</h2><h3 id="1-NuxtJS-介绍"><a href="#1-NuxtJS-介绍" class="headerlink" title="1.NuxtJS 介绍"></a>1.NuxtJS 介绍</h3><blockquote>
+<p>Nuxt.js 是什么</p>
+</blockquote>
+<ul>
+<li>一个基于 Vue.js 生态的第三方开源服务端渲染应用框架</li>
+<li>它可以帮我们轻松的使用 Vue.js 技术栈构建同构应用</li>
+<li>官网：<a href="https://zh.nuxtjs.org/" target="_blank" rel="noopener">https://zh.nuxtjs.org/</a></li>
+<li>GitHub 仓库：<a href="https://github.com.com/nuxt/nuxt.js" target="_blank" rel="noopener">https://github.com.com/nuxt/nuxt.js</a></li>
+</ul>
+<h3 id="2-初始化-NuxtJS-项目"><a href="#2-初始化-NuxtJS-项目" class="headerlink" title="2.初始化 NuxtJS 项目"></a>2.初始化 NuxtJS 项目</h3><blockquote>
+<p>Nuxt.js 的使用方式</p>
+</blockquote>
+<ul>
+<li>初始项目</li>
+<li>已有的 Node.js 服务端项目<ul>
+<li>直接把 Nuxt 当做一个中间件集成到 Node Web Server 中</li>
+</ul>
+</li>
+<li>现有的 Vue.js 项目<ul>
+<li>非常熟悉 Nuxt.js</li>
+<li>至少 10% 的代码改动</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>初始化 Nuxt.js 应用的方式</p>
+</blockquote>
+<ul>
+<li>官方文档：<a href="https://zh.nuxtjs.org/guide/installation" target="_blank" rel="noopener">https://zh.nuxtjs.org/guide/installation</a><ul>
+<li>方式一：使用 create-nuxt-app</li>
+<li>方式二：手动创建</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-案例代码分支说明"><a href="#3-案例代码分支说明" class="headerlink" title="3.案例代码分支说明"></a>3.案例代码分支说明</h3><p>略</p>
+<h3 id="4-路由-基本路由"><a href="#4-路由-基本路由" class="headerlink" title="4.路由-基本路由"></a>4.路由-基本路由</h3><p>略</p>
+<h3 id="5-路由-路由导航"><a href="#5-路由-路由导航" class="headerlink" title="5.路由-路由导航"></a>5.路由-路由导航</h3><blockquote>
+<p>Nuxt.js 路由-路由导航</p>
+</blockquote>
+<ul>
+<li><p>a 标签</p>
+<ul>
+<li>它会刷新整个页面，不要使用</li>
+</ul>
+</li>
+<li><p>nuxt-link 组件</p>
+<ul>
+<li><a href="https://router.vuejs.org/zh/api/#router-link-props" target="_blank" rel="noopener">https://router.vuejs.org/zh/api/#router-link-props</a></li>
+</ul>
+</li>
+<li><p>编程式导航</p>
+<ul>
+<li><a href="https://router.vuejs.org/zh/guide/essentials/navigation.html" target="_blank" rel="noopener">https://router.vuejs.org/zh/guide/essentials/navigation.html</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="6-路由-动态路由"><a href="#6-路由-动态路由" class="headerlink" title="6.路由-动态路由"></a>6.路由-动态路由</h3><blockquote>
+<p>Nuxt.js 路由-动态路由</p>
+</blockquote>
+<ul>
+<li><p>Vue Router 动态路由匹配</p>
+<ul>
+<li><a href="https://router.vuejs.org/zh/guide/essentials/dynamic-matching.html" target="_blank" rel="noopener">https://router.vuejs.org/zh/guide/essentials/dynamic-matching.html</a></li>
+</ul>
+</li>
+<li><p>Nuxt.js 动态路由</p>
+<ul>
+<li><a href="https://zh.nuxtjs.org/guide/routing#动态路由" target="_blank" rel="noopener">https://zh.nuxtjs.org/guide/routing#动态路由</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="7-路由-嵌套路由"><a href="#7-路由-嵌套路由" class="headerlink" title="7.路由-嵌套路由"></a>7.路由-嵌套路由</h3><p>略</p>
+<h3 id="8-路由-自定义路由配置"><a href="#8-路由-自定义路由配置" class="headerlink" title="8.路由-自定义路由配置"></a>8.路由-自定义路由配置</h3><p>略</p>
+<h3 id="9-视图-模板"><a href="#9-视图-模板" class="headerlink" title="9.视图-模板"></a>9.视图-模板</h3><p>略</p>
+<h3 id="10-视图-布局"><a href="#10-视图-布局" class="headerlink" title="10.视图-布局"></a>10.视图-布局</h3><p>略</p>
+<h3 id="11-异步数据-asyncData"><a href="#11-异步数据-asyncData" class="headerlink" title="11.异步数据-asyncData"></a>11.异步数据-asyncData</h3><blockquote>
+<p>Nuxt.js 异步数据-asyncData 方法</p>
+</blockquote>
+<ul>
+<li><p><a href="https://zh.nuxtjs.org/guide/async-data" target="_blank" rel="noopener">https://zh.nuxtjs.org/guide/async-data</a></p>
+</li>
+<li><p>基本用法</p>
+<ul>
+<li>它会将 asyncData 返回的数据融合组件 data 方法返回数据一并给组件</li>
+<li>调用时机：服务端渲染期间和客户端路由更新之前</li>
+</ul>
+</li>
+</ul>
+<p>-注意事项</p>
+<ul>
+<li>只能在页面组件中使用</li>
+<li>没有 this，因为它是在组件初始化之前被调用的</li>
+</ul>
+<h3 id="12-异步数据-上下文对象"><a href="#12-异步数据-上下文对象" class="headerlink" title="12.异步数据-上下文对象"></a>12.异步数据-上下文对象</h3><ul>
+<li>context</li>
+</ul>
+<h2 id="任务四：NuxtJS-综合案例"><a href="#任务四：NuxtJS-综合案例" class="headerlink" title="任务四：NuxtJS 综合案例"></a>任务四：NuxtJS 综合案例</h2><h3 id="1-案例介绍"><a href="#1-案例介绍" class="headerlink" title="1.案例介绍"></a>1.案例介绍</h3><ul>
+<li>案例名称： RealWorld</li>
+<li>一个开源的学习项目，目的就是帮助开发者快速学习新技能</li>
+<li>GitHub 仓库：<a href="https://github.com/gothinkser/realworld" target="_blank" rel="noopener">https://github.com/gothinkser/realworld</a></li>
+<li>在线实例：<a href="https://demo.realworl.io/#/" target="_blank" rel="noopener">https://demo.realworl.io/#/</a></li>
+</ul>
+<blockquote>
+<p>案例相关资源</p>
+</blockquote>
+<ul>
+<li>页面模板：<a href="https://github.com/gothinkster/realworld-starter-kit/blob/master/FRONTEND_INSTRUCTIONS.md" target="_blank" rel="noopener">https://github.com/gothinkster/realworld-starter-kit/blob/master/FRONTEND_INSTRUCTIONS.md</a></li>
+<li>接口文档：<a href="https://github.com/gothunkster/realword/tree/master/api" target="_blank" rel="noopener">https://github.com/gothunkster/realword/tree/master/api</a></li>
+</ul>
+<blockquote>
+<p>学习前提</p>
+</blockquote>
+<ul>
+<li>Vue.js 使用经验</li>
+<li>Nuxt.js 基础</li>
+<li>Node.js、webpack相关使用经验</li>
+</ul>
+<blockquote>
+<p>学习收获</p>
+</blockquote>
+<ul>
+<li>掌握使用 Nuxt.js 开发同构渲染应用</li>
+<li>增强 Vue.js 实践能力</li>
+<li>掌握同构渲染应用中常见的功能处理<ul>
+<li>用户状态管理</li>
+<li>页面访问权限处理</li>
+<li>SEO 优化</li>
+</ul>
+</li>
+<li>掌握同构渲染应用的发布与部署</li>
+</ul>
+<h3 id="2-项目初始化-创建项目"><a href="#2-项目初始化-创建项目" class="headerlink" title="2.项目初始化-创建项目"></a>2.项目初始化-创建项目</h3><blockquote>
+<p>创建项目</p>
+</blockquote>
+<ul>
+<li>mikdir realworld-nuxtjs</li>
+<li>npm init -y</li>
+<li>npm i nuxt</li>
+<li>配置启动脚本</li>
+<li>创建 page 目录，配置初始化页面</li>
+</ul>
+<h3 id="3-项目初始化-导入样式资源"><a href="#3-项目初始化-导入样式资源" class="headerlink" title="3.项目初始化-导入样式资源"></a>3.项目初始化-导入样式资源</h3><p>略</p>
+<h3 id="4-项目初始化-布局组件"><a href="#4-项目初始化-布局组件" class="headerlink" title="4.项目初始化-布局组件"></a>4.项目初始化-布局组件</h3><p>略</p>
+<h3 id="5-项目初始化-导入登录注册页面"><a href="#5-项目初始化-导入登录注册页面" class="headerlink" title="5.项目初始化-导入登录注册页面"></a>5.项目初始化-导入登录注册页面</h3><p>略</p>
+<h3 id="6-项目初始化-导入剩余页面"><a href="#6-项目初始化-导入剩余页面" class="headerlink" title="6.项目初始化-导入剩余页面"></a>6.项目初始化-导入剩余页面</h3><p>略</p>
+<h3 id="7-项目初始化-处理顶部导航链接"><a href="#7-项目初始化-处理顶部导航链接" class="headerlink" title="7.项目初始化-处理顶部导航链接"></a>7.项目初始化-处理顶部导航链接</h3><p>略</p>
+<h3 id="8-项目初始化-处理导航链接高亮"><a href="#8-项目初始化-处理导航链接高亮" class="headerlink" title="8.项目初始化-处理导航链接高亮"></a>8.项目初始化-处理导航链接高亮</h3><p>略</p>
+<h3 id="9-项目初始化-封装请求模块"><a href="#9-项目初始化-封装请求模块" class="headerlink" title="9.项目初始化-封装请求模块"></a>9.项目初始化-封装请求模块</h3><p>略</p>
+<h3 id="10-登录注册-实现基本登录功能"><a href="#10-登录注册-实现基本登录功能" class="headerlink" title="10.登录注册-实现基本登录功能"></a>10.登录注册-实现基本登录功能</h3><p>略</p>
+<h3 id="11-登录注册-封装请求方法"><a href="#11-登录注册-封装请求方法" class="headerlink" title="11.登录注册-封装请求方法"></a>11.登录注册-封装请求方法</h3><p>略</p>
+<h3 id="12-登录注册-表单验证"><a href="#12-登录注册-表单验证" class="headerlink" title="12.登录注册-表单验证"></a>12.登录注册-表单验证</h3><p>略</p>
+<h3 id="13-登录注册-错误处理"><a href="#13-登录注册-错误处理" class="headerlink" title="13.登录注册-错误处理"></a>13.登录注册-错误处理</h3><p>略</p>
+<h3 id="14-登录注册-用户注册"><a href="#14-登录注册-用户注册" class="headerlink" title="14.登录注册-用户注册"></a>14.登录注册-用户注册</h3><p>略</p>
+<h3 id="15-登录注册-解析存储登录状态实现流程"><a href="#15-登录注册-解析存储登录状态实现流程" class="headerlink" title="15.登录注册-解析存储登录状态实现流程"></a>15.登录注册-解析存储登录状态实现流程</h3><p>略</p>
+<h3 id="16-登录注册-将登录状态存储到容器中"><a href="#16-登录注册-将登录状态存储到容器中" class="headerlink" title="16.登录注册-将登录状态存储到容器中"></a>16.登录注册-将登录状态存储到容器中</h3><p>略</p>
+<h3 id="17-登录注册-登录状态持久化"><a href="#17-登录注册-登录状态持久化" class="headerlink" title="17.登录注册-登录状态持久化"></a>17.登录注册-登录状态持久化</h3><p>略</p>
+<h3 id="18-登录注册-处理导航栏链接展示状态"><a href="#18-登录注册-处理导航栏链接展示状态" class="headerlink" title="18.登录注册-处理导航栏链接展示状态"></a>18.登录注册-处理导航栏链接展示状态</h3><p>略</p>
+<h3 id="19-登录注册-处理页面访问权限"><a href="#19-登录注册-处理页面访问权限" class="headerlink" title="19.登录注册-处理页面访问权限"></a>19.登录注册-处理页面访问权限</h3><p>略</p>
+<h3 id="20-首页-业务介绍"><a href="#20-首页-业务介绍" class="headerlink" title="20.首页-业务介绍"></a>20.首页-业务介绍</h3><p>略</p>
+<h3 id="21-首页-展示公共文章列表"><a href="#21-首页-展示公共文章列表" class="headerlink" title="21.首页-展示公共文章列表"></a>21.首页-展示公共文章列表</h3><p>略</p>
+<h3 id="22-首页-列表分页-分页参数的使用"><a href="#22-首页-列表分页-分页参数的使用" class="headerlink" title="22.首页-列表分页-分页参数的使用"></a>22.首页-列表分页-分页参数的使用</h3><p>略</p>
+<h3 id="23-首页-列表分页-页码处理"><a href="#23-首页-列表分页-页码处理" class="headerlink" title="23.首页-列表分页-页码处理"></a>23.首页-列表分页-页码处理</h3><p>略</p>
+<h3 id="24-首页-展示文章标签列表"><a href="#24-首页-展示文章标签列表" class="headerlink" title="24.首页-展示文章标签列表"></a>24.首页-展示文章标签列表</h3><p>略</p>
+<h3 id="25-首页-优化并行异步任务"><a href="#25-首页-优化并行异步任务" class="headerlink" title="25.首页-优化并行异步任务"></a>25.首页-优化并行异步任务</h3><p>略</p>
+<h3 id="26-首页-处理标签列表链接和数据"><a href="#26-首页-处理标签列表链接和数据" class="headerlink" title="26.首页-处理标签列表链接和数据"></a>26.首页-处理标签列表链接和数据</h3><p>略</p>
+<h3 id="27-首页-处理导航栏-业务介绍"><a href="#27-首页-处理导航栏-业务介绍" class="headerlink" title="27.首页-处理导航栏-业务介绍"></a>27.首页-处理导航栏-业务介绍</h3><p>略</p>
+<h3 id="28-首页-处理导航栏-展示状态处理"><a href="#28-首页-处理导航栏-展示状态处理" class="headerlink" title="28.首页-处理导航栏-展示状态处理"></a>28.首页-处理导航栏-展示状态处理</h3><p>略</p>
+<h3 id="29-首页-处理导航栏-标签高亮及链接"><a href="#29-首页-处理导航栏-标签高亮及链接" class="headerlink" title="29.首页-处理导航栏-标签高亮及链接"></a>29.首页-处理导航栏-标签高亮及链接</h3><p>略</p>
+<h3 id="30-首页-处理导航栏-展示用户关注的文章列表"><a href="#30-首页-处理导航栏-展示用户关注的文章列表" class="headerlink" title="30.首页-处理导航栏-展示用户关注的文章列表"></a>30.首页-处理导航栏-展示用户关注的文章列表</h3><p>略</p>
+<h3 id="31-首页-统一设置用户-Token"><a href="#31-首页-统一设置用户-Token" class="headerlink" title="31.首页-统一设置用户 Token"></a>31.首页-统一设置用户 Token</h3><p>略</p>
+<h3 id="32-首页-文章发布时间格式化处理"><a href="#32-首页-文章发布时间格式化处理" class="headerlink" title="32.首页-文章发布时间格式化处理"></a>32.首页-文章发布时间格式化处理</h3><p>略</p>
+<h3 id="33-首页-文章点赞"><a href="#33-首页-文章点赞" class="headerlink" title="33.首页-文章点赞"></a>33.首页-文章点赞</h3><p>略</p>
+<h3 id="34-文章详情-业务介绍"><a href="#34-文章详情-业务介绍" class="headerlink" title="34.文章详情-业务介绍"></a>34.文章详情-业务介绍</h3><p>略</p>
+<h3 id="35-文章详情-展示基本信息"><a href="#35-文章详情-展示基本信息" class="headerlink" title="35.文章详情-展示基本信息"></a>35.文章详情-展示基本信息</h3><p>略</p>
+<h3 id="36-文章详情-把-Markdown-转为-HTML"><a href="#36-文章详情-把-Markdown-转为-HTML" class="headerlink" title="36.文章详情-把 Markdown 转为 HTML"></a>36.文章详情-把 Markdown 转为 HTML</h3><p>略</p>
+<h3 id="37-文章详情-展示文章作者相关信息"><a href="#37-文章详情-展示文章作者相关信息" class="headerlink" title="37.文章详情-展示文章作者相关信息"></a>37.文章详情-展示文章作者相关信息</h3><p>略</p>
+<h3 id="38-文章详情-设置页面-meta-优化-SEO"><a href="#38-文章详情-设置页面-meta-优化-SEO" class="headerlink" title="38.文章详情-设置页面 meta 优化 SEO"></a>38.文章详情-设置页面 meta 优化 SEO</h3><p>略</p>
+<h3 id="39-文章评论-通过客户端渲染展示评论列表"><a href="#39-文章评论-通过客户端渲染展示评论列表" class="headerlink" title="39.文章评论-通过客户端渲染展示评论列表"></a>39.文章评论-通过客户端渲染展示评论列表</h3><p>略</p>
+<h3 id="40-发布部署-打包"><a href="#40-发布部署-打包" class="headerlink" title="40.发布部署-打包"></a>40.发布部署-打包</h3><p>略</p>
+<h3 id="41-发布部署-最简单的部署方式"><a href="#41-发布部署-最简单的部署方式" class="headerlink" title="41.发布部署-最简单的部署方式"></a>41.发布部署-最简单的部署方式</h3><p>略</p>
+<h3 id="42-发布部署-使用-PM2-启动-Node-服务"><a href="#42-发布部署-使用-PM2-启动-Node-服务" class="headerlink" title="42.发布部署-使用 PM2 启动 Node 服务"></a>42.发布部署-使用 PM2 启动 Node 服务</h3><p>略</p>
+<h3 id="43-发布部署-自动化部署介绍"><a href="#43-发布部署-自动化部署介绍" class="headerlink" title="43.发布部署-自动化部署介绍"></a>43.发布部署-自动化部署介绍</h3><p>略</p>
+<h3 id="44-发布部署-准备自动部署内容"><a href="#44-发布部署-准备自动部署内容" class="headerlink" title="44.发布部署-准备自动部署内容"></a>44.发布部署-准备自动部署内容</h3><p>略</p>
+<h3 id="45-发布部署-自动部署完成"><a href="#45-发布部署-自动部署完成" class="headerlink" title="45.发布部署-自动部署完成"></a>45.发布部署-自动部署完成</h3><p>略</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScipt/" rel="tag"># JavaScipt</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/12/20/30/" rel="next" title="学习笔记 ----- 【Vue.js 框架源码与进阶】手写 Vue Router、手写响应式实现、虚拟 DOM 和 Diff 算法">
+                <i class="fa fa-chevron-left"></i> 学习笔记 ----- 【Vue.js 框架源码与进阶】手写 Vue Router、手写响应式实现、虚拟 DOM 和 Diff 算法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/01/01/33/" rel="prev" title="新年寄语">
+                新年寄语 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="FY" />
+            
+              <p class="site-author-name" itemprop="name">FY</p>
+              <p class="site-description motion-element" itemprop="description">Just Be Yourself</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/xuanfeiyu" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Part-3-·-Vue-js-框架源码与进阶"><span class="nav-number">1.</span> <span class="nav-text">Part 3 · Vue.js 框架源码与进阶</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模块三-·-Vue-数据流管理及-Vue-js-服务端渲染-SSR"><span class="nav-number">1.1.</span> <span class="nav-text">模块三 · Vue 数据流管理及 Vue.js 服务端渲染(SSR)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#任务一：Vuex-状态管理"><span class="nav-number">1.2.</span> <span class="nav-text">任务一：Vuex 状态管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-课程目标"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.课程目标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-组件内状态管理流程"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.组件内状态管理流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-组件间通信方式回顾-父组件给子组件传值"><span class="nav-number">1.2.3.</span> <span class="nav-text">3.组件间通信方式回顾-父组件给子组件传值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-组件间通信方式回顾-子组件给父组件传值"><span class="nav-number">1.2.4.</span> <span class="nav-text">4.组件间通信方式回顾-子组件给父组件传值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-组件间通信方式回顾-不相关组件传值"><span class="nav-number">1.2.5.</span> <span class="nav-text">5.组件间通信方式回顾-不相关组件传值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-组件间通信方式回顾-通过ref获取子组件"><span class="nav-number">1.2.6.</span> <span class="nav-text">6.组件间通信方式回顾-通过ref获取子组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-简易的状态管理方案"><span class="nav-number">1.2.7.</span> <span class="nav-text">7.简易的状态管理方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-Vuex-概念回顾"><span class="nav-number">1.2.8.</span> <span class="nav-text">8.Vuex 概念回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-Vuex-的核心概念"><span class="nav-number">1.2.9.</span> <span class="nav-text">9.Vuex 的核心概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-基本代码结构"><span class="nav-number">1.2.10.</span> <span class="nav-text">10.基本代码结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-State"><span class="nav-number">1.2.11.</span> <span class="nav-text">11.State</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-Getter"><span class="nav-number">1.2.12.</span> <span class="nav-text">12.Getter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-Mutation"><span class="nav-number">1.2.13.</span> <span class="nav-text">13.Mutation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-Action"><span class="nav-number">1.2.14.</span> <span class="nav-text">14.Action</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-Module"><span class="nav-number">1.2.15.</span> <span class="nav-text">15.Module</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16-严格模式"><span class="nav-number">1.2.16.</span> <span class="nav-text">16.严格模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17-购物车案例-演示"><span class="nav-number">1.2.17.</span> <span class="nav-text">17.购物车案例-演示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18-购物车案例-模板"><span class="nav-number">1.2.18.</span> <span class="nav-text">18.购物车案例-模板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19-购物车案例-商品列表"><span class="nav-number">1.2.19.</span> <span class="nav-text">19.购物车案例-商品列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#20-购物车案例-添加购物车"><span class="nav-number">1.2.20.</span> <span class="nav-text">20.购物车案例-添加购物车</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#21-购物车案例-我的购物车-列表"><span class="nav-number">1.2.21.</span> <span class="nav-text">21.购物车案例-我的购物车-列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#22-购物车案例-我的购物车-统计"><span class="nav-number">1.2.22.</span> <span class="nav-text">22.购物车案例-我的购物车-统计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#23-购物车案例-我的购物车-删除"><span class="nav-number">1.2.23.</span> <span class="nav-text">23.购物车案例-我的购物车-删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#24-购物车案例-购物车组件-购物车列表"><span class="nav-number">1.2.24.</span> <span class="nav-text">24.购物车案例-购物车组件-购物车列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#25-购物车案例-购物车组件-全选"><span class="nav-number">1.2.25.</span> <span class="nav-text">25.购物车案例-购物车组件-全选</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#26-购物车案例-购物车组件-数字文本框"><span class="nav-number">1.2.26.</span> <span class="nav-text">26.购物车案例-购物车组件-数字文本框</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#27-购物车案例-购物车组件-统计"><span class="nav-number">1.2.27.</span> <span class="nav-text">27.购物车案例-购物车组件-统计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#28-购物车案例-本地存储"><span class="nav-number">1.2.28.</span> <span class="nav-text">28.购物车案例-本地存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#29-模拟Vuex-基本结构"><span class="nav-number">1.2.29.</span> <span class="nav-text">29.模拟Vuex-基本结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#30-模拟Vuex-install"><span class="nav-number">1.2.30.</span> <span class="nav-text">30.模拟Vuex-install</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#31-模拟Vuex-Store-类"><span class="nav-number">1.2.31.</span> <span class="nav-text">31.模拟Vuex-Store 类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#任务二：服务端渲染基础"><span class="nav-number">1.3.</span> <span class="nav-text">任务二：服务端渲染基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-概述"><span class="nav-number">1.3.1.</span> <span class="nav-text">1.概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-什么是渲染"><span class="nav-number">1.3.2.</span> <span class="nav-text">2.什么是渲染</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-传统的服务端渲染"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.传统的服务端渲染</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-客户端渲染"><span class="nav-number">1.3.4.</span> <span class="nav-text">4.客户端渲染</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-为什么客户端渲染首屏渲染慢"><span class="nav-number">1.3.5.</span> <span class="nav-text">5.为什么客户端渲染首屏渲染慢</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-为什么客户端渲染不利于-SEO"><span class="nav-number">1.3.6.</span> <span class="nav-text">6.为什么客户端渲染不利于 SEO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-现代化的服务端渲染"><span class="nav-number">1.3.7.</span> <span class="nav-text">7.现代化的服务端渲染</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-通过-Nuxt-体验同构渲染"><span class="nav-number">1.3.8.</span> <span class="nav-text">8.通过 Nuxt 体验同构渲染</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-同构渲染的-SPA-应用"><span class="nav-number">1.3.9.</span> <span class="nav-text">9.同构渲染的 SPA 应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-同构渲染的问题"><span class="nav-number">1.3.10.</span> <span class="nav-text">10.同构渲染的问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#任务三：NuxtJS-基础"><span class="nav-number">1.4.</span> <span class="nav-text">任务三：NuxtJS 基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-NuxtJS-介绍"><span class="nav-number">1.4.1.</span> <span class="nav-text">1.NuxtJS 介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-初始化-NuxtJS-项目"><span class="nav-number">1.4.2.</span> <span class="nav-text">2.初始化 NuxtJS 项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-案例代码分支说明"><span class="nav-number">1.4.3.</span> <span class="nav-text">3.案例代码分支说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-路由-基本路由"><span class="nav-number">1.4.4.</span> <span class="nav-text">4.路由-基本路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-路由-路由导航"><span class="nav-number">1.4.5.</span> <span class="nav-text">5.路由-路由导航</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-路由-动态路由"><span class="nav-number">1.4.6.</span> <span class="nav-text">6.路由-动态路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-路由-嵌套路由"><span class="nav-number">1.4.7.</span> <span class="nav-text">7.路由-嵌套路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-路由-自定义路由配置"><span class="nav-number">1.4.8.</span> <span class="nav-text">8.路由-自定义路由配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-视图-模板"><span class="nav-number">1.4.9.</span> <span class="nav-text">9.视图-模板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-视图-布局"><span class="nav-number">1.4.10.</span> <span class="nav-text">10.视图-布局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-异步数据-asyncData"><span class="nav-number">1.4.11.</span> <span class="nav-text">11.异步数据-asyncData</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-异步数据-上下文对象"><span class="nav-number">1.4.12.</span> <span class="nav-text">12.异步数据-上下文对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#任务四：NuxtJS-综合案例"><span class="nav-number">1.5.</span> <span class="nav-text">任务四：NuxtJS 综合案例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-案例介绍"><span class="nav-number">1.5.1.</span> <span class="nav-text">1.案例介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-项目初始化-创建项目"><span class="nav-number">1.5.2.</span> <span class="nav-text">2.项目初始化-创建项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-项目初始化-导入样式资源"><span class="nav-number">1.5.3.</span> <span class="nav-text">3.项目初始化-导入样式资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-项目初始化-布局组件"><span class="nav-number">1.5.4.</span> <span class="nav-text">4.项目初始化-布局组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-项目初始化-导入登录注册页面"><span class="nav-number">1.5.5.</span> <span class="nav-text">5.项目初始化-导入登录注册页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-项目初始化-导入剩余页面"><span class="nav-number">1.5.6.</span> <span class="nav-text">6.项目初始化-导入剩余页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-项目初始化-处理顶部导航链接"><span class="nav-number">1.5.7.</span> <span class="nav-text">7.项目初始化-处理顶部导航链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-项目初始化-处理导航链接高亮"><span class="nav-number">1.5.8.</span> <span class="nav-text">8.项目初始化-处理导航链接高亮</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-项目初始化-封装请求模块"><span class="nav-number">1.5.9.</span> <span class="nav-text">9.项目初始化-封装请求模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-登录注册-实现基本登录功能"><span class="nav-number">1.5.10.</span> <span class="nav-text">10.登录注册-实现基本登录功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-登录注册-封装请求方法"><span class="nav-number">1.5.11.</span> <span class="nav-text">11.登录注册-封装请求方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-登录注册-表单验证"><span class="nav-number">1.5.12.</span> <span class="nav-text">12.登录注册-表单验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-登录注册-错误处理"><span class="nav-number">1.5.13.</span> <span class="nav-text">13.登录注册-错误处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-登录注册-用户注册"><span class="nav-number">1.5.14.</span> <span class="nav-text">14.登录注册-用户注册</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-登录注册-解析存储登录状态实现流程"><span class="nav-number">1.5.15.</span> <span class="nav-text">15.登录注册-解析存储登录状态实现流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16-登录注册-将登录状态存储到容器中"><span class="nav-number">1.5.16.</span> <span class="nav-text">16.登录注册-将登录状态存储到容器中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17-登录注册-登录状态持久化"><span class="nav-number">1.5.17.</span> <span class="nav-text">17.登录注册-登录状态持久化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18-登录注册-处理导航栏链接展示状态"><span class="nav-number">1.5.18.</span> <span class="nav-text">18.登录注册-处理导航栏链接展示状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19-登录注册-处理页面访问权限"><span class="nav-number">1.5.19.</span> <span class="nav-text">19.登录注册-处理页面访问权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#20-首页-业务介绍"><span class="nav-number">1.5.20.</span> <span class="nav-text">20.首页-业务介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#21-首页-展示公共文章列表"><span class="nav-number">1.5.21.</span> <span class="nav-text">21.首页-展示公共文章列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#22-首页-列表分页-分页参数的使用"><span class="nav-number">1.5.22.</span> <span class="nav-text">22.首页-列表分页-分页参数的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#23-首页-列表分页-页码处理"><span class="nav-number">1.5.23.</span> <span class="nav-text">23.首页-列表分页-页码处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#24-首页-展示文章标签列表"><span class="nav-number">1.5.24.</span> <span class="nav-text">24.首页-展示文章标签列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#25-首页-优化并行异步任务"><span class="nav-number">1.5.25.</span> <span class="nav-text">25.首页-优化并行异步任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#26-首页-处理标签列表链接和数据"><span class="nav-number">1.5.26.</span> <span class="nav-text">26.首页-处理标签列表链接和数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#27-首页-处理导航栏-业务介绍"><span class="nav-number">1.5.27.</span> <span class="nav-text">27.首页-处理导航栏-业务介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#28-首页-处理导航栏-展示状态处理"><span class="nav-number">1.5.28.</span> <span class="nav-text">28.首页-处理导航栏-展示状态处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#29-首页-处理导航栏-标签高亮及链接"><span class="nav-number">1.5.29.</span> <span class="nav-text">29.首页-处理导航栏-标签高亮及链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#30-首页-处理导航栏-展示用户关注的文章列表"><span class="nav-number">1.5.30.</span> <span class="nav-text">30.首页-处理导航栏-展示用户关注的文章列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#31-首页-统一设置用户-Token"><span class="nav-number">1.5.31.</span> <span class="nav-text">31.首页-统一设置用户 Token</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#32-首页-文章发布时间格式化处理"><span class="nav-number">1.5.32.</span> <span class="nav-text">32.首页-文章发布时间格式化处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#33-首页-文章点赞"><span class="nav-number">1.5.33.</span> <span class="nav-text">33.首页-文章点赞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#34-文章详情-业务介绍"><span class="nav-number">1.5.34.</span> <span class="nav-text">34.文章详情-业务介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#35-文章详情-展示基本信息"><span class="nav-number">1.5.35.</span> <span class="nav-text">35.文章详情-展示基本信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#36-文章详情-把-Markdown-转为-HTML"><span class="nav-number">1.5.36.</span> <span class="nav-text">36.文章详情-把 Markdown 转为 HTML</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#37-文章详情-展示文章作者相关信息"><span class="nav-number">1.5.37.</span> <span class="nav-text">37.文章详情-展示文章作者相关信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#38-文章详情-设置页面-meta-优化-SEO"><span class="nav-number">1.5.38.</span> <span class="nav-text">38.文章详情-设置页面 meta 优化 SEO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#39-文章评论-通过客户端渲染展示评论列表"><span class="nav-number">1.5.39.</span> <span class="nav-text">39.文章评论-通过客户端渲染展示评论列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#40-发布部署-打包"><span class="nav-number">1.5.40.</span> <span class="nav-text">40.发布部署-打包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#41-发布部署-最简单的部署方式"><span class="nav-number">1.5.41.</span> <span class="nav-text">41.发布部署-最简单的部署方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#42-发布部署-使用-PM2-启动-Node-服务"><span class="nav-number">1.5.42.</span> <span class="nav-text">42.发布部署-使用 PM2 启动 Node 服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#43-发布部署-自动化部署介绍"><span class="nav-number">1.5.43.</span> <span class="nav-text">43.发布部署-自动化部署介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#44-发布部署-准备自动部署内容"><span class="nav-number">1.5.44.</span> <span class="nav-text">44.发布部署-准备自动部署内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#45-发布部署-自动部署完成"><span class="nav-number">1.5.45.</span> <span class="nav-text">45.发布部署-自动部署完成</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">FY</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

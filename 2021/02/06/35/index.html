@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScipt," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="作者：FY引用请标明出处  Part 3 · Vue.js 框架源码与进阶模块五 · Vue.js 3.0 Composition APIs 及 3.0 原理剖析任务一：Vue 3.0介绍1.Vue.js 3.0 源码组织方式 源码组织方式的变化 Composition API 性能提升 Vite   源码组织方式   源码采用 TypeScript 重写 使用 Monorepo 管理项目结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习笔记 ----- 【Vue.js 框架源码与进阶】Vue.js 3.0 Composition APIs 及 3.0 原理剖析">
+<meta property="og:url" content="http://yoursite.com/2021/02/06/35/index.html">
+<meta property="og:site_name" content="旋の飞羽">
+<meta property="og:description" content="作者：FY引用请标明出处  Part 3 · Vue.js 框架源码与进阶模块五 · Vue.js 3.0 Composition APIs 及 3.0 原理剖析任务一：Vue 3.0介绍1.Vue.js 3.0 源码组织方式 源码组织方式的变化 Composition API 性能提升 Vite   源码组织方式   源码采用 TypeScript 重写 使用 Monorepo 管理项目结构">
+<meta property="article:published_time" content="2021-02-05T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-02-06T01:59:57.667Z">
+<meta property="article:author" content="FY">
+<meta property="article:tag" content="JavaScipt">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/02/06/35/"/>
+
+
+
+
+
+  <title>学习笔记 ----- 【Vue.js 框架源码与进阶】Vue.js 3.0 Composition APIs 及 3.0 原理剖析 | 旋の飞羽</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">旋の飞羽</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">人间值得，未来可期。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/06/35/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FY">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="旋の飞羽">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">学习笔记 ----- 【Vue.js 框架源码与进阶】Vue.js 3.0 Composition APIs 及 3.0 原理剖析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-02-06T00:00:00+08:00">
+                2021-02-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>作者：FY<br>引用请标明出处</p>
+</blockquote>
+<h1 id="Part-3-·-Vue-js-框架源码与进阶"><a href="#Part-3-·-Vue-js-框架源码与进阶" class="headerlink" title="Part 3 · Vue.js 框架源码与进阶"></a>Part 3 · Vue.js 框架源码与进阶</h1><h2 id="模块五-·-Vue-js-3-0-Composition-APIs-及-3-0-原理剖析"><a href="#模块五-·-Vue-js-3-0-Composition-APIs-及-3-0-原理剖析" class="headerlink" title="模块五 · Vue.js 3.0 Composition APIs 及 3.0 原理剖析"></a>模块五 · Vue.js 3.0 Composition APIs 及 3.0 原理剖析</h2><h2 id="任务一：Vue-3-0介绍"><a href="#任务一：Vue-3-0介绍" class="headerlink" title="任务一：Vue 3.0介绍"></a>任务一：Vue 3.0介绍</h2><h3 id="1-Vue-js-3-0-源码组织方式"><a href="#1-Vue-js-3-0-源码组织方式" class="headerlink" title="1.Vue.js 3.0 源码组织方式"></a>1.Vue.js 3.0 源码组织方式</h3><ul>
+<li>源码组织方式的变化</li>
+<li>Composition API</li>
+<li>性能提升</li>
+<li>Vite</li>
+</ul>
+<blockquote>
+<p>源码组织方式</p>
+</blockquote>
+<ul>
+<li>源码采用 TypeScript 重写</li>
+<li>使用 Monorepo 管理项目结构</li>
+</ul>
+<h3 id="2-不同的构建版本"><a href="#2-不同的构建版本" class="headerlink" title="2.不同的构建版本"></a>2.不同的构建版本</h3><blockquote>
+<p>构建版本</p>
+</blockquote>
+<ul>
+<li><p>cjs</p>
+<ul>
+<li>vue.cjs.js</li>
+<li>vue.cjs.prod.js</li>
+</ul>
+</li>
+<li><p>global</p>
+<ul>
+<li>vue.global.js</li>
+<li>vue.global.prod.js</li>
+<li>vue.runtime.global.js</li>
+<li>vue.runtime.global.prod.js</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-Composition-API-设计动机"><a href="#3-Composition-API-设计动机" class="headerlink" title="3.Composition API 设计动机"></a>3.Composition API 设计动机</h3><ul>
+<li><p>RFC(Request For Comments)</p>
+<ul>
+<li><a href="https://github.com/vuejs/rfcs" target="_blank" rel="noopener">https://github.com/vuejs/rfcs</a></li>
+</ul>
+</li>
+<li><p>Composition API RFC</p>
+<ul>
+<li><a href="https://composition-api.vuejs.org" target="_blank" rel="noopener">https://composition-api.vuejs.org</a></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>设计动机</p>
+</blockquote>
+<ul>
+<li><p>Options API</p>
+<ul>
+<li>包含一个描述组件选项（data、metheds、props等）的对象</li>
+<li>Options API 开发复杂组件，同一个功能逻辑的代码被拆分到不同选项</li>
+</ul>
+</li>
+<li><p>Composition API</p>
+<ul>
+<li>Vue.js 3.0新增的一组 API</li>
+<li>一组基于函数的 API</li>
+<li>可以更灵活的组织组件的逻辑</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-性能提升"><a href="#4-性能提升" class="headerlink" title="4.性能提升"></a>4.性能提升</h3><ul>
+<li>响应式系统升级</li>
+<li>编译优化</li>
+<li>源码体积的优化</li>
+</ul>
+<blockquote>
+<p>响应式系统升级</p>
+</blockquote>
+<ul>
+<li>Vue.js 2.x 中响应式系统的核心 defineProperty</li>
+<li>Vue.js 3.0 中使用 Proxy 对象重写响应式系统<ul>
+<li>可以监听动态新增的属性</li>
+<li>可以监听删除的属性</li>
+<li>可以监听数组的索引和 length 属性</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>编译优化</p>
+</blockquote>
+<ul>
+<li>Vue.js 2.x 中通过标记静态根节点，优化 diff 的过程</li>
+<li>Vue.js 3.x 中标记和提升所有的静态根节点，diff 的时候只需要对比动态节点内容<ul>
+<li>Fragments（升级 Vetur 插件）</li>
+<li>静态提升</li>
+<li>Patch flag</li>
+<li>缓存事件处理函数</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>源码打包体积</p>
+</blockquote>
+<ul>
+<li>Vue.js 3.0 中移除了一些不常用的 API<ul>
+<li>例如：inline-template、filter 等</li>
+</ul>
+</li>
+<li>Tree-shaking</li>
+</ul>
+<h3 id="5-Vite"><a href="#5-Vite" class="headerlink" title="5.Vite"></a>5.Vite</h3><blockquote>
+<p>ES Module</p>
+</blockquote>
+<ul>
+<li>现代浏览器都支持 ES Module（IE 不支持）</li>
+<li>通过下面的方式加载模块<ul>
+<li><script type="module" src="..."></script></li>
+</ul>
+</li>
+<li>支持模块的 script 默认延迟加载<ul>
+<li>类似于 script 标签设置 defer</li>
+<li>在文档解析完成后，触发 DOMContentLoaded 事件前执行</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-Vite"><a href="#6-Vite" class="headerlink" title="6.Vite"></a>6.Vite</h3><blockquote>
+<p>Vite as Vue-CLI</p>
+</blockquote>
+<ul>
+<li>Vite 在开发模式下不需要打包可以直接运行</li>
+<li>Vue-CLI 开发模式下必须对项目打包才可以运行</li>
+</ul>
+<blockquote>
+<p>Vite 特点</p>
+</blockquote>
+<ul>
+<li>快速冷启动</li>
+<li>按需编译</li>
+<li>模块热更新</li>
+</ul>
+<blockquote>
+<p>Vite as Vue-CLI</p>
+</blockquote>
+<ul>
+<li>Vite 在生产环境下使用 Rollup 打包<ul>
+<li>基于 ES Module 的方式打包</li>
+</ul>
+</li>
+<li>Vue-CLI 使用 webpack 打包</li>
+</ul>
+<blockquote>
+<p>Vite 创建项目</p>
+</blockquote>
+<ul>
+<li>Vite 创建项目</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">npm init vite-app &lt;project-name&gt;</span><br><span class="line">cd &lt;project-name&gt;</span><br><span class="line">npm install</span><br><span class="line">npm run dev</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>基于模板创建项目</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm init vite-app --template react</span><br><span class="line">npm init vite-app --template preact</span><br></pre></td></tr></table></figure>
+
+<h2 id="任务二：Composition-API"><a href="#任务二：Composition-API" class="headerlink" title="任务二：Composition API"></a>任务二：Composition API</h2><h3 id="1-Composition-API"><a href="#1-Composition-API" class="headerlink" title="1.Composition API"></a>1.Composition API</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript"><span class="keyword">import</span> &#123; createApp, reactive &#125; <span class="keyword">from</span> <span class="string">'./node_modules/vue/dist/vue.esm-browser.js'</span></span></span><br><span class="line"><span class="actionscript"><span class="keyword">const</span> app = createApp(&#123;</span></span><br><span class="line">    setup()&#123;</span><br><span class="line"><span class="actionscript">        <span class="keyword">const</span> position = reactive(&#123;</span></span><br><span class="line">            x:0,</span><br><span class="line">            y:0</span><br><span class="line">        &#125;)</span><br><span class="line"><span class="actionscript">        <span class="keyword">return</span> &#123;</span></span><br><span class="line">            position</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    mounted()&#123;</span><br><span class="line"><span class="actionscript">        <span class="keyword">this</span>.position.x = <span class="number">100</span></span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="actionscript">app.mount(<span class="string">'#app'</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-生命周期钩子函数"><a href="#2-生命周期钩子函数" class="headerlink" title="2.生命周期钩子函数"></a>2.生命周期钩子函数</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"module"</span>&gt;</span></span><br><span class="line"><span class="javascript"><span class="keyword">import</span> &#123; createApp, reactive, onMounted, onUnmounted &#125; <span class="keyword">from</span> <span class="string">'./node_modules/vue/dist/vue.esm-browser.js'</span></span></span><br><span class="line"></span><br><span class="line"><span class="actionscript"><span class="function"><span class="keyword">function</span> <span class="title">useMousePosition</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">const</span> position = reactive(&#123;</span></span><br><span class="line">            x:0,</span><br><span class="line">            y:0</span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line"><span class="javascript">        <span class="keyword">const</span> update = <span class="function"><span class="params">e</span> =&gt;</span>&#123;</span></span><br><span class="line">           position.x = e.pageX</span><br><span class="line">           position.y = e.pageY</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="javascript">        onMounted(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="built_in">window</span>.addEventListener(<span class="string">'mousemove'</span>, update)</span></span><br><span class="line">        &#125;)</span><br><span class="line">        </span><br><span class="line"><span class="javascript">        onUnmounted(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="built_in">window</span>.removeEventListener(<span class="string">'mousemove'</span>, update)</span></span><br><span class="line">        &#125;)</span><br><span class="line"><span class="actionscript">        <span class="keyword">return</span> position</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="actionscript"><span class="keyword">const</span> app = createApp(&#123;</span></span><br><span class="line">    setup()&#123;</span><br><span class="line"><span class="actionscript">        <span class="keyword">const</span> postition = useMousePosition()</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">return</span> &#123;</span></span><br><span class="line">            position</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    mounted()&#123;</span><br><span class="line"><span class="actionscript">        <span class="keyword">this</span>.position.x = <span class="number">100</span></span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="actionscript">app.mount(<span class="string">'#app'</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="3-reactive-toRefs-ref"><a href="#3-reactive-toRefs-ref" class="headerlink" title="3.reactive-toRefs-ref"></a>3.reactive-toRefs-ref</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"module"</span>&gt;</span></span><br><span class="line"><span class="javascript"><span class="keyword">import</span> &#123; createApp, reactive, onMounted, onUnmounted, toRefs &#125; <span class="keyword">from</span> <span class="string">'./node_modules/vue/dist/vue.esm-browser.js'</span></span></span><br><span class="line"></span><br><span class="line"><span class="actionscript"><span class="function"><span class="keyword">function</span> <span class="title">useMousePosition</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">const</span> position = reactive(&#123;</span></span><br><span class="line">            x:0,</span><br><span class="line">            y:0</span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line"><span class="javascript">        <span class="keyword">const</span> update = <span class="function"><span class="params">e</span> =&gt;</span>&#123;</span></span><br><span class="line">           position.x = e.pageX</span><br><span class="line">           position.y = e.pageY</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="javascript">        onMounted(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="built_in">window</span>.addEventListener(<span class="string">'mousemove'</span>, update)</span></span><br><span class="line">        &#125;)</span><br><span class="line">        </span><br><span class="line"><span class="javascript">        onUnmounted(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="built_in">window</span>.removeEventListener(<span class="string">'mousemove'</span>, update)</span></span><br><span class="line">        &#125;)</span><br><span class="line"><span class="actionscript">        <span class="keyword">return</span> toRefs(position)</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="actionscript"><span class="keyword">const</span> app = createApp(&#123;</span></span><br><span class="line">    setup()&#123;</span><br><span class="line"><span class="actionscript">        <span class="comment">// const postition = useMousePosition()</span></span></span><br><span class="line"><span class="actionscript">        <span class="keyword">const</span> &#123; x, y &#125; = useMousePosition()</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">return</span> &#123;</span></span><br><span class="line">            x,</span><br><span class="line">            y</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;)</span><br><span class="line"><span class="actionscript">app.mount(<span class="string">'#app'</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"module"</span>&gt;</span></span><br><span class="line"><span class="javascript"><span class="keyword">import</span> &#123; createApp, ref &#125; <span class="keyword">from</span> <span class="string">'./node_modules/vue/dist/vue.esm-browser.js'</span></span></span><br><span class="line"></span><br><span class="line"><span class="actionscript"><span class="function"><span class="keyword">function</span> <span class="title">useCount</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">  <span class="keyword">const</span> count = ref(<span class="number">0</span>)</span></span><br><span class="line"><span class="actionscript">  <span class="keyword">return</span> &#123;</span></span><br><span class="line">      count,</span><br><span class="line"><span class="javascript">      increase: <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span></span><br><span class="line">        count.value++</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">createApp(&#123;</span><br><span class="line">    setup()&#123;</span><br><span class="line"><span class="actionscript">        <span class="keyword">return</span> &#123;</span></span><br><span class="line">            ...useCount()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line"><span class="actionscript">&#125;).mount(<span class="string">'#app'</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-computed"><a href="#4-computed" class="headerlink" title="4.computed"></a>4.computed</h3><ul>
+<li>第一种用法<ul>
+<li>watch(()=&gt;count.value+1)</li>
+</ul>
+</li>
+<li>第二种用法</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> count = ref(<span class="number">1</span>)</span><br><span class="line"><span class="keyword">const</span> plusOne = computed(&#123;</span><br><span class="line">    <span class="keyword">get</span>:()=&gt;count.value+1,</span><br><span class="line">    <span class="keyword">set</span>:val=&gt;&#123;</span><br><span class="line">        count.value = val <span class="number">-1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"module"</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">import</span> &#123; createApp, reactive, computed &#125; <span class="keyword">from</span> <span class="string">'./node_modules/vue/dist/vue.esm-browser.js'</span></span></span><br><span class="line"><span class="actionscript">  <span class="keyword">const</span> data = [</span></span><br><span class="line"><span class="actionscript">      &#123; text:<span class="string">'看书'</span>, completed: <span class="literal">false</span> &#125;,</span></span><br><span class="line"><span class="actionscript">      &#123; text:<span class="string">'敲代码'</span>, completed: <span class="literal">false</span> &#125;,</span></span><br><span class="line"><span class="actionscript">      &#123; text:<span class="string">'约会'</span>, completed: <span class="literal">true</span> &#125;</span></span><br><span class="line">  ]</span><br><span class="line">  createApp(&#123;</span><br><span class="line">      setup()&#123;</span><br><span class="line"><span class="actionscript">          <span class="keyword">const</span> todos = reactive(data)</span></span><br><span class="line"><span class="javascript">          <span class="keyword">const</span> activeCount = computed(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span></span><br><span class="line"><span class="javascript">              <span class="keyword">return</span> todos.filter(<span class="function"><span class="params">item</span> =&gt;</span> !item.completed).length</span></span><br><span class="line">          &#125;)</span><br><span class="line"><span class="actionscript">          <span class="keyword">return</span> &#123;</span></span><br><span class="line">              activeCount,</span><br><span class="line"><span class="javascript">              push:<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span></span><br><span class="line">                  todos.push(&#123;</span><br><span class="line"><span class="actionscript">                      text: <span class="string">'开会'</span>，</span></span><br><span class="line"><span class="actionscript">                      completed: <span class="literal">false</span></span></span><br><span class="line">                  &#125;)</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="5-watch"><a href="#5-watch" class="headerlink" title="5.watch"></a>5.watch</h3><ul>
+<li>Watch 的三个参数<ul>
+<li>第一个参数：要监听的数据</li>
+<li>第二个参数：监听到数据变化后执行的函数，这个函数有两个参数分别是新值和旧值</li>
+<li>第三个参数：选项对象，deep 和 immediate</li>
+</ul>
+</li>
+<li>Watch 的返回值<ul>
+<li>取消监听的函数</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"module"</span>&gt;</span></span><br><span class="line"><span class="javascript"><span class="keyword">import</span> &#123; createApp, ref, watch &#125; <span class="keyword">from</span> <span class="string">'./node_modules/vue/dist/vue.esm-browser.js'</span></span></span><br><span class="line">createApp(&#123;</span><br><span class="line">    setup()&#123;</span><br><span class="line"><span class="actionscript">      <span class="keyword">const</span> question = ref(<span class="string">''</span>)</span></span><br><span class="line"><span class="actionscript">      <span class="keyword">const</span> answer = ref(<span class="string">''</span>)</span></span><br><span class="line"></span><br><span class="line">      watch(question,(newValue, oldValue) =&gt; &#123;</span><br><span class="line"><span class="javascript">          <span class="keyword">const</span> response = <span class="keyword">await</span> fetch(<span class="string">'https://www.yesno.wtf/api'</span>)</span></span><br><span class="line"><span class="javascript">          <span class="keyword">const</span> data = <span class="keyword">await</span> response.json()</span></span><br><span class="line">          answer.value = data.answer</span><br><span class="line">      &#125;)</span><br><span class="line"></span><br><span class="line"><span class="actionscript">      <span class="keyword">return</span> &#123;</span></span><br><span class="line">          question,</span><br><span class="line">          answer</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="actionscript">&#125;).mount(<span class="string">'#app'</span>)</span></span><br></pre></td></tr></table></figure>
+<h3 id="6-watchEffect"><a href="#6-watchEffect" class="headerlink" title="6.watchEffect"></a>6.watchEffect</h3><ul>
+<li>是 watch 函数的简化版本，也用来监视数据的变化</li>
+<li>接收一个函数作为参数，监听函数内响应式数据的变化</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"module"</span>&gt;</span></span><br><span class="line"><span class="javascript"><span class="keyword">import</span> &#123; createApp, ref, watchEffect &#125; <span class="keyword">from</span> <span class="string">'./node_modules/vue/dist/vue.esm-browser.js'</span></span></span><br><span class="line">createApp(&#123;</span><br><span class="line">    setup()&#123;</span><br><span class="line"><span class="actionscript">        <span class="keyword">const</span> count = ref(<span class="number">0</span>)</span></span><br><span class="line"><span class="javascript">        <span class="keyword">const</span> stop = watchEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(count.value)</span></span><br><span class="line">        &#125;)</span><br><span class="line"><span class="actionscript">        <span class="keyword">return</span> &#123;</span></span><br><span class="line">            count,</span><br><span class="line">            stop,</span><br><span class="line"><span class="javascript">            increase:<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span></span><br><span class="line">                count.value++</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="actionscript">&#125;).mount(<span class="string">'#app'</span>)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="7-todolist-功能演示"><a href="#7-todolist-功能演示" class="headerlink" title="7.todolist-功能演示"></a>7.todolist-功能演示</h3><ul>
+<li>添加待办事项</li>
+<li>删除待办事项</li>
+<li>编辑待办事项</li>
+<li>切换待办事项</li>
+<li>存储待办事项</li>
+</ul>
+<h3 id="8-todolist-项目结构"><a href="#8-todolist-项目结构" class="headerlink" title="8.todolist-项目结构"></a>8.todolist-项目结构</h3><ul>
+<li><a href="mailto:vue-cli@4.5">vue-cli@4.5</a>以上 vue3.0</li>
+</ul>
+<h3 id="9-todolist-添加待办事项"><a href="#9-todolist-添加待办事项" class="headerlink" title="9.todolist-添加待办事项"></a>9.todolist-添加待办事项</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; ref &#125; <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">const</span> useAdd = <span class="function"><span class="params">todos</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> input = ref(<span class="string">''</span>)</span><br><span class="line">    <span class="keyword">const</span> assTodo = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> text = input.value &amp;&amp; input.value.trim()</span><br><span class="line">        <span class="keyword">if</span>(text.length === <span class="number">0</span>) <span class="keyword">return</span></span><br><span class="line">        todos.value.unshift(&#123;</span><br><span class="line">            text,</span><br><span class="line">            completed: <span class="literal">false</span></span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        input,</span><br><span class="line">        addTodo</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    name: <span class="string">'App'</span>,</span><br><span class="line">    setup () &#123;</span><br><span class="line">        <span class="keyword">const</span> todos = ref([])</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            ...useAdd(todos),</span><br><span class="line">            todos</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="10-todolist-删除待办事项"><a href="#10-todolist-删除待办事项" class="headerlink" title="10.todolist-删除待办事项"></a>10.todolist-删除待办事项</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> useRemove = <span class="function"><span class="params">todos</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> remove = <span class="function"><span class="params">todo</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> index = todos.value.indexof(todo)</span><br><span class="line">        todos.value.splice(index, <span class="number">1</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        remove</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    name: <span class="string">'App'</span>,</span><br><span class="line">    setup () &#123;</span><br><span class="line">        <span class="keyword">const</span> todos = ref([])</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            todos,</span><br><span class="line">            ...useAdd(todos),</span><br><span class="line">            ...useRemove(todos)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="11-todolist-编辑待办事项"><a href="#11-todolist-编辑待办事项" class="headerlink" title="11.todolist-编辑待办事项"></a>11.todolist-编辑待办事项</h3><ul>
+<li>双击待办项，展示编辑文本框</li>
+<li>按回车或者编辑文本框失去焦点，修改数据</li>
+<li>按 esc 取消编辑</li>
+<li>把编辑文本框清空按回车，删除这一项</li>
+<li>显示编辑文本框的时候获取焦点</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> useEdit = <span class="function"><span class="params">remove</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> beforeEditingText = <span class="string">''</span></span><br><span class="line">    <span class="keyword">const</span> editingTodo = ref(<span class="literal">null</span>)</span><br><span class="line">    <span class="keyword">const</span> editTodo = <span class="function"><span class="params">todo</span> =&gt;</span> &#123;</span><br><span class="line">        beforeEditingText = todo.text</span><br><span class="line">        editingTodo.value = todo</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">const</span> doneEdit = <span class="function"><span class="params">todo</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(!editingTodo.value) <span class="keyword">return</span></span><br><span class="line">        todo.text = todo.text.trim()</span><br><span class="line">        todo.text || remove(todo)</span><br><span class="line">        editingTodo.value = <span class="literal">null</span></span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">const</span> cancelEdit = <span class="function"><span class="params">todo</span> =&gt;</span> &#123;</span><br><span class="line">        editingTodo.value = <span class="literal">null</span></span><br><span class="line">        todo.text = beforeEditingText</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        editingTodo,</span><br><span class="line">        editTodo,</span><br><span class="line">        doneEdit,</span><br><span class="line">        cancelEdit,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    name: <span class="string">'App'</span>,</span><br><span class="line">    setup () &#123;</span><br><span class="line">        <span class="keyword">const</span> todos = ref([])</span><br><span class="line">        <span class="keyword">const</span> &#123; remove &#125; = useRemove(todos)</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            todos,</span><br><span class="line">            ...useAdd(todos),</span><br><span class="line">            ...useEdit(remove)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="12-todolist-编辑待办事项-编辑文本框获取焦点"><a href="#12-todolist-编辑待办事项-编辑文本框获取焦点" class="headerlink" title="12.todolist-编辑待办事项-编辑文本框获取焦点"></a>12.todolist-编辑待办事项-编辑文本框获取焦点</h3><blockquote>
+<p>自定义指令</p>
+</blockquote>
+<ul>
+<li>Vue 2.x</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Vue.directive(<span class="string">'editingFocus'</span>, &#123;</span><br><span class="line">    bind(el, bingding, vnode, prevVnode) &#123;&#125;,</span><br><span class="line">    inserted()&#123;&#125;,</span><br><span class="line">    update()&#123;&#125;,<span class="comment">//remove</span></span><br><span class="line">    componentUpdated()&#123;&#125;,</span><br><span class="line">    unbind()&#123;&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Vue 3.x</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">app.directive(<span class="string">'editingFocus'</span>,&#123;</span><br><span class="line">    beforeMount(el,bingding,vnode,prevVnode)&#123;&#125;,</span><br><span class="line">    mounted()&#123;&#125;,</span><br><span class="line">    beforeUpdate()&#123;&#125;,<span class="comment">//new</span></span><br><span class="line">    update()&#123;&#125;,</span><br><span class="line">    beforeUnmount()&#123;&#125;,<span class="comment">//new</span></span><br><span class="line">    unmounted()&#123;&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    name: <span class="string">'App'</span>,</span><br><span class="line">    setup () &#123;</span><br><span class="line">        <span class="keyword">const</span> todos = ref([])</span><br><span class="line">        <span class="keyword">const</span> &#123; remove &#125; = useRemove(todos)</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            todos,</span><br><span class="line">            ...useAdd(todos),</span><br><span class="line">            ...useEdit(remove)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    direactives:&#123;</span><br><span class="line">        editingFocus: <span class="function">(<span class="params">el, binding</span>) =&gt;</span> &#123;</span><br><span class="line">            binding.value &amp;&amp; el.focus()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="13-todolist-切换待办事项-演示效果"><a href="#13-todolist-切换待办事项-演示效果" class="headerlink" title="13.todolist-切换待办事项-演示效果"></a>13.todolist-切换待办事项-演示效果</h3><blockquote>
+<p>切换代办事项状态</p>
+</blockquote>
+<ul>
+<li>点击 checkbox，改变所有待办事项</li>
+<li>All/Active/Completed</li>
+<li>其它<ul>
+<li>显示未完成待办项个数</li>
+<li>移除所有完成的项目</li>
+<li>如果没有待办项，隐藏 main 和 footer</li>
+</ul>
+</li>
+</ul>
+<h3 id="14-todolist-切换待办事项-改变待办事项完成状态"><a href="#14-todolist-切换待办事项-改变待办事项完成状态" class="headerlink" title="14.todolist-切换待办事项-改变待办事项完成状态"></a>14.todolist-切换待办事项-改变待办事项完成状态</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> useFilter = <span class="function"><span class="params">todos</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> allDone = computed(&#123;</span><br><span class="line">        <span class="keyword">get</span>()&#123;</span><br><span class="line">            <span class="keyword">return</span> !todos.value.filter(<span class="function"><span class="params">todo</span> =&gt;</span> !todo.completed).length</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="keyword">set</span>(value)&#123;</span><br><span class="line">            todos.value.forEach(<span class="function"><span class="params">todo</span> =&gt;</span> &#123;</span><br><span class="line">                todo.completed = value</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        allDone</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="15-todolist-切换待办事项-切换状态"><a href="#15-todolist-切换待办事项-切换状态" class="headerlink" title="15.todolist-切换待办事项-切换状态"></a>15.todolist-切换待办事项-切换状态</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> filter = &#123;</span><br><span class="line">    all: <span class="function"><span class="params">list</span> =&gt;</span> list,</span><br><span class="line">    active: <span class="function"><span class="params">list</span> =&gt;</span> list.filter(<span class="function"><span class="params">todo</span> =&gt;</span> !todo.completed),</span><br><span class="line">    completed: <span class="function"><span class="params">list</span> =&gt;</span> list.filter(<span class="function"><span class="params">todo</span> =&gt;</span> todo.completed)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> type = ref(<span class="string">'all'</span>)</span><br><span class="line"><span class="keyword">const</span> filteredTodos = computed(<span class="function"><span class="params">()</span> =&gt;</span> filter[type.value](todos.value))</span><br><span class="line"><span class="keyword">const</span> onHashChange = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> hash = <span class="built_in">window</span>.location.hash.replace(<span class="string">'#/'</span>,<span class="string">''</span>)</span><br><span class="line">    <span class="keyword">if</span>(filter[hash])&#123;</span><br><span class="line">        type.value = hash</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        type.value = <span class="string">'all'</span></span><br><span class="line">        <span class="built_in">window</span>.location.hash = <span class="string">''</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">onMounted(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">window</span>.addEventListener(<span class="string">'hashChange'</span>, onHashChange)</span><br><span class="line">    onHashChange()</span><br><span class="line">&#125;)</span><br><span class="line">onUnmounted(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">window</span>.removeEventListener(<span class="string">'hashChange'</span>, onHashChange)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="16-todolist-切换待办事项-其它"><a href="#16-todolist-切换待办事项-其它" class="headerlink" title="16.todolist-切换待办事项-其它"></a>16.todolist-切换待办事项-其它</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> useRemove = <span class="function"><span class="params">todos</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> remove = <span class="function"><span class="params">todo</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> index = todos.value.indexof(todo)</span><br><span class="line">        todos.value.splice(index, <span class="number">1</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">const</span> removeCompleted = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        todos.value = todos.value.filter(<span class="function"><span class="params">todo</span> =&gt;</span> !todo.completed)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        remove,</span><br><span class="line">        removeCompleted</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> filter = &#123;</span><br><span class="line">    all: <span class="function"><span class="params">list</span> =&gt;</span> list,</span><br><span class="line">    active: <span class="function"><span class="params">list</span> =&gt;</span> list.filter(<span class="function"><span class="params">todo</span> =&gt;</span> !todo.completed),</span><br><span class="line">    completed: <span class="function"><span class="params">list</span> =&gt;</span> list.filter(<span class="function"><span class="params">todo</span> =&gt;</span> todo.completed)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> type = ref(<span class="string">'all'</span>)</span><br><span class="line"><span class="keyword">const</span> filteredTodos = computed(<span class="function"><span class="params">()</span> =&gt;</span> filter[type.value](todos.value))</span><br><span class="line"><span class="keyword">const</span> remainingCount = computed(<span class="function"><span class="params">()</span> =&gt;</span> filter.active(todos.value).length)</span><br><span class="line"><span class="keyword">const</span> count = computed(<span class="function"><span class="params">()</span> =&gt;</span> todos.value.length)</span><br><span class="line"><span class="keyword">const</span> onHashChange = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> hash = <span class="built_in">window</span>.location.hash.replace(<span class="string">'#/'</span>,<span class="string">''</span>)</span><br><span class="line">    <span class="keyword">if</span>(filter[hash])&#123;</span><br><span class="line">        type.value = hash</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        type.value = <span class="string">'all'</span></span><br><span class="line">        <span class="built_in">window</span>.location.hash = <span class="string">''</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">onMounted(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">window</span>.addEventListener(<span class="string">'hashChange'</span>, onHashChange)</span><br><span class="line">    onHashChange()</span><br><span class="line">&#125;)</span><br><span class="line">onUnmounted(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">window</span>.removeEventListener(<span class="string">'hashChange'</span>, onHashChange)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="17-todolist-存储待办事项"><a href="#17-todolist-存储待办事项" class="headerlink" title="17.todolist-存储待办事项"></a>17.todolist-存储待办事项</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">parse</span>(<span class="params">str</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> value</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        value = <span class="built_in">JSON</span>.parse(str)</span><br><span class="line">    &#125;<span class="keyword">catch</span>&#123;</span><br><span class="line">        value = <span class="literal">null</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> value</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">stringify</span>(<span class="params">obj</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> value</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        value = <span class="built_in">JSON</span>.stringify(obj)</span><br><span class="line">    &#125; <span class="keyword">catch</span> &#123;</span><br><span class="line">        value = <span class="literal">null</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> value</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">useLocalStorage</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">setItem</span>(<span class="params">key, value</span>) </span>&#123;</span><br><span class="line">        value = stringify(value)</span><br><span class="line">        <span class="built_in">window</span>.localStorage.setItem(key, value)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">getItem</span>(<span class="params">key</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">let</span> value = <span class="built_in">window</span>.localStorage.getItem(key)</span><br><span class="line">        <span class="keyword">if</span>(value) &#123;</span><br><span class="line">            value = parse(value)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> value</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        setItem,</span><br><span class="line">        getItem</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> useStorage = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> KEY = <span class="string">'TODOKEYS'</span></span><br><span class="line">    <span class="keyword">const</span> todos = ref(storage.getItem(KEY)||[])</span><br><span class="line">    watchEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        storage.setItem(KEY, todos.value)</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> todos</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="任务三：Vue-js-3-0-响应式系统原理"><a href="#任务三：Vue-js-3-0-响应式系统原理" class="headerlink" title="任务三：Vue.js 3.0 响应式系统原理"></a>任务三：Vue.js 3.0 响应式系统原理</h2><h3 id="1-响应式系统原理-介绍"><a href="#1-响应式系统原理-介绍" class="headerlink" title="1.响应式系统原理-介绍"></a>1.响应式系统原理-介绍</h3><blockquote>
+<p>Vue.js 响应式回顾</p>
+</blockquote>
+<ul>
+<li>Proxy 对象实现属性监听</li>
+<li>多层属性嵌套，在访问属性过程中处理下一级属性</li>
+<li>默认监听动态加的属性</li>
+<li>默认监听属性的删除操作</li>
+<li>默认监听数组索引和 length 属性</li>
+<li>可以作为单独的模块使用</li>
+</ul>
+<blockquote>
+<p>核心方法</p>
+</blockquote>
+<ul>
+<li>reactive/ref/toRefs/computed</li>
+<li>effect</li>
+<li>track</li>
+<li>trigger</li>
+</ul>
+<h3 id="2-响应式系统原理-Proxy对象回顾"><a href="#2-响应式系统原理-Proxy对象回顾" class="headerlink" title="2.响应式系统原理-Proxy对象回顾"></a>2.响应式系统原理-Proxy对象回顾</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript"><span class="meta">'use strict'</span></span></span><br><span class="line"><span class="actionscript"><span class="comment">// 问题1：set 和 deleteProperty 中需要返回布尔类型的值</span></span></span><br><span class="line"><span class="actionscript"><span class="comment">// 在严格模式下，如果返回 false 的话会出现 Type Error 的异常</span></span></span><br><span class="line"><span class="actionscript"><span class="keyword">const</span> target = &#123;</span></span><br><span class="line"><span class="actionscript">    foo: <span class="string">'xxx'</span>,</span></span><br><span class="line"><span class="actionscript">    bar: <span class="string">'yyy'</span></span></span><br><span class="line">&#125;</span><br><span class="line"><span class="javascript"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(target, &#123;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">get</span>(target, key, receiver) &#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">return</span> <span class="built_in">Reflect</span>.get(target, key, receiver)</span></span><br><span class="line">    &#125;,</span><br><span class="line"><span class="javascript">    <span class="keyword">set</span>(target, key, value, receiver) &#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">return</span> <span class="built_in">Reflect</span>.set(target, key, value, receiver)</span></span><br><span class="line">    &#125;,</span><br><span class="line">    deleteProperty(target, key)&#123;</span><br><span class="line"><span class="javascript">        <span class="keyword">return</span> <span class="built_in">Reflect</span>.deleteProperty(target, key)</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="actionscript">proxy.foo = <span class="string">'zzz'</span></span></span><br><span class="line"></span><br><span class="line"><span class="actionscript"><span class="comment">// 问题2：Proxy 和 Reflect 中使用的 receiver</span></span></span><br><span class="line"><span class="actionscript"><span class="comment">// Proxy 中 receiver：Proxy 或者继承 Proxy 的对象</span></span></span><br><span class="line"><span class="actionscript"><span class="comment">// Reflect 中 receiver：如果 target 对象中设置了 getter，getter 中的 this 指向 receiver</span></span></span><br><span class="line"><span class="actionscript"><span class="keyword">const</span> obj = &#123;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">get</span> foo()&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">return</span> <span class="keyword">this</span>.bar</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="javascript"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(obj, &#123;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">get</span>(target, key, receiver) &#123;</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">if</span>(key === <span class="string">'bar'</span>) &#123;</span></span><br><span class="line"><span class="actionscript">            <span class="keyword">return</span> <span class="string">'value-bar'</span></span></span><br><span class="line">        &#125;</span><br><span class="line"><span class="javascript">        <span class="keyword">return</span> <span class="built_in">Reflect</span>.get(target, key, receiver)</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-响应式系统原理-reactive"><a href="#3-响应式系统原理-reactive" class="headerlink" title="3.响应式系统原理-reactive"></a>3.响应式系统原理-reactive</h3><ul>
+<li>接收一个参数，判断这参数是否是对象</li>
+<li>创建拦截器对象 handler，设置 get/set/deleteProperty</li>
+<li>返回 Proxy 对象</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> isObject = <span class="function"><span class="params">val</span> =&gt;</span> val !== <span class="literal">null</span> &amp;&amp; <span class="keyword">typeof</span> val === <span class="string">'object'</span></span><br><span class="line"><span class="keyword">const</span> convert = <span class="function"><span class="params">target</span> =&gt;</span> isObject(target) ? reactive(target) : target</span><br><span class="line"><span class="keyword">const</span> hasOwnProperty = <span class="built_in">Object</span>.protoype.hasOwnProperty</span><br><span class="line"><span class="keyword">const</span> hasOwn = <span class="function">(<span class="params">target, key</span>) =&gt;</span> hasOwnProperty.call(target, key)</span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">reactive</span>(<span class="params">target</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(!isObject(target)) <span class="keyword">return</span> target</span><br><span class="line">  <span class="keyword">const</span> handler = &#123;</span><br><span class="line">      <span class="keyword">get</span>(target, key, receiver)&#123;</span><br><span class="line">        <span class="comment">// 收集依赖</span></span><br><span class="line">        track(target, key)</span><br><span class="line">        <span class="keyword">const</span> result = <span class="built_in">Reflect</span>.get(target, key, receiver)</span><br><span class="line">        <span class="keyword">return</span> convert(result)</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="keyword">set</span>(target, key, value, receiver)&#123;</span><br><span class="line">        <span class="keyword">const</span> oldValue = <span class="built_in">Reflect</span>.get(target, key, receiver)</span><br><span class="line">        <span class="keyword">let</span> result = <span class="literal">true</span></span><br><span class="line">        <span class="keyword">if</span>(oldVlaue!==value)&#123;</span><br><span class="line">            result = <span class="built_in">Reflect</span>.set(target, key, value, receiver)</span><br><span class="line">            <span class="comment">// 触发更新</span></span><br><span class="line">            trigger(target, key)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line">      &#125;,</span><br><span class="line">      deleteProperty(target, key)&#123;</span><br><span class="line">        <span class="keyword">const</span> hadkey = hasOwn(target, key)</span><br><span class="line">        <span class="keyword">const</span> result = <span class="built_in">Reflect</span>.deleteProperty(target, key)</span><br><span class="line">        <span class="keyword">if</span>(hadkey &amp;&amp; result)&#123;</span><br><span class="line">            <span class="comment">// 触发更新</span></span><br><span class="line">            trigger(target, key)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-响应式系统原理-收集依赖"><a href="#4-响应式系统原理-收集依赖" class="headerlink" title="4.响应式系统原理-收集依赖"></a>4.响应式系统原理-收集依赖</h3><p>略</p>
+<h3 id="5-响应式系统原理-effect-track"><a href="#5-响应式系统原理-effect-track" class="headerlink" title="5.响应式系统原理-effect-track"></a>5.响应式系统原理-effect-track</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> activeEffect = <span class="literal">null</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">effect</span>(<span class="params">callback</span>)</span>&#123;</span><br><span class="line">    activeEffect = callback</span><br><span class="line">    callback()</span><br><span class="line">    activeEffect = <span class="literal">null</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> targetMap = <span class="keyword">new</span> <span class="built_in">WeakMap</span>()</span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">track</span>(<span class="params">target, key</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(!activeEffect) <span class="keyword">return</span></span><br><span class="line">  <span class="keyword">let</span> depsMap = targetMap.get(target)</span><br><span class="line">  <span class="keyword">if</span>(!depsMap) &#123;</span><br><span class="line">      targetMap.set(target,(depsMap = <span class="keyword">new</span> <span class="built_in">Map</span>()))</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">let</span> dep = depsMap.get(key)</span><br><span class="line">  <span class="keyword">if</span>(!dep)&#123;</span><br><span class="line">      depsMap.set(key, (dep = <span class="keyword">new</span> <span class="built_in">Set</span>()))</span><br><span class="line">  &#125;</span><br><span class="line">  dep.add(activeEffect)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-响应式系统原理-trigger"><a href="#6-响应式系统原理-trigger" class="headerlink" title="6.响应式系统原理-trigger"></a>6.响应式系统原理-trigger</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">trigger</span>(<span class="params">target, key</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">const</span> depsMap = target.get(target)</span><br><span class="line">  <span class="keyword">if</span>(!depsMap) <span class="keyword">return</span></span><br><span class="line">  <span class="keyword">const</span> dep = depsMap.get(key)</span><br><span class="line">  <span class="keyword">if</span>(dep)&#123;</span><br><span class="line">      dep.forEach(<span class="function"><span class="params">effect</span> =&gt;</span> &#123;</span><br><span class="line">          effect()</span><br><span class="line">      &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="7-响应式系统原理-ref"><a href="#7-响应式系统原理-ref" class="headerlink" title="7.响应式系统原理-ref"></a>7.响应式系统原理-ref</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">ref</span> (<span class="params">raw</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 判断 raw 是否是 ref 创建的对象，如果是的话直接返回</span></span><br><span class="line">    <span class="keyword">if</span>(isObject(raw) &amp;&amp; raw._v_isRef)&#123;</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> value = convert(raw)</span><br><span class="line">    <span class="keyword">const</span> r = &#123;</span><br><span class="line">        _v_isRef: <span class="literal">true</span>,</span><br><span class="line">        <span class="keyword">get</span> value() &#123;</span><br><span class="line">            track(r, <span class="string">'value'</span>)</span><br><span class="line">            <span class="keyword">return</span> value</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="keyword">set</span> value(newValue)&#123;</span><br><span class="line">            <span class="keyword">if</span>(newValue !== value)&#123;</span><br><span class="line">                raw = newValue</span><br><span class="line">                value = convert(raw)</span><br><span class="line">                trigger(r, <span class="string">'value'</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> r</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>reactive VS ref</p>
+</blockquote>
+<ul>
+<li>ref 可以把基本数据类型数据转成响应式对象</li>
+<li>ref 返回的对象，重新赋值成对象也是响应式的</li>
+<li>reactive 返回的对象，重新赋值丢失响应式</li>
+<li>reactive 返回的对象不可以解构</li>
+</ul>
+<h3 id="8-响应式系统原理-toRefs"><a href="#8-响应式系统原理-toRefs" class="headerlink" title="8.响应式系统原理-toRefs"></a>8.响应式系统原理-toRefs</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">roRefs</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   <span class="keyword">const</span> ret = proxy <span class="keyword">instanceof</span> <span class="built_in">Array</span> ? <span class="keyword">new</span> <span class="built_in">Array</span>(proxy.length) : &#123;&#125;</span><br><span class="line">   <span class="keyword">for</span>(<span class="keyword">const</span> key <span class="keyword">in</span> proxy)&#123;</span><br><span class="line">       ret[key] = toProxy(proxy, key)</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> ret</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">toProxy</span>(<span class="params">proxy, key</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> r = &#123;</span><br><span class="line">        _v_isRef: <span class="literal">true</span>,</span><br><span class="line">        <span class="keyword">get</span> value() &#123;</span><br><span class="line">            <span class="keyword">return</span> proxy[key]</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="keyword">set</span> value(newValue) &#123;</span><br><span class="line">            proxy[key] = newValue</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="9-响应式系统原理-computed"><a href="#9-响应式系统原理-computed" class="headerlink" title="9.响应式系统原理-computed"></a>9.响应式系统原理-computed</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">computed</span>(<span class="params">getter</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> result = ref()</span><br><span class="line">    effect(<span class="function"><span class="params">()</span> =&gt;</span> (result.value = getter()))</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="任务四：Vite-实现原理"><a href="#任务四：Vite-实现原理" class="headerlink" title="任务四：Vite 实现原理"></a>任务四：Vite 实现原理</h2><h3 id="1-Vite"><a href="#1-Vite" class="headerlink" title="1.Vite"></a>1.Vite</h3><blockquote>
+<p>Vite 概念</p>
+</blockquote>
+<ul>
+<li>Vite 是一个面向现代浏览器的一个更轻、更快的 Web 应用开发工具</li>
+<li>它基于 ECMAScript 标准原生模块系统（ES Modules）实现</li>
+</ul>
+<blockquote>
+<p>Vite 项目依赖</p>
+</blockquote>
+<ul>
+<li>Vite</li>
+<li>@vue/compiler-sfc</li>
+</ul>
+<blockquote>
+<p>基础使用</p>
+</blockquote>
+<ul>
+<li>vite serve</li>
+<li>vite build</li>
+</ul>
+<blockquote>
+<p>HMR</p>
+</blockquote>
+<ul>
+<li>Vite HMR<ul>
+<li>立即编译当前所修改的文件</li>
+</ul>
+</li>
+<li>Webpack HMR<ul>
+<li>会自动以这个文件为入口重写 build 一次，所有的涉及到的依赖也都会被加载一遍</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Build</p>
+</blockquote>
+<ul>
+<li>vite build<ul>
+<li>Rollup</li>
+<li>Dynamic import<ul>
+<li>Polyfill</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>打包 or 不打包</p>
+</blockquote>
+<ul>
+<li>使用 Webpack 打包的两个原因<ul>
+<li>浏览器环境并不支持模块化</li>
+<li>零散的模块文件会产生大量的 HTTP 请求</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>开箱即用</p>
+</blockquote>
+<ul>
+<li>TypeScript - 内置支持</li>
+<li>less/sass/stylus/postcss - 内置支持（需要单独安装）</li>
+<li>JSX</li>
+<li>Web Assembly</li>
+</ul>
+<blockquote>
+<p>Vite 特性</p>
+</blockquote>
+<ul>
+<li>快速冷启动</li>
+<li>模块热更新</li>
+<li>按需编译</li>
+<li>开箱即用</li>
+</ul>
+<h3 id="2-Vite-实现原理-静态Web服务器"><a href="#2-Vite-实现原理-静态Web服务器" class="headerlink" title="2.Vite 实现原理-静态Web服务器"></a>2.Vite 实现原理-静态Web服务器</h3><blockquote>
+<p>Vite 核心功能</p>
+</blockquote>
+<ul>
+<li>静态 Web 服务器</li>
+<li>编译单文件组件<ul>
+<li>拦截浏览器不识别的模块，并处理</li>
+</ul>
+</li>
+<li>HRM</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env node</span></span><br><span class="line"><span class="keyword">const</span> koa = <span class="built_in">require</span>(<span class="string">'koa'</span>)</span><br><span class="line"><span class="keyword">const</span> send = <span class="built_in">require</span>(<span class="string">'koa-send'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa()</span><br><span class="line"></span><br><span class="line">app.use(<span class="keyword">async</span>(ctx, next) =&gt; &#123;</span><br><span class="line">    <span class="keyword">await</span> send(ctx, ctx.path, &#123; <span class="attr">root</span>: process.cwd(), <span class="attr">index</span>: <span class="string">'index.html'</span> &#125;)</span><br><span class="line">    <span class="keyword">await</span> next()</span><br><span class="line">&#125;)</span><br><span class="line">app.listen(<span class="number">3000</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-Vite-实现原理-修改第三方模块的路径"><a href="#3-Vite-实现原理-修改第三方模块的路径" class="headerlink" title="3.Vite 实现原理-修改第三方模块的路径"></a>3.Vite 实现原理-修改第三方模块的路径</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env node</span></span><br><span class="line"><span class="keyword">const</span> koa = <span class="built_in">require</span>(<span class="string">'koa'</span>)</span><br><span class="line"><span class="keyword">const</span> send = <span class="built_in">require</span>(<span class="string">'koa-send'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa()</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> streamToString = <span class="function"><span class="params">stream</span> =&gt;</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> chunks = []</span><br><span class="line">    stream.on(<span class="string">'data'</span>, chunk =&gt; chunks.push(chunk))</span><br><span class="line">    stream.on(<span class="string">'end'</span>,() =&gt; resolve(Buffer.concat(chunks).toString(<span class="string">'utf-8'</span>)))</span><br><span class="line">    stream.on(<span class="string">'error'</span>, reject)</span><br><span class="line">&#125;)</span><br><span class="line">app.use(<span class="keyword">async</span>(ctx, next) =&gt; &#123;</span><br><span class="line">    <span class="keyword">await</span> send(ctx, ctx.path, &#123; <span class="attr">root</span>: process.cwd(), <span class="attr">index</span>: <span class="string">'index.html'</span> &#125;)</span><br><span class="line">    <span class="keyword">await</span> next()</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.use(<span class="keyword">async</span> (ctx, next) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span>(ctx.type === <span class="string">'application/javascript'</span>)&#123;</span><br><span class="line">        <span class="keyword">const</span> contents = <span class="keyword">await</span> streamToString(ctx.body)</span><br><span class="line">        <span class="comment">// import vue from 'vue'</span></span><br><span class="line">        <span class="comment">// import vue from './App.vue'</span></span><br><span class="line"></span><br><span class="line">        ctx.body = contents.replace(<span class="regexp">/(from\s+['"])(?!\.\/)g, '$1/</span>@modules/<span class="string">')</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">&#125;)</span></span><br><span class="line"><span class="string">app.listen(3000)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-Vite-实现原理-加载第三方模块"><a href="#4-Vite-实现原理-加载第三方模块" class="headerlink" title="4.Vite 实现原理-加载第三方模块"></a>4.Vite 实现原理-加载第三方模块</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env node</span></span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"><span class="keyword">const</span> koa = <span class="built_in">require</span>(<span class="string">'koa'</span>)</span><br><span class="line"><span class="keyword">const</span> send = <span class="built_in">require</span>(<span class="string">'koa-send'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa()</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> streamToString = <span class="function"><span class="params">stream</span> =&gt;</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> chunks = []</span><br><span class="line">    stream.on(<span class="string">'data'</span>, chunk =&gt; chunks.push(chunk))</span><br><span class="line">    stream.on(<span class="string">'end'</span>,() =&gt; resolve(Buffer.concat(chunks).toString(<span class="string">'utf-8'</span>)))</span><br><span class="line">    stream.on(<span class="string">'error'</span>, reject)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 3.加载第三方模块</span></span><br><span class="line">app.use(<span class="keyword">async</span>(ctx,next) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span>(ctx.path.startWith(<span class="string">'/@modules/'</span>))&#123;</span><br><span class="line">        <span class="keyword">const</span> moduleName = ctx.path.substr(<span class="number">10</span>)</span><br><span class="line">        <span class="keyword">const</span> pkgPath = path.join(process.cwd(),<span class="string">'node_modules'</span>,moduleName,<span class="string">'package.json'</span>)</span><br><span class="line">        <span class="keyword">const</span> pkg = <span class="built_in">require</span>(pkgPath)</span><br><span class="line">        ctx.path = path.join(<span class="string">'/node_modules'</span>,moduleName,pkg.module)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">await</span> next()</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 1.静态文件服务器</span></span><br><span class="line">app.use(<span class="keyword">async</span>(ctx, next) =&gt; &#123;</span><br><span class="line">    <span class="keyword">await</span> send(ctx, ctx.path, &#123; <span class="attr">root</span>: process.cwd(), <span class="attr">index</span>: <span class="string">'index.html'</span> &#125;)</span><br><span class="line">    <span class="keyword">await</span> next()</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 2.修改第三方模块的路径</span></span><br><span class="line">app.use(<span class="keyword">async</span> (ctx, next) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span>(ctx.type === <span class="string">'application/javascript'</span>)&#123;</span><br><span class="line">        <span class="keyword">const</span> contents = <span class="keyword">await</span> streamToString(ctx.body)</span><br><span class="line">        <span class="comment">// import vue from 'vue'</span></span><br><span class="line">        <span class="comment">// import vue from './App.vue'</span></span><br><span class="line"></span><br><span class="line">        ctx.body = contents.replace(<span class="regexp">/(from\s+['"])(?!\.\/)g, '$1/</span>@modules/<span class="string">')</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">&#125;)</span></span><br><span class="line"><span class="string">app.listen(3000)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-Vite-实现原理-编译单文件组件"><a href="#5-Vite-实现原理-编译单文件组件" class="headerlink" title="5.Vite 实现原理-编译单文件组件"></a>5.Vite 实现原理-编译单文件组件</h3><ul>
+<li>npm i @vue/compiler-sfc</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env node</span></span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"><span class="keyword">const</span> &#123; Readable &#125; = <span class="built_in">require</span>(<span class="string">'stream'</span>)</span><br><span class="line"><span class="keyword">const</span> koa = <span class="built_in">require</span>(<span class="string">'koa'</span>)</span><br><span class="line"><span class="keyword">const</span> send = <span class="built_in">require</span>(<span class="string">'koa-send'</span>)</span><br><span class="line"><span class="keyword">const</span> compilerSFC = <span class="built_in">require</span>(<span class="string">'@vue/compiler-sfc'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa()</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> streamToString = <span class="function"><span class="params">stream</span> =&gt;</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> chunks = []</span><br><span class="line">    stream.on(<span class="string">'data'</span>, chunk =&gt; chunks.push(chunk))</span><br><span class="line">    stream.on(<span class="string">'end'</span>,() =&gt; resolve(Buffer.concat(chunks).toString(<span class="string">'utf-8'</span>)))</span><br><span class="line">    stream.on(<span class="string">'error'</span>, reject)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">const</span> stringToStream = <span class="function"><span class="params">text</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> stream = <span class="keyword">new</span> Readable()</span><br><span class="line">    stream.push(text)</span><br><span class="line">    stream.push(<span class="literal">null</span>)</span><br><span class="line">    <span class="keyword">return</span> stream</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 3.加载第三方模块</span></span><br><span class="line">app.use(<span class="keyword">async</span>(ctx,next) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span>(ctx.path.startWith(<span class="string">'/@modules/'</span>))&#123;</span><br><span class="line">        <span class="keyword">const</span> moduleName = ctx.path.substr(<span class="number">10</span>)</span><br><span class="line">        <span class="keyword">const</span> pkgPath = path.join(process.cwd(),<span class="string">'node_modules'</span>,moduleName,<span class="string">'package.json'</span>)</span><br><span class="line">        <span class="keyword">const</span> pkg = <span class="built_in">require</span>(pkgPath)</span><br><span class="line">        ctx.path = path.join(<span class="string">'/node_modules'</span>,moduleName,pkg.module)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">await</span> next()</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 1.静态文件服务器</span></span><br><span class="line">app.use(<span class="keyword">async</span>(ctx, next) =&gt; &#123;</span><br><span class="line">    <span class="keyword">await</span> send(ctx, ctx.path, &#123; <span class="attr">root</span>: process.cwd(), <span class="attr">index</span>: <span class="string">'index.html'</span> &#125;)</span><br><span class="line">    <span class="keyword">await</span> next()</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 4.处理单文件组件</span></span><br><span class="line">app.use(<span class="keyword">async</span>(ctx,next) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span>(ctx.path.endsWidth(.vue))&#123;</span><br><span class="line">        <span class="keyword">const</span> contents = <span class="keyword">await</span> streamToString(ctx.body)</span><br><span class="line">        <span class="keyword">const</span> &#123; descriptor &#125; = compilerSFC.parse(contents)</span><br><span class="line">        <span class="keyword">let</span> code</span><br><span class="line">        <span class="keyword">if</span>(!ctx.query.type) &#123;</span><br><span class="line">            code = descriptor.script.content</span><br><span class="line">            code = code.replace(<span class="regexp">/export\s+default\s+/g</span>, <span class="string">'const __script = '</span>)</span><br><span class="line">            code += <span class="string">`</span></span><br><span class="line"><span class="string">            import &#123; render as __render &#125; from "<span class="subst">$&#123;ctx.path&#125;</span>?type=template"</span></span><br><span class="line"><span class="string">            __script.render = __render</span></span><br><span class="line"><span class="string">            export default __script</span></span><br><span class="line"><span class="string">            `</span></span><br><span class="line">        &#125;</span><br><span class="line">        ctx.type = <span class="string">'application/javascript'</span></span><br><span class="line">        ctx.body = stringToStream(code)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">await</span> next()</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 2.修改第三方模块的路径</span></span><br><span class="line">app.use(<span class="keyword">async</span> (ctx, next) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span>(ctx.type === <span class="string">'application/javascript'</span>)&#123;</span><br><span class="line">        <span class="keyword">const</span> contents = <span class="keyword">await</span> streamToString(ctx.body)</span><br><span class="line">        <span class="comment">// import vue from 'vue'</span></span><br><span class="line">        <span class="comment">// import vue from './App.vue'</span></span><br><span class="line"></span><br><span class="line">        ctx.body = contents.replace(<span class="regexp">/(from\s+['"])(?![\.\/])g, '$1/</span>@modules/<span class="string">')</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">&#125;)</span></span><br><span class="line"><span class="string">app.listen(3000)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="6-Vite-实现原理-编译单文件组件"><a href="#6-Vite-实现原理-编译单文件组件" class="headerlink" title="6.Vite 实现原理-编译单文件组件"></a>6.Vite 实现原理-编译单文件组件</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env node</span></span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"><span class="keyword">const</span> &#123; Readable &#125; = <span class="built_in">require</span>(<span class="string">'stream'</span>)</span><br><span class="line"><span class="keyword">const</span> koa = <span class="built_in">require</span>(<span class="string">'koa'</span>)</span><br><span class="line"><span class="keyword">const</span> send = <span class="built_in">require</span>(<span class="string">'koa-send'</span>)</span><br><span class="line"><span class="keyword">const</span> compilerSFC = <span class="built_in">require</span>(<span class="string">'@vue/compiler-sfc'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa()</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> streamToString = <span class="function"><span class="params">stream</span> =&gt;</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> chunks = []</span><br><span class="line">    stream.on(<span class="string">'data'</span>, chunk =&gt; chunks.push(chunk))</span><br><span class="line">    stream.on(<span class="string">'end'</span>,() =&gt; resolve(Buffer.concat(chunks).toString(<span class="string">'utf-8'</span>)))</span><br><span class="line">    stream.on(<span class="string">'error'</span>, reject)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">const</span> stringToStream = <span class="function"><span class="params">text</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> stream = <span class="keyword">new</span> Readable()</span><br><span class="line">    stream.push(text)</span><br><span class="line">    stream.push(<span class="literal">null</span>)</span><br><span class="line">    <span class="keyword">return</span> stream</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 3.加载第三方模块</span></span><br><span class="line">app.use(<span class="keyword">async</span>(ctx,next) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span>(ctx.path.startWith(<span class="string">'/@modules/'</span>))&#123;</span><br><span class="line">        <span class="keyword">const</span> moduleName = ctx.path.substr(<span class="number">10</span>)</span><br><span class="line">        <span class="keyword">const</span> pkgPath = path.join(process.cwd(),<span class="string">'node_modules'</span>,moduleName,<span class="string">'package.json'</span>)</span><br><span class="line">        <span class="keyword">const</span> pkg = <span class="built_in">require</span>(pkgPath)</span><br><span class="line">        ctx.path = path.join(<span class="string">'/node_modules'</span>,moduleName,pkg.module)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">await</span> next()</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 1.静态文件服务器</span></span><br><span class="line">app.use(<span class="keyword">async</span>(ctx, next) =&gt; &#123;</span><br><span class="line">    <span class="keyword">await</span> send(ctx, ctx.path, &#123; <span class="attr">root</span>: process.cwd(), <span class="attr">index</span>: <span class="string">'index.html'</span> &#125;)</span><br><span class="line">    <span class="keyword">await</span> next()</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 4.处理单文件组件</span></span><br><span class="line">app.use(<span class="keyword">async</span>(ctx,next) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span>(ctx.path.endsWidth(.vue))&#123;</span><br><span class="line">        <span class="keyword">const</span> contents = <span class="keyword">await</span> streamToString(ctx.body)</span><br><span class="line">        <span class="keyword">const</span> &#123; descriptor &#125; = compilerSFC.parse(contents)</span><br><span class="line">        <span class="keyword">let</span> code</span><br><span class="line">        <span class="keyword">if</span>(!ctx.query.type) &#123;</span><br><span class="line">            code = descriptor.script.content</span><br><span class="line">            code = code.replace(<span class="regexp">/export\s+default\s+/g</span>, <span class="string">'const __script = '</span>)</span><br><span class="line">            code += <span class="string">`</span></span><br><span class="line"><span class="string">            import &#123; render as __render &#125; from "<span class="subst">$&#123;ctx.path&#125;</span>?type=template"</span></span><br><span class="line"><span class="string">            __script.render = __render</span></span><br><span class="line"><span class="string">            export default __script</span></span><br><span class="line"><span class="string">            `</span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(ctx.query.type === <span class="string">'template'</span>) &#123;</span><br><span class="line">            <span class="keyword">const</span> templateRender = compilerSFC.compileTemplate(&#123; <span class="attr">source</span>: descriptor.template.content &#125;)</span><br><span class="line">            code = templateRender.code</span><br><span class="line">        &#125;</span><br><span class="line">        ctx.type = <span class="string">'application/javascript'</span></span><br><span class="line">        ctx.body = stringToStream(code)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">await</span> next()</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 2.修改第三方模块的路径</span></span><br><span class="line">app.use(<span class="keyword">async</span> (ctx, next) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span>(ctx.type === <span class="string">'application/javascript'</span>)&#123;</span><br><span class="line">        <span class="keyword">const</span> contents = <span class="keyword">await</span> streamToString(ctx.body)</span><br><span class="line">        <span class="comment">// import vue from 'vue'</span></span><br><span class="line">        <span class="comment">// import vue from './App.vue'</span></span><br><span class="line"></span><br><span class="line">        ctx.body = contents</span><br><span class="line">        .replace(<span class="regexp">/(from\s+['"])(?![\.\/])g, '$1/</span>@modules/<span class="string">')</span></span><br><span class="line"><span class="string">        .replace(/process\.env\.NODE_ENV/g,'</span><span class="string">"development"</span><span class="string">')</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">&#125;)</span></span><br><span class="line"><span class="string">app.listen(3000)</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScipt/" rel="tag"># JavaScipt</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/02/03/34/" rel="next" title="学习笔记 ----- 【Vue.js 框架源码与进阶】搭建自己的SSR、静态站点生成（SSG）及封装 Vue.js 组件库">
+                <i class="fa fa-chevron-left"></i> 学习笔记 ----- 【Vue.js 框架源码与进阶】搭建自己的SSR、静态站点生成（SSG）及封装 Vue.js 组件库
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/02/16/36/" rel="prev" title="学习笔记 ----- 【Vue.js 框架源码与进阶】Vue.js + Vuex + TypeScript 实战项目开发与项目优化">
+                学习笔记 ----- 【Vue.js 框架源码与进阶】Vue.js + Vuex + TypeScript 实战项目开发与项目优化 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="FY" />
+            
+              <p class="site-author-name" itemprop="name">FY</p>
+              <p class="site-description motion-element" itemprop="description">Just Be Yourself</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/xuanfeiyu" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Part-3-·-Vue-js-框架源码与进阶"><span class="nav-number">1.</span> <span class="nav-text">Part 3 · Vue.js 框架源码与进阶</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模块五-·-Vue-js-3-0-Composition-APIs-及-3-0-原理剖析"><span class="nav-number">1.1.</span> <span class="nav-text">模块五 · Vue.js 3.0 Composition APIs 及 3.0 原理剖析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#任务一：Vue-3-0介绍"><span class="nav-number">1.2.</span> <span class="nav-text">任务一：Vue 3.0介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Vue-js-3-0-源码组织方式"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.Vue.js 3.0 源码组织方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-不同的构建版本"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.不同的构建版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Composition-API-设计动机"><span class="nav-number">1.2.3.</span> <span class="nav-text">3.Composition API 设计动机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-性能提升"><span class="nav-number">1.2.4.</span> <span class="nav-text">4.性能提升</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Vite"><span class="nav-number">1.2.5.</span> <span class="nav-text">5.Vite</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-Vite"><span class="nav-number">1.2.6.</span> <span class="nav-text">6.Vite</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#任务二：Composition-API"><span class="nav-number">1.3.</span> <span class="nav-text">任务二：Composition API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Composition-API"><span class="nav-number">1.3.1.</span> <span class="nav-text">1.Composition API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-生命周期钩子函数"><span class="nav-number">1.3.2.</span> <span class="nav-text">2.生命周期钩子函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-reactive-toRefs-ref"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.reactive-toRefs-ref</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-computed"><span class="nav-number">1.3.4.</span> <span class="nav-text">4.computed</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-watch"><span class="nav-number">1.3.5.</span> <span class="nav-text">5.watch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-watchEffect"><span class="nav-number">1.3.6.</span> <span class="nav-text">6.watchEffect</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-todolist-功能演示"><span class="nav-number">1.3.7.</span> <span class="nav-text">7.todolist-功能演示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-todolist-项目结构"><span class="nav-number">1.3.8.</span> <span class="nav-text">8.todolist-项目结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-todolist-添加待办事项"><span class="nav-number">1.3.9.</span> <span class="nav-text">9.todolist-添加待办事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-todolist-删除待办事项"><span class="nav-number">1.3.10.</span> <span class="nav-text">10.todolist-删除待办事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-todolist-编辑待办事项"><span class="nav-number">1.3.11.</span> <span class="nav-text">11.todolist-编辑待办事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-todolist-编辑待办事项-编辑文本框获取焦点"><span class="nav-number">1.3.12.</span> <span class="nav-text">12.todolist-编辑待办事项-编辑文本框获取焦点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-todolist-切换待办事项-演示效果"><span class="nav-number">1.3.13.</span> <span class="nav-text">13.todolist-切换待办事项-演示效果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-todolist-切换待办事项-改变待办事项完成状态"><span class="nav-number">1.3.14.</span> <span class="nav-text">14.todolist-切换待办事项-改变待办事项完成状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-todolist-切换待办事项-切换状态"><span class="nav-number">1.3.15.</span> <span class="nav-text">15.todolist-切换待办事项-切换状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16-todolist-切换待办事项-其它"><span class="nav-number">1.3.16.</span> <span class="nav-text">16.todolist-切换待办事项-其它</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17-todolist-存储待办事项"><span class="nav-number">1.3.17.</span> <span class="nav-text">17.todolist-存储待办事项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#任务三：Vue-js-3-0-响应式系统原理"><span class="nav-number">1.4.</span> <span class="nav-text">任务三：Vue.js 3.0 响应式系统原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-响应式系统原理-介绍"><span class="nav-number">1.4.1.</span> <span class="nav-text">1.响应式系统原理-介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-响应式系统原理-Proxy对象回顾"><span class="nav-number">1.4.2.</span> <span class="nav-text">2.响应式系统原理-Proxy对象回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-响应式系统原理-reactive"><span class="nav-number">1.4.3.</span> <span class="nav-text">3.响应式系统原理-reactive</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-响应式系统原理-收集依赖"><span class="nav-number">1.4.4.</span> <span class="nav-text">4.响应式系统原理-收集依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-响应式系统原理-effect-track"><span class="nav-number">1.4.5.</span> <span class="nav-text">5.响应式系统原理-effect-track</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-响应式系统原理-trigger"><span class="nav-number">1.4.6.</span> <span class="nav-text">6.响应式系统原理-trigger</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-响应式系统原理-ref"><span class="nav-number">1.4.7.</span> <span class="nav-text">7.响应式系统原理-ref</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-响应式系统原理-toRefs"><span class="nav-number">1.4.8.</span> <span class="nav-text">8.响应式系统原理-toRefs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-响应式系统原理-computed"><span class="nav-number">1.4.9.</span> <span class="nav-text">9.响应式系统原理-computed</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#任务四：Vite-实现原理"><span class="nav-number">1.5.</span> <span class="nav-text">任务四：Vite 实现原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Vite"><span class="nav-number">1.5.1.</span> <span class="nav-text">1.Vite</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Vite-实现原理-静态Web服务器"><span class="nav-number">1.5.2.</span> <span class="nav-text">2.Vite 实现原理-静态Web服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Vite-实现原理-修改第三方模块的路径"><span class="nav-number">1.5.3.</span> <span class="nav-text">3.Vite 实现原理-修改第三方模块的路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Vite-实现原理-加载第三方模块"><span class="nav-number">1.5.4.</span> <span class="nav-text">4.Vite 实现原理-加载第三方模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Vite-实现原理-编译单文件组件"><span class="nav-number">1.5.5.</span> <span class="nav-text">5.Vite 实现原理-编译单文件组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-Vite-实现原理-编译单文件组件"><span class="nav-number">1.5.6.</span> <span class="nav-text">6.Vite 实现原理-编译单文件组件</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">FY</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
