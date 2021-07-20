@@ -1706,692 +1706,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/20/30/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="FY">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="旋の飞羽">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/12/20/30/" itemprop="url">学习笔记 ----- 【Vue.js 框架源码与进阶】手写 Vue Router、手写响应式实现、虚拟 DOM 和 Diff 算法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-20T00:00:00+08:00">
-                2020-12-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>作者：FY<br>引用请标明出处</p>
-</blockquote>
-<h1 id="Part-3-·-Vue-js-框架源码与进阶"><a href="#Part-3-·-Vue-js-框架源码与进阶" class="headerlink" title="Part 3 · Vue.js 框架源码与进阶"></a>Part 3 · Vue.js 框架源码与进阶</h1><h2 id="模块一-·-手写-Vue-Router、手写响应式实现、虚拟-DOM-和-Diff-算法"><a href="#模块一-·-手写-Vue-Router、手写响应式实现、虚拟-DOM-和-Diff-算法" class="headerlink" title="模块一 · 手写 Vue Router、手写响应式实现、虚拟 DOM 和 Diff 算法"></a>模块一 · 手写 Vue Router、手写响应式实现、虚拟 DOM 和 Diff 算法</h2><h2 id="任务一：Vue-js-基础回顾"><a href="#任务一：Vue-js-基础回顾" class="headerlink" title="任务一：Vue.js 基础回顾"></a>任务一：Vue.js 基础回顾</h2><h3 id="1-阶段内容"><a href="#1-阶段内容" class="headerlink" title="1.阶段内容"></a>1.阶段内容</h3><ul>
-<li>快速回顾 Vue.js 基础语法</li>
-<li>Vue Router 原理分析与实现</li>
-<li>虚拟 DOM 库 Snabbdom 源码解析</li>
-<li>响应式原理分析与实现</li>
-<li>Vue.js 源码分析</li>
-</ul>
-<h3 id="2-Vue-基础结构"><a href="#2-Vue-基础结构" class="headerlink" title="2.Vue 基础结构"></a>2.Vue 基础结构</h3><p>略</p>
-<h3 id="3-Vue-的生命周期"><a href="#3-Vue-的生命周期" class="headerlink" title="3.Vue 的生命周期"></a>3.Vue 的生命周期</h3><p>略</p>
-<h3 id="4-Vue-语法和概念-上"><a href="#4-Vue-语法和概念-上" class="headerlink" title="4.Vue 语法和概念-上"></a>4.Vue 语法和概念-上</h3><ul>
-<li>插值表达式</li>
-<li>指令</li>
-<li>计算属性和侦听器</li>
-<li>Class 和 Style 绑定</li>
-<li>条件渲染/列表渲染</li>
-<li>表单输入绑定</li>
-</ul>
-<h3 id="5-Vue-语法和概念-下"><a href="#5-Vue-语法和概念-下" class="headerlink" title="5.Vue 语法和概念-下"></a>5.Vue 语法和概念-下</h3><ul>
-<li>组件</li>
-<li>插槽</li>
-<li>插件</li>
-<li>混入 mixin</li>
-<li>深入响应式原理</li>
-<li>不同构建版本的 Vue</li>
-</ul>
-<h2 id="任务二：Vue-Router-原理实现"><a href="#任务二：Vue-Router-原理实现" class="headerlink" title="任务二：Vue-Router 原理实现"></a>任务二：Vue-Router 原理实现</h2><h3 id="1-课程介绍"><a href="#1-课程介绍" class="headerlink" title="1.课程介绍"></a>1.课程介绍</h3><ul>
-<li>Vue Router 基础回顾</li>
-<li>Hash 模式和 History 模式</li>
-<li>模拟实现自己的Vue Router</li>
-</ul>
-<h3 id="2-Vue-Router-基础回顾-使用步骤"><a href="#2-Vue-Router-基础回顾-使用步骤" class="headerlink" title="2.Vue Router 基础回顾-使用步骤"></a>2.Vue Router 基础回顾-使用步骤</h3><p>略</p>
-<h3 id="3-动态路由"><a href="#3-动态路由" class="headerlink" title="3.动态路由"></a>3.动态路由</h3><p>略</p>
-<h3 id="4-嵌套路由"><a href="#4-嵌套路由" class="headerlink" title="4.嵌套路由"></a>4.嵌套路由</h3><p>略</p>
-<h3 id="5-编程式导航"><a href="#5-编程式导航" class="headerlink" title="5.编程式导航"></a>5.编程式导航</h3><ul>
-<li>push</li>
-<li>replace</li>
-<li>go</li>
-</ul>
-<h3 id="6-Hash-模式和-History-模式的区别"><a href="#6-Hash-模式和-History-模式的区别" class="headerlink" title="6.Hash 模式和 History 模式的区别"></a>6.Hash 模式和 History 模式的区别</h3><ul>
-<li><p>表现形式的区别</p>
-<ul>
-<li>Hash 模式<ul>
-<li>https:music.163.com/#/palylist?id=3102961863</li>
-</ul>
-</li>
-<li>History 模式<ul>
-<li>https:music.163.com/palylist/3102961863</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>原理的区别</p>
-<ul>
-<li>Hash 模式是基于锚点，以及 onhashchange事件</li>
-<li>History 模式是基于 HTML5 中的 History API<ul>
-<li>history.pushState() IE10 以后才支持</li>
-<li>history.repalceState()</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="7-History-模式"><a href="#7-History-模式" class="headerlink" title="7.History 模式"></a>7.History 模式</h3><ul>
-<li>History 需要服务器的支持</li>
-<li>单页应用中，服务端不存在 <a href="http://www.testurl.com/login" target="_blank" rel="noopener">http://www.testurl.com/login</a> 这样的地址会返回找不到该页面</li>
-<li>在服务端应该除了静态资源外都返回单页应用的 index.html</li>
-</ul>
-<h3 id="8-History-模式-Node-js"><a href="#8-History-模式-Node-js" class="headerlink" title="8.History 模式 - Node.js"></a>8.History 模式 - Node.js</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"><span class="keyword">const</span> history = <span class="built_in">require</span>(<span class="string">'connect-history-api-fallback'</span>)</span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>)</span><br><span class="line"><span class="keyword">const</span> app = express()</span><br><span class="line">app.use(history())</span><br><span class="line">app.use(express.static(path.join(__dirname, <span class="string">'../web'</span>)))</span><br><span class="line">app.listen(<span class="number">3000</span>, () =&gt; &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'服务器开启， 端口：3000'</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h3 id="9-History-模式-nginx"><a href="#9-History-模式-nginx" class="headerlink" title="9.History 模式 - nginx"></a>9.History 模式 - nginx</h3><ul>
-<li>从官网下载 nginx 的压缩包</li>
-<li>把压缩包解压到 c 盘根目录， c:\nginx-1.18.0 文件夹</li>
-<li>打开命令行，切换到目录 c:\nginx-1.18.0</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 启动</span></span><br><span class="line">start nginx</span><br><span class="line"><span class="comment">// 重启</span></span><br><span class="line">nginx -s reload</span><br><span class="line"><span class="comment">// 停止</span></span><br><span class="line">nginx -s stop</span><br><span class="line"></span><br><span class="line"><span class="comment">// nginx</span></span><br><span class="line">location / &#123;</span><br><span class="line">  root html;</span><br><span class="line">  index index.html index.htm;</span><br><span class="line">  try_files $uri $uri/ <span class="regexp">/index.html;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="10-VueRouter-实现原理"><a href="#10-VueRouter-实现原理" class="headerlink" title="10.VueRouter 实现原理"></a>10.VueRouter 实现原理</h3><blockquote>
-<p>Vue 前置知识</p>
-</blockquote>
-<ul>
-<li>插件</li>
-<li>混入</li>
-<li>Vue.observable()</li>
-<li>插槽</li>
-<li>render 函数</li>
-<li>运行时和完整版的 Vue</li>
-</ul>
-<blockquote>
-<p>Hash 模式</p>
-</blockquote>
-<ul>
-<li>URL 中 # 后面的内容作为路径地址</li>
-<li>监听 hashchange 事件</li>
-<li>根据当前路由地址找到对应组件重新渲染</li>
-</ul>
-<blockquote>
-<p>History 模式</p>
-</blockquote>
-<ul>
-<li>通过 history.pushState() 方法改变地址栏</li>
-<li>监听 popstate 事件</li>
-<li>根据当前路由地址找到对应组件重新渲染</li>
-</ul>
-<h3 id="11-VueRouter-模拟实现-分析"><a href="#11-VueRouter-模拟实现-分析" class="headerlink" title="11.VueRouter 模拟实现 - 分析"></a>11.VueRouter 模拟实现 - 分析</h3><p>VueRouter</p>
-<ul>
-<li>options</li>
-<li>data</li>
-<li>routeMap</li>
-<li>Constructor(Options): VueRouter</li>
-<li>_install(Vue): void</li>
-<li>init(): void</li>
-<li>initEvent(): void</li>
-<li>createRouterMap(): void</li>
-<li>initComponents(Vue): void</li>
-</ul>
-<h3 id="12-VueRouter-install"><a href="#12-VueRouter-install" class="headerlink" title="12.VueRouter - install"></a>12.VueRouter - install</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> _Vue = <span class="literal">null</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">VueRouter</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> install (Vue) &#123;</span><br><span class="line">    <span class="comment">// 1.判断当前插件是否已经被安装</span></span><br><span class="line">    <span class="keyword">if</span>(VueRouter.install.installed)&#123;</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    VueRouter.install.installed = <span class="literal">true</span></span><br><span class="line">    <span class="comment">// 2.把 Vue 构造函数记录到全局变量</span></span><br><span class="line">    _Vue = Vue</span><br><span class="line">    <span class="comment">// 3.把创建 Vue 实例时候传入的router对象注入到Vue实例上 </span></span><br><span class="line">    <span class="comment">// 混入</span></span><br><span class="line">    _Vue.mixin(&#123;</span><br><span class="line">      beforeCreate () &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.$options.router)&#123;</span><br><span class="line">          _Vue.prototype.$router = <span class="keyword">this</span>.$options.router</span><br><span class="line">          <span class="keyword">this</span>.$options.router.init() <span class="comment">// 详见 15.VueRouter - router-link</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="13-VueRouter-构造函数"><a href="#13-VueRouter-构造函数" class="headerlink" title="13.VueRouter - 构造函数"></a>13.VueRouter - 构造函数</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">VueRouter</span> </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="keyword">constructor</span> (options) &#123;</span><br><span class="line">    <span class="keyword">this</span>.options = options</span><br><span class="line">    <span class="keyword">this</span>.routeMap = &#123;&#125;</span><br><span class="line">    <span class="keyword">this</span>.data = _Vue.observable(&#123;</span><br><span class="line">      current: <span class="string">'/'</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="14-VueRouter-createRouteMap"><a href="#14-VueRouter-createRouteMap" class="headerlink" title="14.VueRouter - createRouteMap"></a>14.VueRouter - createRouteMap</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">VueRouter</span> </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  createRouteMap() &#123;</span><br><span class="line">    <span class="comment">// 遍历所有的路由规则，把路由规则解析成键值对的形式 存储到 routeMap 中</span></span><br><span class="line">    <span class="keyword">this</span>.options.routes.forEach(<span class="function"><span class="params">route</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">this</span>.routeMap[route.path] = route.component</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="15-VueRouter-router-link"><a href="#15-VueRouter-router-link" class="headerlink" title="15.VueRouter - router-link"></a>15.VueRouter - router-link</h3><blockquote>
-<p>Vue 的构建版本</p>
-</blockquote>
-<ul>
-<li>运行时版：不支持 template 模板，需要打包的时候提前编译</li>
-<li>完整版：包含运行时和编译器，体积比运行时版大 10k 左右， 程序运行的时候把模板转换成 render 函数</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">VueRouter</span> </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  initComponents(Vue) &#123;</span><br><span class="line">    Vue.component(<span class="string">'router-link'</span>, &#123;</span><br><span class="line">      props: &#123;</span><br><span class="line">        to: <span class="built_in">String</span></span><br><span class="line">      &#125;,</span><br><span class="line">      template: <span class="string">'&lt;a :href = "to"&gt;&lt;slot&gt;&lt;/slot&gt;&lt;/a&gt;'</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  init() &#123;</span><br><span class="line">    <span class="keyword">this</span>.createRouteMap()</span><br><span class="line">    <span class="keyword">this</span>.initComponents(_Vue)</span><br><span class="line">    <span class="keyword">this</span>.initEvent() <span class="comment">// 详见 19.VueRouter - initEvent</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="16-VueRouter-完整版的-Vue"><a href="#16-VueRouter-完整版的-Vue" class="headerlink" title="16.VueRouter - 完整版的 Vue"></a>16.VueRouter - 完整版的 Vue</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// vue.config.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  runtimeCompiler: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="17-VueRouter-render"><a href="#17-VueRouter-render" class="headerlink" title="17.VueRouter - render"></a>17.VueRouter - render</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">VueRouter</span> </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  initComponents(Vue) &#123;</span><br><span class="line">    Vue.component(<span class="string">'router-link'</span>, &#123;</span><br><span class="line">      props: &#123;</span><br><span class="line">        to: <span class="built_in">String</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="comment">// template: '&lt;a :href = "to"&gt;&lt;slot&gt;&lt;/slot&gt;&lt;/a&gt;'</span></span><br><span class="line">      render(h) &#123;</span><br><span class="line">        <span class="keyword">return</span> h(<span class="string">'a'</span>, &#123;</span><br><span class="line">          attrs: &#123;</span><br><span class="line">            href: <span class="keyword">this</span>.to</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;,[<span class="keyword">this</span>.$slots.default])</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="18-VueRouter-router-view"><a href="#18-VueRouter-router-view" class="headerlink" title="18.VueRouter - router-view"></a>18.VueRouter - router-view</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">VueRouter</span> </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  initComponents(Vue) &#123;</span><br><span class="line">    Vue.component(<span class="string">'router-link'</span>, &#123;</span><br><span class="line">      props: &#123;</span><br><span class="line">        to: <span class="built_in">String</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="comment">// template: '&lt;a :href = "to"&gt;&lt;slot&gt;&lt;/slot&gt;&lt;/a&gt;'</span></span><br><span class="line">      render(h) &#123;</span><br><span class="line">        <span class="keyword">return</span> h(<span class="string">'a'</span>, &#123;</span><br><span class="line">          attrs: &#123;</span><br><span class="line">            href: <span class="keyword">this</span>.to</span><br><span class="line">          &#125;,</span><br><span class="line">          on: &#123;</span><br><span class="line">            click: <span class="keyword">this</span>.clickHandler</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;,[<span class="keyword">this</span>.$slots.default])</span><br><span class="line">      &#125;,</span><br><span class="line">      methods: &#123;</span><br><span class="line">        clickHandler(e) &#123;</span><br><span class="line">          history.pushState(&#123;&#125;,<span class="string">''</span>,<span class="keyword">this</span>.to)</span><br><span class="line">          <span class="keyword">this</span>.$router.data.current = <span class="keyword">this</span>.to</span><br><span class="line">          e.preventDefault()</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">const</span> self = <span class="keyword">this</span></span><br><span class="line">    Vue.component(<span class="string">'router-view'</span>, &#123;</span><br><span class="line">      render(h)&#123;</span><br><span class="line">        <span class="keyword">const</span> component = self.routeMap[self.data.current]</span><br><span class="line">        <span class="keyword">return</span> h(component)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="19-VueRouter-initEvent"><a href="#19-VueRouter-initEvent" class="headerlink" title="19.VueRouter - initEvent"></a>19.VueRouter - initEvent</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">VueRouter</span> </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  initEvent() &#123;</span><br><span class="line">    <span class="built_in">window</span>.addEventListener(<span class="string">'popstate'</span>, () =&gt; &#123;</span><br><span class="line">      <span class="keyword">this</span>.dada.current = <span class="built_in">window</span>.location.pathname</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="任务三：模拟-Vue-js-响应式原理"><a href="#任务三：模拟-Vue-js-响应式原理" class="headerlink" title="任务三：模拟 Vue.js 响应式原理"></a>任务三：模拟 Vue.js 响应式原理</h2><h3 id="1-课程目标"><a href="#1-课程目标" class="headerlink" title="1.课程目标"></a>1.课程目标</h3><ul>
-<li>模拟一个最小版本的 Vue</li>
-<li>响应式原理在面试的常问问题</li>
-<li>学习别人优秀的经验，转换成自己的经验</li>
-<li>实际项目中出问题的原理层面的解决<ul>
-<li>给 Vue 实例新增一个成员是否是响应式的</li>
-<li>给属性重新赋值成对象，是否是响应式的</li>
-</ul>
-</li>
-<li>为学习 Vue 源码做铺垫</li>
-</ul>
-<h3 id="2-数据驱动"><a href="#2-数据驱动" class="headerlink" title="2.数据驱动"></a>2.数据驱动</h3><ul>
-<li><p>准备工作</p>
-<ul>
-<li>数据驱动</li>
-<li>响应式的核心原理</li>
-<li>发布订阅模式和观察者模式</li>
-</ul>
-</li>
-<li><p>数据驱动</p>
-<ul>
-<li>数据响应式、双向绑定、数据驱动</li>
-<li>数据响应式<ul>
-<li>数据模型仅仅是普通的 JavaScript 对象，而当我们修改数据时，视图会进行更新，避免了繁琐的 DOM 操作，提高开发效率</li>
-</ul>
-</li>
-<li>双向绑定<ul>
-<li>数据改变，视图改变；视图改变，数据也随之改变</li>
-<li>我们可以使用 v-model 在表单元素上创建双向绑定数据</li>
-</ul>
-</li>
-<li>数据驱动是 Vue 最独特的特性之一<ul>
-<li>开发过程中仅需要关注数据本身，不需要关心数据是如何渲染到视图</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="3-数据响应式核心原理-Vue2"><a href="#3-数据响应式核心原理-Vue2" class="headerlink" title="3.数据响应式核心原理 - Vue2"></a>3.数据响应式核心原理 - Vue2</h3><p>略</p>
-<h3 id="4-数据响应式核心原理-Vue3"><a href="#4-数据响应式核心原理-Vue3" class="headerlink" title="4.数据响应式核心原理 - Vue3"></a>4.数据响应式核心原理 - Vue3</h3><p>略</p>
-<h3 id="5-发布订阅模式"><a href="#5-发布订阅模式" class="headerlink" title="5.发布订阅模式"></a>5.发布订阅模式</h3><ul>
-<li><p>发布/订阅模式</p>
-<ul>
-<li>订阅者</li>
-<li>发布者</li>
-<li>信号中心</li>
-</ul>
-</li>
-<li><p>我们假定，存在一个“信号中心”，某个任务执行完成，就向信号中心“发布”一个信号，其他任务可以向信号中心“订阅”这个信号，从而知道什么时候自己可以开始执行。这就叫做“发布/订阅模式”</p>
-</li>
-</ul>
-<h3 id="6-观察者模式"><a href="#6-观察者模式" class="headerlink" title="6.观察者模式"></a>6.观察者模式</h3><ul>
-<li><p>观察者（订阅者） – Watcher</p>
-<ul>
-<li>update(): 当事件发生时，具体要做的事情</li>
-</ul>
-</li>
-<li><p>目标（发布者） – Dep</p>
-<ul>
-<li>subs 数组：存储所有的观察者</li>
-<li>addSub()：添加观察者</li>
-<li>notify()：当事件发生，调用所有观察者的 update() 方法</li>
-</ul>
-</li>
-<li><p>没有事件中心</p>
-</li>
-</ul>
-<h3 id="7-模拟Vue响应式原理-分析"><a href="#7-模拟Vue响应式原理-分析" class="headerlink" title="7.模拟Vue响应式原理 - 分析"></a>7.模拟Vue响应式原理 - 分析</h3><p>略</p>
-<h3 id="8-Vue"><a href="#8-Vue" class="headerlink" title="8.Vue"></a>8.Vue</h3><ul>
-<li>功能<ul>
-<li>负责接收初始化的参数（选项）</li>
-<li>负责把data中的属性注入到Vue实例，转换成getter/setter</li>
-<li>负责调用 observer 监听 data 中所有属性的变化</li>
-<li>负责调用complier解析指令/差值表达式</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Vue</span> </span>&#123;</span><br><span class="line">  contructor(option) &#123;</span><br><span class="line">    <span class="comment">// 1.通过属性保存选项的数据</span></span><br><span class="line">    <span class="keyword">this</span>.$options = options || &#123;&#125;</span><br><span class="line">    <span class="keyword">this</span>.$data = options.data || &#123;&#125;</span><br><span class="line">    <span class="keyword">this</span>.$el = <span class="keyword">typeof</span> options.el === <span class="string">'string'</span> ? <span class="built_in">document</span>.querySelector(options.el):options.el</span><br><span class="line">    <span class="comment">// 2.把data中的成员转换成getter和setter，注入到vue实例中</span></span><br><span class="line">    <span class="keyword">this</span>.proxyData(<span class="keyword">this</span>.$data)</span><br><span class="line">    <span class="comment">// 3.调用observer对象，监听数据的变化</span></span><br><span class="line">    <span class="comment">// 4.调用compiler对象，解析指令和差值表达式</span></span><br><span class="line">  &#125;</span><br><span class="line">  _proxyData(data) &#123;</span><br><span class="line">    <span class="comment">// 遍历data中的所有属性</span></span><br><span class="line">    <span class="built_in">Object</span>.keys(data).forEach(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 把data的属性注入到vue实例中</span></span><br><span class="line">      <span class="built_in">Object</span>.defineProperty(<span class="keyword">this</span>, key, &#123;</span><br><span class="line">        enumerable: <span class="literal">true</span>,</span><br><span class="line">        configurable: <span class="literal">true</span>,</span><br><span class="line">        <span class="keyword">get</span>()&#123;</span><br><span class="line">          <span class="keyword">return</span> data[key]</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="keyword">set</span>(newValue) &#123;</span><br><span class="line">          <span class="keyword">if</span>(newValue === data[key]) &#123;</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">          &#125;</span><br><span class="line">          data[key] = newValue</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="9-Observer"><a href="#9-Observer" class="headerlink" title="9.Observer"></a>9.Observer</h3><ul>
-<li>功能<ul>
-<li>负责把data选项中的属性转换成响应式数据</li>
-<li>data 中的某个属性也是对象，把该属性转换成响应式数据</li>
-<li>数据变化发送通知</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// vue.js</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Vue</span> </span>&#123;</span><br><span class="line">  contructor(option) &#123;</span><br><span class="line">    <span class="comment">// 1.通过属性保存选项的数据</span></span><br><span class="line">    <span class="keyword">this</span>.$options = options || &#123;&#125;</span><br><span class="line">    <span class="keyword">this</span>.$data = options.data || &#123;&#125;</span><br><span class="line">    <span class="keyword">this</span>.$el = <span class="keyword">typeof</span> options.el === <span class="string">'string'</span> ? <span class="built_in">document</span>.querySelector(options.el):options.el</span><br><span class="line">    <span class="comment">// 2.把data中的成员转换成getter和setter，注入到vue实例中</span></span><br><span class="line">    <span class="keyword">this</span>.proxyData(<span class="keyword">this</span>.$data)</span><br><span class="line">    <span class="comment">// 3.调用observer对象，监听数据的变化</span></span><br><span class="line">    <span class="keyword">new</span> Observer(<span class="keyword">this</span>.$data)</span><br><span class="line">    <span class="comment">// 4.调用compiler对象，解析指令和差值表达式</span></span><br><span class="line">  &#125;</span><br><span class="line">  _proxyData(data) &#123;</span><br><span class="line">    <span class="comment">// 遍历data中的所有属性</span></span><br><span class="line">    <span class="built_in">Object</span>.keys(data).forEach(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 把data的属性注入到vue实例中</span></span><br><span class="line">      <span class="built_in">Object</span>.defineProperty(<span class="keyword">this</span>, key, &#123;</span><br><span class="line">        enumerable: <span class="literal">true</span>,</span><br><span class="line">        configurable: <span class="literal">true</span>,</span><br><span class="line">        <span class="keyword">get</span>()&#123;</span><br><span class="line">          <span class="keyword">return</span> data[key]</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="keyword">set</span>(newValue) &#123;</span><br><span class="line">          <span class="keyword">if</span>(newValue === data[key]) &#123;</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">          &#125;</span><br><span class="line">          data[key] = newValue</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// observer.js</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Observer</span> </span>&#123;</span><br><span class="line">  constuctor(data)&#123;</span><br><span class="line">    <span class="keyword">this</span>.walk(data)</span><br><span class="line">  &#125;</span><br><span class="line">  walk (data) &#123;</span><br><span class="line">    <span class="comment">// 1.判断data是否是对象</span></span><br><span class="line">    <span class="keyword">if</span>(!data || <span class="keyword">typeof</span> data !== <span class="string">'object'</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 2.遍历data对象的所有属性</span></span><br><span class="line">    <span class="built_in">Object</span>.keys(data).forEach(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">this</span>.defineReactive(data, key, data[key])</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  defineReactive(obj, key, val) &#123;</span><br><span class="line">    <span class="keyword">let</span> that = <span class="keyword">this</span></span><br><span class="line">    <span class="keyword">this</span>.walk(val) <span class="comment">// @ 11.Observer - defineReactive2</span></span><br><span class="line">    <span class="built_in">Object</span>.defineProperty(obj, key, &#123;</span><br><span class="line">      enumerable: <span class="literal">true</span>,</span><br><span class="line">      configurable: <span class="literal">true</span>,</span><br><span class="line">      <span class="keyword">get</span>() &#123;</span><br><span class="line">        <span class="keyword">return</span> val</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="keyword">set</span>(newValue) &#123;</span><br><span class="line">        <span class="keyword">if</span>(newValue === val) &#123;</span><br><span class="line">          <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        val = newValue</span><br><span class="line">        that.walk(newValue) <span class="comment">// @ 11.Observer - defineReactive2</span></span><br><span class="line">        <span class="comment">// 发送通知</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="10-Observer-defineReactive1"><a href="#10-Observer-defineReactive1" class="headerlink" title="10.Observer - defineReactive1"></a>10.Observer - defineReactive1</h3><p>略</p>
-<h3 id="11-Observer-defineReactive2"><a href="#11-Observer-defineReactive2" class="headerlink" title="11.Observer - defineReactive2"></a>11.Observer - defineReactive2</h3><p>略</p>
-<h3 id="12-Compiler"><a href="#12-Compiler" class="headerlink" title="12.Compiler"></a>12.Compiler</h3><ul>
-<li><p>功能</p>
-<ul>
-<li>负责编译模板，解析指令/插值表达式</li>
-<li>负责页面的首次渲染</li>
-<li>当数据变化后重新渲染视图</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// compiler.js</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Compiler</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span> (vm) &#123;</span><br><span class="line">     <span class="keyword">this</span>.el = vm.$el</span><br><span class="line">     <span class="keyword">this</span>.vm = vm</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 编译模板，处理文本节点和元素节点</span></span><br><span class="line">  compile(el) &#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 编译元素节点，处理指令</span></span><br><span class="line">  compileElement(node)&#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 编译文本节点，处理差值表达式</span></span><br><span class="line">  compileText(node) &#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 判断元素属性是否是指令</span></span><br><span class="line">  isDirective(attrName) &#123;</span><br><span class="line">    <span class="keyword">return</span> attrName.startsWith(<span class="string">'v-'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 判断节点是否是文本节点</span></span><br><span class="line">  isTextNode(node) &#123;</span><br><span class="line">    <span class="keyword">return</span> node.nodeType === <span class="number">3</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 判断节点是否是元素节点</span></span><br><span class="line">  isElementNode(node) &#123;</span><br><span class="line">    <span class="keyword">return</span> node.nodeType === <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="13-Compiler-compile"><a href="#13-Compiler-compile" class="headerlink" title="13.Compiler - compile"></a>13.Compiler - compile</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// compiler.js</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Compiler</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span> (vm) &#123;</span><br><span class="line">     <span class="keyword">this</span>.el = vm.$el</span><br><span class="line">     <span class="keyword">this</span>.vm = vm</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 编译模板，处理文本节点和元素节点</span></span><br><span class="line">  compile(el) &#123;</span><br><span class="line">    <span class="keyword">let</span> childNodes = el.childNodes</span><br><span class="line">    <span class="built_in">Array</span>.from(childNodes).forEach(<span class="function"><span class="params">node</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 处理文本节点</span></span><br><span class="line">      <span class="keyword">if</span>(<span class="keyword">this</span>.isTextNode(node)) &#123;</span><br><span class="line">        <span class="keyword">this</span>.compileText(node)</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">this</span>.isElementNode(node)) &#123;</span><br><span class="line">        <span class="comment">// 处理元素节点</span></span><br><span class="line">        <span class="keyword">this</span>.compileElement(node)</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// 判断node节点，是否有子节点，如果子节点，要递归调用compile</span></span><br><span class="line">      <span class="keyword">if</span>(node.childNodes &amp;&amp; node.childNodes.length) &#123;</span><br><span class="line">        <span class="keyword">this</span>.compile(node)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="14-Compiler-compileText"><a href="#14-Compiler-compileText" class="headerlink" title="14.Compiler - compileText"></a>14.Compiler - compileText</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// vue.js</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Vue</span> </span>&#123;</span><br><span class="line">  contructor(option) &#123;</span><br><span class="line">    <span class="comment">// 1.通过属性保存选项的数据</span></span><br><span class="line">    <span class="keyword">this</span>.$options = options || &#123;&#125;</span><br><span class="line">    <span class="keyword">this</span>.$data = options.data || &#123;&#125;</span><br><span class="line">    <span class="keyword">this</span>.$el = <span class="keyword">typeof</span> options.el === <span class="string">'string'</span> ? <span class="built_in">document</span>.querySelector(options.el):options.el</span><br><span class="line">    <span class="comment">// 2.把data中的成员转换成getter和setter，注入到vue实例中</span></span><br><span class="line">    <span class="keyword">this</span>.proxyData(<span class="keyword">this</span>.$data)</span><br><span class="line">    <span class="comment">// 3.调用observer对象，监听数据的变化</span></span><br><span class="line">    <span class="keyword">new</span> Observer(<span class="keyword">this</span>.$data)</span><br><span class="line">    <span class="comment">// 4.调用compiler对象，解析指令和差值表达式</span></span><br><span class="line">    <span class="keyword">new</span> Compiler(<span class="keyword">this</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  _proxyData(data) &#123;</span><br><span class="line">    <span class="comment">// 遍历data中的所有属性</span></span><br><span class="line">    <span class="built_in">Object</span>.keys(data).forEach(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 把data的属性注入到vue实例中</span></span><br><span class="line">      <span class="built_in">Object</span>.defineProperty(<span class="keyword">this</span>, key, &#123;</span><br><span class="line">        enumerable: <span class="literal">true</span>,</span><br><span class="line">        configurable: <span class="literal">true</span>,</span><br><span class="line">        <span class="keyword">get</span>()&#123;</span><br><span class="line">          <span class="keyword">return</span> data[key]</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="keyword">set</span>(newValue) &#123;</span><br><span class="line">          <span class="keyword">if</span>(newValue === data[key]) &#123;</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">          &#125;</span><br><span class="line">          data[key] = newValue</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// compiler.js</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Compiler</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span> (vm) &#123;</span><br><span class="line">    <span class="keyword">this</span>.el = vm.$el</span><br><span class="line">    <span class="keyword">this</span>.vm = vm</span><br><span class="line">    <span class="keyword">this</span>.compile(<span class="keyword">this</span>.el)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 编译模板，处理文本节点和元素节点</span></span><br><span class="line">  compile(el) &#123;</span><br><span class="line">    <span class="keyword">let</span> childNodes = el.childNodes</span><br><span class="line">    <span class="built_in">Array</span>.from(childNodes).forEach(<span class="function"><span class="params">node</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 处理文本节点</span></span><br><span class="line">      <span class="keyword">if</span>(<span class="keyword">this</span>.isTextNode(node)) &#123;</span><br><span class="line">        <span class="keyword">this</span>.compileText(node)</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">this</span>.isElementNode(node)) &#123;</span><br><span class="line">        <span class="comment">// 处理元素节点</span></span><br><span class="line">        <span class="keyword">this</span>.compileElement(node)</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// 判断node节点，是否有子节点，如果子节点，要递归调用compile</span></span><br><span class="line">      <span class="keyword">if</span>(node.childNodes &amp;&amp; node.childNodes.length) &#123;</span><br><span class="line">        <span class="keyword">this</span>.compile(node)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 编译文本节点，处理差值表达式</span></span><br><span class="line">  compileText(node) &#123;</span><br><span class="line">    <span class="keyword">let</span> reg = <span class="regexp">/\&#123;\&#123;(.+?)\&#125;\&#125;/</span></span><br><span class="line">    <span class="keyword">let</span> value = node.textContent</span><br><span class="line">    <span class="keyword">if</span>(reg.test(value))&#123;</span><br><span class="line">      <span class="keyword">let</span> key = <span class="built_in">RegExp</span>.$<span class="number">1.</span>trim()</span><br><span class="line">      node.textContent = value.replace(reg, <span class="keyword">this</span>.vm[key])</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h3 id="15-Compiler-compileElement"><a href="#15-Compiler-compileElement" class="headerlink" title="15.Compiler - compileElement"></a>15.Compiler - compileElement</h3>  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// compiler.js</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Compiler</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span> (vm) &#123;</span><br><span class="line">    <span class="keyword">this</span>.el = vm.$el</span><br><span class="line">    <span class="keyword">this</span>.vm = vm</span><br><span class="line">    <span class="keyword">this</span>.compile(<span class="keyword">this</span>.el)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 编译模板，处理文本节点和元素节点</span></span><br><span class="line">  compile(el) &#123;</span><br><span class="line">    <span class="keyword">let</span> childNodes = el.childNodes</span><br><span class="line">    <span class="built_in">Array</span>.from(childNodes).forEach(<span class="function"><span class="params">node</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 处理文本节点</span></span><br><span class="line">      <span class="keyword">if</span>(<span class="keyword">this</span>.isTextNode(node)) &#123;</span><br><span class="line">        <span class="keyword">this</span>.compileText(node)</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">this</span>.isElementNode(node)) &#123;</span><br><span class="line">        <span class="comment">// 处理元素节点</span></span><br><span class="line">        <span class="keyword">this</span>.compileElement(node)</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// 判断node节点，是否有子节点，如果子节点，要递归调用compile</span></span><br><span class="line">      <span class="keyword">if</span>(node.childNodes &amp;&amp; node.childNodes.length) &#123;</span><br><span class="line">        <span class="keyword">this</span>.compile(node)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 编译元素节点，处理指令</span></span><br><span class="line">  compileElement(node) &#123;</span><br><span class="line">    <span class="comment">// 遍历所有的属性节点</span></span><br><span class="line">    <span class="built_in">Array</span>.from(node.attributes).forEach(<span class="function"><span class="params">attr</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 判断是否是指令</span></span><br><span class="line">      <span class="keyword">let</span> attrName = attr.name</span><br><span class="line">      <span class="keyword">if</span>(<span class="keyword">this</span>.isDirective(attrName)) &#123;</span><br><span class="line">        attrName = attrName.substr(<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">let</span> key = attr.value</span><br><span class="line">        <span class="keyword">this</span>.update(node,key,attrName)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  update(node,key,attrName) &#123;</span><br><span class="line">    <span class="keyword">let</span> updateFn = <span class="keyword">this</span>[attrName + <span class="string">'Updater'</span>]</span><br><span class="line">    updateFn &amp;&amp; updateFn(node, <span class="keyword">this</span>.vm[key])</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 处理v-text指令</span></span><br><span class="line">  textUpdater(node, value) &#123;</span><br><span class="line">    node.textContent = value</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// v-model</span></span><br><span class="line">  modelUpdater(node, value) &#123;</span><br><span class="line">    node.value = value</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="16-Compiler复习"><a href="#16-Compiler复习" class="headerlink" title="16.Compiler复习"></a>16.Compiler复习</h3><p>略</p>
-<h3 id="17-Dep"><a href="#17-Dep" class="headerlink" title="17.Dep"></a>17.Dep</h3><ul>
-<li>功能<ul>
-<li>收集依赖，添加观察者（watcher）</li>
-<li>通知所有观察者</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// observer.js</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Observer</span> </span>&#123;</span><br><span class="line">  constuctor(data)&#123;</span><br><span class="line">    <span class="keyword">this</span>.walk(data)</span><br><span class="line">  &#125;</span><br><span class="line">  walk (data) &#123;</span><br><span class="line">    <span class="comment">// 1.判断data是否是对象</span></span><br><span class="line">    <span class="keyword">if</span>(!data || <span class="keyword">typeof</span> data !== <span class="string">'object'</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 2.遍历data对象的所有属性</span></span><br><span class="line">    <span class="built_in">Object</span>.keys(data).forEach(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">this</span>.defineReactive(data, key, data[key])</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  defineReactive(obj, key, val) &#123;</span><br><span class="line">    <span class="keyword">let</span> that = <span class="keyword">this</span></span><br><span class="line">    <span class="comment">// 负责收集依赖，并发送通知</span></span><br><span class="line">    <span class="keyword">let</span> dep = <span class="keyword">new</span> Dep()</span><br><span class="line">    <span class="comment">// 如果val是对象，把val内部的属性转换成响应式数据</span></span><br><span class="line">    <span class="keyword">this</span>.walk(val) <span class="comment">// @ 11.Observer - defineReactive2</span></span><br><span class="line">    <span class="built_in">Object</span>.defineProperty(obj, key, &#123;</span><br><span class="line">      enumerable: <span class="literal">true</span>,</span><br><span class="line">      configurable: <span class="literal">true</span>,</span><br><span class="line">      <span class="keyword">get</span>() &#123;</span><br><span class="line">        Dep.target &amp;&amp; dep.addSub(Dep.target)</span><br><span class="line">        <span class="keyword">return</span> val</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="keyword">set</span>(newValue) &#123;</span><br><span class="line">        <span class="keyword">if</span>(newValue === val) &#123;</span><br><span class="line">          <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        val = newValue</span><br><span class="line">        that.walk(newValue) <span class="comment">// @ 11.Observer - defineReactive2</span></span><br><span class="line">        <span class="comment">// 发送通知</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// dep.js</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dep</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span> () &#123;</span><br><span class="line">    <span class="comment">// 存储所有的观察者</span></span><br><span class="line">    <span class="keyword">this</span>.subs = []</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 添加观察者</span></span><br><span class="line">  addSub(sub)&#123;</span><br><span class="line">    <span class="keyword">if</span>(sub &amp;&amp; sub.update) &#123;</span><br><span class="line">      <span class="keyword">this</span>.subs.push(sub)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 发出通知</span></span><br><span class="line">  notify() &#123;</span><br><span class="line">    <span class="keyword">this</span>.subs.forEach(<span class="function"><span class="params">sub</span> =&gt;</span> &#123;</span><br><span class="line">      sub.update()</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="18-Wathcer"><a href="#18-Wathcer" class="headerlink" title="18.Wathcer"></a>18.Wathcer</h3><ul>
-<li>功能<ul>
-<li>当数据变化触发依赖，dep 通知所有的 Wachter 实例更新视图</li>
-<li>自身实例化的时候往dep对象中添加自己</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// watcher.js</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Watcher</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span> (vm, key, cb) &#123;</span><br><span class="line">    <span class="keyword">this</span>.vm = vm</span><br><span class="line">    <span class="comment">// data中的属性名称</span></span><br><span class="line">    <span class="keyword">this</span>.key = key</span><br><span class="line">    <span class="comment">// 回调函数负责更新视图</span></span><br><span class="line">    <span class="keyword">this</span>.cb = cb</span><br><span class="line">    <span class="comment">// 把watcher对象记录到Dep类的静态属性target</span></span><br><span class="line">    Dep.target = <span class="keyword">this</span></span><br><span class="line">    <span class="comment">// 触发get方法，在get方法中会调用addSub</span></span><br><span class="line">    <span class="keyword">this</span>.oldValue = vm[key]</span><br><span class="line">    Dep.target = <span class="literal">null</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 当数据变化的时候更新视图</span></span><br><span class="line">  update() &#123;</span><br><span class="line">    <span class="keyword">let</span> newValue = <span class="keyword">this</span>.vm[<span class="keyword">this</span>.key]</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>.oldValue === newValue) &#123;</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.cb(newValue)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="19-创建Wathcer对象1"><a href="#19-创建Wathcer对象1" class="headerlink" title="19.创建Wathcer对象1"></a>19.创建Wathcer对象1</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// compiler.js</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Compiler</span> </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="comment">// 编译文本节点，处理差值表达式</span></span><br><span class="line">  compileText(node) &#123;</span><br><span class="line">    <span class="keyword">let</span> reg = <span class="regexp">/\&#123;\&#123;(.+?)\&#125;\&#125;/</span></span><br><span class="line">    <span class="keyword">let</span> value = node.textContent</span><br><span class="line">    <span class="keyword">if</span>(reg.test(value))&#123;</span><br><span class="line">      <span class="keyword">let</span> key = <span class="built_in">RegExp</span>.$<span class="number">1.</span>trim()</span><br><span class="line">      node.textContent = value.replace(reg, <span class="keyword">this</span>.vm[key])</span><br><span class="line">      <span class="comment">// 创建watcher对象，当数据改变更新视图</span></span><br><span class="line">      <span class="keyword">new</span> Wathcer(<span class="keyword">this</span>.vm, key, (newValue) =&gt; &#123;</span><br><span class="line">         node.textContent = newValue</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="20-创建Wathcer对象2"><a href="#20-创建Wathcer对象2" class="headerlink" title="20.创建Wathcer对象2"></a>20.创建Wathcer对象2</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// compiler.js</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Compiler</span> </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  update(node,key,attrName) &#123;</span><br><span class="line">    <span class="keyword">let</span> updateFn = <span class="keyword">this</span>[attrName + <span class="string">'Updater'</span>]</span><br><span class="line">    updateFn &amp;&amp; updateFn.call(<span class="keyword">this</span>, node, <span class="keyword">this</span>.vm[key], key)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 处理v-text指令</span></span><br><span class="line">  textUpdater(node, value, key) &#123;</span><br><span class="line">    node.textContent = value</span><br><span class="line">    <span class="keyword">new</span> Wathcer(<span class="keyword">this</span>.vm, key, (newValue) =&gt; &#123;</span><br><span class="line">      node.textContent = newValue</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  modelUpdater(node, value, key) &#123;</span><br><span class="line">    node.value = value</span><br><span class="line">    <span class="keyword">new</span> Wathcer(<span class="keyword">this</span>.vm, key, (newValue) =&gt; &#123;</span><br><span class="line">      node.value = newValue</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="21-双向绑定"><a href="#21-双向绑定" class="headerlink" title="21.双向绑定"></a>21.双向绑定</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// compiler.js</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Compiler</span> </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  modelUpdater(node, value, key) &#123;</span><br><span class="line">    node.value = value</span><br><span class="line">    <span class="keyword">new</span> Wathcer(<span class="keyword">this</span>.vm, key, (newValue) =&gt; &#123;</span><br><span class="line">      node.value = newValue</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">// 双向绑定</span></span><br><span class="line">    node.addEventListener(<span class="string">'input'</span>, () =&gt; &#123;</span><br><span class="line">      <span class="keyword">this</span>.vm[key] = node.value</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="22-调试-首次渲染"><a href="#22-调试-首次渲染" class="headerlink" title="22.调试-首次渲染"></a>22.调试-首次渲染</h3><ul>
-<li>通过调试加深对代码的理解<ul>
-<li>1.调试页面首次渲染的过程</li>
-<li>2.调试数据改变更新视图的过程</li>
-</ul>
-</li>
-</ul>
-<h3 id="23-数据改变"><a href="#23-数据改变" class="headerlink" title="23.数据改变"></a>23.数据改变</h3><p>略</p>
-<h3 id="24-总结-问题"><a href="#24-总结-问题" class="headerlink" title="24.总结-问题"></a>24.总结-问题</h3><ul>
-<li>问题<ul>
-<li>给属性重新赋值成对象，是否是响应式的？</li>
-<li>给Vue实例新增一个成员是否是响应式的？</li>
-</ul>
-</li>
-</ul>
-<h3 id="25-总结-整体流程"><a href="#25-总结-整体流程" class="headerlink" title="25.总结-整体流程"></a>25.总结-整体流程</h3><p>略</p>
-<h2 id="任务四：Virtual-DOM-的实现原理"><a href="#任务四：Virtual-DOM-的实现原理" class="headerlink" title="任务四：Virtual DOM 的实现原理"></a>任务四：Virtual DOM 的实现原理</h2><h3 id="1-课程目标-1"><a href="#1-课程目标-1" class="headerlink" title="1.课程目标"></a>1.课程目标</h3><ul>
-<li>了解什么是虚拟DOM，以及虚拟DOM的作用</li>
-<li>Snabbdom 的基本使用</li>
-<li>Snabbdom 的源码解析</li>
-</ul>
-<h3 id="2-什么是虚拟DOM"><a href="#2-什么是虚拟DOM" class="headerlink" title="2.什么是虚拟DOM"></a>2.什么是虚拟DOM</h3><ul>
-<li>Virtual DOM（虚拟 DOM），是由普通的 JS 对象来描述 DOM 对象，因为不是真实的 DOM 对象，所以叫 Virtual DOM</li>
-</ul>
-<h3 id="3-为什么使用虚拟DOM"><a href="#3-为什么使用虚拟DOM" class="headerlink" title="3.为什么使用虚拟DOM"></a>3.为什么使用虚拟DOM</h3><ul>
-<li>手动操作 DOM 比较麻烦，还需要考虑浏览器兼容性问题，虽然有 jQuery 等库简化 DOM 操作，但是随着项目的复杂 DOM 操作复杂提升</li>
-<li>为了简化 DOM 的复杂操作于是出现了各种 MVVM 框架，MVVM 框架解决了视图和状态的同步问题</li>
-<li>为了简化视图的操作我们可以使用模板引擎，但是模板引擎没有解决跟踪状态变化的问题，于是 Virtual DOM 出现了</li>
-<li>Virtual DOM 的好处是当状态改变时不需要立即更新 DOM，只需要创建一个虚拟树来描述 DOM，Virtual DOM 内部将弄清楚如何有效（diff）的更新 DOM</li>
-<li>参考 github 上 virtual-dom 的描述<ul>
-<li>虚拟 DOM 可以维护程序的状态，跟踪上一次的状态</li>
-<li>通过比较前后两次状态的差异更新真实 DOM</li>
-</ul>
-</li>
-</ul>
-<h3 id="4-虚拟DOM的作用和虚拟DOM库"><a href="#4-虚拟DOM的作用和虚拟DOM库" class="headerlink" title="4.虚拟DOM的作用和虚拟DOM库"></a>4.虚拟DOM的作用和虚拟DOM库</h3><ul>
-<li><p>虚拟 DOM 的作用</p>
-<ul>
-<li>维护视图和状态的关系</li>
-<li>复杂视图情况下提升渲染性能</li>
-<li>除了渲染 DOM 外，还可以实现 SSR（Nuxt.js/Next.js）、原生应用（Weex/React Native）、小程序（mpvue/uni-app）等</li>
-</ul>
-</li>
-<li><p>Virtual DOM 库</p>
-<ul>
-<li>Snabbdom</li>
-<li>virtual-dom</li>
-</ul>
-</li>
-</ul>
-<h3 id="5-创建项目"><a href="#5-创建项目" class="headerlink" title="5.创建项目"></a>5.创建项目</h3><ul>
-<li><p>创建项目</p>
-<ul>
-<li>打包工具为了方便使用 parcel</li>
-<li>创建项目，并安装 parcel</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 创建项目目录</span><br><span class="line">md snabbdom-demo</span><br><span class="line"># 进入项目目录</span><br><span class="line">cd snabbdom-demo</span><br><span class="line"># 创建 package.json</span><br><span class="line">yarn init -y</span><br><span class="line"># 本地安装 parcel</span><br><span class="line">yarn add parcel-bundler</span><br></pre></td></tr></table></figure>
-<ul>
-<li>配置 package.json 的 scripts</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"scripts"</span>: &#123;</span><br><span class="line">  <span class="string">"dev"</span>: <span class="string">"parcel index.html --open"</span>,</span><br><span class="line">  <span class="string">"build"</span>: <span class="string">"parcel build index.html"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>创建目录结构</li>
-</ul>
-<p>|  index.html<br>|  package.json<br>|_ src<br>   01-basicusage.js</p>
-</li>
-</ul>
-<h3 id="6-导入-Snabbdom"><a href="#6-导入-Snabbdom" class="headerlink" title="6.导入 Snabbdom"></a>6.导入 Snabbdom</h3><blockquote>
-<p>Snabbdom 文档</p>
-</blockquote>
-<ul>
-<li><p>看文档的意义</p>
-<ul>
-<li>学习任何一个库都要先看文档</li>
-<li>通过文档了解库的作用</li>
-<li>看文档中提供的实例，自己快速实现一个 demo</li>
-<li>通过文档查看 API 的使用</li>
-</ul>
-</li>
-<li><p>文档地址</p>
-<ul>
-<li><a href="https://github.com/snabbdom/snabbdom" target="_blank" rel="noopener">https://github.com/snabbdom/snabbdom</a></li>
-<li>中文翻译</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>安装 Snabbdom</p>
-</blockquote>
-<ul>
-<li>安装 Snabbdom<ul>
-<li>yarn add snabbdom</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>导入 Snabbdom</p>
-</blockquote>
-<ul>
-<li>Snabbdom 的官网 demo 中导入使用的是 commonjs 模块化语法，我们使用更流行的 ES6 模块化的语法 import</li>
-<li>关于模块化的语法请参考阮一峰老师的 Module 的语法</li>
-<li>ES6 模块与 CommonJs 模块的差异</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; init, h, thunk &#125; <span class="keyword">from</span> <span class="string">'snabbdom'</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>Snabbdom 的核心仅提供最基本的功能，只导出了三个函数 init()、h()、thunk()<ul>
-<li>init() 是一个高阶函数，返回 patch()</li>
-<li>h() 返回虚拟节点 VNode，这个函数我们在使用 Vue.js 的时候见过</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  router,</span><br><span class="line">  store,</span><br><span class="line">  render: <span class="function"><span class="params">h</span> =&gt;</span> h(App)</span><br><span class="line">&#125;).$mount(<span class="string">'#app'</span>)</span><br></pre></td></tr></table></figure>
-<ul>
-<li>thunk() 是一种优化策略，可以在处理不可变数据时使用</li>
-</ul>
-<ul>
-<li><strong>注意</strong>：导入的时候不能使用 import snabbdom form ‘snabbdom’<ul>
-<li>原因：mode_modules/src/snabbdom.js 末尾导出使用的语法是 export 导出 API，没有使用 export default 导出默认输出</li>
-</ul>
-</li>
-</ul>
-<h3 id="7-代码演示"><a href="#7-代码演示" class="headerlink" title="7.代码演示"></a>7.代码演示</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 01-basicusage.js</span></span><br><span class="line"><span class="keyword">import</span> &#123; h, init &#125; <span class="keyword">from</span> <span class="string">'snabbdom'</span></span><br><span class="line"><span class="comment">// 1.hello world</span></span><br><span class="line"><span class="comment">// 参数：数组，模块</span></span><br><span class="line"><span class="comment">// 返回值：patch 函数，作用对比两个vnode的差异更新到真实DOM</span></span><br><span class="line"><span class="keyword">let</span> patch = init([])</span><br><span class="line"><span class="comment">// 第一个参数：标签 + 选择器</span></span><br><span class="line"><span class="comment">// 第二个参数：如果是字符串的话就是标签中的内容</span></span><br><span class="line"><span class="keyword">let</span> vnode = h(<span class="string">'div#container.cls'</span>, <span class="string">'Hello World'</span>)</span><br><span class="line"><span class="keyword">let</span> app = <span class="built_in">document</span>.querySelector(<span class="string">'#app'</span>)</span><br><span class="line"><span class="comment">// 第一个参数：可以是DOM元素，内部会把DOM元素转换成VNode</span></span><br><span class="line"><span class="comment">// 第二个参数： VNode</span></span><br><span class="line"><span class="comment">// 返回值：VNode</span></span><br><span class="line"><span class="keyword">let</span> oldVnode = patch(app, vnode)</span><br><span class="line"><span class="comment">// 假设的时刻</span></span><br><span class="line">vnode = h(<span class="string">'div'</span>, <span class="string">'Hello Snabbdom'</span>)</span><br><span class="line">patch(oldVnode, vnode)</span><br><span class="line"><span class="comment">// 02-basicusage.js</span></span><br><span class="line"><span class="keyword">import</span> &#123; h, init &#125; <span class="keyword">from</span> <span class="string">'snabbdom'</span></span><br><span class="line"><span class="keyword">let</span> patch = init([])</span><br><span class="line"><span class="keyword">let</span> vnode = h(<span class="string">'div#container'</span>,[</span><br><span class="line">  h(<span class="string">'h1'</span>, <span class="string">'Hello Snabbdom'</span>),</span><br><span class="line">  h(<span class="string">'p'</span>, <span class="string">'这是一个p标签'</span>)</span><br><span class="line">])</span><br><span class="line"><span class="keyword">let</span> app = <span class="built_in">document</span>.querySelector(<span class="string">'#app'</span>)</span><br><span class="line"><span class="keyword">let</span> oldVnode = patch(app, vnode)</span><br><span class="line"></span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  vnode = h(<span class="string">'div#container'</span>,[</span><br><span class="line">    h(<span class="string">'h1'</span>, <span class="string">'Hello World'</span>),</span><br><span class="line">    h(<span class="string">'p'</span>, <span class="string">'Hello p'</span>)</span><br><span class="line">  ])</span><br><span class="line">  patch(oldVnode, vnode)</span><br><span class="line">  <span class="comment">// 清空页面元素 -- 错误</span></span><br><span class="line">  <span class="comment">// patch(oldVnode, null)</span></span><br><span class="line">  patch(oldVnode, h(<span class="string">'!'</span>))</span><br><span class="line">&#125;, <span class="number">2000</span>)</span><br></pre></td></tr></table></figure>
-
-<h3 id="8-模块"><a href="#8-模块" class="headerlink" title="8.模块"></a>8.模块</h3><blockquote>
-<p>模块</p>
-</blockquote>
-<p>Snabbdom 的核心库并不能处理元素的属性/样式/事件等，如果需要处理的话，可以使用模块</p>
-<blockquote>
-<p>常用模块</p>
-</blockquote>
-<ul>
-<li><p>官方提供了6个模块</p>
-<ul>
-<li>attributes<ul>
-<li>设置 DOM 元素的属性，使用 setAttributes()</li>
-<li>处理布尔类型的属性</li>
-</ul>
-</li>
-<li>props<ul>
-<li>和 attributes 模块相似，设置DOM元素的属性 element[attr] = value</li>
-<li>不处理布尔类型的属性</li>
-</ul>
-</li>
-<li>class<ul>
-<li>切换类样式</li>
-<li>注意：给元素设置类样式是通过 sel 选择器</li>
-</ul>
-</li>
-<li>dataset<ul>
-<li>设置 data-* 的自定义属性</li>
-</ul>
-</li>
-<li>eventlisteners<ul>
-<li>注册和移除事件<br>style</li>
-<li>设置行内样式，支持动画</li>
-<li>delayed/remove/destroy<blockquote>
-<p>模块使用</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>模块的使用步骤</p>
-<ul>
-<li>导入需要的模块</li>
-<li>init() 中注册模块</li>
-<li>使用 h() 函数创建 VNode 的时候，可以把第二个参数设置为对象，其他参数往后移</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 导入模块</span></span><br><span class="line"><span class="keyword">import</span> &#123; init, h &#125; <span class="keyword">from</span> <span class="string">'sanbbdom'</span></span><br><span class="line"><span class="keyword">import</span> style <span class="keyword">from</span> <span class="string">'snabbdom/modules/style'</span></span><br><span class="line"><span class="keyword">import</span> eventlisteners <span class="keyword">from</span> <span class="string">'snabbdom/modules/eventlisteners'</span></span><br><span class="line"><span class="comment">// 注册模块</span></span><br><span class="line"><span class="keyword">let</span> patch = init([</span><br><span class="line">  style,</span><br><span class="line">  eventlisteners</span><br><span class="line">])</span><br><span class="line"><span class="comment">// 使用 h() 函数的第二个参数传入模块需要的数据</span></span><br><span class="line"><span class="keyword">let</span> vnode = h(<span class="string">'div'</span>, &#123;</span><br><span class="line">  style: &#123;</span><br><span class="line">    backgroundColor: <span class="string">'red'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  on: &#123;</span><br><span class="line">    click: eventHandler</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,[</span><br><span class="line">  h(<span class="string">'h1'</span>, <span class="string">'Hello Snabbdom'</span>),</span><br><span class="line">  h(<span class="string">'p'</span>, <span class="string">'这是p标签'</span>)</span><br><span class="line">])</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">eventHandler</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'点击我了'</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> app = <span class="built_in">document</span>.querySlector(<span class="string">'#app'</span>)</span><br><span class="line">patch(app, vnode)</span><br></pre></td></tr></table></figure>
-
-<h3 id="9-Snabbdom-源码解析"><a href="#9-Snabbdom-源码解析" class="headerlink" title="9.Snabbdom 源码解析"></a>9.Snabbdom 源码解析</h3><blockquote>
-<p>如何学习源码</p>
-</blockquote>
-<ul>
-<li>先宏观了解</li>
-<li>带着目标看源码</li>
-<li>看源码的过程要不求甚解</li>
-<li>调试</li>
-<li>参考资料</li>
-</ul>
-<blockquote>
-<p>Snabbdom 的核心</p>
-</blockquote>
-<ul>
-<li>使用 h() 函数创建 JavaScript 对象(VNode)描述真实 DOM</li>
-<li>init() 设置模块，创建 patch()</li>
-<li>patch() 比较新旧两个 VNode</li>
-<li>把变化的内容更新到真实的 DOM 树上</li>
-</ul>
-<blockquote>
-<p>Snabbdom 源码</p>
-</blockquote>
-<ul>
-<li>源码地址<ul>
-<li><a href="https://github.com/snabbdom/snabbdom" target="_blank" rel="noopener">https://github.com/snabbdom/snabbdom</a></li>
-</ul>
-</li>
-</ul>
-<h3 id="10-h函数"><a href="#10-h函数" class="headerlink" title="10.h函数"></a>10.h函数</h3><ul>
-<li><p>h() 函数介绍</p>
-<ul>
-<li>在使用 Vue 的时候见过 h() 函数<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  router,</span><br><span class="line">  store,</span><br><span class="line">  render: <span class="function"><span class="params">h</span> =&gt;</span> h(App)</span><br><span class="line">&#125;).$mount(<span class="string">'#app'</span>)</span><br></pre></td></tr></table></figure></li>
-<li>h() 函数最早见于 hyperscript,使用 JavaScript 创建超文本</li>
-<li>Snabbdom 中的 h() 函数不是用来创建超文本，而是创建 VNode</li>
-</ul>
-</li>
-<li><p>函数重载</p>
-<ul>
-<li>概念<ul>
-<li>参数个数或类型不同的函数</li>
-<li>JavaScript 中没有重载的概念</li>
-<li>TypeScript 中有重载，不过重载的实现还是通过代码调整参数</li>
-</ul>
-</li>
-<li>重载的示意<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(a + b)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">a, b, c</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(a + b + c)</span><br><span class="line">&#125;</span><br><span class="line">add(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">add(<span class="number">1</span>, <span class="number">2</span>， <span class="number">3</span>)</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p>源码位置：src/h.ts</p>
-</li>
-</ul>
-<h3 id="11-必备快捷键"><a href="#11-必备快捷键" class="headerlink" title="11.必备快捷键"></a>11.必备快捷键</h3><ul>
-<li>F12 快速定位 或 Ctrl + 鼠标点击</li>
-<li>Alt + &lt;—— 返回</li>
-</ul>
-<h3 id="12-vnode"><a href="#12-vnode" class="headerlink" title="12.vnode"></a>12.vnode</h3><p>略</p>
-<h3 id="13-patch-的整体过程"><a href="#13-patch-的整体过程" class="headerlink" title="13.patch 的整体过程"></a>13.patch 的整体过程</h3><ul>
-<li>patch(oldVnode, newVnode)</li>
-<li>打补丁，把新节点中变化的内容渲染到真实 DOM，最后返回新节点作为下一次处理的旧节点</li>
-<li>对比新旧 VNode 是否相同节点（节点的 key 和 sel 相同）</li>
-<li>如果不是相同节点，删除之前的内容，重新渲染</li>
-<li>如果是相同节点，再判断薪的VNode是否有 text，如果有并且 oldnode 的 text 不同，直接更新文本内容</li>
-<li>如果新的 VNode 有 children，判断子节点是否有变化，判断子节点的过程使用的就是 diff 算法</li>
-<li>diff 过程只进行同层级比较</li>
-</ul>
-<h3 id="14-init"><a href="#14-init" class="headerlink" title="14.init"></a>14.init</h3><p>略</p>
-<h3 id="15-patch"><a href="#15-patch" class="headerlink" title="15.patch"></a>15.patch</h3><p>略</p>
-<h3 id="16-调试-patch"><a href="#16-调试-patch" class="headerlink" title="16.调试 patch"></a>16.调试 patch</h3><p>略</p>
-<h3 id="17-createElm"><a href="#17-createElm" class="headerlink" title="17.createElm"></a>17.createElm</h3><p>略</p>
-<h3 id="18-createElm-调试"><a href="#18-createElm-调试" class="headerlink" title="18.createElm 调试"></a>18.createElm 调试</h3><p>略</p>
-<h3 id="19-addVnodes-和-removeVnodes"><a href="#19-addVnodes-和-removeVnodes" class="headerlink" title="19.addVnodes 和 removeVnodes"></a>19.addVnodes 和 removeVnodes</h3><p>略</p>
-<h3 id="20-patchVnode"><a href="#20-patchVnode" class="headerlink" title="20.patchVnode"></a>20.patchVnode</h3><p>略</p>
-<h3 id="21-updateChildren-整体分析"><a href="#21-updateChildren-整体分析" class="headerlink" title="21.updateChildren 整体分析"></a>21.updateChildren 整体分析</h3><ul>
-<li><p>功能</p>
-<ul>
-<li>diff 算法的核心，对比新旧节点的 children，更新 DOM</li>
-</ul>
-</li>
-<li><p>执行过程</p>
-<ul>
-<li>要对比两棵树的差异，我们可以取第一棵树的每一个节点依次和第二棵树的每一个节点比较，但是这样的时间复杂度为O(n^3)</li>
-<li>在 DOM 操作的时候我们很少很少会把一个父节点移动/更新到某一个子节点</li>
-<li>因此只需要找同级别的子节点依次比较，然后再找下一级别的节点比较，这样算法的时间复杂度为O(n)</li>
-<li>在进行同级别节点比较的时候，首先会对新老节点数组的开始和结尾节点设置标记索引，遍历的过程中移动索引</li>
-<li>在对开始和结束节点比较的时候，总共有四种情况<ul>
-<li>oldStartVnode/newStartVnode(旧开始节点/新开始节点)</li>
-<li>oldEndVnode/newEndVnode(旧结束节点/新结束节点)</li>
-<li>oldStartVnode/oldEndVnode(旧开始节点/新结束节点)</li>
-<li>oldEndVnode/newStartVnode(旧结束节点/新开始节点)</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="22-updateChildren"><a href="#22-updateChildren" class="headerlink" title="22.updateChildren"></a>22.updateChildren</h3><p>略</p>
-<h3 id="23-调试-PatchVnode"><a href="#23-调试-PatchVnode" class="headerlink" title="23.调试 PatchVnode"></a>23.调试 PatchVnode</h3><p>略</p>
-<h3 id="24-调试-updateChildren"><a href="#24-调试-updateChildren" class="headerlink" title="24.调试 updateChildren"></a>24.调试 updateChildren</h3><p>略</p>
-<h3 id="25-调试带-key-的情况"><a href="#25-调试带-key-的情况" class="headerlink" title="25.调试带 key 的情况"></a>25.调试带 key 的情况</h3><p>略</p>
-<h3 id="26-模块源码"><a href="#26-模块源码" class="headerlink" title="26.模块源码"></a>26.模块源码</h3><p>略</p>
-<h2 id="任务五：模块作业"><a href="#任务五：模块作业" class="headerlink" title="任务五：模块作业"></a>任务五：模块作业</h2>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/20/31/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -3140,6 +2454,692 @@
 </ul>
 <h3 id="20-组件的-patch-过程"><a href="#20-组件的-patch-过程" class="headerlink" title="20.组件的 patch 过程"></a>20.组件的 patch 过程</h3><p>略</p>
 
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/20/30/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FY">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="旋の飞羽">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/12/20/30/" itemprop="url">学习笔记 ----- 【Vue.js 框架源码与进阶】手写 Vue Router、手写响应式实现、虚拟 DOM 和 Diff 算法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-20T00:00:00+08:00">
+                2020-12-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>作者：FY<br>引用请标明出处</p>
+</blockquote>
+<h1 id="Part-3-·-Vue-js-框架源码与进阶"><a href="#Part-3-·-Vue-js-框架源码与进阶" class="headerlink" title="Part 3 · Vue.js 框架源码与进阶"></a>Part 3 · Vue.js 框架源码与进阶</h1><h2 id="模块一-·-手写-Vue-Router、手写响应式实现、虚拟-DOM-和-Diff-算法"><a href="#模块一-·-手写-Vue-Router、手写响应式实现、虚拟-DOM-和-Diff-算法" class="headerlink" title="模块一 · 手写 Vue Router、手写响应式实现、虚拟 DOM 和 Diff 算法"></a>模块一 · 手写 Vue Router、手写响应式实现、虚拟 DOM 和 Diff 算法</h2><h2 id="任务一：Vue-js-基础回顾"><a href="#任务一：Vue-js-基础回顾" class="headerlink" title="任务一：Vue.js 基础回顾"></a>任务一：Vue.js 基础回顾</h2><h3 id="1-阶段内容"><a href="#1-阶段内容" class="headerlink" title="1.阶段内容"></a>1.阶段内容</h3><ul>
+<li>快速回顾 Vue.js 基础语法</li>
+<li>Vue Router 原理分析与实现</li>
+<li>虚拟 DOM 库 Snabbdom 源码解析</li>
+<li>响应式原理分析与实现</li>
+<li>Vue.js 源码分析</li>
+</ul>
+<h3 id="2-Vue-基础结构"><a href="#2-Vue-基础结构" class="headerlink" title="2.Vue 基础结构"></a>2.Vue 基础结构</h3><p>略</p>
+<h3 id="3-Vue-的生命周期"><a href="#3-Vue-的生命周期" class="headerlink" title="3.Vue 的生命周期"></a>3.Vue 的生命周期</h3><p>略</p>
+<h3 id="4-Vue-语法和概念-上"><a href="#4-Vue-语法和概念-上" class="headerlink" title="4.Vue 语法和概念-上"></a>4.Vue 语法和概念-上</h3><ul>
+<li>插值表达式</li>
+<li>指令</li>
+<li>计算属性和侦听器</li>
+<li>Class 和 Style 绑定</li>
+<li>条件渲染/列表渲染</li>
+<li>表单输入绑定</li>
+</ul>
+<h3 id="5-Vue-语法和概念-下"><a href="#5-Vue-语法和概念-下" class="headerlink" title="5.Vue 语法和概念-下"></a>5.Vue 语法和概念-下</h3><ul>
+<li>组件</li>
+<li>插槽</li>
+<li>插件</li>
+<li>混入 mixin</li>
+<li>深入响应式原理</li>
+<li>不同构建版本的 Vue</li>
+</ul>
+<h2 id="任务二：Vue-Router-原理实现"><a href="#任务二：Vue-Router-原理实现" class="headerlink" title="任务二：Vue-Router 原理实现"></a>任务二：Vue-Router 原理实现</h2><h3 id="1-课程介绍"><a href="#1-课程介绍" class="headerlink" title="1.课程介绍"></a>1.课程介绍</h3><ul>
+<li>Vue Router 基础回顾</li>
+<li>Hash 模式和 History 模式</li>
+<li>模拟实现自己的Vue Router</li>
+</ul>
+<h3 id="2-Vue-Router-基础回顾-使用步骤"><a href="#2-Vue-Router-基础回顾-使用步骤" class="headerlink" title="2.Vue Router 基础回顾-使用步骤"></a>2.Vue Router 基础回顾-使用步骤</h3><p>略</p>
+<h3 id="3-动态路由"><a href="#3-动态路由" class="headerlink" title="3.动态路由"></a>3.动态路由</h3><p>略</p>
+<h3 id="4-嵌套路由"><a href="#4-嵌套路由" class="headerlink" title="4.嵌套路由"></a>4.嵌套路由</h3><p>略</p>
+<h3 id="5-编程式导航"><a href="#5-编程式导航" class="headerlink" title="5.编程式导航"></a>5.编程式导航</h3><ul>
+<li>push</li>
+<li>replace</li>
+<li>go</li>
+</ul>
+<h3 id="6-Hash-模式和-History-模式的区别"><a href="#6-Hash-模式和-History-模式的区别" class="headerlink" title="6.Hash 模式和 History 模式的区别"></a>6.Hash 模式和 History 模式的区别</h3><ul>
+<li><p>表现形式的区别</p>
+<ul>
+<li>Hash 模式<ul>
+<li>https:music.163.com/#/palylist?id=3102961863</li>
+</ul>
+</li>
+<li>History 模式<ul>
+<li>https:music.163.com/palylist/3102961863</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>原理的区别</p>
+<ul>
+<li>Hash 模式是基于锚点，以及 onhashchange事件</li>
+<li>History 模式是基于 HTML5 中的 History API<ul>
+<li>history.pushState() IE10 以后才支持</li>
+<li>history.repalceState()</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="7-History-模式"><a href="#7-History-模式" class="headerlink" title="7.History 模式"></a>7.History 模式</h3><ul>
+<li>History 需要服务器的支持</li>
+<li>单页应用中，服务端不存在 <a href="http://www.testurl.com/login" target="_blank" rel="noopener">http://www.testurl.com/login</a> 这样的地址会返回找不到该页面</li>
+<li>在服务端应该除了静态资源外都返回单页应用的 index.html</li>
+</ul>
+<h3 id="8-History-模式-Node-js"><a href="#8-History-模式-Node-js" class="headerlink" title="8.History 模式 - Node.js"></a>8.History 模式 - Node.js</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"><span class="keyword">const</span> history = <span class="built_in">require</span>(<span class="string">'connect-history-api-fallback'</span>)</span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>)</span><br><span class="line"><span class="keyword">const</span> app = express()</span><br><span class="line">app.use(history())</span><br><span class="line">app.use(express.static(path.join(__dirname, <span class="string">'../web'</span>)))</span><br><span class="line">app.listen(<span class="number">3000</span>, () =&gt; &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'服务器开启， 端口：3000'</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="9-History-模式-nginx"><a href="#9-History-模式-nginx" class="headerlink" title="9.History 模式 - nginx"></a>9.History 模式 - nginx</h3><ul>
+<li>从官网下载 nginx 的压缩包</li>
+<li>把压缩包解压到 c 盘根目录， c:\nginx-1.18.0 文件夹</li>
+<li>打开命令行，切换到目录 c:\nginx-1.18.0</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 启动</span></span><br><span class="line">start nginx</span><br><span class="line"><span class="comment">// 重启</span></span><br><span class="line">nginx -s reload</span><br><span class="line"><span class="comment">// 停止</span></span><br><span class="line">nginx -s stop</span><br><span class="line"></span><br><span class="line"><span class="comment">// nginx</span></span><br><span class="line">location / &#123;</span><br><span class="line">  root html;</span><br><span class="line">  index index.html index.htm;</span><br><span class="line">  try_files $uri $uri/ <span class="regexp">/index.html;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="10-VueRouter-实现原理"><a href="#10-VueRouter-实现原理" class="headerlink" title="10.VueRouter 实现原理"></a>10.VueRouter 实现原理</h3><blockquote>
+<p>Vue 前置知识</p>
+</blockquote>
+<ul>
+<li>插件</li>
+<li>混入</li>
+<li>Vue.observable()</li>
+<li>插槽</li>
+<li>render 函数</li>
+<li>运行时和完整版的 Vue</li>
+</ul>
+<blockquote>
+<p>Hash 模式</p>
+</blockquote>
+<ul>
+<li>URL 中 # 后面的内容作为路径地址</li>
+<li>监听 hashchange 事件</li>
+<li>根据当前路由地址找到对应组件重新渲染</li>
+</ul>
+<blockquote>
+<p>History 模式</p>
+</blockquote>
+<ul>
+<li>通过 history.pushState() 方法改变地址栏</li>
+<li>监听 popstate 事件</li>
+<li>根据当前路由地址找到对应组件重新渲染</li>
+</ul>
+<h3 id="11-VueRouter-模拟实现-分析"><a href="#11-VueRouter-模拟实现-分析" class="headerlink" title="11.VueRouter 模拟实现 - 分析"></a>11.VueRouter 模拟实现 - 分析</h3><p>VueRouter</p>
+<ul>
+<li>options</li>
+<li>data</li>
+<li>routeMap</li>
+<li>Constructor(Options): VueRouter</li>
+<li>_install(Vue): void</li>
+<li>init(): void</li>
+<li>initEvent(): void</li>
+<li>createRouterMap(): void</li>
+<li>initComponents(Vue): void</li>
+</ul>
+<h3 id="12-VueRouter-install"><a href="#12-VueRouter-install" class="headerlink" title="12.VueRouter - install"></a>12.VueRouter - install</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> _Vue = <span class="literal">null</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">VueRouter</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> install (Vue) &#123;</span><br><span class="line">    <span class="comment">// 1.判断当前插件是否已经被安装</span></span><br><span class="line">    <span class="keyword">if</span>(VueRouter.install.installed)&#123;</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    VueRouter.install.installed = <span class="literal">true</span></span><br><span class="line">    <span class="comment">// 2.把 Vue 构造函数记录到全局变量</span></span><br><span class="line">    _Vue = Vue</span><br><span class="line">    <span class="comment">// 3.把创建 Vue 实例时候传入的router对象注入到Vue实例上 </span></span><br><span class="line">    <span class="comment">// 混入</span></span><br><span class="line">    _Vue.mixin(&#123;</span><br><span class="line">      beforeCreate () &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.$options.router)&#123;</span><br><span class="line">          _Vue.prototype.$router = <span class="keyword">this</span>.$options.router</span><br><span class="line">          <span class="keyword">this</span>.$options.router.init() <span class="comment">// 详见 15.VueRouter - router-link</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="13-VueRouter-构造函数"><a href="#13-VueRouter-构造函数" class="headerlink" title="13.VueRouter - 构造函数"></a>13.VueRouter - 构造函数</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">VueRouter</span> </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="keyword">constructor</span> (options) &#123;</span><br><span class="line">    <span class="keyword">this</span>.options = options</span><br><span class="line">    <span class="keyword">this</span>.routeMap = &#123;&#125;</span><br><span class="line">    <span class="keyword">this</span>.data = _Vue.observable(&#123;</span><br><span class="line">      current: <span class="string">'/'</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="14-VueRouter-createRouteMap"><a href="#14-VueRouter-createRouteMap" class="headerlink" title="14.VueRouter - createRouteMap"></a>14.VueRouter - createRouteMap</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">VueRouter</span> </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  createRouteMap() &#123;</span><br><span class="line">    <span class="comment">// 遍历所有的路由规则，把路由规则解析成键值对的形式 存储到 routeMap 中</span></span><br><span class="line">    <span class="keyword">this</span>.options.routes.forEach(<span class="function"><span class="params">route</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">this</span>.routeMap[route.path] = route.component</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="15-VueRouter-router-link"><a href="#15-VueRouter-router-link" class="headerlink" title="15.VueRouter - router-link"></a>15.VueRouter - router-link</h3><blockquote>
+<p>Vue 的构建版本</p>
+</blockquote>
+<ul>
+<li>运行时版：不支持 template 模板，需要打包的时候提前编译</li>
+<li>完整版：包含运行时和编译器，体积比运行时版大 10k 左右， 程序运行的时候把模板转换成 render 函数</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">VueRouter</span> </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  initComponents(Vue) &#123;</span><br><span class="line">    Vue.component(<span class="string">'router-link'</span>, &#123;</span><br><span class="line">      props: &#123;</span><br><span class="line">        to: <span class="built_in">String</span></span><br><span class="line">      &#125;,</span><br><span class="line">      template: <span class="string">'&lt;a :href = "to"&gt;&lt;slot&gt;&lt;/slot&gt;&lt;/a&gt;'</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  init() &#123;</span><br><span class="line">    <span class="keyword">this</span>.createRouteMap()</span><br><span class="line">    <span class="keyword">this</span>.initComponents(_Vue)</span><br><span class="line">    <span class="keyword">this</span>.initEvent() <span class="comment">// 详见 19.VueRouter - initEvent</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="16-VueRouter-完整版的-Vue"><a href="#16-VueRouter-完整版的-Vue" class="headerlink" title="16.VueRouter - 完整版的 Vue"></a>16.VueRouter - 完整版的 Vue</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// vue.config.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  runtimeCompiler: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="17-VueRouter-render"><a href="#17-VueRouter-render" class="headerlink" title="17.VueRouter - render"></a>17.VueRouter - render</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">VueRouter</span> </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  initComponents(Vue) &#123;</span><br><span class="line">    Vue.component(<span class="string">'router-link'</span>, &#123;</span><br><span class="line">      props: &#123;</span><br><span class="line">        to: <span class="built_in">String</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="comment">// template: '&lt;a :href = "to"&gt;&lt;slot&gt;&lt;/slot&gt;&lt;/a&gt;'</span></span><br><span class="line">      render(h) &#123;</span><br><span class="line">        <span class="keyword">return</span> h(<span class="string">'a'</span>, &#123;</span><br><span class="line">          attrs: &#123;</span><br><span class="line">            href: <span class="keyword">this</span>.to</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;,[<span class="keyword">this</span>.$slots.default])</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="18-VueRouter-router-view"><a href="#18-VueRouter-router-view" class="headerlink" title="18.VueRouter - router-view"></a>18.VueRouter - router-view</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">VueRouter</span> </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  initComponents(Vue) &#123;</span><br><span class="line">    Vue.component(<span class="string">'router-link'</span>, &#123;</span><br><span class="line">      props: &#123;</span><br><span class="line">        to: <span class="built_in">String</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="comment">// template: '&lt;a :href = "to"&gt;&lt;slot&gt;&lt;/slot&gt;&lt;/a&gt;'</span></span><br><span class="line">      render(h) &#123;</span><br><span class="line">        <span class="keyword">return</span> h(<span class="string">'a'</span>, &#123;</span><br><span class="line">          attrs: &#123;</span><br><span class="line">            href: <span class="keyword">this</span>.to</span><br><span class="line">          &#125;,</span><br><span class="line">          on: &#123;</span><br><span class="line">            click: <span class="keyword">this</span>.clickHandler</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;,[<span class="keyword">this</span>.$slots.default])</span><br><span class="line">      &#125;,</span><br><span class="line">      methods: &#123;</span><br><span class="line">        clickHandler(e) &#123;</span><br><span class="line">          history.pushState(&#123;&#125;,<span class="string">''</span>,<span class="keyword">this</span>.to)</span><br><span class="line">          <span class="keyword">this</span>.$router.data.current = <span class="keyword">this</span>.to</span><br><span class="line">          e.preventDefault()</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">const</span> self = <span class="keyword">this</span></span><br><span class="line">    Vue.component(<span class="string">'router-view'</span>, &#123;</span><br><span class="line">      render(h)&#123;</span><br><span class="line">        <span class="keyword">const</span> component = self.routeMap[self.data.current]</span><br><span class="line">        <span class="keyword">return</span> h(component)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="19-VueRouter-initEvent"><a href="#19-VueRouter-initEvent" class="headerlink" title="19.VueRouter - initEvent"></a>19.VueRouter - initEvent</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">VueRouter</span> </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  initEvent() &#123;</span><br><span class="line">    <span class="built_in">window</span>.addEventListener(<span class="string">'popstate'</span>, () =&gt; &#123;</span><br><span class="line">      <span class="keyword">this</span>.dada.current = <span class="built_in">window</span>.location.pathname</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="任务三：模拟-Vue-js-响应式原理"><a href="#任务三：模拟-Vue-js-响应式原理" class="headerlink" title="任务三：模拟 Vue.js 响应式原理"></a>任务三：模拟 Vue.js 响应式原理</h2><h3 id="1-课程目标"><a href="#1-课程目标" class="headerlink" title="1.课程目标"></a>1.课程目标</h3><ul>
+<li>模拟一个最小版本的 Vue</li>
+<li>响应式原理在面试的常问问题</li>
+<li>学习别人优秀的经验，转换成自己的经验</li>
+<li>实际项目中出问题的原理层面的解决<ul>
+<li>给 Vue 实例新增一个成员是否是响应式的</li>
+<li>给属性重新赋值成对象，是否是响应式的</li>
+</ul>
+</li>
+<li>为学习 Vue 源码做铺垫</li>
+</ul>
+<h3 id="2-数据驱动"><a href="#2-数据驱动" class="headerlink" title="2.数据驱动"></a>2.数据驱动</h3><ul>
+<li><p>准备工作</p>
+<ul>
+<li>数据驱动</li>
+<li>响应式的核心原理</li>
+<li>发布订阅模式和观察者模式</li>
+</ul>
+</li>
+<li><p>数据驱动</p>
+<ul>
+<li>数据响应式、双向绑定、数据驱动</li>
+<li>数据响应式<ul>
+<li>数据模型仅仅是普通的 JavaScript 对象，而当我们修改数据时，视图会进行更新，避免了繁琐的 DOM 操作，提高开发效率</li>
+</ul>
+</li>
+<li>双向绑定<ul>
+<li>数据改变，视图改变；视图改变，数据也随之改变</li>
+<li>我们可以使用 v-model 在表单元素上创建双向绑定数据</li>
+</ul>
+</li>
+<li>数据驱动是 Vue 最独特的特性之一<ul>
+<li>开发过程中仅需要关注数据本身，不需要关心数据是如何渲染到视图</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-数据响应式核心原理-Vue2"><a href="#3-数据响应式核心原理-Vue2" class="headerlink" title="3.数据响应式核心原理 - Vue2"></a>3.数据响应式核心原理 - Vue2</h3><p>略</p>
+<h3 id="4-数据响应式核心原理-Vue3"><a href="#4-数据响应式核心原理-Vue3" class="headerlink" title="4.数据响应式核心原理 - Vue3"></a>4.数据响应式核心原理 - Vue3</h3><p>略</p>
+<h3 id="5-发布订阅模式"><a href="#5-发布订阅模式" class="headerlink" title="5.发布订阅模式"></a>5.发布订阅模式</h3><ul>
+<li><p>发布/订阅模式</p>
+<ul>
+<li>订阅者</li>
+<li>发布者</li>
+<li>信号中心</li>
+</ul>
+</li>
+<li><p>我们假定，存在一个“信号中心”，某个任务执行完成，就向信号中心“发布”一个信号，其他任务可以向信号中心“订阅”这个信号，从而知道什么时候自己可以开始执行。这就叫做“发布/订阅模式”</p>
+</li>
+</ul>
+<h3 id="6-观察者模式"><a href="#6-观察者模式" class="headerlink" title="6.观察者模式"></a>6.观察者模式</h3><ul>
+<li><p>观察者（订阅者） – Watcher</p>
+<ul>
+<li>update(): 当事件发生时，具体要做的事情</li>
+</ul>
+</li>
+<li><p>目标（发布者） – Dep</p>
+<ul>
+<li>subs 数组：存储所有的观察者</li>
+<li>addSub()：添加观察者</li>
+<li>notify()：当事件发生，调用所有观察者的 update() 方法</li>
+</ul>
+</li>
+<li><p>没有事件中心</p>
+</li>
+</ul>
+<h3 id="7-模拟Vue响应式原理-分析"><a href="#7-模拟Vue响应式原理-分析" class="headerlink" title="7.模拟Vue响应式原理 - 分析"></a>7.模拟Vue响应式原理 - 分析</h3><p>略</p>
+<h3 id="8-Vue"><a href="#8-Vue" class="headerlink" title="8.Vue"></a>8.Vue</h3><ul>
+<li>功能<ul>
+<li>负责接收初始化的参数（选项）</li>
+<li>负责把data中的属性注入到Vue实例，转换成getter/setter</li>
+<li>负责调用 observer 监听 data 中所有属性的变化</li>
+<li>负责调用complier解析指令/差值表达式</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Vue</span> </span>&#123;</span><br><span class="line">  contructor(option) &#123;</span><br><span class="line">    <span class="comment">// 1.通过属性保存选项的数据</span></span><br><span class="line">    <span class="keyword">this</span>.$options = options || &#123;&#125;</span><br><span class="line">    <span class="keyword">this</span>.$data = options.data || &#123;&#125;</span><br><span class="line">    <span class="keyword">this</span>.$el = <span class="keyword">typeof</span> options.el === <span class="string">'string'</span> ? <span class="built_in">document</span>.querySelector(options.el):options.el</span><br><span class="line">    <span class="comment">// 2.把data中的成员转换成getter和setter，注入到vue实例中</span></span><br><span class="line">    <span class="keyword">this</span>.proxyData(<span class="keyword">this</span>.$data)</span><br><span class="line">    <span class="comment">// 3.调用observer对象，监听数据的变化</span></span><br><span class="line">    <span class="comment">// 4.调用compiler对象，解析指令和差值表达式</span></span><br><span class="line">  &#125;</span><br><span class="line">  _proxyData(data) &#123;</span><br><span class="line">    <span class="comment">// 遍历data中的所有属性</span></span><br><span class="line">    <span class="built_in">Object</span>.keys(data).forEach(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 把data的属性注入到vue实例中</span></span><br><span class="line">      <span class="built_in">Object</span>.defineProperty(<span class="keyword">this</span>, key, &#123;</span><br><span class="line">        enumerable: <span class="literal">true</span>,</span><br><span class="line">        configurable: <span class="literal">true</span>,</span><br><span class="line">        <span class="keyword">get</span>()&#123;</span><br><span class="line">          <span class="keyword">return</span> data[key]</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="keyword">set</span>(newValue) &#123;</span><br><span class="line">          <span class="keyword">if</span>(newValue === data[key]) &#123;</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">          &#125;</span><br><span class="line">          data[key] = newValue</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="9-Observer"><a href="#9-Observer" class="headerlink" title="9.Observer"></a>9.Observer</h3><ul>
+<li>功能<ul>
+<li>负责把data选项中的属性转换成响应式数据</li>
+<li>data 中的某个属性也是对象，把该属性转换成响应式数据</li>
+<li>数据变化发送通知</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// vue.js</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Vue</span> </span>&#123;</span><br><span class="line">  contructor(option) &#123;</span><br><span class="line">    <span class="comment">// 1.通过属性保存选项的数据</span></span><br><span class="line">    <span class="keyword">this</span>.$options = options || &#123;&#125;</span><br><span class="line">    <span class="keyword">this</span>.$data = options.data || &#123;&#125;</span><br><span class="line">    <span class="keyword">this</span>.$el = <span class="keyword">typeof</span> options.el === <span class="string">'string'</span> ? <span class="built_in">document</span>.querySelector(options.el):options.el</span><br><span class="line">    <span class="comment">// 2.把data中的成员转换成getter和setter，注入到vue实例中</span></span><br><span class="line">    <span class="keyword">this</span>.proxyData(<span class="keyword">this</span>.$data)</span><br><span class="line">    <span class="comment">// 3.调用observer对象，监听数据的变化</span></span><br><span class="line">    <span class="keyword">new</span> Observer(<span class="keyword">this</span>.$data)</span><br><span class="line">    <span class="comment">// 4.调用compiler对象，解析指令和差值表达式</span></span><br><span class="line">  &#125;</span><br><span class="line">  _proxyData(data) &#123;</span><br><span class="line">    <span class="comment">// 遍历data中的所有属性</span></span><br><span class="line">    <span class="built_in">Object</span>.keys(data).forEach(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 把data的属性注入到vue实例中</span></span><br><span class="line">      <span class="built_in">Object</span>.defineProperty(<span class="keyword">this</span>, key, &#123;</span><br><span class="line">        enumerable: <span class="literal">true</span>,</span><br><span class="line">        configurable: <span class="literal">true</span>,</span><br><span class="line">        <span class="keyword">get</span>()&#123;</span><br><span class="line">          <span class="keyword">return</span> data[key]</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="keyword">set</span>(newValue) &#123;</span><br><span class="line">          <span class="keyword">if</span>(newValue === data[key]) &#123;</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">          &#125;</span><br><span class="line">          data[key] = newValue</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// observer.js</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Observer</span> </span>&#123;</span><br><span class="line">  constuctor(data)&#123;</span><br><span class="line">    <span class="keyword">this</span>.walk(data)</span><br><span class="line">  &#125;</span><br><span class="line">  walk (data) &#123;</span><br><span class="line">    <span class="comment">// 1.判断data是否是对象</span></span><br><span class="line">    <span class="keyword">if</span>(!data || <span class="keyword">typeof</span> data !== <span class="string">'object'</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 2.遍历data对象的所有属性</span></span><br><span class="line">    <span class="built_in">Object</span>.keys(data).forEach(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">this</span>.defineReactive(data, key, data[key])</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  defineReactive(obj, key, val) &#123;</span><br><span class="line">    <span class="keyword">let</span> that = <span class="keyword">this</span></span><br><span class="line">    <span class="keyword">this</span>.walk(val) <span class="comment">// @ 11.Observer - defineReactive2</span></span><br><span class="line">    <span class="built_in">Object</span>.defineProperty(obj, key, &#123;</span><br><span class="line">      enumerable: <span class="literal">true</span>,</span><br><span class="line">      configurable: <span class="literal">true</span>,</span><br><span class="line">      <span class="keyword">get</span>() &#123;</span><br><span class="line">        <span class="keyword">return</span> val</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="keyword">set</span>(newValue) &#123;</span><br><span class="line">        <span class="keyword">if</span>(newValue === val) &#123;</span><br><span class="line">          <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        val = newValue</span><br><span class="line">        that.walk(newValue) <span class="comment">// @ 11.Observer - defineReactive2</span></span><br><span class="line">        <span class="comment">// 发送通知</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="10-Observer-defineReactive1"><a href="#10-Observer-defineReactive1" class="headerlink" title="10.Observer - defineReactive1"></a>10.Observer - defineReactive1</h3><p>略</p>
+<h3 id="11-Observer-defineReactive2"><a href="#11-Observer-defineReactive2" class="headerlink" title="11.Observer - defineReactive2"></a>11.Observer - defineReactive2</h3><p>略</p>
+<h3 id="12-Compiler"><a href="#12-Compiler" class="headerlink" title="12.Compiler"></a>12.Compiler</h3><ul>
+<li><p>功能</p>
+<ul>
+<li>负责编译模板，解析指令/插值表达式</li>
+<li>负责页面的首次渲染</li>
+<li>当数据变化后重新渲染视图</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// compiler.js</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Compiler</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span> (vm) &#123;</span><br><span class="line">     <span class="keyword">this</span>.el = vm.$el</span><br><span class="line">     <span class="keyword">this</span>.vm = vm</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 编译模板，处理文本节点和元素节点</span></span><br><span class="line">  compile(el) &#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 编译元素节点，处理指令</span></span><br><span class="line">  compileElement(node)&#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 编译文本节点，处理差值表达式</span></span><br><span class="line">  compileText(node) &#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 判断元素属性是否是指令</span></span><br><span class="line">  isDirective(attrName) &#123;</span><br><span class="line">    <span class="keyword">return</span> attrName.startsWith(<span class="string">'v-'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 判断节点是否是文本节点</span></span><br><span class="line">  isTextNode(node) &#123;</span><br><span class="line">    <span class="keyword">return</span> node.nodeType === <span class="number">3</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 判断节点是否是元素节点</span></span><br><span class="line">  isElementNode(node) &#123;</span><br><span class="line">    <span class="keyword">return</span> node.nodeType === <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="13-Compiler-compile"><a href="#13-Compiler-compile" class="headerlink" title="13.Compiler - compile"></a>13.Compiler - compile</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// compiler.js</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Compiler</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span> (vm) &#123;</span><br><span class="line">     <span class="keyword">this</span>.el = vm.$el</span><br><span class="line">     <span class="keyword">this</span>.vm = vm</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 编译模板，处理文本节点和元素节点</span></span><br><span class="line">  compile(el) &#123;</span><br><span class="line">    <span class="keyword">let</span> childNodes = el.childNodes</span><br><span class="line">    <span class="built_in">Array</span>.from(childNodes).forEach(<span class="function"><span class="params">node</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 处理文本节点</span></span><br><span class="line">      <span class="keyword">if</span>(<span class="keyword">this</span>.isTextNode(node)) &#123;</span><br><span class="line">        <span class="keyword">this</span>.compileText(node)</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">this</span>.isElementNode(node)) &#123;</span><br><span class="line">        <span class="comment">// 处理元素节点</span></span><br><span class="line">        <span class="keyword">this</span>.compileElement(node)</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// 判断node节点，是否有子节点，如果子节点，要递归调用compile</span></span><br><span class="line">      <span class="keyword">if</span>(node.childNodes &amp;&amp; node.childNodes.length) &#123;</span><br><span class="line">        <span class="keyword">this</span>.compile(node)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="14-Compiler-compileText"><a href="#14-Compiler-compileText" class="headerlink" title="14.Compiler - compileText"></a>14.Compiler - compileText</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// vue.js</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Vue</span> </span>&#123;</span><br><span class="line">  contructor(option) &#123;</span><br><span class="line">    <span class="comment">// 1.通过属性保存选项的数据</span></span><br><span class="line">    <span class="keyword">this</span>.$options = options || &#123;&#125;</span><br><span class="line">    <span class="keyword">this</span>.$data = options.data || &#123;&#125;</span><br><span class="line">    <span class="keyword">this</span>.$el = <span class="keyword">typeof</span> options.el === <span class="string">'string'</span> ? <span class="built_in">document</span>.querySelector(options.el):options.el</span><br><span class="line">    <span class="comment">// 2.把data中的成员转换成getter和setter，注入到vue实例中</span></span><br><span class="line">    <span class="keyword">this</span>.proxyData(<span class="keyword">this</span>.$data)</span><br><span class="line">    <span class="comment">// 3.调用observer对象，监听数据的变化</span></span><br><span class="line">    <span class="keyword">new</span> Observer(<span class="keyword">this</span>.$data)</span><br><span class="line">    <span class="comment">// 4.调用compiler对象，解析指令和差值表达式</span></span><br><span class="line">    <span class="keyword">new</span> Compiler(<span class="keyword">this</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  _proxyData(data) &#123;</span><br><span class="line">    <span class="comment">// 遍历data中的所有属性</span></span><br><span class="line">    <span class="built_in">Object</span>.keys(data).forEach(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 把data的属性注入到vue实例中</span></span><br><span class="line">      <span class="built_in">Object</span>.defineProperty(<span class="keyword">this</span>, key, &#123;</span><br><span class="line">        enumerable: <span class="literal">true</span>,</span><br><span class="line">        configurable: <span class="literal">true</span>,</span><br><span class="line">        <span class="keyword">get</span>()&#123;</span><br><span class="line">          <span class="keyword">return</span> data[key]</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="keyword">set</span>(newValue) &#123;</span><br><span class="line">          <span class="keyword">if</span>(newValue === data[key]) &#123;</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">          &#125;</span><br><span class="line">          data[key] = newValue</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// compiler.js</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Compiler</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span> (vm) &#123;</span><br><span class="line">    <span class="keyword">this</span>.el = vm.$el</span><br><span class="line">    <span class="keyword">this</span>.vm = vm</span><br><span class="line">    <span class="keyword">this</span>.compile(<span class="keyword">this</span>.el)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 编译模板，处理文本节点和元素节点</span></span><br><span class="line">  compile(el) &#123;</span><br><span class="line">    <span class="keyword">let</span> childNodes = el.childNodes</span><br><span class="line">    <span class="built_in">Array</span>.from(childNodes).forEach(<span class="function"><span class="params">node</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 处理文本节点</span></span><br><span class="line">      <span class="keyword">if</span>(<span class="keyword">this</span>.isTextNode(node)) &#123;</span><br><span class="line">        <span class="keyword">this</span>.compileText(node)</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">this</span>.isElementNode(node)) &#123;</span><br><span class="line">        <span class="comment">// 处理元素节点</span></span><br><span class="line">        <span class="keyword">this</span>.compileElement(node)</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// 判断node节点，是否有子节点，如果子节点，要递归调用compile</span></span><br><span class="line">      <span class="keyword">if</span>(node.childNodes &amp;&amp; node.childNodes.length) &#123;</span><br><span class="line">        <span class="keyword">this</span>.compile(node)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 编译文本节点，处理差值表达式</span></span><br><span class="line">  compileText(node) &#123;</span><br><span class="line">    <span class="keyword">let</span> reg = <span class="regexp">/\&#123;\&#123;(.+?)\&#125;\&#125;/</span></span><br><span class="line">    <span class="keyword">let</span> value = node.textContent</span><br><span class="line">    <span class="keyword">if</span>(reg.test(value))&#123;</span><br><span class="line">      <span class="keyword">let</span> key = <span class="built_in">RegExp</span>.$<span class="number">1.</span>trim()</span><br><span class="line">      node.textContent = value.replace(reg, <span class="keyword">this</span>.vm[key])</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="15-Compiler-compileElement"><a href="#15-Compiler-compileElement" class="headerlink" title="15.Compiler - compileElement"></a>15.Compiler - compileElement</h3>  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// compiler.js</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Compiler</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span> (vm) &#123;</span><br><span class="line">    <span class="keyword">this</span>.el = vm.$el</span><br><span class="line">    <span class="keyword">this</span>.vm = vm</span><br><span class="line">    <span class="keyword">this</span>.compile(<span class="keyword">this</span>.el)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 编译模板，处理文本节点和元素节点</span></span><br><span class="line">  compile(el) &#123;</span><br><span class="line">    <span class="keyword">let</span> childNodes = el.childNodes</span><br><span class="line">    <span class="built_in">Array</span>.from(childNodes).forEach(<span class="function"><span class="params">node</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 处理文本节点</span></span><br><span class="line">      <span class="keyword">if</span>(<span class="keyword">this</span>.isTextNode(node)) &#123;</span><br><span class="line">        <span class="keyword">this</span>.compileText(node)</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">this</span>.isElementNode(node)) &#123;</span><br><span class="line">        <span class="comment">// 处理元素节点</span></span><br><span class="line">        <span class="keyword">this</span>.compileElement(node)</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// 判断node节点，是否有子节点，如果子节点，要递归调用compile</span></span><br><span class="line">      <span class="keyword">if</span>(node.childNodes &amp;&amp; node.childNodes.length) &#123;</span><br><span class="line">        <span class="keyword">this</span>.compile(node)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 编译元素节点，处理指令</span></span><br><span class="line">  compileElement(node) &#123;</span><br><span class="line">    <span class="comment">// 遍历所有的属性节点</span></span><br><span class="line">    <span class="built_in">Array</span>.from(node.attributes).forEach(<span class="function"><span class="params">attr</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 判断是否是指令</span></span><br><span class="line">      <span class="keyword">let</span> attrName = attr.name</span><br><span class="line">      <span class="keyword">if</span>(<span class="keyword">this</span>.isDirective(attrName)) &#123;</span><br><span class="line">        attrName = attrName.substr(<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">let</span> key = attr.value</span><br><span class="line">        <span class="keyword">this</span>.update(node,key,attrName)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  update(node,key,attrName) &#123;</span><br><span class="line">    <span class="keyword">let</span> updateFn = <span class="keyword">this</span>[attrName + <span class="string">'Updater'</span>]</span><br><span class="line">    updateFn &amp;&amp; updateFn(node, <span class="keyword">this</span>.vm[key])</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 处理v-text指令</span></span><br><span class="line">  textUpdater(node, value) &#123;</span><br><span class="line">    node.textContent = value</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// v-model</span></span><br><span class="line">  modelUpdater(node, value) &#123;</span><br><span class="line">    node.value = value</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="16-Compiler复习"><a href="#16-Compiler复习" class="headerlink" title="16.Compiler复习"></a>16.Compiler复习</h3><p>略</p>
+<h3 id="17-Dep"><a href="#17-Dep" class="headerlink" title="17.Dep"></a>17.Dep</h3><ul>
+<li>功能<ul>
+<li>收集依赖，添加观察者（watcher）</li>
+<li>通知所有观察者</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// observer.js</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Observer</span> </span>&#123;</span><br><span class="line">  constuctor(data)&#123;</span><br><span class="line">    <span class="keyword">this</span>.walk(data)</span><br><span class="line">  &#125;</span><br><span class="line">  walk (data) &#123;</span><br><span class="line">    <span class="comment">// 1.判断data是否是对象</span></span><br><span class="line">    <span class="keyword">if</span>(!data || <span class="keyword">typeof</span> data !== <span class="string">'object'</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 2.遍历data对象的所有属性</span></span><br><span class="line">    <span class="built_in">Object</span>.keys(data).forEach(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">this</span>.defineReactive(data, key, data[key])</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  defineReactive(obj, key, val) &#123;</span><br><span class="line">    <span class="keyword">let</span> that = <span class="keyword">this</span></span><br><span class="line">    <span class="comment">// 负责收集依赖，并发送通知</span></span><br><span class="line">    <span class="keyword">let</span> dep = <span class="keyword">new</span> Dep()</span><br><span class="line">    <span class="comment">// 如果val是对象，把val内部的属性转换成响应式数据</span></span><br><span class="line">    <span class="keyword">this</span>.walk(val) <span class="comment">// @ 11.Observer - defineReactive2</span></span><br><span class="line">    <span class="built_in">Object</span>.defineProperty(obj, key, &#123;</span><br><span class="line">      enumerable: <span class="literal">true</span>,</span><br><span class="line">      configurable: <span class="literal">true</span>,</span><br><span class="line">      <span class="keyword">get</span>() &#123;</span><br><span class="line">        Dep.target &amp;&amp; dep.addSub(Dep.target)</span><br><span class="line">        <span class="keyword">return</span> val</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="keyword">set</span>(newValue) &#123;</span><br><span class="line">        <span class="keyword">if</span>(newValue === val) &#123;</span><br><span class="line">          <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        val = newValue</span><br><span class="line">        that.walk(newValue) <span class="comment">// @ 11.Observer - defineReactive2</span></span><br><span class="line">        <span class="comment">// 发送通知</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// dep.js</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dep</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span> () &#123;</span><br><span class="line">    <span class="comment">// 存储所有的观察者</span></span><br><span class="line">    <span class="keyword">this</span>.subs = []</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 添加观察者</span></span><br><span class="line">  addSub(sub)&#123;</span><br><span class="line">    <span class="keyword">if</span>(sub &amp;&amp; sub.update) &#123;</span><br><span class="line">      <span class="keyword">this</span>.subs.push(sub)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 发出通知</span></span><br><span class="line">  notify() &#123;</span><br><span class="line">    <span class="keyword">this</span>.subs.forEach(<span class="function"><span class="params">sub</span> =&gt;</span> &#123;</span><br><span class="line">      sub.update()</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="18-Wathcer"><a href="#18-Wathcer" class="headerlink" title="18.Wathcer"></a>18.Wathcer</h3><ul>
+<li>功能<ul>
+<li>当数据变化触发依赖，dep 通知所有的 Wachter 实例更新视图</li>
+<li>自身实例化的时候往dep对象中添加自己</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// watcher.js</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Watcher</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span> (vm, key, cb) &#123;</span><br><span class="line">    <span class="keyword">this</span>.vm = vm</span><br><span class="line">    <span class="comment">// data中的属性名称</span></span><br><span class="line">    <span class="keyword">this</span>.key = key</span><br><span class="line">    <span class="comment">// 回调函数负责更新视图</span></span><br><span class="line">    <span class="keyword">this</span>.cb = cb</span><br><span class="line">    <span class="comment">// 把watcher对象记录到Dep类的静态属性target</span></span><br><span class="line">    Dep.target = <span class="keyword">this</span></span><br><span class="line">    <span class="comment">// 触发get方法，在get方法中会调用addSub</span></span><br><span class="line">    <span class="keyword">this</span>.oldValue = vm[key]</span><br><span class="line">    Dep.target = <span class="literal">null</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 当数据变化的时候更新视图</span></span><br><span class="line">  update() &#123;</span><br><span class="line">    <span class="keyword">let</span> newValue = <span class="keyword">this</span>.vm[<span class="keyword">this</span>.key]</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>.oldValue === newValue) &#123;</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.cb(newValue)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="19-创建Wathcer对象1"><a href="#19-创建Wathcer对象1" class="headerlink" title="19.创建Wathcer对象1"></a>19.创建Wathcer对象1</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// compiler.js</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Compiler</span> </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="comment">// 编译文本节点，处理差值表达式</span></span><br><span class="line">  compileText(node) &#123;</span><br><span class="line">    <span class="keyword">let</span> reg = <span class="regexp">/\&#123;\&#123;(.+?)\&#125;\&#125;/</span></span><br><span class="line">    <span class="keyword">let</span> value = node.textContent</span><br><span class="line">    <span class="keyword">if</span>(reg.test(value))&#123;</span><br><span class="line">      <span class="keyword">let</span> key = <span class="built_in">RegExp</span>.$<span class="number">1.</span>trim()</span><br><span class="line">      node.textContent = value.replace(reg, <span class="keyword">this</span>.vm[key])</span><br><span class="line">      <span class="comment">// 创建watcher对象，当数据改变更新视图</span></span><br><span class="line">      <span class="keyword">new</span> Wathcer(<span class="keyword">this</span>.vm, key, (newValue) =&gt; &#123;</span><br><span class="line">         node.textContent = newValue</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="20-创建Wathcer对象2"><a href="#20-创建Wathcer对象2" class="headerlink" title="20.创建Wathcer对象2"></a>20.创建Wathcer对象2</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// compiler.js</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Compiler</span> </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  update(node,key,attrName) &#123;</span><br><span class="line">    <span class="keyword">let</span> updateFn = <span class="keyword">this</span>[attrName + <span class="string">'Updater'</span>]</span><br><span class="line">    updateFn &amp;&amp; updateFn.call(<span class="keyword">this</span>, node, <span class="keyword">this</span>.vm[key], key)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 处理v-text指令</span></span><br><span class="line">  textUpdater(node, value, key) &#123;</span><br><span class="line">    node.textContent = value</span><br><span class="line">    <span class="keyword">new</span> Wathcer(<span class="keyword">this</span>.vm, key, (newValue) =&gt; &#123;</span><br><span class="line">      node.textContent = newValue</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  modelUpdater(node, value, key) &#123;</span><br><span class="line">    node.value = value</span><br><span class="line">    <span class="keyword">new</span> Wathcer(<span class="keyword">this</span>.vm, key, (newValue) =&gt; &#123;</span><br><span class="line">      node.value = newValue</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="21-双向绑定"><a href="#21-双向绑定" class="headerlink" title="21.双向绑定"></a>21.双向绑定</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// compiler.js</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Compiler</span> </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  modelUpdater(node, value, key) &#123;</span><br><span class="line">    node.value = value</span><br><span class="line">    <span class="keyword">new</span> Wathcer(<span class="keyword">this</span>.vm, key, (newValue) =&gt; &#123;</span><br><span class="line">      node.value = newValue</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">// 双向绑定</span></span><br><span class="line">    node.addEventListener(<span class="string">'input'</span>, () =&gt; &#123;</span><br><span class="line">      <span class="keyword">this</span>.vm[key] = node.value</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="22-调试-首次渲染"><a href="#22-调试-首次渲染" class="headerlink" title="22.调试-首次渲染"></a>22.调试-首次渲染</h3><ul>
+<li>通过调试加深对代码的理解<ul>
+<li>1.调试页面首次渲染的过程</li>
+<li>2.调试数据改变更新视图的过程</li>
+</ul>
+</li>
+</ul>
+<h3 id="23-数据改变"><a href="#23-数据改变" class="headerlink" title="23.数据改变"></a>23.数据改变</h3><p>略</p>
+<h3 id="24-总结-问题"><a href="#24-总结-问题" class="headerlink" title="24.总结-问题"></a>24.总结-问题</h3><ul>
+<li>问题<ul>
+<li>给属性重新赋值成对象，是否是响应式的？</li>
+<li>给Vue实例新增一个成员是否是响应式的？</li>
+</ul>
+</li>
+</ul>
+<h3 id="25-总结-整体流程"><a href="#25-总结-整体流程" class="headerlink" title="25.总结-整体流程"></a>25.总结-整体流程</h3><p>略</p>
+<h2 id="任务四：Virtual-DOM-的实现原理"><a href="#任务四：Virtual-DOM-的实现原理" class="headerlink" title="任务四：Virtual DOM 的实现原理"></a>任务四：Virtual DOM 的实现原理</h2><h3 id="1-课程目标-1"><a href="#1-课程目标-1" class="headerlink" title="1.课程目标"></a>1.课程目标</h3><ul>
+<li>了解什么是虚拟DOM，以及虚拟DOM的作用</li>
+<li>Snabbdom 的基本使用</li>
+<li>Snabbdom 的源码解析</li>
+</ul>
+<h3 id="2-什么是虚拟DOM"><a href="#2-什么是虚拟DOM" class="headerlink" title="2.什么是虚拟DOM"></a>2.什么是虚拟DOM</h3><ul>
+<li>Virtual DOM（虚拟 DOM），是由普通的 JS 对象来描述 DOM 对象，因为不是真实的 DOM 对象，所以叫 Virtual DOM</li>
+</ul>
+<h3 id="3-为什么使用虚拟DOM"><a href="#3-为什么使用虚拟DOM" class="headerlink" title="3.为什么使用虚拟DOM"></a>3.为什么使用虚拟DOM</h3><ul>
+<li>手动操作 DOM 比较麻烦，还需要考虑浏览器兼容性问题，虽然有 jQuery 等库简化 DOM 操作，但是随着项目的复杂 DOM 操作复杂提升</li>
+<li>为了简化 DOM 的复杂操作于是出现了各种 MVVM 框架，MVVM 框架解决了视图和状态的同步问题</li>
+<li>为了简化视图的操作我们可以使用模板引擎，但是模板引擎没有解决跟踪状态变化的问题，于是 Virtual DOM 出现了</li>
+<li>Virtual DOM 的好处是当状态改变时不需要立即更新 DOM，只需要创建一个虚拟树来描述 DOM，Virtual DOM 内部将弄清楚如何有效（diff）的更新 DOM</li>
+<li>参考 github 上 virtual-dom 的描述<ul>
+<li>虚拟 DOM 可以维护程序的状态，跟踪上一次的状态</li>
+<li>通过比较前后两次状态的差异更新真实 DOM</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-虚拟DOM的作用和虚拟DOM库"><a href="#4-虚拟DOM的作用和虚拟DOM库" class="headerlink" title="4.虚拟DOM的作用和虚拟DOM库"></a>4.虚拟DOM的作用和虚拟DOM库</h3><ul>
+<li><p>虚拟 DOM 的作用</p>
+<ul>
+<li>维护视图和状态的关系</li>
+<li>复杂视图情况下提升渲染性能</li>
+<li>除了渲染 DOM 外，还可以实现 SSR（Nuxt.js/Next.js）、原生应用（Weex/React Native）、小程序（mpvue/uni-app）等</li>
+</ul>
+</li>
+<li><p>Virtual DOM 库</p>
+<ul>
+<li>Snabbdom</li>
+<li>virtual-dom</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-创建项目"><a href="#5-创建项目" class="headerlink" title="5.创建项目"></a>5.创建项目</h3><ul>
+<li><p>创建项目</p>
+<ul>
+<li>打包工具为了方便使用 parcel</li>
+<li>创建项目，并安装 parcel</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 创建项目目录</span><br><span class="line">md snabbdom-demo</span><br><span class="line"># 进入项目目录</span><br><span class="line">cd snabbdom-demo</span><br><span class="line"># 创建 package.json</span><br><span class="line">yarn init -y</span><br><span class="line"># 本地安装 parcel</span><br><span class="line">yarn add parcel-bundler</span><br></pre></td></tr></table></figure>
+<ul>
+<li>配置 package.json 的 scripts</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"scripts"</span>: &#123;</span><br><span class="line">  <span class="string">"dev"</span>: <span class="string">"parcel index.html --open"</span>,</span><br><span class="line">  <span class="string">"build"</span>: <span class="string">"parcel build index.html"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>创建目录结构</li>
+</ul>
+<p>|  index.html<br>|  package.json<br>|_ src<br>   01-basicusage.js</p>
+</li>
+</ul>
+<h3 id="6-导入-Snabbdom"><a href="#6-导入-Snabbdom" class="headerlink" title="6.导入 Snabbdom"></a>6.导入 Snabbdom</h3><blockquote>
+<p>Snabbdom 文档</p>
+</blockquote>
+<ul>
+<li><p>看文档的意义</p>
+<ul>
+<li>学习任何一个库都要先看文档</li>
+<li>通过文档了解库的作用</li>
+<li>看文档中提供的实例，自己快速实现一个 demo</li>
+<li>通过文档查看 API 的使用</li>
+</ul>
+</li>
+<li><p>文档地址</p>
+<ul>
+<li><a href="https://github.com/snabbdom/snabbdom" target="_blank" rel="noopener">https://github.com/snabbdom/snabbdom</a></li>
+<li>中文翻译</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>安装 Snabbdom</p>
+</blockquote>
+<ul>
+<li>安装 Snabbdom<ul>
+<li>yarn add snabbdom</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>导入 Snabbdom</p>
+</blockquote>
+<ul>
+<li>Snabbdom 的官网 demo 中导入使用的是 commonjs 模块化语法，我们使用更流行的 ES6 模块化的语法 import</li>
+<li>关于模块化的语法请参考阮一峰老师的 Module 的语法</li>
+<li>ES6 模块与 CommonJs 模块的差异</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; init, h, thunk &#125; <span class="keyword">from</span> <span class="string">'snabbdom'</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Snabbdom 的核心仅提供最基本的功能，只导出了三个函数 init()、h()、thunk()<ul>
+<li>init() 是一个高阶函数，返回 patch()</li>
+<li>h() 返回虚拟节点 VNode，这个函数我们在使用 Vue.js 的时候见过</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  router,</span><br><span class="line">  store,</span><br><span class="line">  render: <span class="function"><span class="params">h</span> =&gt;</span> h(App)</span><br><span class="line">&#125;).$mount(<span class="string">'#app'</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>thunk() 是一种优化策略，可以在处理不可变数据时使用</li>
+</ul>
+<ul>
+<li><strong>注意</strong>：导入的时候不能使用 import snabbdom form ‘snabbdom’<ul>
+<li>原因：mode_modules/src/snabbdom.js 末尾导出使用的语法是 export 导出 API，没有使用 export default 导出默认输出</li>
+</ul>
+</li>
+</ul>
+<h3 id="7-代码演示"><a href="#7-代码演示" class="headerlink" title="7.代码演示"></a>7.代码演示</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 01-basicusage.js</span></span><br><span class="line"><span class="keyword">import</span> &#123; h, init &#125; <span class="keyword">from</span> <span class="string">'snabbdom'</span></span><br><span class="line"><span class="comment">// 1.hello world</span></span><br><span class="line"><span class="comment">// 参数：数组，模块</span></span><br><span class="line"><span class="comment">// 返回值：patch 函数，作用对比两个vnode的差异更新到真实DOM</span></span><br><span class="line"><span class="keyword">let</span> patch = init([])</span><br><span class="line"><span class="comment">// 第一个参数：标签 + 选择器</span></span><br><span class="line"><span class="comment">// 第二个参数：如果是字符串的话就是标签中的内容</span></span><br><span class="line"><span class="keyword">let</span> vnode = h(<span class="string">'div#container.cls'</span>, <span class="string">'Hello World'</span>)</span><br><span class="line"><span class="keyword">let</span> app = <span class="built_in">document</span>.querySelector(<span class="string">'#app'</span>)</span><br><span class="line"><span class="comment">// 第一个参数：可以是DOM元素，内部会把DOM元素转换成VNode</span></span><br><span class="line"><span class="comment">// 第二个参数： VNode</span></span><br><span class="line"><span class="comment">// 返回值：VNode</span></span><br><span class="line"><span class="keyword">let</span> oldVnode = patch(app, vnode)</span><br><span class="line"><span class="comment">// 假设的时刻</span></span><br><span class="line">vnode = h(<span class="string">'div'</span>, <span class="string">'Hello Snabbdom'</span>)</span><br><span class="line">patch(oldVnode, vnode)</span><br><span class="line"><span class="comment">// 02-basicusage.js</span></span><br><span class="line"><span class="keyword">import</span> &#123; h, init &#125; <span class="keyword">from</span> <span class="string">'snabbdom'</span></span><br><span class="line"><span class="keyword">let</span> patch = init([])</span><br><span class="line"><span class="keyword">let</span> vnode = h(<span class="string">'div#container'</span>,[</span><br><span class="line">  h(<span class="string">'h1'</span>, <span class="string">'Hello Snabbdom'</span>),</span><br><span class="line">  h(<span class="string">'p'</span>, <span class="string">'这是一个p标签'</span>)</span><br><span class="line">])</span><br><span class="line"><span class="keyword">let</span> app = <span class="built_in">document</span>.querySelector(<span class="string">'#app'</span>)</span><br><span class="line"><span class="keyword">let</span> oldVnode = patch(app, vnode)</span><br><span class="line"></span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  vnode = h(<span class="string">'div#container'</span>,[</span><br><span class="line">    h(<span class="string">'h1'</span>, <span class="string">'Hello World'</span>),</span><br><span class="line">    h(<span class="string">'p'</span>, <span class="string">'Hello p'</span>)</span><br><span class="line">  ])</span><br><span class="line">  patch(oldVnode, vnode)</span><br><span class="line">  <span class="comment">// 清空页面元素 -- 错误</span></span><br><span class="line">  <span class="comment">// patch(oldVnode, null)</span></span><br><span class="line">  patch(oldVnode, h(<span class="string">'!'</span>))</span><br><span class="line">&#125;, <span class="number">2000</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="8-模块"><a href="#8-模块" class="headerlink" title="8.模块"></a>8.模块</h3><blockquote>
+<p>模块</p>
+</blockquote>
+<p>Snabbdom 的核心库并不能处理元素的属性/样式/事件等，如果需要处理的话，可以使用模块</p>
+<blockquote>
+<p>常用模块</p>
+</blockquote>
+<ul>
+<li><p>官方提供了6个模块</p>
+<ul>
+<li>attributes<ul>
+<li>设置 DOM 元素的属性，使用 setAttributes()</li>
+<li>处理布尔类型的属性</li>
+</ul>
+</li>
+<li>props<ul>
+<li>和 attributes 模块相似，设置DOM元素的属性 element[attr] = value</li>
+<li>不处理布尔类型的属性</li>
+</ul>
+</li>
+<li>class<ul>
+<li>切换类样式</li>
+<li>注意：给元素设置类样式是通过 sel 选择器</li>
+</ul>
+</li>
+<li>dataset<ul>
+<li>设置 data-* 的自定义属性</li>
+</ul>
+</li>
+<li>eventlisteners<ul>
+<li>注册和移除事件<br>style</li>
+<li>设置行内样式，支持动画</li>
+<li>delayed/remove/destroy<blockquote>
+<p>模块使用</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>模块的使用步骤</p>
+<ul>
+<li>导入需要的模块</li>
+<li>init() 中注册模块</li>
+<li>使用 h() 函数创建 VNode 的时候，可以把第二个参数设置为对象，其他参数往后移</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 导入模块</span></span><br><span class="line"><span class="keyword">import</span> &#123; init, h &#125; <span class="keyword">from</span> <span class="string">'sanbbdom'</span></span><br><span class="line"><span class="keyword">import</span> style <span class="keyword">from</span> <span class="string">'snabbdom/modules/style'</span></span><br><span class="line"><span class="keyword">import</span> eventlisteners <span class="keyword">from</span> <span class="string">'snabbdom/modules/eventlisteners'</span></span><br><span class="line"><span class="comment">// 注册模块</span></span><br><span class="line"><span class="keyword">let</span> patch = init([</span><br><span class="line">  style,</span><br><span class="line">  eventlisteners</span><br><span class="line">])</span><br><span class="line"><span class="comment">// 使用 h() 函数的第二个参数传入模块需要的数据</span></span><br><span class="line"><span class="keyword">let</span> vnode = h(<span class="string">'div'</span>, &#123;</span><br><span class="line">  style: &#123;</span><br><span class="line">    backgroundColor: <span class="string">'red'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  on: &#123;</span><br><span class="line">    click: eventHandler</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,[</span><br><span class="line">  h(<span class="string">'h1'</span>, <span class="string">'Hello Snabbdom'</span>),</span><br><span class="line">  h(<span class="string">'p'</span>, <span class="string">'这是p标签'</span>)</span><br><span class="line">])</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">eventHandler</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'点击我了'</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> app = <span class="built_in">document</span>.querySlector(<span class="string">'#app'</span>)</span><br><span class="line">patch(app, vnode)</span><br></pre></td></tr></table></figure>
+
+<h3 id="9-Snabbdom-源码解析"><a href="#9-Snabbdom-源码解析" class="headerlink" title="9.Snabbdom 源码解析"></a>9.Snabbdom 源码解析</h3><blockquote>
+<p>如何学习源码</p>
+</blockquote>
+<ul>
+<li>先宏观了解</li>
+<li>带着目标看源码</li>
+<li>看源码的过程要不求甚解</li>
+<li>调试</li>
+<li>参考资料</li>
+</ul>
+<blockquote>
+<p>Snabbdom 的核心</p>
+</blockquote>
+<ul>
+<li>使用 h() 函数创建 JavaScript 对象(VNode)描述真实 DOM</li>
+<li>init() 设置模块，创建 patch()</li>
+<li>patch() 比较新旧两个 VNode</li>
+<li>把变化的内容更新到真实的 DOM 树上</li>
+</ul>
+<blockquote>
+<p>Snabbdom 源码</p>
+</blockquote>
+<ul>
+<li>源码地址<ul>
+<li><a href="https://github.com/snabbdom/snabbdom" target="_blank" rel="noopener">https://github.com/snabbdom/snabbdom</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="10-h函数"><a href="#10-h函数" class="headerlink" title="10.h函数"></a>10.h函数</h3><ul>
+<li><p>h() 函数介绍</p>
+<ul>
+<li>在使用 Vue 的时候见过 h() 函数<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  router,</span><br><span class="line">  store,</span><br><span class="line">  render: <span class="function"><span class="params">h</span> =&gt;</span> h(App)</span><br><span class="line">&#125;).$mount(<span class="string">'#app'</span>)</span><br></pre></td></tr></table></figure></li>
+<li>h() 函数最早见于 hyperscript,使用 JavaScript 创建超文本</li>
+<li>Snabbdom 中的 h() 函数不是用来创建超文本，而是创建 VNode</li>
+</ul>
+</li>
+<li><p>函数重载</p>
+<ul>
+<li>概念<ul>
+<li>参数个数或类型不同的函数</li>
+<li>JavaScript 中没有重载的概念</li>
+<li>TypeScript 中有重载，不过重载的实现还是通过代码调整参数</li>
+</ul>
+</li>
+<li>重载的示意<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(a + b)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">a, b, c</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(a + b + c)</span><br><span class="line">&#125;</span><br><span class="line">add(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">add(<span class="number">1</span>, <span class="number">2</span>， <span class="number">3</span>)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>源码位置：src/h.ts</p>
+</li>
+</ul>
+<h3 id="11-必备快捷键"><a href="#11-必备快捷键" class="headerlink" title="11.必备快捷键"></a>11.必备快捷键</h3><ul>
+<li>F12 快速定位 或 Ctrl + 鼠标点击</li>
+<li>Alt + &lt;—— 返回</li>
+</ul>
+<h3 id="12-vnode"><a href="#12-vnode" class="headerlink" title="12.vnode"></a>12.vnode</h3><p>略</p>
+<h3 id="13-patch-的整体过程"><a href="#13-patch-的整体过程" class="headerlink" title="13.patch 的整体过程"></a>13.patch 的整体过程</h3><ul>
+<li>patch(oldVnode, newVnode)</li>
+<li>打补丁，把新节点中变化的内容渲染到真实 DOM，最后返回新节点作为下一次处理的旧节点</li>
+<li>对比新旧 VNode 是否相同节点（节点的 key 和 sel 相同）</li>
+<li>如果不是相同节点，删除之前的内容，重新渲染</li>
+<li>如果是相同节点，再判断薪的VNode是否有 text，如果有并且 oldnode 的 text 不同，直接更新文本内容</li>
+<li>如果新的 VNode 有 children，判断子节点是否有变化，判断子节点的过程使用的就是 diff 算法</li>
+<li>diff 过程只进行同层级比较</li>
+</ul>
+<h3 id="14-init"><a href="#14-init" class="headerlink" title="14.init"></a>14.init</h3><p>略</p>
+<h3 id="15-patch"><a href="#15-patch" class="headerlink" title="15.patch"></a>15.patch</h3><p>略</p>
+<h3 id="16-调试-patch"><a href="#16-调试-patch" class="headerlink" title="16.调试 patch"></a>16.调试 patch</h3><p>略</p>
+<h3 id="17-createElm"><a href="#17-createElm" class="headerlink" title="17.createElm"></a>17.createElm</h3><p>略</p>
+<h3 id="18-createElm-调试"><a href="#18-createElm-调试" class="headerlink" title="18.createElm 调试"></a>18.createElm 调试</h3><p>略</p>
+<h3 id="19-addVnodes-和-removeVnodes"><a href="#19-addVnodes-和-removeVnodes" class="headerlink" title="19.addVnodes 和 removeVnodes"></a>19.addVnodes 和 removeVnodes</h3><p>略</p>
+<h3 id="20-patchVnode"><a href="#20-patchVnode" class="headerlink" title="20.patchVnode"></a>20.patchVnode</h3><p>略</p>
+<h3 id="21-updateChildren-整体分析"><a href="#21-updateChildren-整体分析" class="headerlink" title="21.updateChildren 整体分析"></a>21.updateChildren 整体分析</h3><ul>
+<li><p>功能</p>
+<ul>
+<li>diff 算法的核心，对比新旧节点的 children，更新 DOM</li>
+</ul>
+</li>
+<li><p>执行过程</p>
+<ul>
+<li>要对比两棵树的差异，我们可以取第一棵树的每一个节点依次和第二棵树的每一个节点比较，但是这样的时间复杂度为O(n^3)</li>
+<li>在 DOM 操作的时候我们很少很少会把一个父节点移动/更新到某一个子节点</li>
+<li>因此只需要找同级别的子节点依次比较，然后再找下一级别的节点比较，这样算法的时间复杂度为O(n)</li>
+<li>在进行同级别节点比较的时候，首先会对新老节点数组的开始和结尾节点设置标记索引，遍历的过程中移动索引</li>
+<li>在对开始和结束节点比较的时候，总共有四种情况<ul>
+<li>oldStartVnode/newStartVnode(旧开始节点/新开始节点)</li>
+<li>oldEndVnode/newEndVnode(旧结束节点/新结束节点)</li>
+<li>oldStartVnode/oldEndVnode(旧开始节点/新结束节点)</li>
+<li>oldEndVnode/newStartVnode(旧结束节点/新开始节点)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="22-updateChildren"><a href="#22-updateChildren" class="headerlink" title="22.updateChildren"></a>22.updateChildren</h3><p>略</p>
+<h3 id="23-调试-PatchVnode"><a href="#23-调试-PatchVnode" class="headerlink" title="23.调试 PatchVnode"></a>23.调试 PatchVnode</h3><p>略</p>
+<h3 id="24-调试-updateChildren"><a href="#24-调试-updateChildren" class="headerlink" title="24.调试 updateChildren"></a>24.调试 updateChildren</h3><p>略</p>
+<h3 id="25-调试带-key-的情况"><a href="#25-调试带-key-的情况" class="headerlink" title="25.调试带 key 的情况"></a>25.调试带 key 的情况</h3><p>略</p>
+<h3 id="26-模块源码"><a href="#26-模块源码" class="headerlink" title="26.模块源码"></a>26.模块源码</h3><p>略</p>
+<h2 id="任务五：模块作业"><a href="#任务五：模块作业" class="headerlink" title="任务五：模块作业"></a>任务五：模块作业</h2>
           
         
       
